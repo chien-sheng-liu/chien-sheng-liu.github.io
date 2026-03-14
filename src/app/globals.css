@@ -1,0 +1,66 @@
+@import "tailwindcss";
+
+@theme {
+  --color-deep-space: #0d1117;
+  --color-electric-blue: #00bfff;
+  --color-violet-glow: #8a2be2;
+  --color-gray-300: #d1d5db;
+  --color-gray-400: #9ca3af;
+  --color-gray-700: #374151;
+  --color-gray-800: #1f2937;
+  --color-white: #ffffff;
+}
+
+@layer base {
+  body {
+    background-color: var(--color-deep-space);
+    color: var(--color-gray-300);
+  }
+}
+
+@layer utilities {
+  .animation-delay-2000 {
+    animation-delay: 2s;
+  }
+  .animation-delay-4000 {
+    animation-delay: 4s;
+  }
+  .bg-grid-pattern {
+    background-image: linear-gradient(to right, rgba(255, 255, 255, 0.1) 1px, transparent 1px),
+                      linear-gradient(to bottom, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+    background-size: 2rem 2rem;
+  }
+}
+
+@keyframes aurora {
+  from {
+    transform: translate(var(--aurora-start-x, -50%), var(--aurora-start-y, -50%)) rotate(0deg);
+  }
+  to {
+    transform: translate(var(--aurora-end-x, -50%), var(--aurora-end-y, -50%)) rotate(360deg);
+  }
+}
+
+@keyframes background-shine {
+  from {
+    background-position: 200% 0;
+  }
+  to {
+    background-position: -200% 0;
+  }
+}
+
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fade-in-up 0.8s ease-out forwards;
+}
