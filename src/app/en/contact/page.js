@@ -2,18 +2,18 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { FaEnvelope, FaLinkedin, FaCalendarAlt, FaPaperPlane, FaMapMarkerAlt, FaClock, FaGlobe } from "react-icons/fa";
+import { FaEnvelope, FaLinkedin, FaCalendarAlt, FaMapMarkerAlt, FaClock, FaGlobe, FaPaperPlane } from "react-icons/fa";
 
 const TO_EMAIL = "liu_chiensheng@outlook.com";
 
 const contactInfo = [
   { icon: <FaEnvelope size={24} />, label: "Email", value: TO_EMAIL, href: `mailto:${TO_EMAIL}`, description: "Fastest way to reach me", color: "from-red-500 to-orange-500" },
   { icon: <FaLinkedin size={24} />, label: "LinkedIn", value: "Chien-Sheng (Morris) Liu", href: "https://www.linkedin.com/in/chienshengliu/", description: "Professional network", color: "from-blue-600 to-blue-400" },
-  { icon: <FaCalendarAlt size={24} />, label: "Book a call (Google Calendar)", value: "Schedule a 30‑min chat", href: "https://calendar.app.google/jPexFUzauM39fYfV9", description: "Pick an available timeslot", color: "from-green-600 to-emerald-400" },
+  { icon: <FaCalendarAlt size={24} />, label: "Book a call (Google Calendar)", value: "Schedule a 30‑min chat", href: "https://calendar.app.google/jPexFUzauM39fYfV9", description: "Preview timeslots or book directly", color: "from-green-600 to-emerald-400", type: "calendar" },
 ];
 
 const quickInfo = [
-  { icon: <FaMapMarkerAlt size={20} />, label: "Location", value: "Taipei, Taiwan" },
+  { icon: <FaMapMarkerAlt size={20} />, label: "Location", value: "Hong Kong" },
   { icon: <FaClock size={20} />, label: "Response", value: "24–48 hours" },
   { icon: <FaGlobe size={20} />, label: "Languages", value: "Chinese, English, Deutsch" },
 ];
@@ -23,12 +23,7 @@ const itemVariants = { hidden: { y: 20, opacity: 0 }, visible: { y: 0, opacity: 
 const floatingVariants = { animate: { y: [-8, 8, -8], rotate: [-2, 2, -2], transition: { duration: 4, repeat: Infinity, ease: "easeInOut" } } };
 
 const ContactPageEn = () => {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [subject, setSubject] = useState("");
-  const [message, setMessage] = useState("");
-  const [feedback, setFeedback] = useState(null);
-  const [sending, setSending] = useState(false);
+  const [calendarOpen, setCalendarOpen] = useState(false);
 
   const isEmailValid = (val) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val);
 
@@ -96,6 +91,27 @@ const ContactPageEn = () => {
         <motion.div className="absolute top-2/3 left-1/5 w-3 h-3 bg-[var(--color-violet-glow)]/40 rounded-full" variants={floatingVariants} animate="animate" style={{ animationDelay: "2s" }} />
         <motion.div className="absolute top-1/2 left-1/4 w-2 h-2 border border-[var(--color-electric-blue)]/40 rounded-full" variants={floatingVariants} animate="animate" style={{ animationDelay: "3s" }} />
       </div>
+      {calendarOpen && (
+        <div className="fixed inset-0 z-[60] bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
+          <div className="w-full max-w-lg bg-[var(--color-gray-900)]/80 border border-white/10 rounded-2xl p-6 relative">
+            <button onClick={() => setCalendarOpen(false)} className="absolute top-3 right-3 rounded-full bg-white/10 hover:bg-white/20 px-2 py-1 text-sm">✕</button>
+            <h3 className="text-2xl font-bold text-white mb-2">Pick a timeslot</h3>
+            <p className="text-sm text-[var(--color-gray-400)] mb-4">Timezone: HKT (UTC+8). You can also book directly via Google Calendar.</p>
+            <div className="space-y-2 mb-4">
+              {['Wed 8:00–8:30 PM','Sat 10:00–10:30 AM','Mon 7:30–8:00 PM'].map((slot, i) => (
+                <div key={i} className="flex items-center justify-between bg-white/5 border border-white/10 rounded-xl px-4 py-3">
+                  <div className="text-white text-sm">{slot}</div>
+                  <a href="https://calendar.app.google/jPexFUzauM39fYfV9" target="_blank" rel="noopener noreferrer" className="text-[var(--color-electric-blue)] hover:text-[var(--color-violet-glow)] text-sm font-semibold">Book</a>
+                </div>
+              ))}
+            </div>
+            <div className="flex items-center justify-between">
+              <a href="https://calendar.app.google/jPexFUzauM39fYfV9" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center px-4 py-2 rounded-lg bg-[var(--color-electric-blue)] text-black font-semibold">Open Google Calendar</a>
+              <button onClick={() => setCalendarOpen(false)} className="text-sm text-[var(--color-gray-300)] hover:text-white">Maybe later</button>
+            </div>
+          </div>
+        </div>
+      )}
 
       <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <motion.div className="text-center mb-16" initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }}>
@@ -118,37 +134,53 @@ const ContactPageEn = () => {
           </motion.div>
         </motion.div>
 
-        <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+        <div className="max-w-6xl mx-auto">
           <motion.div className="space-y-6" variants={containerVariants} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.3 }}>
             <motion.h2 className="text-3xl font-bold text-white mb-8" variants={itemVariants}>Contact Methods</motion.h2>
-            {contactInfo.map((item, index) => (
-              <motion.a key={index} href={item.href} target="_blank" rel="noopener noreferrer" variants={itemVariants} className="group block relative overflow-hidden bg-gradient-to-br from-[var(--color-gray-800)]/80 to-[var(--color-gray-800)]/40 backdrop-blur-xl rounded-2xl p-6 border border-[var(--color-gray-700)]/50 transition-all duration-500 hover:border-[var(--color-electric-blue)]/50 hover:shadow-2xl hover:shadow-[var(--color-electric-blue)]/10" whileHover={{ y: -5, scale: 1.02 }}>
-                <div className={`absolute inset-0 bg-gradient-to-r ${item.color} opacity-0 group-hover:opacity-5 transition-opacity duration-500`}></div>
-                <div className="relative flex items-center space-x-6">
-                  <motion.div className={`flex-shrink-0 w-16 h-16 bg-gradient-to-br ${item.color} rounded-2xl flex items-center justify-center text-white shadow-lg`} whileHover={{ rotate: 5, scale: 1.1 }} transition={{ type: "spring", stiffness: 300 }}>
-                    {item.icon}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {contactInfo.map((item, index) => {
+                const base = "group block relative overflow-hidden bg-gradient-to-br from-[var(--color-gray-800)]/80 to-[var(--color-gray-800)]/40 backdrop-blur-xl rounded-2xl p-6 border border-[var(--color-gray-700)]/50 transition-all duration-500 hover:border-[var(--color-electric-blue)]/50 hover:shadow-2xl hover:shadow-[var(--color-electric-blue)]/10";
+                const inner = (
+                  <>
+                    <div className={`absolute inset-0 bg-gradient-to-r ${item.color} opacity-0 group-hover:opacity-5 transition-opacity duration-500`}></div>
+                    <div className="relative flex items-center space-x-6">
+                      <div className={`flex-shrink-0 w-16 h-16 bg-gradient-to-br ${item.color} rounded-2xl flex items-center justify-center text-white shadow-lg`}>{item.icon}</div>
+                      <div className="flex-1 min-w-0">
+                        <h3 className="text-xl font-bold text-white group-hover:text-[var(--color-electric-blue)] transition-colors duration-300">{item.label}</h3>
+                        <p className="text-[var(--color-gray-300)] font-medium mt-1 group-hover:text-white transition-colors duration-300">{item.value}</p>
+                        <p className="text-sm text-[var(--color-gray-500)] mt-1 group-hover:text-[var(--color-gray-400)] transition-colors duration-300">{item.description}</p>
+                      </div>
+                      <div className="flex-shrink-0 w-8 h-8 rounded-full bg-[var(--color-electric-blue)]/10 flex items-center justify-center group-hover:bg-[var(--color-electric-blue)]/20 transition-all duration-300">
+                        <span className="text-[var(--color-electric-blue)] text-sm">→</span>
+                      </div>
+                    </div>
+                  </>
+                );
+                return (
+                  <motion.div key={index} variants={itemVariants} whileHover={{ y: -3 }}>
+                    {item.type === 'calendar' ? (
+                      <button type="button" onClick={() => setCalendarOpen(true)} className={base}>
+                        {inner}
+                      </button>
+                    ) : (
+                      <a href={item.href} target="_blank" rel="noopener noreferrer" className={base}>
+                        {inner}
+                      </a>
+                    )}
                   </motion.div>
-                  <div className="flex-1 min-w-0">
-                    <h3 className="text-xl font-bold text-white group-hover:text-[var(--color-electric-blue)] transition-colors duration-300">{item.label}</h3>
-                    <p className="text-[var(--color-gray-300)] font-medium mt-1 group-hover:text-white transition-colors duration-300">{item.value}</p>
-                    <p className="text-sm text-[var(--color-gray-500)] mt-1 group-hover:text-[var(--color-gray-400)] transition-colors duration-300">{item.description}</p>
-                  </div>
-                  <div className="flex-shrink-0 w-8 h-8 rounded-full bg-[var(--color-electric-blue)]/10 flex items-center justify-center group-hover:bg-[var(--color-electric-blue)]/20 transition-all duration-300">
-                    <motion.div className="text-[var(--color-electric-blue)] text-sm" animate={{ x: [0, 3, 0] }} transition={{ duration: 2, repeat: Infinity }}>→</motion.div>
-                  </div>
-                </div>
-                <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-bl from-[var(--color-electric-blue)]/10 to-transparent rounded-bl-full opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-              </motion.a>
-            ))}
+                );
+              })}
+            </div>
             <motion.div variants={itemVariants} className="relative overflow-hidden bg-gradient-to-br from-[var(--color-gray-800)]/60 to-[var(--color-gray-800)]/30 backdrop-blur-xl rounded-2xl p-6 border border-[var(--color-violet-glow)]/30">
               <div className="absolute inset-0 bg-gradient-to-r from-[var(--color-violet-glow)]/5 to-[var(--color-electric-blue)]/5"></div>
               <div className="relative">
                 <h3 className="text-lg font-bold text-[var(--color-violet-glow)] mb-2">Response Commitment</h3>
-                <p className="text-[var(--color-gray-400)] text-sm leading-relaxed">I commit to replying within 24–48 hours. For urgent matters, please email directly and include "URGENT" in the subject.</p>
+                <p className="text-[var(--color-gray-400)] text-sm leading-relaxed">I commit to replying within 24–48 hours. For urgent matters, please email directly and include &ldquo;URGENT&rdquo; in the subject.</p>
               </div>
             </motion.div>
           </motion.div>
 
+          {false && (
           <motion.div className="relative" initial={{ opacity: 0, x: 50 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true, amount: 0.3 }} transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}>
             <div className="relative overflow-hidden bg-gradient-to-br from-[var(--color-gray-800)]/90 to-[var(--color-gray-800)]/60 backdrop-blur-xl rounded-3xl p-8 border border-[var(--color-gray-700)]/50 shadow-2xl">
               <div className="text-center mb-8">
@@ -198,6 +230,7 @@ const ContactPageEn = () => {
               <div className="absolute -bottom-10 -left-10 w-32 h-32 bg-[var(--color-electric-blue)]/20 rounded-full blur-3xl"></div>
             </div>
           </motion.div>
+          )}
         </div>
 
         <motion.div className="text-center mt-24" initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.8 }}>
@@ -216,4 +249,3 @@ const ContactPageEn = () => {
 };
 
 export default ContactPageEn;
-

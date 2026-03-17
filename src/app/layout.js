@@ -1,14 +1,8 @@
 
-import { Noto_Sans_TC } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "./providers";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-
-const notoSansTC = Noto_Sans_TC({
-  subsets: ["latin"],
-  weight: ["400", "700"],
-});
 
 export const metadata = {
   title: {
@@ -24,7 +18,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="zh-TW" suppressHydrationWarning>
-      <body className={`${notoSansTC.className} bg-deep-space text-gray-300 transition-colors duration-500`}>
+      <body className="bg-deep-space text-gray-300 transition-colors duration-500">
         <ThemeProvider>
           <Navbar />
           {/* Ensure the main content area has padding top to not be obscured by the fixed navbar */}

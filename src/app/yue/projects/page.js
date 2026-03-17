@@ -1,14 +1,38 @@
 "use client";
 
-import { FaGithub, FaArrowRight, FaEye, FaDatabase, FaCode, FaStar } from "react-icons/fa";
+import { FaGithub, FaArrowRight, FaEye, FaDatabase, FaCode, FaStar, FaBrain, FaCloud, FaChartLine } from "react-icons/fa";
 import { motion } from "framer-motion";
-import { projects, stats } from "./projectData";
+import { projects as baseProjects, stats } from "./projectData";
+import { useEffect, useMemo, useState } from "react";
 
 const containerVariants = { hidden: { opacity: 0 }, visible: { opacity: 1, transition: { staggerChildren: 0.15, delayChildren: 0.2 } } };
 const itemVariants = { hidden: { y: 30, opacity: 0 }, visible: { y: 0, opacity: 1, transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] } } };
 const floatingVariants = { animate: { y: [-10, 10, -10], x: [-5, 5, -5], rotate: [-3, 3, -3], transition: { duration: 6, repeat: Infinity, ease: "easeInOut" } } };
 
+const iconForCategory = (cat) => {
+  const c = (cat || '').toLowerCase();
+  if (c.includes('llm')) return <FaDatabase size={28} />;
+  if (c.includes('nlp')) return <FaBrain size={28} />;
+  if (c.includes('deep') || c.includes('learning')) return <FaBrain size={28} />;
+  if (c.includes('cloud')) return <FaCloud size={28} />;
+  return <FaChartLine size={28} />;
+};
+
 const ProjectsPageYue = () => {
+  const [extra, setExtra] = useState([]);
+
+  useEffect(() => {
+    fetch('/api/content/projects?locale=yue').then(r=>r.json()).then(d=>{
+      const items = (d.items || []).map(p => ({
+        ...p,
+        icon: iconForCategory(p.category),
+        categoryIcon: <FaCode size={16} />,
+      }));
+      setExtra(items);
+    }).catch(()=>{});
+  }, []);
+
+  const projects = useMemo(() => ([...baseProjects, ...extra]), [extra]);
   return (
     <div className="relative min-h-screen text-[var(--color-white)] overflow-hidden">
       <div className="absolute inset-0">
@@ -110,4 +134,3 @@ const ProjectsPageYue = () => {
 };
 
 export default ProjectsPageYue;
-

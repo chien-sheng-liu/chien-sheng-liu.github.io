@@ -2,18 +2,18 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { FaEnvelope, FaLinkedin, FaCalendarAlt, FaPaperPlane, FaMapMarkerAlt, FaClock, FaGlobe } from "react-icons/fa";
+import { FaEnvelope, FaLinkedin, FaCalendarAlt, FaMapMarkerAlt, FaClock, FaGlobe, FaPaperPlane } from "react-icons/fa";
 
 const TO_EMAIL = "liu_chiensheng@outlook.com";
 
 const contactInfo = [
   { icon: <FaEnvelope size={24} />, label: "Email", value: TO_EMAIL, href: `mailto:${TO_EMAIL}`, description: "最快聯絡方式", color: "from-red-500 to-orange-500" },
   { icon: <FaLinkedin size={24} />, label: "LinkedIn", value: "Chien-Sheng (Morris) Liu", href: "https://www.linkedin.com/in/chienshengliu/", description: "專業社交網絡", color: "from-blue-600 to-blue-400" },
-  { icon: <FaCalendarAlt size={24} />, label: "預約會談（Google Calendar）", value: "預約 30 分鐘", href: "https://calendar.app.google/jPexFUzauM39fYfV9", description: "揀可用時段預約", color: "from-green-600 to-emerald-400" },
+  { icon: <FaCalendarAlt size={24} />, label: "預約會談（Google Calendar）", value: "預約 30 分鐘", href: "https://calendar.app.google/jPexFUzauM39fYfV9", description: "睇可約時段或直接預約", color: "from-green-600 to-emerald-400", type: "calendar" },
 ];
 
 const quickInfo = [
-  { icon: <FaMapMarkerAlt size={20} />, label: "位置", value: "台北，台灣" },
+  { icon: <FaMapMarkerAlt size={20} />, label: "位置", value: "香港" },
   { icon: <FaClock size={20} />, label: "回覆時間", value: "24–48 小時" },
   { icon: <FaGlobe size={20} />, label: "語言", value: "中文、English、Deutsch" },
 ];
@@ -23,62 +23,6 @@ const itemVariants = { hidden: { y: 20, opacity: 0 }, visible: { y: 0, opacity: 
 const floatingVariants = { animate: { y: [-8, 8, -8], rotate: [-2, 2, -2], transition: { duration: 4, repeat: Infinity, ease: "easeInOut" } } };
 
 const ContactPageYue = () => {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [subject, setSubject] = useState("");
-  const [message, setMessage] = useState("");
-  const [feedback, setFeedback] = useState(null);
-  const [sending, setSending] = useState(false);
-
-  const isEmailValid = (val) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val);
-  const buildSubject = () => (subject || `新聯絡訊息：${name || "未填寫姓名"}`).trim();
-  const buildBody = () => {
-    const lines = [
-      `你好，我係 ${name || "（未填）"}`,
-      "",
-      message || "（無訊息內容）",
-      "",
-      "—",
-      `聯絡人：${name || "（未填）"}`,
-      `Email：${email || "（未填）"}`,
-      typeof window !== "undefined" ? `來自頁面：${window.location.href}` : "",
-    ].filter(Boolean);
-    return lines.join("\n");
-  };
-  const openWithMailto = () => {
-    const su = encodeURIComponent(buildSubject());
-    const bo = encodeURIComponent(buildBody());
-    const cc = email && isEmailValid(email) ? `&cc=${encodeURIComponent(email)}` : "";
-    const url = `mailto:${encodeURIComponent(TO_EMAIL)}?subject=${su}&body=${bo}${cc}`;
-    window.location.href = url;
-  };
-  const openWithGmail = () => {
-    const su = encodeURIComponent(buildSubject());
-    const bo = encodeURIComponent(buildBody());
-    const cc = email && isEmailValid(email) ? `&cc=${encodeURIComponent(email)}` : "";
-    const url = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(TO_EMAIL)}${cc}&su=${su}&body=${bo}`;
-    window.open(url, "_blank", "noopener,noreferrer");
-  };
-  const openWithOutlookWeb = () => {
-    const su = encodeURIComponent(buildSubject());
-    const bo = encodeURIComponent(buildBody());
-    const cc = email && isEmailValid(email) ? `&cc=${encodeURIComponent(email)}` : "";
-    const url = `https://outlook.live.com/owa/?path=/mail/action/compose&to=${encodeURIComponent(TO_EMAIL)}${cc}&subject=${su}&body=${bo}`;
-    window.open(url, "_blank", "noopener,noreferrer");
-  };
-  const validate = () => {
-    if (!name.trim()) return "請填寫姓名。";
-    if (!email.trim()) return "請填寫電子郵件。";
-    if (!isEmailValid(email)) return "請輸入有效嘅電子郵件格式。";
-    return null;
-  };
-  const onSubmit = (e) => {
-    e.preventDefault();
-    const err = validate();
-    if (err) { setFeedback(err); return; }
-    setSending(true);
-    try { openWithMailto(); } finally { setTimeout(() => setSending(false), 300); }
-  };
 
   return (
     <div className="relative min-h-screen text-[var(--color-white)] overflow-hidden">
@@ -109,11 +53,12 @@ const ContactPageYue = () => {
           </motion.div>
         </motion.div>
 
-        <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
-          <motion.div className="space-y-6" variants={containerVariants} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.3 }}>
+        <div className="max-w-6xl mx-auto">
+          <motion.div variants={containerVariants} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.3 }}>
             <motion.h2 className="text-3xl font-bold text-white mb-8" variants={itemVariants}>聯絡方式</motion.h2>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {contactInfo.map((item, index) => (
-              <motion.a key={index} href={item.href} target="_blank" rel="noopener noreferrer" variants={itemVariants} className="group block relative overflow-hidden bg-gradient-to-br from-[var(--color-gray-800)]/80 to-[var(--color-gray-800)]/40 backdrop-blur-xl rounded-2xl p-6 border border-[var(--color-gray-700)]/50 transition-all duration-500 hover:border-[var(--color-electric-blue)]/50 hover:shadow-2xl hover:shadow-[var(--color-electric-blue)]/10" whileHover={{ y: -5, scale: 1.02 }}>
+              <motion.a key={index} href={item.href} target="_blank" rel="noopener noreferrer" variants={itemVariants} className="group block relative overflow-hidden bg-gradient-to-br from-[var(--color-gray-800)]/80 to-[var(--color-gray-800)]/40 backdrop-blur-xl rounded-2xl p-6 border border-[var(--color-gray-700)]/50 transition-all duration-500 hover:border-[var(--color-electric-blue)]/50 hover:shadow-2xl hover:shadow-[var(--color-electric-blue)]/10" whileHover={{ y: -3 }}>
                 <div className={`absolute inset-0 bg-gradient-to-r ${item.color} opacity-0 group-hover:opacity-5 transition-opacity duration-500`}></div>
                 <div className="relative flex items-center space-x-6">
                   <motion.div className={`flex-shrink-0 w-16 h-16 bg-gradient-to-br ${item.color} rounded-2xl flex items-center justify-center text-white shadow-lg`} whileHover={{ rotate: 5, scale: 1.1 }} transition={{ type: "spring", stiffness: 300 }}>{item.icon}</motion.div>
@@ -129,6 +74,7 @@ const ContactPageYue = () => {
                 <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-bl from-[var(--color-electric-blue)]/10 to-transparent rounded-bl-full opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
               </motion.a>
             ))}
+            </div>
             <motion.div variants={itemVariants} className="relative overflow-hidden bg-gradient-to-br from-[var(--color-gray-800)]/60 to-[var(--color-gray-800)]/30 backdrop-blur-xl rounded-2xl p-6 border border-[var(--color-violet-glow)]/30">
               <div className="absolute inset-0 bg-gradient-to-r from-[var(--color-violet-glow)]/5 to-[var(--color-electric-blue)]/5"></div>
               <div className="relative">
@@ -138,6 +84,7 @@ const ContactPageYue = () => {
             </motion.div>
           </motion.div>
 
+          {false && (
           <motion.div className="relative" initial={{ opacity: 0, x: 50 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true, amount: 0.3 }} transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}>
             <div className="relative overflow-hidden bg-gradient-to-br from-[var(--color-gray-800)]/90 to-[var(--color-gray-800)]/60 backdrop-blur-xl rounded-3xl p-8 border border-[var(--color-gray-700)]/50 shadow-2xl">
               <div className="text-center mb-8">
@@ -183,6 +130,7 @@ const ContactPageYue = () => {
               <div className="absolute -bottom-10 -left-10 w-32 h-32 bg-[var(--color-electric-blue)]/20 rounded-full blur-3xl"></div>
             </div>
           </motion.div>
+          )}
         </div>
 
         <motion.div className="text-center mt-24" initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.8 }}>
@@ -201,4 +149,3 @@ const ContactPageYue = () => {
 };
 
 export default ContactPageYue;
-

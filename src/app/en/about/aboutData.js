@@ -2,55 +2,81 @@ import { FaUserTie, FaGraduationCap, FaChalkboardTeacher, FaProjectDiagram, FaGl
 
 export const highlights = [
   {
-    icon: <FaUserTie size={28} />,
-    title: "AI Team Leader & Architect",
-    description: "Built data teams from scratch, led multimillion NT$ projects, and designed/deployed custom LLMs and deep learning architectures.",
+    icon: <FaUserTie size={24} />,
+    title: "AI Team & Delivery",
+    description: "Built a 10‑person team, led 8+ projects, NT$60M+ revenue.",
     color: "from-blue-500 to-cyan-500",
     bgGradient: "from-blue-500/10 to-cyan-500/10",
-    metrics: ["10‑person team", "NT$60M revenue", "8+ projects"],
+    metrics: ["10 people", "8+ projects", "NT$60M+"],
   },
   {
-    icon: <FaProjectDiagram size={28} />,
-    title: "End‑to‑end AI Product Mindset",
-    description: "From discovery and architecture to model development and delivery—turning AI into business value across the full lifecycle.",
+    icon: <FaProjectDiagram size={24} />,
+    title: "Business‑driven AI Productization",
+    description: "Turn AI into revenue: discovery→architecture→models→launch & governance.",
     color: "from-purple-500 to-pink-500",
     bgGradient: "from-purple-500/10 to-pink-500/10",
-    metrics: ["Full lifecycle", "Business value", "Tech translation"],
+    metrics: ["E2E", "Revenue/Efficiency", "Governance"],
   },
   {
-    icon: <FaGraduationCap size={28} />,
-    title: "MSc in Data Science (Germany)",
-    description: "University of Mannheim—one of Europe’s top business schools—with a focus on data science and business applications.",
+    icon: <FaGraduationCap size={24} />,
+    title: "International Data Science Background",
+    description: "MSc, University of Mannheim. Hands‑on across markets.",
     color: "from-green-500 to-emerald-500",
     bgGradient: "from-green-500/10 to-emerald-500/10",
-    metrics: ["Top school", "Global perspective", "Strong foundation"],
+    metrics: ["MSc (DE)", "Multi‑market", "Biz apps"],
   },
 ];
 
 export const experiences = [
   {
-    date: "2024/8-Present",
+    date: "2026/4–Present",
+    title: "Lead, Business Intelligence",
+    company: "Lalamove (Hong Kong)",
+    bullets: [
+      "Launched cross‑market KPIs, supply‑demand and funnel analytics; faster decisions",
+      "Co‑built governance with DE/DA (dbt/LookML); shorter delivery cycle",
+      "Roadmapped data products; strengthened self‑serve analytics",
+    ],
+  },
+  {
+    date: "2024/8–2026/4",
     title: "Data Scientist (Deputy Manager)",
     company: "Datarget Innovation Inc.",
-    description: `Built and lead a 10‑person data team across Data Science, Data Engineering, and PM. • Acted as PM for discovery, planning, timeline control, and cross‑functional collaboration. • Won and delivered 8+ projects/tenders totaling around NT$60M. • Led custom LLM (RAG, LangChain, LoRA fine‑tuning) and hybrid GCP/on‑prem deployments.`,
+    bullets: [
+      "Built and led a 10‑person team; 8+ projects; NT$60M+ revenue",
+      "Delivered custom LLM (RAG/LoRA); hybrid cloud deployment",
+      "Acted as PM: discovery, planning, cross‑functional sync, acceptance",
+    ],
   },
   {
-    date: "2023/4-Present",
+    date: "2023/4–Present",
     title: "Data Science Instructor",
     company: "DeepCoding",
-    description: `Long‑term workshop instructor at National Yang Ming Chiao Tung University, teaching data analysis, data science, and visualization. • Provide 1‑on‑1 coaching; mentored 5+ students on career planning, resume polish, and successful job placement.`,
+    bullets: [
+      "Workshops in data science/visualization; 100+ learners",
+      "1‑on‑1 coached 5+ learners for transitions",
+      "Hands‑on courses with verifiable outcomes",
+    ],
   },
   {
-    date: "2023/7-2024/6",
+    date: "2023/7–2024/6",
     title: "Machine Learning Engineer",
     company: "OneAD",
-    description: `Developed and deployed ML models to optimize ad delivery, improving CTR by 20% and dwell time by 30%. • Refactored user targeting model, boosting inference speed by 40% and cutting GCP cost by 30%. • Built a Meta ads precise audience platform combining LLM and RAG, significantly improving campaign accuracy.`,
+    bullets: [
+      "CTR +20%, dwell +30% for ads",
+      "Refactor: +40% inference speed, −30% GCP cost",
+      "Built LLM + RAG audience platform",
+    ],
   },
   {
-    date: "2022/3-2024/2",
+    date: "2022/3–2024/2",
     title: "Data Analyst Engineer",
     company: "HelloFresh (Germany)",
-    description: `Deployed 3 custom ML models across 18 markets, saving 10% ad budget with 85% accuracy. • Built Tableau dashboards for conversion journey visualization and KPI‑driven decisions. • Used Google Clean Room for effectiveness analysis, reducing ad cost by 10% and audience overlap by 15%.`,
+    bullets: [
+      "3 ML models across 18 markets; −10% ad budget",
+      "Conversion‑journey dashboards for KPI decisions",
+      "Clean Room analysis: −15% overlap",
+    ],
   },
 ];
 
@@ -174,24 +200,24 @@ export const skills = [
 export const stats = [
   { label: "Experience", value: "4+", suffix: " yrs", icon: <FaAward /> },
   { label: "Projects", value: "15+", suffix: "", icon: <FaProjectDiagram /> },
-  { label: "Students Mentored", value: "100+", suffix: "", icon: <FaChalkboardTeacher /> },
-  { label: "Tech Talks", value: "10+", suffix: "", icon: <FaMicrophone /> },
+  { label: "Students / mentees", value: "100+", suffix: "", icon: <FaChalkboardTeacher /> },
+  { label: "Talks", value: "10+", suffix: "", icon: <FaMicrophone /> },
 ];
 
 export const pageText = {
   title: "About",
-  subtitle: "I am a data leader and product builder. I discover value deep within data and turn it into AI products and strategies that drive business growth. From building high‑performing teams from 0 to 1, to leading complex, multi‑country projects and nurturing the next generation of data talent, my goal is consistent: create data solutions that not only solve problems but create enduring value.",
+  subtitle:
+    "AI/Data Leader and Product‑minded Builder. BI Lead at Lalamove (Hong Kong). I turn data and AI into measurable, reusable products and processes, focusing on revenue, efficiency and UX outcomes.",
   sections: {
     experience: "Experience",
-    education: "Education",
-    speeches: "Talks & Sharing",
+    education: "Education & Languages",
+    speeches: "Selected Talks",
     languages: "Languages",
     skills: "Skills"
   },
   cta: {
-    title: "Let’s create value together",
-    description: "Whether you’re a business seeking AI transformation or an individual pursuing career growth, I’d be glad to share insights and explore the possibilities of data science with you.",
-    tagline: "Keep learning, keep innovating"
+    title: "Want to collaborate or chat?",
+    description: "Planning AI/Data products, platforms or efficiency improvements? Let’s talk.",
+    tagline: "Business‑driven. Builder mindset."
   }
 };
-

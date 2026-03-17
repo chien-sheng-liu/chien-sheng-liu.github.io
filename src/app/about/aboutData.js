@@ -2,76 +2,102 @@ import { FaUserTie, FaGraduationCap, FaChalkboardTeacher, FaProjectDiagram, FaGl
 
 export const highlights = [
   {
-    icon: <FaUserTie size={28} />,
-    title: "AI 團隊領導者與架構師",
-    description: "從零建立數據團隊，主導千萬級專案，並設計與部署客製化語言模型與深度學習架構。",
+    icon: <FaUserTie size={24} />,
+    title: "AI 團隊與交付",
+    description: "自 0 組建 10 人團隊，主導 8+ 專案，累計營收 NT$6,000萬+。",
     color: "from-blue-500 to-cyan-500",
     bgGradient: "from-blue-500/10 to-cyan-500/10",
-    metrics: ["10人團隊", "NT$6,000萬營收", "8+專案"],
+    metrics: ["10 人", "8+ 專案", "NT$6,000萬+"],
   },
   {
-    icon: <FaProjectDiagram size={28} />,
-    title: "全端 AI 產品思維",
-    description: "從需求訪談、架構設計、模型開發到儀表板交付，具備將 AI 技術轉化為商業價值的全流程能力。",
+    icon: <FaProjectDiagram size={24} />,
+    title: "商業導向 AI 產品化",
+    description: "端到端將 AI 轉化為收益：需求→架構→模型→上線與治理。",
     color: "from-purple-500 to-pink-500",
     bgGradient: "from-purple-500/10 to-pink-500/10",
-    metrics: ["全流程覆蓋", "商業價值", "技術轉化"],
+    metrics: ["E2E", "營收/效率", "治理"],
   },
   {
-    icon: <FaGraduationCap size={28} />,
-    title: "德國頂尖大學資料科學碩士",
-    description: "畢業於德國曼海姆大學，歐洲頂尖商學院之一，專攻資料科學與商業應用。",
+    icon: <FaGraduationCap size={24} />,
+    title: "國際化資料科學背景",
+    description: "德國曼海姆大學 MSc，跨市場數據與 AI 實戰。",
     color: "from-green-500 to-emerald-500",
     bgGradient: "from-green-500/10 to-emerald-500/10",
-    metrics: ["頂尖學府", "國際視野", "學術基礎"],
+    metrics: ["MSc 德國", "跨國市場", "商業應用"],
   },
 ];
 
 export const experiences = [
   {
-    date: "2024/8-Present",
-    title: "Data Scientist 副理",
-    company: "創代科技 Datarget Innovation Inc.",
-    description: `自 0 建立並領導 10 人數據團隊，涵蓋 Data Science、Data Engineering、PM 職能。• 兼任 PM，負責需求訪談、專案規劃、時程控管與跨部門協作。• 主導並成功取得 8+ 個專案 / 標案，累積營收約 NT$ 6,000 萬。• 主導語言模型客製化（RAG、LangChain、LoRA 微調），並完成 GCP 與地端混合架構部署。`,
+    date: "2026/4–Present",
+    title: "Lead, Business Intelligence",
+    company: "Lalamove 香港",
+    bullets: [
+      "跨市場 KPI、供需監控與漏斗分析落地，提升決策速度",
+      "與 DE/DA 共建治理（dbt/LookML），縮短交付週期",
+      "規劃數據產品路線圖，強化自助分析能力",
+    ],
   },
   {
-    date: "2023/4-Present",
+    date: "2024/8–2026/4",
+    title: "Data Scientist 副理",
+    company: "創代科技 Datarget",
+    bullets: [
+      "自 0 帶 10 人團隊，主導 8+ 專案，營收 NT$6,000萬+",
+      "規劃與交付客製 LLM（RAG/LoRA），混合雲部署",
+      "兼任 PM：需求、時程、跨部門同步、驗收",
+    ],
+  },
+  {
+    date: "2023/4–Present",
     title: "資料科學講師",
     company: "DeepCoding 鍵深坊",
-    description: `長期擔任國立陽明交通大學工作坊講師，授課內容涵蓋資料分析、資料科學與視覺化。• 提供一對一資料科學課程，並協助超過 5 位學生進行職涯規劃、履歷修改並成功就業。`,
+    bullets: [
+      "開授資料科學/視覺化工作坊，學員 100+",
+      "1 對 1 指導 5+ 位學員轉職/升職",
+      "規劃實作導向課程，產出可驗證成果",
+    ],
   },
   {
-    date: "2023/7-2024/6",
+    date: "2023/7–2024/6",
     title: "機器學習工程師",
     company: "果實夥伴 OneAD",
-    description: `開發並部署機器學習模型以優化廣告投放，成功提高 20% CTR 及 30% 停留時間。• 重構用戶定位模型，使預測速度提升 40%，節省 30% GCP 成本。• 開發 Meta 廣告精準受眾平台，結合 LLM 與 RAG，顯著提高營銷活動的準確性。`,
+    bullets: [
+      "CTR +20%、停留 +30%，提升投放成效",
+      "模型重構：推論 +40% 速度、GCP 成本 -30%",
+      "打造 LLM+RAG 受眾平台，提升精準度",
+    ],
   },
   {
-    date: "2022/3-2024/2",
+    date: "2022/3–2024/2",
     title: "數據分析工程師",
-    company: "HelloFresh (德國)",
-    description: `針對 18 個市場部署 3 個客製化機器學習模型，節省 10% 廣告預算並達到 85% 準確率。• 創建 Tableau 儀表板以視覺化顧客轉化旅程，協助行銷部門進行 KPI 導向決策。• 運用 Google Clean Room 進行成效分析，成功降低 10% 廣告成本，並減少 15% 顧客重疊率。`,
+    company: "HelloFresh（德國）",
+    bullets: [
+      "18 市場部署 3 個 ML 模型，廣告預算 -10%",
+      "轉化旅程儀表板，支援 KPI 決策",
+      "Clean Room 成效分析：重疊 -15%",
+    ],
   },
 ];
 
 export const education = [
   {
-    date: "2020/9-2023/1",
-    title: "經濟資訊學碩士 (Wirtschaftsinformatik)",
-    company: "曼海姆大學 Universität Mannheim, 德國",
-    description: "專注於資料科學與商業資訊領域的碩士學位，德國商學院排名第一。",
+    date: "2020/9–2023/1",
+    title: "MSc 經濟資訊學",
+    company: "曼海姆大學（德國）",
+    description: "資料科學 × 商業應用",
   },
   {
-    date: "2019/10-2020/3",
-    title: "經濟工程系交換 (Wirtschaftsingenieurwesen)",
-    company: "拜羅伊特大學 Universität Bayreuth, 德國",
-    description: "跨領域學習，結合商業管理與工程技術，培養國際視野。",
+    date: "2019/10–2020/3",
+    title: "交換生｜經濟工程",
+    company: "拜羅伊特大學（德國）",
+    description: "跨領域與國際視野",
   },
   {
-    date: "2015/9-2020/01",
-    title: "資訊管理學學士 & 企業管理系輔系",
-    company: "中原大學 Chung Yuan Christian University, 台灣",
-    description: "奠定資訊管理與企業管理的雙重專業基礎，成績優異。",
+    date: "2015/9–2020/1",
+    title: "學士｜資管（輔企管）",
+    company: "中原大學（台灣）",
+    description: "資訊 × 管理",
   },
 ];
 
@@ -257,24 +283,25 @@ export const skills = [
 
 export const stats = [
   { label: "專業經驗", value: "4+", suffix: "年", icon: <FaAward /> },
-  { label: "專案成功", value: "15+", suffix: "個", icon: <FaProjectDiagram /> },
-  { label: "學生指導", value: "100+", suffix: "位", icon: <FaChalkboardTeacher /> },
-  { label: "技術演講", value: "10+", suffix: "場", icon: <FaMicrophone /> },
+  { label: "專案", value: "15+", suffix: "個", icon: <FaProjectDiagram /> },
+  { label: "學生 / mentees", value: "100+", suffix: "位", icon: <FaChalkboardTeacher /> },
+  { label: "演講 / 分享", value: "10+", suffix: "場", icon: <FaMicrophone /> },
 ];
 
 export const pageText = {
   title: "關於我",
-  subtitle: "我是一位熱情的數據領袖與產品建構者。我的專業在於挖掘數據深處的潛力，並將其轉化為驅動商業增長的 AI 產品與策略。從 0 到 1 建立高效能團隊、主導橫跨多國的複雜專案，再到培育下一代數據人才，我的目標始終如一：打造不僅能解決問題，更能創造價值的數據解決方案。",
+  subtitle:
+    "AI / Data Leader 與 Product‑minded Builder。現任 Lalamove 香港 BI Lead，專長把資料與 AI 做成能落地、能衡量、能複用的產品與流程。關心營收、效率與體驗的可量化提升。",
   sections: {
-    experience: "專業經歷",
-    education: "教育背景",
-    speeches: "演講與分享",
-    languages: "語言能力",
-    skills: "專業技能"
+    experience: "經歷",
+    education: "教育與語言",
+    speeches: "精選演講",
+    languages: "語言",
+    skills: "技能"
   },
   cta: {
-    title: "讓我們一起創造價值",
-    description: "無論您是企業主尋求 AI 轉型，還是個人追求職涯發展，我都很樂意與您分享經驗，共同探索數據科學的無限可能。",
-    tagline: "持續學習，持續創新"
+    title: "想合作或交流？",
+    description: "如果你在規劃 AI / Data 產品、數據平台或效能提升，歡迎聊聊。",
+    tagline: "Business‑driven. Builder mindset."
   }
 };

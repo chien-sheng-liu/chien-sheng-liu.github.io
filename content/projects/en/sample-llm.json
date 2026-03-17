@@ -1,0 +1,14 @@
+{
+  "slug": "gov-graph-rag",
+  "title": "Public Sector GraphRAG Chatbots",
+  "description": "Chatbots using OpenAI/Gemma/Gemini with hybrid cloud/on‑prem and agent workflows to reduce administrative workload.",
+  "category": "LLM",
+  "technologies": ["LLM", "RAG", "GCP", "Neo4j", "Next.js", "FastAPI"],
+  "metrics": [
+    { "label": "Bots", "value": "7+" },
+    { "label": "Data", "value": "5T+" },
+    { "label": "Efficiency", "value": "40%" }
+  ],
+  "link": "#"
+}
+

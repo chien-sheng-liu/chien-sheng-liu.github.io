@@ -1,97 +1,67 @@
 
 "use client";
-import { useCallback, useMemo } from "react";
-import Particles from "react-tsparticles";
-import { loadSlim } from "tsparticles-slim";
+import { useCallback, useEffect, useMemo, useState } from "react";
+import { Particles } from "@tsparticles/react";
+import { loadSlim } from "@tsparticles/slim";
 
+// Premium, subtle network particles tuned for dark-cinematic UIs.
 const ParticlesBackground = () => {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const onResize = () => setIsMobile(typeof window !== "undefined" && window.innerWidth < 768);
+    onResize();
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
+  }, []);
+
   const particlesInit = useCallback(async (engine) => {
     await loadSlim(engine);
   }, []);
 
-  const particlesLoaded = useCallback(async (container) => {
-    await console.log(container);
-  }, []);
-
   const options = useMemo(
     () => ({
-      background: {
-        color: {
-          value: "#0d1117",
-        },
-      },
-      fpsLimit: 60,
+      background: { color: { value: "#0d1117" } },
+      fpsLimit: 45,
       interactivity: {
         events: {
-          onClick: {
-            enable: true,
-            mode: "push",
-          },
-          onHover: {
-            enable: true,
-            mode: "repulse",
-          },
-        },
-        modes: {
-          push: {
-            quantity: 4,
-          },
-          repulse: {
-            distance: 200,
-            duration: 0.4,
-          },
+          onClick: { enable: false },
+          onHover: { enable: false },
+          resize: true,
         },
       },
       particles: {
-        color: {
-          value: "#ffffff",
-        },
+        color: { value: "#94a3b8" },
         links: {
-          color: "#ffffff",
-          distance: 150,
+          color: "#94a3b8",
+          distance: isMobile ? 120 : 160,
           enable: true,
-          opacity: 0.5,
-          width: 1,
+          opacity: isMobile ? 0.06 : 0.09,
+          width: 0.35,
         },
-        collisions: {
-          enable: true,
-        },
+        collisions: { enable: false },
         move: {
           direction: "none",
           enable: true,
-          outModes: {
-            default: "bounce",
-          },
+          outModes: { default: "out" },
           random: false,
-          speed: 2,
+          speed: isMobile ? 0.08 : 0.16,
           straight: false,
         },
-        number: {
-          density: {
-            enable: true,
-          },
-          value: 80,
-        },
-        opacity: {
-          value: 0.5,
-        },
-        shape: {
-          type: "circle",
-        },
-        size: {
-          value: { min: 1, max: 5 },
-        },
+        number: { density: { enable: true }, value: isMobile ? 10 : 20 },
+        opacity: { value: isMobile ? 0.08 : 0.12 },
+        shape: { type: "circle" },
+        size: { value: { min: 0.6, max: 1.6 } },
       },
       detectRetina: true,
     }),
-    []
+    [isMobile]
   );
 
   return (
     <Particles
       id="tsparticles"
       init={particlesInit}
-      loaded={particlesLoaded}
       options={options}
       className="fixed top-0 left-0 w-full h-full -z-10"
     />

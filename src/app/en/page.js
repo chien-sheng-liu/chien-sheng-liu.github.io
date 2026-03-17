@@ -2,356 +2,193 @@
 import Link from "next/link";
 import Image from "next/image";
 import ParticlesBackground from "@/components/ParticlesBackground";
-import { FaUserTie, FaGraduationCap, FaChalkboardTeacher, FaRobot, FaChartLine, FaArrowRight, FaStar } from "react-icons/fa";
 import { motion } from "framer-motion";
+import { FaArrowRight, FaRobot, FaShieldAlt, FaFeather } from "react-icons/fa";
+import { highlights, experiences, education, languages, pageText } from "@/app/en/about/aboutData";
+import { projects } from "@/app/en/projects/projectData";
 
-const coreDifferentiators = [
-  {
-    icon: <FaUserTie size={32} className="text-[var(--color-electric-blue)]" />,
-    title: "Strategic Leadership",
-    description: "I lead AI and data strategy end-to-end, translating technical potential into measurable business growth and competitive advantage.",
-    highlight: "8+ projects delivered",
-  },
-  {
-    icon: <FaGraduationCap size={32} className="text-[var(--color-electric-blue)]" />,
-    title: "First‑Principles Thinking",
-    description: "Trained in a top German university, I break down complex problems from fundamentals and design robust, innovative solutions—beyond off‑the‑shelf models.",
-    highlight: "Top European academia",
-  },
-  {
-    icon: <FaChalkboardTeacher size={32} className="text-[var(--color-electric-blue)]" />,
-    title: "Industry Impact",
-    description: "As an industry instructor, I share knowledge and build talent pipelines—keeping a pulse on the market while growing high‑performing teams.",
-    highlight: "5+ mentees placed",
-  },
-];
-
-const homepageServices = [
-  {
-    icon: <FaRobot size={28} className="text-[var(--color-electric-blue)]" />,
-    title: "AI Product Development & Data Strategy",
-    description: "Turn cutting‑edge AI into real products and craft data‑driven strategies to help you lead the market.",
-    link: "/en/service",
-    features: ["Custom LLMs", "RAG deployments", "Hybrid architectures"],
-  },
-  {
-    icon: <FaUserTie size={28} className="text-[var(--color-electric-blue)]" />,
-    title: "Career Coaching & Talent Enablement",
-    description: "Personalized planning, resume optimization, and interview prep to help you find your niche and accelerate growth in AI.",
-    link: "/en/service",
-    features: ["1‑on‑1 mentoring", "Resume optimization", "Interview prep"],
-  },
-  {
-    icon: <FaChartLine size={28} className="text-[var(--color-electric-blue)]" />,
-    title: "Business Insights & Decision Optimization",
-    description: "Uncover key insights through deep analytics and optimize decision processes for sustainable growth.",
-    link: "/en/service",
-    features: ["Data visualization", "KPI dashboards", "Impact analysis"],
-  },
-];
-
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.2,
-      delayChildren: 0.3,
-    },
-  },
+const fadeUp = {
+  hidden: { opacity: 0, y: 18 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } },
 };
+const stagger = { hidden: {}, visible: { transition: { staggerChildren: 0.08 } } };
 
-const itemVariants = {
-  hidden: { y: 30, opacity: 0 },
-  visible: {
-    y: 0,
-    opacity: 1,
-    transition: {
-      duration: 0.6,
-      ease: [0.16, 1, 0.3, 1],
-    },
-  },
-};
+const heroTags = ["Frontend Engineer", "Process Designer", "AI / Data"];
+// Removed business arrays (services/stats) to keep homepage personal
 
-const floatingVariants = {
-  animate: {
-    y: [-10, 10, -10],
-    transition: {
-      duration: 6,
-      repeat: Infinity,
-      ease: "easeInOut",
-    },
-  },
-};
+const Pill = ({ children, tone = "default" }) => (
+  <span
+    className={`inline-flex items-center rounded-full border px-3 py-1 text-[11px] font-medium tracking-tight ${
+      tone === "primary"
+        ? "border-[var(--color-electric-blue)]/50 bg-[var(--color-electric-blue)]/10 text-[var(--color-electric-blue)]"
+        : "border-white/10 bg-white/5 text-[var(--color-gray-300)]"
+    }`}
+  >
+    {children}
+  </span>
+);
 
 export default function HomeEn() {
   return (
-    <div className="relative min-h-screen text-[var(--color-white)] overflow-x-hidden">
+    <div className="relative min-h-screen overflow-hidden bg-[#020617] text-[var(--color-white)]">
       <ParticlesBackground />
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_25%_10%,rgba(0,191,255,0.15),transparent_45%),radial-gradient(circle_at_80%_15%,rgba(138,43,226,0.1),transparent_50%)]" />
 
-      {/* Background Effects */}
-      <div className="absolute inset-0 z-0">
-        <div className="absolute top-1/4 left-0 w-96 h-96 bg-[var(--color-electric-blue)] rounded-full mix-blend-screen filter blur-3xl opacity-20 animate-pulse"></div>
-        <div className="absolute top-1/2 right-0 w-96 h-96 bg-[var(--color-violet-glow)] rounded-full mix-blend-screen filter blur-3xl opacity-20 animate-pulse" style={{animationDelay: '2s'}}></div>
-        <div className="absolute bottom-1/4 left-1/3 w-64 h-64 bg-[var(--color-electric-blue)] rounded-full mix-blend-screen filter blur-3xl opacity-10 animate-pulse" style={{animationDelay: '4s'}}></div>
-
-        <motion.div
-          className="absolute top-1/3 right-1/4 w-2 h-2 bg-[var(--color-electric-blue)] rounded-full opacity-60"
-          variants={floatingVariants}
-          animate="animate"
-        />
-        <motion.div
-          className="absolute top-2/3 left-1/5 w-1 h-1 bg-[var(--color-violet-glow)] rounded-full opacity-80"
-          variants={floatingVariants}
-          animate="animate"
-          style={{animationDelay: '1s'}}
-        />
-      </div>
-
-      <main className="relative z-10">
-        {/* Hero */}
-        <section className="min-h-screen flex items-center justify-center p-4 sm:p-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 w-full max-w-7xl items-center">
-
+      <main className="relative z-10 space-y-16 pb-16">
+        {/* HERO */}
+        <section className="px-4 sm:px-6 lg:px-8 pt-16">
+          <div className="mx-auto max-w-6xl">
+            {/* Left: Textual hero */}
             <motion.div
-              className="flex flex-col items-center lg:items-start text-center lg:text-left"
-              initial={{ opacity: 0, x: -50 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8 }}
-            >
-              {/* Profile */}
-              <div className="relative w-52 h-52 mb-8 group z-20">
-                <div className="absolute inset-0 bg-gradient-to-r from-[var(--color-electric-blue)] to-[var(--color-violet-glow)] rounded-full animate-spin-slow blur-xl group-hover:blur-2xl transition-all duration-500"></div>
-                <div className="absolute inset-2 bg-gradient-to-r from-[var(--color-electric-blue)]/20 to-[var(--color-violet-glow)]/20 rounded-full animate-pulse"></div>
-
-                <Image
-                  src="/profile.png"
-                  alt="Chien-Sheng Liu"
-                  width={208}
-                  height={208}
-                  priority
-                  className="relative z-10 rounded-full border-4 border-[var(--color-gray-700)] shadow-2xl transform transition-transform duration-300 group-hover:scale-105"
-                  style={{ position: 'relative' }}
-                />
-
-                <div className="absolute -bottom-2 -right-2 z-30 bg-green-500 w-8 h-8 rounded-full border-4 border-[var(--color-deep-space)] flex items-center justify-center">
-                  <div className="w-3 h-3 bg-green-400 rounded-full animate-pulse"></div>
-                </div>
-              </div>
-
-              <motion.h1
-                className="text-5xl md:text-6xl font-extrabold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-[var(--color-electric-blue)] to-[var(--color-violet-glow)] leading-tight"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.2 }}
-              >
-                Morris
-                <div className="text-2xl md:text-3xl font-medium text-[var(--color-gray-300)] mt-2">
-                  Chien-Sheng Liu
-                </div>
-              </motion.h1>
-
-              <motion.div
-                className="flex flex-wrap gap-3 mb-6"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.4 }}
-              >
-                {["AI Strategy Consultant", "Career Mentor", "Data Science Expert"].map((tag, index) => (
-                  <span key={index} className="px-4 py-2 bg-[var(--color-electric-blue)]/20 border border-[var(--color-electric-blue)]/40 rounded-full text-sm font-medium text-[var(--color-electric-blue)] backdrop-blur-sm">
-                    {tag}
-                  </span>
-                ))}
-              </motion.div>
-
-              <motion.p
-                className="text-lg md:text-xl text-[var(--color-gray-300)] max-w-xl mb-8 leading-relaxed"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.6 }}
-              >
-                An experienced <span className="text-[var(--color-electric-blue)] font-semibold">AI strategy consultant</span> and <span className="text-[var(--color-violet-glow)] font-semibold">career mentor</span> dedicated to turning data into core advantage for organizations and empowering individuals to level up in the AI era.
-              </motion.p>
-
-              <motion.div
-                className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 mt-4"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.8 }}
-              >
-                <Link href="/en/about">
-                  <motion.button
-                    className="group relative px-8 py-4 bg-gradient-to-r from-[var(--color-electric-blue)] to-[var(--color-electric-blue)]/80 text-[var(--color-white)] font-bold rounded-full transition-all duration-300 shadow-lg shadow-[var(--color-electric-blue)]/30 hover:shadow-[var(--color-electric-blue)]/50 hover:shadow-2xl overflow-hidden"
-                    whileHover={{ scale: 1.05, y: -2 }}
-                    whileTap={{ scale: 0.95 }}
-                  >
-                    <div className="absolute inset-0 bg-gradient-to-r from-[var(--color-electric-blue)]/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                    <span className="relative flex items-center">
-                      Explore my background
-                      <FaArrowRight className="ml-2 group-hover:translate-x-1 transition-transform duration-300" />
-                    </span>
-                  </motion.button>
-                </Link>
-                <Link href="/en/contact">
-                  <motion.button
-                    className="group relative px-8 py-4 bg-transparent border-2 border-[var(--color-violet-glow)] text-[var(--color-violet-glow)] font-bold rounded-full transition-all duration-300 hover:bg-[var(--color-violet-glow)] hover:text-white shadow-lg shadow-[var(--color-violet-glow)]/30 hover:shadow-[var(--color-violet-glow)]/50 hover:shadow-2xl overflow-hidden"
-                    whileHover={{ scale: 1.05, y: -2 }}
-                    whileTap={{ scale: 0.95 }}
-                  >
-                    <div className="absolute inset-0 bg-[var(--color-violet-glow)]/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                    <span className="relative flex items-center">
-                      Get in touch
-                      <FaStar className="ml-2 group-hover:rotate-12 transition-transform duration-300" />
-                    </span>
-                  </motion.button>
-                </Link>
-              </motion.div>
-            </motion.div>
-
-            {/* Differentiators */}
-            <motion.div
-              className="space-y-6"
-              variants={containerVariants}
+              variants={stagger}
               initial="hidden"
               animate="visible"
+              className="rounded-[40px] border border-white/10 bg-gradient-to-br from-[#1a2a48] via-[#0f1b33] to-[#0a1326] p-9 shadow-[0_60px_160px_-60px_rgba(0,191,255,0.55)]"
             >
-              {coreDifferentiators.map((insight, index) => (
-                <motion.div
-                  key={index}
-                  variants={itemVariants}
-                  className="group relative bg-gradient-to-br from-[var(--color-gray-800)]/80 to-[var(--color-gray-800)]/40 backdrop-blur-xl rounded-2xl p-8 border border-[var(--color-gray-700)]/50 transition-all duration-500 hover:border-[var(--color-electric-blue)]/50 hover:shadow-2xl hover:shadow-[var(--color-electric-blue)]/10 overflow-hidden"
-                  whileHover={{ y: -8, scale: 1.02 }}
-                >
-                  <div className="absolute inset-0 bg-gradient-to-r from-[var(--color-electric-blue)]/5 via-transparent to-[var(--color-violet-glow)]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-
-                  <div className="relative flex items-start space-x-6">
-                    <motion.div
-                      className="flex-shrink-0 mt-1 p-3 bg-[var(--color-electric-blue)]/10 rounded-xl border border-[var(--color-electric-blue)]/20 group-hover:bg-[var(--color-electric-blue)]/20 transition-all duration-300"
-                      whileHover={{ rotate: 5, scale: 1.1 }}
-                    >
-                      {insight.icon}
-                    </motion.div>
-                    <div className="flex-1">
-                      <div className="flex items-center justify-between mb-3">
-                        <h3 className="text-xl font-bold text-[var(--color-white)] group-hover:text-[var(--color-electric-blue)] transition-colors duration-300">
-                          {insight.title}
-                        </h3>
-                        <span className="px-3 py-1 bg-[var(--color-violet-glow)]/20 border border-[var(--color-violet-glow)]/30 rounded-full text-xs font-semibold text-[var(--color-violet-glow)]">
-                          {insight.highlight}
-                        </span>
-                      </div>
-                      <p className="text-[var(--color-gray-400)] leading-relaxed group-hover:text-[var(--color-gray-300)] transition-colors duration-300">
-                        {insight.description}
-                      </p>
-                    </div>
-                  </div>
-
-                  <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-bl from-[var(--color-electric-blue)]/10 to-transparent rounded-bl-full opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+              <div className="grid gap-8 lg:grid-cols-2 items-center">
+                <div className="space-y-5">
+                <motion.p variants={fadeUp} className="text-[11px] uppercase tracking-[0.4em] text-[var(--color-gray-300)]">Hi, I’m Morris</motion.p>
+                <motion.h1 variants={fadeUp} className="text-4xl sm:text-5xl font-semibold leading-tight text-white">I turn AI into work and stories</motion.h1>
+                <motion.p variants={fadeUp} className="text-sm md:text-base text-[var(--color-gray-200)] max-w-xl">{pageText?.subtitle}</motion.p>
+                <motion.div variants={fadeUp} className="flex flex-wrap gap-2">
+                  {heroTags.map((tag) => (
+                    <Pill key={tag}>{tag}</Pill>
+                  ))}
                 </motion.div>
-              ))}
+                <motion.div variants={fadeUp} className="flex flex-wrap gap-3 pt-1">
+                  <Link href="/en/contact" className="group inline-flex items-center rounded-full border border-[var(--color-electric-blue)]/60 bg-[var(--color-electric-blue)]/15 px-6 py-3 text-sm font-semibold text-[var(--color-electric-blue)]">Say hello<FaArrowRight className="ml-2 transition-transform group-hover:translate-x-1" /></Link>
+                </motion.div>
+                <motion.p variants={fadeUp} className="mt-6 text-sm md:text-base text-[var(--color-gray-200)] max-w-2xl border-t border-white/10 pt-6">{pageText?.subtitle}</motion.p>
+              </div>
+              <motion.div variants={fadeUp} className="relative mx-auto h-56 w-56 sm:h-64 sm:w-64">
+                <div className="absolute inset-0 rounded-full bg-[radial-gradient(circle_at_50%_50%,rgba(0,191,255,0.35),transparent_60%)] blur-2xl" />
+                <div className="relative h-full w-full overflow-hidden rounded-full ring-2 ring-white/15 shadow-[0_30px_100px_-60px_rgba(0,191,255,0.6)]">
+                  <Image src="/profile.png" alt="Morris portrait" fill sizes="256px" className="object-cover" />
+                </div>
+              </motion.div>
+              </div>
             </motion.div>
 
+            
           </div>
         </section>
 
-        {/* Services */}
-        <section className="py-24 px-4 sm:px-8">
-          <div className="max-w-7xl mx-auto">
-            <motion.div
-              className="text-center mb-16"
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8 }}
-            >
-              <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-white via-[var(--color-electric-blue)] to-[var(--color-violet-glow)]">
-                My Services
-              </h2>
-              <p className="text-xl text-[var(--color-gray-300)] max-w-3xl mx-auto leading-relaxed">
-                End‑to‑end AI solutions from technical implementation to talent enablement—so you can win in digital transformation.
-              </p>
-            </motion.div>
-
-            <motion.div
-              className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16"
-              variants={containerVariants}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, amount: 0.2 }}
-            >
-              {homepageServices.map((service, index) => (
-                <motion.div
-                  key={index}
-                  variants={itemVariants}
-                  className="group relative bg-gradient-to-br from-[var(--color-gray-800)]/80 to-[var(--color-gray-800)]/40 backdrop-blur-xl rounded-2xl p-8 border border-[var(--color-gray-700)]/50 transition-all duration-500 hover:border-[var(--color-electric-blue)]/50 hover:shadow-2xl hover:shadow-[var(--color-electric-blue)]/10 overflow-hidden"
-                  whileHover={{ y: -12, scale: 1.03 }}
-                >
-                  <div className="absolute inset-0 bg-gradient-to-br from-[var(--color-electric-blue)]/5 via-transparent to-[var(--color-violet-glow)]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-
-                  <Link href={service.link} className="block relative">
-                    <div className="flex flex-col items-center text-center">
-                      <motion.div
-                        className="mb-6 p-4 bg-[var(--color-electric-blue)]/10 rounded-2xl border border-[var(--color-electric-blue)]/20 group-hover:bg-[var(--color-electric-blue)]/20 transition-all duration-300"
-                        whileHover={{ rotate: 5, scale: 1.1 }}
-                      >
-                        {service.icon}
-                      </motion.div>
-
-                      <h3 className="text-2xl font-bold text-[var(--color-white)] mb-4 group-hover:text-[var(--color-electric-blue)] transition-colors duration-300">
-                        {service.title}
-                      </h3>
-
-                      <p className="text-[var(--color-gray-400)] mb-6 leading-relaxed group-hover:text-[var(--color-gray-300)] transition-colors duration-300">
-                        {service.description}
-                      </p>
-
-                      <div className="space-y-2 mb-6 w-full">
-                        {service.features.map((feature, idx) => (
-                          <div key={idx} className="flex items-center text-sm text-[var(--color-gray-500)] group-hover:text-[var(--color-gray-400)] transition-colors duration-300">
-                            <div className="w-2 h-2 bg-[var(--color-electric-blue)] rounded-full mr-3"></div>
-                            {feature}
-                          </div>
-                        ))}
-                      </div>
-
-                      <div className="inline-flex items-center text-[var(--color-electric-blue)] font-semibold group-hover:text-[var(--color-violet-glow)] transition-colors duration-300">
-                        Learn more
-                        <FaArrowRight className="ml-2 group-hover:translate-x-1 transition-transform duration-300" />
-                      </div>
-                    </div>
-                  </Link>
-
-                  <div className="absolute -top-10 -right-10 w-20 h-20 bg-[var(--color-electric-blue)]/20 rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+        {/* HIGHLIGHTS */}
+        <section id="about" className="px-4 sm:px-6 lg:px-8">
+          <div className="mx-auto max-w-6xl">
+            <div className="mb-4"><h2 className="text-sm uppercase tracking-[0.35em] text-[var(--color-gray-400)]">Highlights</h2></div>
+            <div className="grid gap-5 md:grid-cols-3">
+              {highlights.slice(0,3).map((h, idx) => (
+                <motion.div key={idx} variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.3 }} className="rounded-2xl border border-white/10 bg-[#111c2f] p-6">
+                  <div className="flex items-center gap-3">
+                    <div className="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-[var(--color-electric-blue)]/14 text-[var(--color-electric-blue)]">{h.icon}</div>
+                    <h3 className="text-base font-semibold text-white">{h.title}</h3>
+                  </div>
+                  <p className="mt-2 text-sm text-[var(--color-gray-300)]">{h.description}</p>
                 </motion.div>
               ))}
-            </motion.div>
+            </div>
+          </div>
+        </section>
 
-            <motion.div
-              className="text-center"
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8, delay: 0.4 }}
-            >
-              <Link href="/en/service">
-                <motion.button
-                  className="group relative px-12 py-6 bg-gradient-to-r from-[var(--color-violet-glow)] to-[var(--color-electric-blue)] text-[var(--color-white)] font-bold text-lg rounded-full transition-all duration-300 shadow-2xl shadow-[var(--color-violet-glow)]/30 hover:shadow-[var(--color-violet-glow)]/50 overflow-hidden"
-                  whileHover={{ scale: 1.05, y: -3 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  <div className="absolute inset-0 bg-gradient-to-r from-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                  <span className="relative flex items-center">
-                    Explore full services
-                    <motion.div
-                      className="ml-3"
-                      animate={{ x: [0, 5, 0] }}
-                      transition={{ duration: 2, repeat: Infinity }}
-                    >
-                      <FaArrowRight />
+        {/* SELECTED WORK removed for personal CV-style */}
+        <section className="hidden">
+          <div className="mx-auto max-w-6xl">
+            <div className="mb-5 flex items-center justify-between">
+              <h2 className="text-lg font-semibold tracking-tight text-white">Selected Work</h2>
+              <Link href="/en/projects" className="text-sm text-[var(--color-gray-300)] hover:text-white">All work</Link>
+            </div>
+            {projects.length > 0 && (
+              <div className="grid gap-6 lg:grid-cols-[1.15fr_0.85fr]">
+                <motion.div initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.3 }} transition={{ duration: 0.55 }} className="relative overflow-hidden rounded-[28px] border border-white/10 bg-gradient-to-br from-[#1a2a48] via-[#0f1b33] to-[#0a1326] p-7 shadow-[0_60px_160px_-60px_rgba(0,191,255,0.45)] hover:shadow-[0_60px_160px_-50px_rgba(0,191,255,0.6)] hover-lift">
+                  <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_85%_20%,rgba(0,191,255,0.35),transparent_55%)]" />
+                  <div className="relative space-y-3">
+                    <h3 className="text-xl font-semibold text-white">{projects[0].title}</h3>
+                    <p className="text-sm text-[var(--color-gray-200)]">{projects[0].description}</p>
+                    <div className="flex flex-wrap gap-2">{(projects[0].technologies||[]).slice(0,4).map((t) => (<Pill key={t} tone="primary">{t}</Pill>))}</div>
+                    <Link href={projects[0].link || '/en/projects'} className="group inline-flex items-center text-sm font-semibold text-[var(--color-electric-blue)]">View details<FaArrowRight className="ml-2 transition-transform group-hover:translate-x-1" /></Link>
+                  </div>
+                </motion.div>
+                <div className="grid gap-6">
+                  {projects.slice(1,3).map((p, idx) => (
+                    <motion.div key={p.slug || p.title || idx} initial={{ opacity: 0, y: 22 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.25 }} transition={{ duration: 0.5, delay: idx * 0.05 }} className="rounded-[22px] border border-white/10 bg-[#0b1220] p-6">
+                      <div className="flex items-center justify-between">
+                        <h3 className="text-base font-semibold text-white">{p.title}</h3>
+                        <span className="text-[10px] uppercase tracking-[0.35em] text-[var(--color-gray-500)]">Work</span>
+                      </div>
+                      <p className="mt-1.5 text-sm text-[var(--color-gray-300)]">{p.description}</p>
+                      <div className="mt-3 flex flex-wrap gap-2">{(p.technologies||[]).slice(0,3).map((t)=> (<Pill key={t}>{t}</Pill>))}</div>
+                      <Link href={p.link || '/en/projects'} className="mt-4 inline-flex items-center text-sm text-[var(--color-gray-200)] hover:text-white">Learn more<FaArrowRight className="ml-2 text-xs" /></Link>
                     </motion.div>
-                  </span>
-                </motion.button>
-              </Link>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
+        </section>
+
+        {/* EXPERIENCE */}
+        <section className="px-4 sm:px-6 lg:px-8">
+          <div className="mx-auto max-w-6xl">
+            <div className="mb-4"><h2 className="text-sm uppercase tracking-[0.35em] text-[var(--color-gray-400)]">Experience</h2></div>
+            <div className="space-y-4">
+              {experiences.slice(0,5).map((exp, idx) => (
+                <motion.div key={idx} variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }} className="rounded-2xl border border-white/10 bg-[#111c2f] p-6">
+                  <div className="flex flex-wrap items-baseline justify-between gap-2">
+                    <h3 className="text-base font-semibold text-white">{exp.title}</h3>
+                    <span className="text-xs text-[var(--color-gray-500)]">{exp.date}</span>
+                  </div>
+                  <div className="text-sm text-[var(--color-gray-300)]">{exp.company}</div>
+                  <ul className="mt-2 space-y-1">
+                    {(exp.bullets||[]).slice(0,3).map((b,i)=>(<li key={i} className="text-sm text-[var(--color-gray-300)]">• {b}</li>))}
+                  </ul>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* EDUCATION / LANGUAGES */}
+        <section className="px-4 sm:px-6 lg:px-8">
+          <div className="mx-auto max-w-6xl">
+            <div className="mb-4"><h2 className="text-sm uppercase tracking-[0.35em] text-[var(--color-gray-400)]">Education / Languages</h2></div>
+            <div className="grid gap-6 md:grid-cols-2">
+              <div className="space-y-4">
+                {education.slice(0,3).map((ed, idx)=>(
+                  <div key={idx} className="rounded-2xl border border-white/10 bg-[#111c2f] p-6">
+                    <div className="flex items-center justify-between gap-2">
+                      <h3 className="text-base font-semibold text-white">{ed.title}</h3>
+                      <span className="text-xs text-[var(--color-gray-500)]">{ed.date}</span>
+                    </div>
+                    <p className="text-sm text-[var(--color-gray-300)]">{ed.company}</p>
+                    {ed.description && <p className="text-xs text-[var(--color-gray-500)] mt-1">{ed.description}</p>}
+                  </div>
+                ))}
+              </div>
+              <div className="space-y-3">
+                {languages.map((l,idx)=>(
+                  <div key={idx} className="flex items-center justify-between rounded-2xl border border-white/10 bg-[#111c2f] px-5 py-4">
+                    <span className="text-sm text-white">{l.title}</span>
+                    <span className="text-xs text-[var(--color-electric-blue)]">{l.level}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* CTA */}
+        <section className="px-4 sm:px-6 lg:px-8">
+          <div className="mx-auto max-w-4xl rounded-[20px] border border-white/5 bg-[#0b1220] px-6 py-8 text-center">
+            <motion.div initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.3 }} transition={{ duration: 0.45 }}>
+              <h3 className="text-2xl font-semibold text-white">Want to create better work together?</h3>
+              <p className="mt-2 text-sm text-[var(--color-gray-400)]">Drop me a line or grab a time to chat.</p>
+              <div className="mt-5 flex flex-wrap justify-center gap-3">
+                <Link href="/en/contact" className="group inline-flex items-center rounded-full border border-[var(--color-electric-blue)]/60 bg-[var(--color-electric-blue)]/15 px-6 py-3 text-sm font-semibold text-[var(--color-electric-blue)]">
+                  Say hello
+                  <FaArrowRight className="ml-2 transition-transform group-hover:translate-x-1" />
+                </Link>
+              </div>
             </motion.div>
           </div>
         </section>
@@ -359,4 +196,3 @@ export default function HomeEn() {
     </div>
   );
 }
-

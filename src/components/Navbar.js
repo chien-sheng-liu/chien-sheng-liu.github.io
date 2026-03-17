@@ -8,25 +8,22 @@ import { FaBars, FaTimes } from 'react-icons/fa';
 
 const navLinksZh = [
   { name: '首頁', href: '/' },
-  { name: '關於我', href: '/about' },
   { name: '個人專案', href: '/projects' },
-  { name: '服務項目', href: '/service' },
+  { name: '文章', href: '/articles' },
   { name: '聯絡我', href: '/contact' },
 ];
 
 const navLinksEn = [
   { name: 'Home', href: '/' },
-  { name: 'About', href: '/about' },
   { name: 'Projects', href: '/projects' },
-  { name: 'Services', href: '/service' },
+  { name: 'Articles', href: '/articles' },
   { name: 'Contact', href: '/contact' },
 ];
 
 const navLinksYue = [
   { name: '主頁', href: '/' },
-  { name: '關於我', href: '/about' },
   { name: '個人項目', href: '/projects' },
-  { name: '服務內容', href: '/service' },
+  { name: '文章', href: '/articles' },
   { name: '聯絡我', href: '/contact' },
 ];
 
@@ -65,49 +62,51 @@ const Navbar = () => {
 
   return (
     <motion.nav
-      className="fixed top-0 left-0 right-0 z-50 bg-black/30 backdrop-blur-lg"
+      className="fixed top-0 left-0 right-0 z-50 border-b border-white/10 bg-[#020617]/60 backdrop-blur-md"
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.5, ease: 'easeOut' }}
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-20">
+        <div className="flex items-center justify-between h-16">
           <motion.div whileHover={{ scale: 1.05 }}>
-            <Link href={hrefPrefix || '/'} className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-400">
+            <Link href={hrefPrefix || '/'} className="text-2xl font-semibold text-white">
               Morris
             </Link>
           </motion.div>
 
           {/* Desktop Menu */}
-          <div className="hidden md:flex items-center space-x-8">
-            {links.map((link) => {
-              const linkHref = normalize(`${hrefPrefix}${link.href}`.replace('//', '/'));
-              const isActive = normalize(pathname || '') === linkHref;
-              return (
-                <Link key={`${link.name}-${link.href}`} href={linkHref} className={`relative text-sm font-medium transition-colors duration-300 ${isActive ? 'text-white' : 'text-gray-400 hover:text-white'}`}>
-                  {link.name}
-                  {isActive && (
-                    <motion.span
-                      layoutId="underline"
-                      className="absolute left-0 bottom-[-6px] block h-[2px] w-full bg-[var(--color-electric-blue)]"
-                    />
-                  )}
-                </Link>
-              );
-            })}
+          <div className="hidden md:flex items-center gap-4">
+            <div className="flex items-center gap-1 rounded-full border border-white/10 bg-white/5 p-1">
+              {links.map((link) => {
+                const linkHref = normalize(`${hrefPrefix}${link.href}`.replace('//', '/'));
+                const isActive = normalize(pathname || '') === linkHref;
+                return (
+                  <Link
+                    key={`${link.name}-${link.href}`}
+                    href={linkHref}
+                    className={`px-3 py-1.5 rounded-full text-sm font-medium transition-colors ${
+                      isActive ? 'bg-white/10 text-white' : 'text-gray-300 hover:text-white hover:bg-white/5'
+                    }`}
+                  >
+                    {link.name}
+                  </Link>
+                );
+              })}
+            </div>
 
             {/* Language Selector */}
             <div className="relative">
               <button
                 onClick={() => setShowLang(v => !v)}
-                className="ml-2 px-3 py-1.5 rounded-full text-xs font-semibold border border-white/20 text-gray-300 hover:text-white hover:border-white/40 transition-colors"
+                className="ml-2 px-3 py-1.5 rounded-full text-xs font-semibold border border-white/15 text-gray-300 hover:text-white hover:border-white/30 transition-colors bg-white/5"
                 aria-haspopup="true"
                 aria-expanded={showLang}
               >
                 {locale === 'en' ? 'EN' : locale === 'yue' ? '粵語' : '繁中'}
               </button>
               {showLang && (
-                <div className="absolute right-0 mt-2 w-28 rounded-lg border border-white/10 bg-black/70 backdrop-blur-xl shadow-lg p-1">
+                <div className="absolute right-0 mt-2 w-28 rounded-lg border border-white/10 bg-[#0b1220]/90 backdrop-blur-xl shadow-lg p-1">
                   <button onClick={() => switchTo('zh')} className={`w-full text-left px-3 py-2 rounded-md text-xs ${locale==='zh' ? 'bg-white/10 text-white' : 'text-gray-300 hover:bg-white/5 hover:text-white'}`}>繁中</button>
                   <button onClick={() => switchTo('yue')} className={`w-full text-left px-3 py-2 rounded-md text-xs ${locale==='yue' ? 'bg-white/10 text-white' : 'text-gray-300 hover:bg-white/5 hover:text-white'}`}>粵語</button>
                   <button onClick={() => switchTo('en')} className={`w-full text-left px-3 py-2 rounded-md text-xs ${locale==='en' ? 'bg-white/10 text-white' : 'text-gray-300 hover:bg-white/5 hover:text-white'}`}>English</button>
@@ -145,7 +144,7 @@ const Navbar = () => {
       {/* Mobile Menu */}
       {isOpen && (
         <motion.div
-          className="md:hidden bg-black/50 backdrop-blur-xl"
+          className="md:hidden bg-[#020617]/80 backdrop-blur-xl"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.3 }}
@@ -162,7 +161,7 @@ const Navbar = () => {
                   animate="visible"
                   transition={{ delay: index * 0.1 }}
                 >
-                  <Link href={linkHref} onClick={toggleMenu} className={`block px-3 py-2 rounded-md text-base font-medium ${active ? 'text-white bg-white/10' : 'text-gray-300 hover:text-white hover:bg-white/5'}`}>
+                  <Link href={linkHref} onClick={toggleMenu} className={`block px-3 py-2 rounded-full text-base font-medium border ${active ? 'text-white bg-white/10 border-white/10' : 'text-gray-300 hover:text-white hover:bg-white/5 border-transparent'}`}>
                     {link.name}
                   </Link>
                 </motion.div>

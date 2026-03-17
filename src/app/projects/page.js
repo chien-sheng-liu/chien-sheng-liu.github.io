@@ -1,8 +1,9 @@
 "use client";
 
-import { FaGithub, FaArrowRight, FaEye, FaDatabase, FaCode, FaStar } from "react-icons/fa";
+import { FaGithub, FaArrowRight, FaEye, FaDatabase, FaCode, FaStar, FaBrain, FaCloud, FaChartLine } from "react-icons/fa";
 import { motion } from "framer-motion";
-import { projects, stats } from "./projectData";
+import { projects as baseProjects, stats } from "./projectData";
+import { useEffect, useMemo, useState } from "react";
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -40,7 +41,32 @@ const floatingVariants = {
   },
 };
 
+const iconForCategory = (cat) => {
+  const c = (cat || '').toLowerCase();
+  if (c.includes('llm')) return <FaDatabase size={28} />;
+  if (c.includes('nlp')) return <FaBrain size={28} />;
+  if (c.includes('deep') || c.includes('learning')) return <FaBrain size={28} />;
+  if (c.includes('cloud')) return <FaCloud size={28} />;
+  return <FaChartLine size={28} />;
+};
+
 const ProjectsPage = () => {
+  const [extra, setExtra] = useState([]);
+
+  useEffect(() => {
+    fetch('/api/content/projects?locale=zh').then(r=>r.json()).then(d=>{
+      const items = (d.items || []).map(p => ({
+        ...p,
+        icon: iconForCategory(p.category),
+        categoryIcon: <FaCode size={16} />,
+      }));
+      setExtra(items);
+    }).catch(()=>{});
+  }, []);
+
+  const allProjects = useMemo(() => {
+    return [...baseProjects, ...extra];
+  }, [extra]);
   return (
     <div className="relative min-h-screen text-[var(--color-white)] overflow-hidden">
       {/* Enhanced Background Effects */}
@@ -128,7 +154,7 @@ const ProjectsPage = () => {
           whileInView="visible"
           viewport={{ once: true, amount: 0.2 }}
         >
-          {projects.map((project, index) => (
+              {allProjects.map((project, index) => (
             <motion.div 
               key={index}
               variants={itemVariants}

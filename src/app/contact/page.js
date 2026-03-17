@@ -1,12 +1,10 @@
 "use client";
-
-import { useState } from "react";
 import { motion } from "framer-motion";
+import { useState } from "react";
 import {
   FaEnvelope,
   FaLinkedin,
   FaCalendarAlt,
-  FaPaperPlane,
   FaMapMarkerAlt,
   FaClock,
   FaGlobe,
@@ -37,12 +35,13 @@ const contactInfo = [
     value: "預約 30 分鐘諮詢",
     href: "https://calendar.app.google/jPexFUzauM39fYfV9",
     description: "直接選擇可用時段進行預約",
+    type: 'calendar',
     color: "from-green-600 to-emerald-400",
   },
 ];
 
 const quickInfo = [
-  { icon: <FaMapMarkerAlt size={20} />, label: "位置", value: "台北, 台灣" },
+  { icon: <FaMapMarkerAlt size={20} />, label: "位置", value: "香港, 香港" },
   { icon: <FaClock size={20} />, label: "回覆時間", value: "24-48 小時內" },
   { icon: <FaGlobe size={20} />, label: "語言", value: "中文, English, Deutsch" },
 ];
@@ -66,90 +65,7 @@ const floatingVariants = {
 };
 
 const ContactPage = () => {
-  // 受控表單狀態（純 JS）
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [subject, setSubject] = useState("");
-  const [message, setMessage] = useState("");
-  const [feedback, setFeedback] = useState(null);
-  const [sending, setSending] = useState(false);
-
-  const isEmailValid = (val) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val);
-
-  const buildSubject = () =>
-    (subject || `新的聯絡訊息：${name || "未填寫姓名"}`).trim();
-
-  const buildBody = () => {
-    const lines = [
-      `您好，我是 ${name || "（未填）"}`,
-      "",
-      message || "（無訊息內容）",
-      "",
-      "—",
-      `聯絡人：${name || "（未填）"}`,
-      `Email：${email || "（未填）"}`,
-      typeof window !== "undefined" ? `來自頁面：${window.location.href}` : "",
-    ].filter(Boolean);
-    return lines.join("\n");
-  };
-
-  // 「智慧寄送」：使用 mailto（若瀏覽器以 Gmail 為預設處理器，會自動開 Gmail）
-  const openWithMailto = () => {
-    const su = encodeURIComponent(buildSubject());
-    const bo = encodeURIComponent(buildBody());
-    const cc = email && isEmailValid(email) ? `&cc=${encodeURIComponent(email)}` : "";
-    const url = `mailto:${encodeURIComponent(TO_EMAIL)}?subject=${su}&body=${bo}${cc}`;
-    window.location.href = url;
-  };
-
-  // 提供強制 Gmail / Outlook Web 的備用連結
-  const openWithGmail = () => {
-    const su = encodeURIComponent(buildSubject());
-    const bo = encodeURIComponent(buildBody());
-    const cc = email && isEmailValid(email) ? `&cc=${encodeURIComponent(email)}` : "";
-    const url = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(
-      TO_EMAIL
-    )}${cc}&su=${su}&body=${bo}`;
-    window.open(url, "_blank", "noopener,noreferrer");
-  };
-  const openWithOutlookWeb = () => {
-    const su = encodeURIComponent(buildSubject());
-    const bo = encodeURIComponent(buildBody());
-    const cc = email && isEmailValid(email) ? `&cc=${encodeURIComponent(email)}` : "";
-    const url = `https://outlook.live.com/owa/?path=/mail/action/compose&to=${encodeURIComponent(
-      TO_EMAIL
-    )}${cc}&subject=${su}&body=${bo}`;
-    window.open(url, "_blank", "noopener,noreferrer");
-  };
-
-  const validate = () => {
-    if (!name.trim()) return "請填寫姓名。";
-    if (!email.trim()) return "請填寫電子郵件。";
-    if (!isEmailValid(email)) return "請輸入有效的電子郵件格式。";
-    if (!message.trim()) return "請填寫訊息內容。";
-    // mailto 可能有長度限制（依瀏覽器/系統而異）
-    const approxLength = buildSubject().length + buildBody().length;
-    if (approxLength > 1800) {
-      return "訊息太長，可能無法透過 mailto 完整帶入。請精簡內容或點擊下方『改用 Gmail』。";
-    }
-    return null;
-  };
-
-  const handleSmartSend = () => {
-    setFeedback(null);
-    const err = validate();
-    if (err) {
-      setFeedback(err);
-      return;
-    }
-    setSending(true);
-    try {
-      openWithMailto(); // 智慧路由（Gmail 已設為預設處理器時會自動開 Gmail）
-    } finally {
-      setTimeout(() => setSending(false), 300);
-    }
-  };
-
+  const [calendarOpen, setCalendarOpen] = useState(false);
   return (
     <div className="relative min-h-screen text-[var(--color-white)] overflow-hidden">
       {/* 背景效果 */}
@@ -203,56 +119,43 @@ const ContactPage = () => {
           </motion.div>
         </motion.div>
 
-        <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+        <div className="max-w-6xl mx-auto">
           {/* 聯絡方式卡片 */}
           <motion.div className="space-y-6" variants={containerVariants} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.3 }}>
             <motion.h2 className="text-3xl font-bold text-white mb-8" variants={itemVariants}>
               聯絡方式
             </motion.h2>
 
-            {contactInfo.map((item, index) => (
-              <motion.a
-                key={index}
-                href={item.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                variants={itemVariants}
-                className="group block relative overflow-hidden bg-gradient-to-br from-[var(--color-gray-800)]/80 to-[var(--color-gray-800)]/40 backdrop-blur-xl rounded-2xl p-6 border border-[var(--color-gray-700)]/50 transition-all duration-500 hover:border-[var(--color-electric-blue)]/50 hover:shadow-2xl hover:shadow-[var(--color-electric-blue)]/10"
-                whileHover={{ y: -5, scale: 1.02 }}
-              >
-                <div className={`absolute inset-0 bg-gradient-to-r ${item.color} opacity-0 group-hover:opacity-5 transition-opacity duration-500`}></div>
-
-                <div className="relative flex items-center space-x-6">
-                  <motion.div
-                    className={`flex-shrink-0 w-16 h-16 bg-gradient-to-br ${item.color} rounded-2xl flex items-center justify-center text-white shadow-lg`}
-                    whileHover={{ rotate: 5, scale: 1.1 }}
-                    transition={{ type: "spring", stiffness: 300 }}
-                  >
-                    {item.icon}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {contactInfo.map((item, index) => {
+                const base = "group block relative overflow-hidden bg-gradient-to-br from-[var(--color-gray-800)]/80 to-[var(--color-gray-800)]/40 backdrop-blur-xl rounded-2xl p-6 border border-[var(--color-gray-700)]/50 transition-all duration-500 hover:border-[var(--color-electric-blue)]/50 hover:shadow-2xl hover:shadow-[var(--color-electric-blue)]/10";
+                const inner = (
+                  <>
+                    <div className={`absolute inset-0 bg-gradient-to-r ${item.color} opacity-0 group-hover:opacity-5 transition-opacity duration-500`}></div>
+                    <div className="relative flex items-center space-x-6">
+                      <div className={`flex-shrink-0 w-16 h-16 bg-gradient-to-br ${item.color} rounded-2xl flex items-center justify-center text-white shadow-lg`}>{item.icon}</div>
+                      <div className="flex-1 min-w-0">
+                        <h3 className="text-xl font-bold text-white group-hover:text-[var(--color-electric-blue)] transition-colors duration-300">{item.label}</h3>
+                        <p className="text-[var(--color-gray-300)] font-medium mt-1 group-hover:text-white transition-colors duration-300">{item.value}</p>
+                        <p className="text-sm text-[var(--color-gray-500)] mt-1 group-hover:text-[var(--color-gray-400)] transition-colors duration-300">{item.description}</p>
+                      </div>
+                      <div className="flex-shrink-0 w-8 h-8 rounded-full bg-[var(--color-electric-blue)]/10 flex items-center justify-center group-hover:bg-[var(--color-electric-blue)]/20 transition-all duration-300">
+                        <span className="text-[var(--color-electric-blue)] text-sm">→</span>
+                      </div>
+                    </div>
+                  </>
+                );
+                return (
+                  <motion.div key={index} variants={itemVariants} whileHover={{ y: -3 }}>
+                    {item.type === 'calendar' ? (
+                      <button type="button" onClick={() => setCalendarOpen(true)} className={base}>{inner}</button>
+                    ) : (
+                      <a href={item.href} target="_blank" rel="noopener noreferrer" className={base}>{inner}</a>
+                    )}
                   </motion.div>
-
-                  <div className="flex-1 min-w-0">
-                    <h3 className="text-xl font-bold text-white group-hover:text-[var(--color-electric-blue)] transition-colors duration-300">
-                      {item.label}
-                    </h3>
-                    <p className="text-[var(--color-gray-300)] font-medium mt-1 group-hover:text-white transition-colors duration-300">
-                      {item.value}
-                    </p>
-                    <p className="text-sm text-[var(--color-gray-500)] mt-1 group-hover:text-[var(--color-gray-400)] transition-colors duration-300">
-                      {item.description}
-                    </p>
-                  </div>
-
-                  <div className="flex-shrink-0 w-8 h-8 rounded-full bg-[var(--color-electric-blue)]/10 flex items-center justify-center group-hover:bg-[var(--color-electric-blue)]/20 transition-all duration-300">
-                    <motion.div className="text-[var(--color-electric-blue)] text-sm" animate={{ x: [0, 3, 0] }} transition={{ duration: 2, repeat: Infinity }}>
-                      →
-                    </motion.div>
-                  </div>
-                </div>
-
-                <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-bl from-[var(--color-electric-blue)]/10 to-transparent rounded-bl-full opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-              </motion.a>
-            ))}
+                );
+              })}
+            </div>
 
             <motion.div
               variants={itemVariants}
@@ -268,148 +171,7 @@ const ContactPage = () => {
             </motion.div>
           </motion.div>
 
-          {/* 發送訊息（智慧路由） */}
-          <motion.div
-            className="relative"
-            initial={{ opacity: 0, x: 50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-          >
-            <div className="relative overflow-hidden bg-gradient-to-br from-[var(--color-gray-800)]/90 to-[var(--color-gray-800)]/60 backdrop-blur-xl rounded-3xl p-8 border border-[var(--color-gray-700)]/50 shadow-2xl">
-              <div className="text-center mb-8">
-                <motion.div
-                  className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-[var(--color-electric-blue)] to-[var(--color-violet-glow)] rounded-2xl mb-4"
-                  whileHover={{ rotate: 5, scale: 1.1 }}
-                  transition={{ type: "spring", stiffness: 300 }}
-                >
-                  <FaPaperPlane className="text-white text-xl" />
-                </motion.div>
-                <h2 className="text-2xl font-bold text-white mb-2">發送訊息</h2>
-                <p className="text-[var(--color-gray-400)] text-sm">填寫以下表單，將用您的郵件帳號發信</p>
-              </div>
-
-              <form className="space-y-6" onSubmit={(e) => e.preventDefault()}>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div className="space-y-2">
-                    <label htmlFor="name" className="block text-sm font-semibold text-white/90">
-                      姓名 <span className="text-red-400">*</span>
-                    </label>
-                    <motion.input
-                      type="text"
-                      id="name"
-                      placeholder="您的姓名"
-                      value={name}
-                      onChange={(e) => setName(e.target.value)}
-                      className="w-full bg-[var(--color-gray-900)]/50 border border-[var(--color-gray-600)]/30 rounded-xl py-4 px-4 focus:outline-none focus:ring-2 focus:ring-[var(--color-electric-blue)] focus:border-transparent transition-all duration-300 text-white placeholder-gray-500"
-                      whileFocus={{ scale: 1.02 }}
-                    />
-                  </div>
-                  <div className="space-y-2">
-                    <label htmlFor="email" className="block text-sm font-semibold text-white/90">
-                      電子郵件 <span className="text-red-400">*</span>
-                    </label>
-                    <motion.input
-                      type="email"
-                      id="email"
-                      placeholder="您的電子郵件（寄件者）"
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                      className="w-full bg-[var(--color-gray-900)]/50 border border-[var(--color-gray-600)]/30 rounded-xl py-4 px-4 focus:outline-none focus:ring-2 focus:ring-[var(--color-electric-blue)] focus:border-transparent transition-all duration-300 text-white placeholder-gray-500"
-                      whileFocus={{ scale: 1.02 }}
-                    />
-                  </div>
-                </div>
-
-                <div className="space-y-2">
-                  <label htmlFor="subject" className="block text-sm font-semibold text-white/90">
-                    主旨（未填將自動帶入）
-                  </label>
-                  <motion.input
-                    type="text"
-                    id="subject"
-                    placeholder="訊息主旨"
-                    value={subject}
-                    onChange={(e) => setSubject(e.target.value)}
-                    className="w-full bg-[var(--color-gray-900)]/50 border border-[var(--color-gray-600)]/30 rounded-xl py-4 px-4 focus:outline-none focus:ring-2 focus:ring-[var(--color-electric-blue)] focus:border-transparent transition-all duration-300 text-white placeholder-gray-500"
-                    whileFocus={{ scale: 1.02 }}
-                  />
-                </div>
-
-                <div className="space-y-2">
-                  <label htmlFor="message" className="block text-sm font-semibold text-white/90">
-                    訊息內容 <span className="text-red-400">*</span>
-                  </label>
-                  <motion.textarea
-                    id="message"
-                    placeholder="請詳細說明您的需求、想討論的項目，或任何問題..."
-                    rows={6}
-                    value={message}
-                    onChange={(e) => setMessage(e.target.value)}
-                    className="w-full bg-[var(--color-gray-900)]/50 border border-[var(--color-gray-600)]/30 rounded-xl py-4 px-4 focus:outline-none focus:ring-2 focus:ring-[var(--color-electric-blue)] focus:border-transparent transition-all duration-300 text-white placeholder-gray-500 resize-none"
-                    whileFocus={{ scale: 1.02 }}
-                  />
-                </div>
-
-                {/* 主按鈕：智慧寄送（mailto；若預設為 Gmail 會自動開 Gmail） */}
-                <motion.button
-                  type="button"
-                  disabled={sending}
-                  onClick={handleSmartSend}
-                  whileHover={{ scale: 1.02, y: -2 }}
-                  whileTap={{ scale: 0.98 }}
-                  className="group relative w-full font-bold py-4 px-8 rounded-xl transition-all duration-300 bg-gradient-to-r from-[var(--color-electric-blue)] to-[var(--color-violet-glow)] text-white shadow-2xl shadow-[var(--color-electric-blue)]/25 hover:shadow-[var(--color-electric-blue)]/40 overflow-hidden disabled:opacity-60"
-                >
-                  <div className="absolute inset-0 bg-gradient-to-r from-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                  <span className="relative flex items-center justify-center space-x-2">
-                    <span>{sending ? "處理中…" : "智慧寄送（依預設郵件設定）"}</span>
-                    <motion.div animate={{ x: [0, 3, 0] }} transition={{ duration: 2, repeat: Infinity }}>
-                      <FaPaperPlane />
-                    </motion.div>
-                  </span>
-                </motion.button>
-
-                {/* 備用連結：強制走指定 Web 郵件 */}
-                <div className="text-center text-xs text-[var(--color-gray-400)] mt-2 space-x-3">
-                  <button
-                    type="button"
-                    onClick={openWithGmail}
-                    className="underline hover:text-white"
-                  >
-                    改用 Gmail（強制）
-                  </button>
-                  <span>·</span>
-                  <button
-                    type="button"
-                    onClick={openWithOutlookWeb}
-                    className="underline hover:text-white"
-                  >
-                    改用 Outlook Web
-                  </button>
-                </div>
-
-                {/* 表單提示 */}
-                {feedback && (
-                  <div
-                    aria-live="assertive"
-                    className="text-sm mt-2 p-3 rounded-lg border border-red-500/40 bg-red-500/10 text-red-200"
-                  >
-                    {feedback}
-                  </div>
-                )}
-
-                <div className="mt-6 pt-6 border-t border-[var(--color-gray-600)]/30">
-                  <p className="text-center text-sm text-[var(--color-gray-500)]">
-                    送出會開啟您的郵件視窗；實際寄送仍需您確認並點擊「傳送」。
-                  </p>
-                </div>
-              </form>
-
-              {/* 角落光暈 */}
-              <div className="absolute -top-10 -right-10 w-32 h-32 bg-[var(--color-violet-glow)]/20 rounded-full blur-3xl"></div>
-              <div className="absolute -bottom-10 -left-10 w-32 h-32 bg-[var(--color-electric-blue)]/20 rounded-full blur-3xl"></div>
-            </div>
-          </motion.div>
+          
         </div>
 
         {/* CTA 區塊 */}
@@ -442,6 +204,27 @@ const ContactPage = () => {
           </div>
         </motion.div>
       </div>
+      {calendarOpen && (
+        <div className="fixed inset-0 z-[60] bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
+          <div className="w-full max-w-lg bg-[var(--color-gray-900)]/80 border border-white/10 rounded-2xl p-6 relative">
+            <button onClick={() => setCalendarOpen(false)} className="absolute top-3 right-3 rounded-full bg-white/10 hover:bg-white/20 px-2 py-1 text-sm">✕</button>
+            <h3 className="text-2xl font-bold text-white mb-2">選擇可約時段</h3>
+            <p className="text-sm text-[var(--color-gray-400)] mb-4">時區：HKT（UTC+8）。你也可以直接開啟 Google Calendar 預約。</p>
+            <div className="space-y-2 mb-4">
+              {['本週三 20:00 - 20:30','本週六 10:00 - 10:30','下週一 19:30 - 20:00'].map((slot, i) => (
+                <div key={i} className="flex items-center justify-between bg-white/5 border border-white/10 rounded-xl px-4 py-3">
+                  <div className="text-white text-sm">{slot}</div>
+                  <a href="https://calendar.app.google/jPexFUzauM39fYfV9" target="_blank" rel="noopener noreferrer" className="text-[var(--color-electric-blue)] hover:text-[var(--color-violet-glow)] text-sm font-semibold">預約</a>
+                </div>
+              ))}
+            </div>
+            <div className="flex items-center justify-between">
+              <a href="https://calendar.app.google/jPexFUzauM39fYfV9" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center px-4 py-2 rounded-lg bg-[var(--color-electric-blue)] text-black font-semibold">開啟 Google Calendar</a>
+              <button onClick={() => setCalendarOpen(false)} className="text-sm text-[var(--color-gray-300)] hover:text-white">稍後再說</button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
