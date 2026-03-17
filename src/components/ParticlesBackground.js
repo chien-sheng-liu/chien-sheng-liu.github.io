@@ -31,9 +31,9 @@ const ParticlesBackground = () => {
         },
       },
       particles: {
-        color: { value: "#94a3b8" },
+        color: { value: "#38bdf8" },
         links: {
-          color: "#cbd5e1",
+          color: "#22d3ee",
           distance: isMobile ? 120 : 160,
           enable: true,
           opacity: isMobile ? 0.15 : 0.2,

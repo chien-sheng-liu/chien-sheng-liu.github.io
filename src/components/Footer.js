@@ -7,7 +7,7 @@ const Footer = () => {
   const pathname = usePathname();
   const isEnglish = pathname?.startsWith('/en');
   return (
-    <footer className="relative z-10 bg-white text-gray-600 py-6 border-t border-gray-200">
+    <footer className="relative z-10 bg-[#f5f5f7] text-slate-500 py-6 border-t border-slate-200/60">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center">
           <p className="text-sm">

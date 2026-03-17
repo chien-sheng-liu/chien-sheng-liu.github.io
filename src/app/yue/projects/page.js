@@ -2,7 +2,8 @@
 
 import { FaGithub, FaArrowRight, FaEye, FaDatabase, FaCode, FaStar, FaBrain, FaCloud, FaChartLine } from "react-icons/fa";
 import { motion } from "framer-motion";
-import { projects as baseProjects, stats } from "./projectData";
+import { getProjectData } from "@/data/projectData";
+const { projects: baseProjects, stats } = getProjectData("yue");
 import { useEffect, useMemo, useState } from "react";
 
 const containerVariants = { hidden: { opacity: 0 }, visible: { opacity: 1, transition: { staggerChildren: 0.15, delayChildren: 0.2 } } };

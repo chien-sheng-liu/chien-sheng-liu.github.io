@@ -7,12 +7,18 @@
 
 :root {
   --font-body: 'Noto Sans TC', 'PingFang TC', 'Microsoft JhengHei', 'Heiti TC', 'Source Han Sans TC', 'Helvetica Neue', Arial, sans-serif;
+  --cursor-x: -999px;
+  --cursor-y: -999px;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 @layer base {
   body {
-    background-color: #f8fafc;
-    color: #334155;
+    background-color: #f5f5f7;
+    color: #1d1d1f;
     font-family: var(--font-body);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -20,36 +26,20 @@
 }
 
 @layer utilities {
-  .animation-delay-2000 {
-    animation-delay: 2s;
-  }
-  .animation-delay-4000 {
-    animation-delay: 4s;
-  }
+  .animation-delay-2000 { animation-delay: 2s; }
+  .animation-delay-4000 { animation-delay: 4s; }
   .bg-grid-pattern {
     background-image: linear-gradient(to right, rgba(0, 0, 0, 0.04) 1px, transparent 1px),
                       linear-gradient(to bottom, rgba(0, 0, 0, 0.04) 1px, transparent 1px);
     background-size: 2rem 2rem;
   }
-  .btn-shine {
-    background-image: linear-gradient(110deg, rgba(14,165,233,0.15) 0%, rgba(255,255,255,0.3) 20%, rgba(14,165,233,0.15) 40%);
-    background-size: 200% 100%;
+  .glass-panel {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: saturate(140%) blur(12px);
+    -webkit-backdrop-filter: saturate(140%) blur(12px);
   }
-  .btn-shine:hover { animation: background-shine 1.6s linear; }
-  .hover-lift {
-    transition: transform 300ms ease, box-shadow 300ms ease, border-color 300ms ease, background-color 300ms ease;
-  }
-  .hover-lift:hover { transform: translateY(-6px); }
-  .glass-panel { backdrop-filter: saturate(140%) blur(12px); }
-  .aura-ring {
-    position: absolute;
-    inset: -20%;
-    border-radius: 999px;
-    background: radial-gradient(circle at 50% 50%, rgba(14,165,233,0.1), transparent 60%),
-                radial-gradient(circle at 60% 40%, rgba(99,102,241,0.08), transparent 60%);
-    filter: blur(24px);
-    animation: aura-breathe 6s ease-in-out infinite;
-    z-index: 0;
+  @supports not (backdrop-filter: blur(12px)) {
+    .glass-panel { background: rgba(255, 255, 255, 0.92); }
   }
 }
 
@@ -93,43 +83,17 @@ article blockquote {
   color: #334155;
 }
 
-@keyframes aurora {
-  from {
-    transform: translate(var(--aurora-start-x, -50%), var(--aurora-start-y, -50%)) rotate(0deg);
-  }
-  to {
-    transform: translate(var(--aurora-end-x, -50%), var(--aurora-end-y, -50%)) rotate(360deg);
-  }
+/* ─── Keyframes ─── */
+
+@keyframes gradient-flow {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
-@keyframes background-shine {
-  from {
-    background-position: 200% 0;
-  }
-  to {
-    background-position: -200% 0;
-  }
-}
-
-@keyframes aura-breathe {
-  0% { opacity: 0.3; transform: scale(0.98); }
-  50% { opacity: 0.5; transform: scale(1.02); }
-  100% { opacity: 0.3; transform: scale(0.98); }
-}
-
-@keyframes fade-in-up {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.animate-fade-in-up {
-  animation: fade-in-up 0.8s ease-out forwards;
+@keyframes blink-caret {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
 }
 
 @keyframes hero-float {
@@ -138,16 +102,21 @@ article blockquote {
 }
 
 @keyframes pulse-ring {
-  0% { transform: scale(1); opacity: 0.4; }
+  0%   { transform: scale(1); opacity: 0.4; }
   100% { transform: scale(1.6); opacity: 0; }
-}
-
-@keyframes text-shimmer {
-  0% { background-position: -200% center; }
-  100% { background-position: 200% center; }
 }
 
 @keyframes scroll-bounce {
   0%, 100% { transform: translateY(0); opacity: 0.6; }
   50% { transform: translateY(8px); opacity: 1; }
+}
+
+/* ─── Reduced Motion ─── */
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }

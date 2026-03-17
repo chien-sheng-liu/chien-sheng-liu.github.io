@@ -5,65 +5,63 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## Development Commands
 
 - `npm run dev` - Start development server with Turbopack
-- `npm run build` - Build production application with Turbopack  
-- `npm start` - Start production server
-- `npm run lint` - Run ESLint checks
-- `npm run lint:fix` - Fix auto-correctable linting issues
+- `npm run build` - Production build (runs `clean` automatically via `prebuild`)
+- `npm run lint` / `npm run lint:fix` - ESLint
+- `npm run clean` - Delete `.next` cache (runs automatically before dev/build)
 
-## Architecture Overview
+## Architecture
 
-This is a multilingual personal portfolio website built with Next.js 15, featuring Chinese (traditional), Cantonese, and English language support.
+### Stack
+Next.js 15 (App Router) + Tailwind CSS v4 (`@theme` directive, not tailwind.config.js) + Framer Motion + React Three Fiber/Three.js + tsparticles
 
-### Core Architecture
+### Internationalization (3 locales)
 
-- **Framework**: Next.js 15 with App Router
-- **Build Tool**: Turbopack for faster development builds
-- **Styling**: Tailwind CSS with custom aurora animations
-- **Internationalization**: Custom middleware-based routing (`/yue` for Cantonese, default for Chinese)
-- **Typography**: Noto Sans TC for Chinese/Cantonese text rendering
+| Locale | Route prefix | Default? |
+|--------|-------------|----------|
+| Traditional Chinese (zh) | `/` (no prefix) | Yes |
+| English | `/en/` | No |
+| Cantonese (yue) | `/yue/` | No |
 
-### Key Directories
+- `middleware.js` (root) handles language detection via cookie `preferred-lang` → Accept-Language header → fallback to `zh`
+- Each locale has its own page files: `src/app/page.js` (zh), `src/app/en/page.js`, `src/app/yue/page.js`
+- Locale sub-layouts: `src/app/en/layout.js`, `src/app/yue/layout.js`
+- **When modifying a page, the same change must be applied to all 3 locale versions**
 
-- `src/app/` - Next.js App Router pages with nested route structure
-  - Includes language-specific routes (e.g., `yue/` subdirectory)
-  - Page-specific data files (e.g., `projectData.js`, `aboutData.js`)
-- `src/components/` - Reusable UI components including timeline visualizations
-- `content/` - Content management with `articles/` and `projects/` subdirectories
-- `public/` - Static assets and images
+### Page Structure
 
-### Language Routing System
+Each locale has: homepage (`page.js`), `/about`, `/articles`, `/articles/[slug]`, `/contact`, `/projects`
 
-The middleware.js implements automatic language detection and routing:
-- Cookie-based language preference storage
-- Accept-Language header parsing for initial visits
-- Automatic redirection to appropriate language routes
-- Support for Cantonese (`yue`), Traditional Chinese (default), and English
+- Homepage data: inline in each `page.js`
+- Project data: `src/app/projects/projectData.js` (shared by zh/yue), `src/app/en/projects/projectData.js`
+- About data: `src/app/about/aboutData.js`, `src/app/en/about/aboutData.js`
 
-### Styling System
+### Content System
 
-- Tailwind CSS with custom configuration
-- Dark theme with deep space color palette
-- Custom aurora animation keyframes
-- Responsive design with mobile-first approach
+- Markdown articles/projects in `content/articles/{zh,en,yue}/` and `content/projects/{zh,en,yue}/`
+- `src/lib/content.js` - File-based content reading with frontmatter parsing
+- `src/lib/markdown.js` - Markdown → HTML with TOC generation (uses Shiki `github-light` theme)
+- API routes: `src/app/api/content/articles/` and `src/app/api/content/projects/` serve content as JSON
 
-### Component Architecture
+### Key Components
 
-Key reusable components include:
-- `JourneyTimeline.js` - Complex timeline visualization with country theming
-- `ParticlesBackground.js` - Interactive particle system background
-- `Navbar.js` - Responsive navigation with language switching
-- Various timeline components (`SerpentineTimeline.js`, `CreativeTimeline.js`)
+- `Navbar.js` - Navigation with language switcher dropdown, sets `preferred-lang` cookie
+- `FlightTimeline.js` - Career journey timeline with globe, flight arcs, and detail modals
+- `FlightArc.js` - SVG animated arcs with traveling light dots between timeline nodes
+- `GlobeBackground.js` - Three.js wireframe globe (React Three Fiber)
+- `ParticlesBackground.js` - tsparticles background effect
+- `MarkdownRenderer.js` - Renders HTML from markdown with Shiki syntax highlighting
+- `Footer.js` - Site footer
 
-### Content Management
+### Styling
 
-- Articles and projects stored in structured directories under `content/`
-- Page-specific data objects in corresponding `*Data.js` files
-- Markdown rendering support via `MarkdownRenderer.js`
+- Tailwind CSS v4 with `@theme` directive in `globals.css` (not `tailwind.config.js`)
+- Light theme: body bg `#f8fafc`, text `#334155`
+- Accent colors: `--color-electric-blue: #0ea5e9`, `--color-violet-glow: #6366f1`
+- Theme forced to light mode via `next-themes` in `src/app/providers.js`
+- Font: Noto Sans TC (loaded via `next/font/google` in root `layout.js`)
 
-## Development Notes
+### Common Patterns
 
-- The site uses motion animations via Framer Motion
-- Three.js integration for 3D graphics via React Three Fiber
-- Icon system uses both Lucide React and React Icons
-- Theme switching implemented with next-themes
-- All JavaScript files use modern ES modules syntax
+- Client components use `"use client"` directive and Framer Motion for animations
+- Server components for article/content pages (data fetched at build time)
+- All page-level styling uses direct Tailwind classes (not CSS custom properties for colors)

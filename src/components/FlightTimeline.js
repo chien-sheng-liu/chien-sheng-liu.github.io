@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { FaPlane, FaTimes } from "react-icons/fa";
 import dynamic from "next/dynamic";
 import FlightArc from "./FlightArc";
+import Card3D from "./Card3D";
 
 /* ── Lazy-load Globe (no SSR — Three.js needs browser) ── */
 const GlobeBackground = dynamic(() => import("./GlobeBackground"), {
@@ -16,106 +17,113 @@ const events = [
   {
     year: "2026", title: "Lead, BI", org: "Lalamove", flag: "🇭🇰", type: "work",
     detail: [
-      "帶領 BI 團隊，建立數據驅動決策文化",
-      "設計與落地核心營運儀表板",
-      "推動 AI 自動化分析流程",
+      "跨市場建置 KPI、供需監控與漏斗儀表板，讓決策即時化",
+      "與 DE/DA 共建 dbt・LookML 治理與資料規格，加速交付",
+      "規劃數據產品 Roadmap，導入自助分析與 AI 自動化",
+      "連結營運/商務與資料團隊，確保儀表板貢獻可量化",
     ],
   },
   {
     year: "2024", title: "Manager · Data & AI", org: "Datarget 創代科技", flag: "🇹🇼", type: "work",
     detail: [
-      "管理數據與 AI 產品團隊",
-      "主導客戶 AI 解決方案的規劃與交付",
-      "建立 MLOps 標準化流程",
+      "Built & led 8 人 AI/Data 團隊，包辦需求、KPI 設計到上線",
+      "交付 15+ analytics/AI 專案，為各產業創造 NT$8,000 萬",
+      "以 Python/SQL 打造 forecasting、segmentation、Text-to-SQL LLM",
+      "建 Tableau/Power BI/Metabase funnel dashboard 與 SQL・dbt 管線",
+      "自動化 CRM 數據與報表，提升資料準確度與交付效率",
     ],
   },
   {
     year: "2023", title: "ML Engineer", org: "OneAD AdTech", flag: "🇹🇼", type: "work",
     detail: [
-      "開發廣告推薦模型，提升 CTR",
-      "建置即時特徵工程 pipeline",
-      "A/B 測試框架設計與分析",
+      "設計/部署多格式 ML・DL targeting 模型，CTR +20%、停留 +30%",
+      "重構 cross-device 系統，推論 +40%、GCP 成本 -30%",
+      "打造 LLM+RAG 受眾平台並整合 Meta/Google Ads API",
+      "營運 1 億+ 日誌資料處理鏈，導入 Spark/Hadoop/Airflow/MLflow",
     ],
   },
   {
     year: "2023", title: "資料科學講師", org: "DeepCoding", flag: "🇹🇼", type: "work",
     detail: [
-      "設計並教授資料科學課程",
-      "涵蓋 Python、機器學習、資料視覺化",
-      "指導學員完成實戰專案",
+      "Delivered custom data/AI workshops，累積 100+ 學員",
+      "與大學/企業合辦 LLM、資料分析課程，聚焦實作",
+      "提供 1 對 1 coaching，協助學員轉職或升遷",
+      "維持教材更新，涵蓋 Python、視覺化與商業案例",
     ],
   },
   {
     year: "2022", title: "Marketing DA", org: "HelloFresh SE", flag: "🇩🇪", type: "work",
     detail: [
-      "負責行銷數據分析與歸因模型",
-      "建立自動化報表系統",
-      "跨部門數據需求溝通與交付",
+      "為 18 市場部署 conversion/CTR/Revenue 預測，準確度約 85%",
+      "打造 CTR/CVR funnel 與 penetration dashboard 支援行銷決策",
+      "自動化 ETL 匯入 BigQuery 與 CRM，優化高流量 log 處理",
+      "整合 Google/Meta/DV360/YouTube 多渠道資料並執行 A/B 測試",
     ],
   },
   {
     year: "2021", title: "Research Assistant", org: "ZEW 經濟研究中心", flag: "🇩🇪", type: "work",
     detail: [
-      "協助經濟學研究的資料蒐集與分析",
-      "使用計量經濟學方法進行實證研究",
-      "撰寫研究報告與文獻回顧",
+      "建立 OCR + text-mining pipeline 處理中文社會信用資料",
+      "設計自動化爬蟲，日更經濟/財政/政策資訊",
+      "清理並結構化資料，提供研究模型即時引用",
     ],
   },
   {
     year: "2020", title: "MSc 經濟資訊學", org: "曼海姆大學", flag: "🇩🇪", type: "education",
     detail: [
-      "主修經濟資訊學（Wirtschaftsinformatik）",
-      "研究方向：機器學習應用於經濟預測",
-      "碩士論文：深度學習在金融時序資料的應用",
+      "Business Informatics (Data Science Track) 連結資訊與商業",
+      "Thesis：Handling Covid-disrupted forecasting in MarTech",
+      "研究：以 AI/NN 解決 Newsvendor 需求預測",
+      "養成跨國協作、研究與資料驅動解題能力",
     ],
   },
   {
     year: "2019", title: "交換生", org: "拜羅伊特大學", flag: "🇩🇪", type: "education",
     detail: [
-      "赴德國拜羅伊特大學交換一學期",
-      "修習資訊管理與商業分析課程",
-      "跨文化學習與語言能力提升",
+      "Business Engineering 交換，修習供應鏈/製造/管理課程",
+      "以英文與德文完成專題與簡報，提升溝通力",
+      "拓展跨文化合作與歐洲產業視野",
     ],
   },
   {
     year: "2017", title: "Software Eng. Intern", org: "Getec · Mitac", flag: "🇨🇳", type: "work",
     detail: [
-      "參與企業軟體開發專案",
-      "負責後端 API 開發與測試",
-      "學習敏捷開發流程與團隊協作",
+      "開發 C#/.NET 後端並整合 WeChat API 的會議安排系統",
+      "設計 workflow 讓差旅報銷效率提升 25%",
+      "訪談 10+ 使用者，將需求轉成系統設計/測試",
     ],
   },
   {
     year: "2015", title: "學士 · 資訊管理", org: "中原大學", flag: "🇹🇼", type: "education",
     detail: [
-      "主修資訊管理學系",
-      "學習程式設計、資料庫、系統分析",
-      "參與多項實務專題與競賽",
+      "資管主修、企管輔系，奠定資訊 × 管理基礎",
+      "系學會會長，策畫跨院活動與專案",
+      "2019 Taiwan InnoService、資管競賽獲獎並取得交換資格",
     ],
   },
 ];
 
-/* ── Type-based styling ── */
+/* ── Type-based styling (frosted glass + colored left border) ── */
 const typeStyle = {
   work: {
-    border: "border-sky-200",
-    text: "text-sky-600",
-    glow: "shadow-sm",
-    badge: "bg-sky-50 text-sky-600",
-    dot: "bg-sky-500",
-    hex: "#0ea5e9",
+    border: "border-l-[3px] border-l-cyan-400 border-white/20",
+    text: "text-cyan-600",
+    glow: "shadow-sm hover:shadow-md",
+    badge: "bg-cyan-50 text-cyan-600",
+    dot: "bg-cyan-400",
+    hex: "#06b6d4",
   },
   education: {
-    border: "border-indigo-200",
-    text: "text-indigo-600",
-    glow: "shadow-sm",
-    badge: "bg-indigo-50 text-indigo-600",
-    dot: "bg-indigo-500",
-    hex: "#6366f1",
+    border: "border-l-[3px] border-l-purple-400 border-white/20",
+    text: "text-purple-600",
+    glow: "shadow-sm hover:shadow-md",
+    badge: "bg-purple-50 text-purple-600",
+    dot: "bg-purple-400",
+    hex: "#a855f7",
   },
 };
 
-/* ── SVG GEOMETRY — wide spread, compact height ── */
+/* ── SVG GEOMETRY ── */
 const VB_W = 1100;
 const VB_H = 680;
 
@@ -149,24 +157,20 @@ export default function FlightTimeline() {
           <motion.p initial={{ opacity: 0, y: 8 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-[10px] uppercase tracking-[0.5em] text-slate-400 mb-3">
             Flight Log
           </motion.p>
-          <motion.h2 initial={{ opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }} className="text-3xl sm:text-4xl font-semibold text-slate-900 mb-2">
+          <motion.h2 initial={{ opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }} className="text-3xl sm:text-4xl font-bold text-[#1d1d1f] mb-2">
             人生航線
           </motion.h2>
-          <motion.p initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ delay: 0.15 }} className="text-xs text-slate-500">
+          <motion.p initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ delay: 0.15 }} className="text-sm text-slate-500">
             台灣 → 中國 → 德國 → 香港
           </motion.p>
         </div>
 
         {/* ═══ DESKTOP ═══ */}
         <div className="hidden md:block relative" style={{ aspectRatio: `${VB_W} / ${VB_H}` }}>
-
-          {/* 3D Globe background */}
           <GlobeBackground />
-
-          {/* Flight arcs with animated dots */}
           <FlightArc nodes={nodes} vbW={VB_W} vbH={VB_H} />
 
-          {/* Node dots on SVG layer */}
+          {/* Node dots */}
           <svg className="absolute inset-0 w-full h-full z-[8]" viewBox={`0 0 ${VB_W} ${VB_H}`} preserveAspectRatio="xMidYMid meet" aria-hidden="true">
             {nodes.map((n, i) => {
               const s = typeStyle[events[i].type];
@@ -183,7 +187,7 @@ export default function FlightTimeline() {
             })}
           </svg>
 
-          {/* Cards — wrapper div handles positioning, motion.div handles animation */}
+          {/* Cards */}
           {events.map((ev, idx) => {
             const n = nodes[idx];
             const toRight = n.x < VB_W / 2;
@@ -204,7 +208,9 @@ export default function FlightTimeline() {
                   viewport={{ once: true, amount: 0.3 }}
                   transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
                 >
-                  <FlightCard ev={ev} s={s} align={toRight ? "left" : "right"} onClick={() => openModal(ev)} />
+                  <Card3D intensity={5}>
+                    <FlightCard ev={ev} s={s} align={toRight ? "left" : "right"} onClick={() => openModal(ev)} />
+                  </Card3D>
                 </motion.div>
               </div>
             );
@@ -247,57 +253,73 @@ export default function FlightTimeline() {
   );
 }
 
-/* ── Desktop card: fixed height, clickable ── */
+/* ── Desktop card: frosted glass with colored left border ── */
 function FlightCard({ ev, s, align, onClick }) {
-  return (
-    <button
-      type="button"
-      onClick={onClick}
-      className={`w-[280px] h-[80px] rounded-xl border ${s.border} bg-white px-4 py-2.5 ${s.glow} transition-all duration-200 hover:bg-slate-50 hover:shadow-md cursor-pointer text-left`}
-    >
-      <div className={`inline-block rounded-full px-2 py-0.5 text-[8px] font-medium uppercase tracking-wider mb-1 ${s.badge}`}>
-        {ev.type === "work" ? "Work" : "Education"}
-      </div>
+  const alignRight = align === "right";
+  const textAlignClass = alignRight ? "text-right" : "text-left";
+  const badgeRowClass = alignRight ? "justify-start" : "justify-end";
+  const flagPosClass = alignRight ? "right-4" : "left-4";
 
-      <div className={`flex items-center gap-2 ${align === "right" ? "flex-row-reverse text-right" : ""}`}>
-        <span className="text-sm leading-none shrink-0">{ev.flag}</span>
-        <div className="min-w-0 flex-1">
-          <h3 className="text-sm font-semibold text-slate-800 leading-tight truncate">{ev.title}</h3>
-          <p className={`text-[11px] ${s.text} opacity-80 leading-tight truncate`}>{ev.org}</p>
+  return (
+    <div className="relative w-[280px]">
+      <span className="absolute -top-5 right-0 rounded-full border border-slate-200/60 bg-white/80 px-2 py-0.5 text-[10px] font-medium tracking-wide text-slate-500 shadow-sm">
+        {ev.year}
+      </span>
+      <button
+        type="button"
+        onClick={onClick}
+        className={`relative w-full h-[96px] rounded-2xl ${s.border} bg-white/70 backdrop-blur-[12px] px-4 pt-5 pb-5 ${s.glow} transition-all duration-200 hover:bg-white/80 cursor-pointer ${textAlignClass}`}
+      >
+        <span className={`absolute top-2 ${flagPosClass} text-lg leading-none`}>
+          {ev.flag}
+        </span>
+        <div className={`flex ${badgeRowClass} mb-2`}>
+          <div className={`inline-block rounded-full px-2 py-0.5 text-[8px] font-medium uppercase tracking-wider ${s.badge}`}>
+            {ev.type === "work" ? "Work" : "Education"}
+          </div>
         </div>
-        <span className="text-[10px] text-slate-400 font-mono shrink-0">{ev.year}</span>
-      </div>
-    </button>
+
+        <div>
+          <h3 className="text-lg font-semibold text-[#1d1d1f] leading-tight truncate">{ev.title}</h3>
+          <p className={`mt-1 text-sm font-medium ${s.text} leading-tight truncate`}>{ev.org}</p>
+        </div>
+      </button>
+    </div>
   );
 }
 
-/* ── Mobile card: clickable ── */
+
+/* ── Mobile card: frosted glass ── */
 function MobileFlightCard({ ev, s, isEven, onClick }) {
   return (
-    <button
-      type="button"
-      onClick={onClick}
-      className={`w-[85%] h-[72px] rounded-xl border ${s.border} bg-white px-4 py-2 ${s.glow} relative text-left cursor-pointer`}
-    >
-      <div className={`absolute top-4 ${isEven ? "-right-2" : "-left-2"} w-3.5 h-3.5 rounded-full ${s.dot} ring-2 ring-white`} />
+    <div className="relative w-[85%]">
+      <span className="absolute -top-4 right-0 rounded-full border border-slate-200/60 bg-white/80 px-2 py-0.5 text-[10px] font-medium tracking-wide text-slate-500 shadow-sm">
+        {ev.year}
+      </span>
+      <button
+        type="button"
+        onClick={onClick}
+        className={`relative w-full h-[86px] rounded-2xl ${s.border} bg-white/70 backdrop-blur-[12px] px-4 pt-5 pb-4 ${s.glow} text-left cursor-pointer`}
+      >
+        <div className={`absolute top-4 ${isEven ? "-right-2" : "-left-2"} w-3.5 h-3.5 rounded-full ${s.dot} ring-2 ring-white`} />
+        <span className="absolute top-2 left-4 text-lg leading-none">{ev.flag}</span>
 
-      <div className={`inline-block rounded-full px-2 py-0.5 text-[8px] font-medium uppercase tracking-wider mb-1 ${s.badge}`}>
-        {ev.type === "work" ? "Work" : "Education"}
-      </div>
-
-      <div className="flex items-center gap-3">
-        <span className="text-base leading-none shrink-0">{ev.flag}</span>
-        <div className="min-w-0 flex-1">
-          <h3 className="text-base font-semibold text-slate-800 leading-tight truncate">{ev.title}</h3>
-          <p className={`text-sm ${s.text} opacity-80 leading-tight truncate`}>{ev.org}</p>
+        <div className="mb-2">
+          <div className={`inline-block rounded-full px-2 py-0.5 text-[8px] font-medium uppercase tracking-wider ${s.badge}`}>
+            {ev.type === "work" ? "Work" : "Education"}
+          </div>
         </div>
-        <span className="text-[11px] text-slate-400 font-mono shrink-0">{ev.year}</span>
-      </div>
-    </button>
+
+        <div>
+          <h3 className="text-lg font-semibold text-[#1d1d1f] leading-tight truncate">{ev.title}</h3>
+          <p className={`mt-1 text-sm font-medium ${s.text} leading-tight truncate`}>{ev.org}</p>
+        </div>
+      </button>
+    </div>
   );
 }
 
-/* ── Detail Modal (popup overlay) ── */
+/* ── Detail Modal: frosted glass ── */
 function DetailModal({ ev, s, onClose }) {
   return (
     <motion.div
@@ -308,19 +330,16 @@ function DetailModal({ ev, s, onClose }) {
       className="fixed inset-0 z-50 flex items-center justify-center px-4"
       onClick={onClose}
     >
-      {/* Backdrop */}
       <div className="absolute inset-0 bg-black/20 backdrop-blur-sm" />
 
-      {/* Modal content */}
       <motion.div
         initial={{ opacity: 0, scale: 0.9, y: 20 }}
         animate={{ opacity: 1, scale: 1, y: 0 }}
         exit={{ opacity: 0, scale: 0.9, y: 20 }}
         transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
-        className={`relative w-full max-w-md rounded-2xl border ${s.border} bg-white shadow-2xl p-6`}
+        className={`relative w-full max-w-md rounded-2xl ${s.border} bg-white/80 backdrop-blur-xl shadow-2xl p-6 text-[#1d1d1f]`}
         onClick={(e) => e.stopPropagation()}
       >
-        {/* Close button */}
         <button
           type="button"
           onClick={onClose}
@@ -329,29 +348,25 @@ function DetailModal({ ev, s, onClose }) {
           <FaTimes className="text-sm" />
         </button>
 
-        {/* Type badge */}
         <div className={`inline-block rounded-full px-3 py-1 text-[10px] font-medium uppercase tracking-wider mb-4 ${s.badge}`}>
           {ev.type === "work" ? "Work" : "Education"}
         </div>
 
-        {/* Header */}
         <div className="flex items-start gap-3 mb-5">
           <span className="text-2xl leading-none shrink-0 mt-0.5">{ev.flag}</span>
           <div>
-            <h3 className="text-xl font-bold text-slate-800 leading-snug">{ev.title}</h3>
-            <p className={`text-sm ${s.text} opacity-90`}>{ev.org}</p>
+            <h3 className="text-xl font-bold text-[#1d1d1f] leading-snug">{ev.title}</h3>
+            <p className={`text-sm ${s.text}`}>{ev.org}</p>
             <p className="text-xs text-slate-400 font-mono mt-1">{ev.year}</p>
           </div>
         </div>
 
-        {/* Divider */}
-        <div className={`h-px mb-4 ${ev.type === "work" ? "bg-sky-200" : "bg-indigo-200"}`} />
+        <div className="h-px mb-4 bg-slate-200/60" />
 
-        {/* Detail list */}
         <ul className="space-y-2.5">
           {ev.detail.map((item, i) => (
             <li key={i} className="flex items-start gap-2.5 text-sm text-slate-600">
-              <span className={`mt-1.5 w-1.5 h-1.5 rounded-full shrink-0 ${ev.type === "work" ? "bg-sky-400" : "bg-indigo-400"}`} />
+              <span className={`mt-1.5 w-1.5 h-1.5 rounded-full shrink-0 ${ev.type === "work" ? "bg-cyan-400" : "bg-purple-400"}`} />
               {item}
             </li>
           ))}

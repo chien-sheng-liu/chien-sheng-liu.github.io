@@ -3,6 +3,7 @@ import "./globals.css";
 import { ThemeProvider } from "./providers";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import CursorGlow from "@/components/CursorGlow";
 
 export const metadata = {
   title: {
@@ -18,10 +19,10 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="zh-TW" suppressHydrationWarning>
-      <body className="bg-slate-50 text-slate-700 transition-colors duration-500">
+      <body className="bg-[#f5f5f7] text-[#1d1d1f] antialiased">
         <ThemeProvider>
+          <CursorGlow />
           <Navbar />
-          {/* Ensure the main content area has padding top to not be obscured by the fixed navbar */}
           <main className="relative z-0 pt-20">{children}</main>
           <Footer />
         </ThemeProvider>

@@ -2,7 +2,8 @@
 
 import { FaGithub, FaArrowRight, FaEye, FaDatabase, FaCode, FaStar, FaBrain, FaCloud, FaChartLine } from "react-icons/fa";
 import { motion } from "framer-motion";
-import { projects as baseProjects, stats } from "./projectData";
+import { getProjectData } from "@/data/projectData";
+const { projects: baseProjects, stats } = getProjectData("en");
 import { useEffect, useMemo, useState } from "react";
 
 const containerVariants = {

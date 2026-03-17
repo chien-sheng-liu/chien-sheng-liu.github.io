@@ -3,21 +3,18 @@ import { useRef, useMemo } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import * as THREE from "three";
 
-/* ── Wireframe globe that auto-rotates ── */
+/* Animated wireframe globe */
 function Globe() {
   const groupRef = useRef();
 
-  /* Sphere wireframe geometry */
   const wireGeo = useMemo(() => new THREE.SphereGeometry(1.8, 36, 24), []);
 
-  /* Latitude / longitude rings for "map" feel */
   const rings = useMemo(() => {
     const lines = [];
-    // Latitude lines
     for (let lat = -60; lat <= 60; lat += 30) {
       const phi = (90 - lat) * (Math.PI / 180);
       const pts = [];
-      for (let lng = 0; lng <= 360; lng += 5) {
+      for (let lng = 0; lng <= 360; lng += 6) {
         const theta = lng * (Math.PI / 180);
         pts.push(
           new THREE.Vector3(
@@ -29,11 +26,10 @@ function Globe() {
       }
       lines.push(pts);
     }
-    // Longitude lines
     for (let lng = 0; lng < 360; lng += 30) {
       const theta = lng * (Math.PI / 180);
       const pts = [];
-      for (let lat = -90; lat <= 90; lat += 5) {
+      for (let lat = -90; lat <= 90; lat += 6) {
         const phi = (90 - lat) * (Math.PI / 180);
         pts.push(
           new THREE.Vector3(
@@ -50,33 +46,21 @@ function Globe() {
 
   useFrame((_, delta) => {
     if (groupRef.current) {
-      groupRef.current.rotation.y += delta * 0.08;
+      groupRef.current.rotation.y += delta * 0.1;
     }
   });
 
   return (
-    <group ref={groupRef} rotation={[0.3, 0, 0.1]}>
-      {/* Core wireframe sphere */}
+    <group ref={groupRef} rotation={[0.3, 0, 0.15]}>
       <mesh geometry={wireGeo}>
-        <meshBasicMaterial
-          color="#0ea5e9"
-          wireframe
-          transparent
-          opacity={0.1}
-        />
+        <meshBasicMaterial color="#22d3ee" wireframe transparent opacity={0.18} />
       </mesh>
 
-      {/* Solid inner sphere */}
       <mesh>
         <sphereGeometry args={[1.78, 32, 24]} />
-        <meshBasicMaterial
-          color="#f1f5f9"
-          transparent
-          opacity={0.7}
-        />
+        <meshBasicMaterial color="#020617" transparent opacity={0.6} />
       </mesh>
 
-      {/* Lat/Lng grid lines */}
       {rings.map((pts, i) => (
         <line key={i}>
           <bufferGeometry>
@@ -88,22 +72,16 @@ function Globe() {
             />
           </bufferGeometry>
           <lineBasicMaterial
-            color={i < 5 ? "#0ea5e9" : "#6366f1"}
+            color={i < 5 ? "#22d3ee" : "#a78bfa"}
             transparent
-            opacity={0.1}
+            opacity={0.25}
           />
         </line>
       ))}
 
-      {/* Outer ring */}
       <mesh>
-        <ringGeometry args={[1.82, 1.88, 64]} />
-        <meshBasicMaterial
-          color="#0ea5e9"
-          transparent
-          opacity={0.08}
-          side={THREE.DoubleSide}
-        />
+        <ringGeometry args={[1.82, 1.9, 64]} />
+        <meshBasicMaterial color="#22d3ee" transparent opacity={0.18} side={THREE.DoubleSide} />
       </mesh>
     </group>
   );
@@ -111,10 +89,10 @@ function Globe() {
 
 export default function GlobeBackground() {
   return (
-    <div className="absolute inset-0 z-0 opacity-70">
+    <div className="absolute inset-0 -z-10 pointer-events-none opacity-80">
       <Canvas
-        camera={{ position: [0, 0, 4.5], fov: 45 }}
-        dpr={[1, 1.5]}
+        camera={{ position: [0, 0, 4.6], fov: 45 }}
+        dpr={[1, 1.75]}
         gl={{ antialias: true, alpha: true }}
         style={{ background: "transparent" }}
       >
