@@ -461,11 +461,16 @@ export default function FlightTimeline() {
   );
 }
 
-/* ── Detail Modal ── */
-const listStagger = { hidden: {}, visible: { transition: { staggerChildren: 0.06 } } };
-const listItem = { hidden: { opacity: 0, x: -8 }, visible: { opacity: 1, x: 0, transition: { duration: 0.25 } } };
+/* ── Detail Modal — horizontal boarding-pass ── */
+const listStagger = { hidden: {}, visible: { transition: { staggerChildren: 0.04 } } };
+const listItem = { hidden: { opacity: 0, x: -8 }, visible: { opacity: 1, x: 0, transition: { duration: 0.2 } } };
 
 function DetailModal({ ev, s, onClose }) {
+  const idx = events.indexOf(ev);
+  const prevEvent = idx < events.length - 1 ? events[idx + 1] : null;
+  const flightNo = `ML-${String(events.length - idx).padStart(3, "0")}`;
+  const airline = ev.type === "work" ? "Career Airlines" : "Edu Airlines";
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -475,69 +480,138 @@ function DetailModal({ ev, s, onClose }) {
       className="fixed inset-0 z-50 flex items-center justify-center px-4"
       onClick={onClose}
     >
-      <div className="absolute inset-0 bg-black/15 backdrop-blur-sm" />
+      <div className="absolute inset-0 bg-black/20 backdrop-blur-sm" />
 
       <motion.div
-        initial={{ opacity: 0, scale: 0.92, y: 24 }}
-        animate={{ opacity: 1, scale: 1, y: 0 }}
-        exit={{ opacity: 0, scale: 0.92, y: 24 }}
-        transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-        className="relative w-full max-w-md overflow-hidden bg-white/95 backdrop-blur-xl shadow-2xl shadow-slate-300/30 text-[#1d1d1f]"
-        style={{ borderRadius: "12px", border: "1px solid rgba(0,0,0,0.06)" }}
+        initial={{ opacity: 0, scale: 0.92 }}
+        animate={{ opacity: 1, scale: 1 }}
+        exit={{ opacity: 0, scale: 0.92 }}
+        transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+        className="relative w-full max-w-3xl overflow-hidden bg-white shadow-2xl shadow-slate-400/20 text-[#1d1d1f] flex flex-col sm:flex-row"
+        style={{ borderRadius: "16px" }}
         onClick={(e) => e.stopPropagation()}
       >
-        {/* Header bar */}
-        <div className={`flex items-center justify-between px-5 py-2.5 bg-gradient-to-r ${s.strip} text-white`}>
-          <div className="flex items-center gap-1.5">
-            <FaPlane className="text-[10px] opacity-80" />
-            <span className="text-[11px] font-bold tracking-wider uppercase">
-              {ev.type === "work" ? "Career Airlines" : "Edu Airlines"}
-            </span>
-          </div>
-          <span className="text-[10px] font-mono opacity-80">
-            ML-{String(events.length - events.indexOf(ev)).padStart(3, "0")}
-          </span>
-        </div>
+        {/* ══ LEFT: Main ticket section ══ */}
+        <div className="flex-1 min-w-0 flex flex-col">
+          {/* Airline header + route */}
+          <div className={`relative px-6 pt-5 pb-4 bg-gradient-to-r ${s.strip} text-white`}>
+            <button
+              type="button"
+              onClick={onClose}
+              className="absolute top-3 right-3 w-7 h-7 rounded-full bg-white/20 hover:bg-white/30 flex items-center justify-center transition-colors cursor-pointer sm:hidden"
+            >
+              <FaTimes className="text-[10px]" />
+            </button>
 
-        <div className="p-5">
-          <button
-            type="button"
-            onClick={onClose}
-            className="absolute top-2.5 right-4 text-white/60 hover:text-white transition-colors cursor-pointer"
-          >
-            <FaTimes className="text-xs" />
-          </button>
+            <div className="flex items-center gap-1.5 mb-3">
+              <FaPlane className="text-[10px] opacity-80" />
+              <span className="text-[10px] font-bold tracking-wider uppercase opacity-90">{airline}</span>
+              <span className="ml-auto text-[10px] font-mono opacity-70">{flightNo}</span>
+            </div>
 
-          {/* FROM → TO */}
-          <div className="flex items-center gap-3 mb-4">
-            <span className="text-3xl leading-none">{ev.flag}</span>
-            <div className="flex-1 min-w-0">
-              <h3 className="text-xl font-bold text-[#1d1d1f] leading-snug">{ev.title}</h3>
-              <p className={`text-sm ${s.accentText} font-medium`}>{ev.org}</p>
-              <p className="text-xs text-slate-400 font-mono mt-0.5">{ev.year} · {ev.locFull} ({ev.loc})</p>
+            <div className="flex items-end gap-3">
+              <div>
+                <div className="text-[9px] uppercase tracking-wider opacity-50">From</div>
+                <div className="text-2xl font-black leading-none mt-0.5">{prevEvent ? prevEvent.loc : "---"}</div>
+                <div className="text-[9px] opacity-50 mt-0.5">{prevEvent ? prevEvent.locFull : ""}</div>
+              </div>
+              <div className="flex-1 flex items-center gap-1.5 px-2 pb-1.5">
+                <div className="flex-1 border-t border-dashed border-white/30" />
+                <FaPlane className="text-xs opacity-80" />
+                <div className="flex-1 border-t border-dashed border-white/30" />
+              </div>
+              <div className="text-right">
+                <div className="text-[9px] uppercase tracking-wider opacity-50">To</div>
+                <div className="text-2xl font-black leading-none mt-0.5">{ev.loc}</div>
+                <div className="text-[9px] opacity-50 mt-0.5">{ev.locFull}</div>
+              </div>
             </div>
           </div>
 
-          {/* Perforation */}
-          <div className="relative my-3">
-            <div className="border-t border-dashed border-slate-200" />
-            <div className="absolute -left-6 top-1/2 -translate-y-1/2 w-3 h-3 rounded-full bg-[#f5f5f7]" />
-            <div className="absolute -right-6 top-1/2 -translate-y-1/2 w-3 h-3 rounded-full bg-[#f5f5f7]" />
+          {/* Info row */}
+          <div className="flex border-b border-slate-100">
+            <div className="flex-1 px-4 py-2.5 border-r border-slate-100">
+              <div className="text-[8px] uppercase tracking-wider text-slate-400">Date</div>
+              <div className="text-sm font-bold text-[#1d1d1f]">{ev.year}</div>
+            </div>
+            <div className="flex-1 px-4 py-2.5 border-r border-slate-100">
+              <div className="text-[8px] uppercase tracking-wider text-slate-400">Duration</div>
+              <div className="text-xs font-bold text-[#1d1d1f] font-mono">{ev.duration}</div>
+            </div>
+            <div className="flex-1 px-4 py-2.5 border-r border-slate-100">
+              <div className="text-[8px] uppercase tracking-wider text-slate-400">Gate</div>
+              <div className="text-sm font-bold text-[#1d1d1f]">{ev.flag}</div>
+            </div>
+            <div className="flex-1 px-4 py-2.5">
+              <div className="text-[8px] uppercase tracking-wider text-slate-400">Seat</div>
+              <div className="text-sm font-bold font-mono text-[#1d1d1f]">{flightNo}</div>
+            </div>
           </div>
 
-          <motion.ul className="space-y-2.5" variants={listStagger} initial="hidden" animate="visible">
-            {ev.detail.map((item, i) => (
-              <motion.li key={i} variants={listItem} className="flex items-start gap-2.5 text-sm text-slate-600">
-                <span className={`mt-1.5 w-1.5 h-1.5 rounded-full shrink-0 ${s.dot}`} />
-                {item}
-              </motion.li>
-            ))}
-          </motion.ul>
+          {/* Role + details */}
+          <div className="flex-1 px-6 py-4 overflow-y-auto" style={{ maxHeight: "340px" }}>
+            <div className="mb-3">
+              <div className="text-[8px] uppercase tracking-wider text-slate-400 mb-1">Passenger / Role</div>
+              <h3 className="text-base font-bold text-[#1d1d1f] leading-snug">{ev.title}</h3>
+              <p className={`text-sm ${s.accentText} font-semibold`}>{ev.org}</p>
+            </div>
 
-          {/* Barcode */}
-          <div className="mt-4 flex items-center justify-between">
-            <BarcodeSVG width={120} height={20} />
-            <span className="text-[9px] text-slate-300 font-mono">BOARDING PASS</span>
+            {/* Perforation */}
+            <div className="relative my-3">
+              <div className="border-t border-dashed border-slate-200" />
+              <div className="absolute -left-7 top-1/2 -translate-y-1/2 w-4 h-4 rounded-full bg-[#f5f5f7]" />
+              <div className="absolute -right-7 top-1/2 -translate-y-1/2 w-4 h-4 rounded-full bg-[#f5f5f7]" />
+            </div>
+
+            <div className="text-[8px] uppercase tracking-wider text-slate-400 mb-2">Flight Log</div>
+            <motion.ul className="space-y-2" variants={listStagger} initial="hidden" animate="visible">
+              {ev.detail.map((item, i) => (
+                <motion.li key={i} variants={listItem} className="flex items-start gap-2 text-[13px] text-slate-600 leading-relaxed">
+                  <span className={`mt-1.5 w-1.5 h-1.5 rounded-full shrink-0 ${s.dot}`} />
+                  {item}
+                </motion.li>
+              ))}
+            </motion.ul>
+          </div>
+
+          {/* Bottom barcode */}
+          <div className="px-6 py-3 border-t border-slate-100 flex items-center justify-between">
+            <BarcodeSVG width={120} height={22} />
+            <span className="text-[8px] text-slate-300 font-mono">{flightNo} · BOARDING PASS</span>
+          </div>
+        </div>
+
+        {/* ══ Vertical perforation ══ */}
+        <div className="hidden sm:block relative w-0 shrink-0">
+          <div className="absolute inset-y-0 left-0 border-l border-dashed border-slate-200" />
+          <div className="absolute -top-2.5 left-1/2 -translate-x-1/2 w-5 h-5 rounded-full bg-[#f5f5f7]" />
+          <div className="absolute -bottom-2.5 left-1/2 -translate-x-1/2 w-5 h-5 rounded-full bg-[#f5f5f7]" />
+        </div>
+
+        {/* ══ RIGHT: Stub section ══ */}
+        <div className="hidden sm:flex w-[180px] shrink-0 flex-col items-center justify-between py-6 px-4 text-center">
+          <button
+            type="button"
+            onClick={onClose}
+            className="absolute top-3 right-3 w-7 h-7 rounded-full bg-slate-100 hover:bg-slate-200 flex items-center justify-center transition-colors cursor-pointer"
+          >
+            <FaTimes className="text-[10px] text-slate-500" />
+          </button>
+
+          <div>
+            <div className="text-[8px] uppercase tracking-wider text-slate-400 mb-1">{airline}</div>
+            <div className="text-4xl mb-2">{ev.flag}</div>
+            <div className="text-2xl font-black text-[#1d1d1f] leading-none">{ev.loc}</div>
+            <div className="text-[10px] text-slate-400 mt-1">{ev.locFull}</div>
+          </div>
+
+          <div>
+            <div className={`text-3xl font-black ${s.accentText} mb-1`}>{ev.year}</div>
+            <div className="text-[9px] text-slate-400 font-mono">{flightNo}</div>
+          </div>
+
+          <div className="rotate-90 origin-center">
+            <BarcodeSVG width={80} height={16} />
           </div>
         </div>
       </motion.div>
