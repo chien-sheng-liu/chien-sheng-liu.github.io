@@ -9,9 +9,12 @@ import CtaSection from "@/components/sections/CtaSection";
 export default function HomeYue() {
   return (
     <div className="relative min-h-screen overflow-hidden text-[#1d1d1f]">
+      {/* Single unified background */}
+      <AnimatedGradientBg variant="hero" />
+
       <main className="relative z-10 space-y-20 pb-16">
 
-        {/* ═══ HERO (shared) ═══ */}
+        {/* ═══ HERO ═══ */}
         <HeroSection
           greeting="Hello，我係 Morris"
           titlePrefix="將 AI"
@@ -48,7 +51,6 @@ export default function HomeYue() {
 
         {/* ═══ 經歷 ═══ */}
         <section className="relative px-4 sm:px-6 lg:px-8">
-          <AnimatedGradientBg variant="mid" />
           <div className="relative z-10 mx-auto max-w-7xl">
             <ScrollReveal>
               <h2 className="text-sm uppercase tracking-[0.35em] text-slate-400 mb-6">經歷</h2>
@@ -111,7 +113,7 @@ export default function HomeYue() {
           </div>
         </section>
 
-        {/* ═══ CTA (shared) ═══ */}
+        {/* ═══ CTA ═══ */}
         <CtaSection
           title="想一齊打造更好嘅作品？"
           description="畀我個訊息，或者直接約時間傾吓。"

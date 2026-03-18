@@ -3,8 +3,6 @@ import Link from "next/link";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { FaArrowRight } from "react-icons/fa";
-import AnimatedGradientBg from "@/components/AnimatedGradientBg";
-import DotGridBackground from "@/components/DotGridBackground";
 import TypewriterText from "@/components/TypewriterText";
 import Card3D from "@/components/Card3D";
 
@@ -37,8 +35,6 @@ export default function HeroSection({
 }) {
   return (
     <section className="relative px-4 sm:px-6 lg:px-8 pt-16 pb-8">
-      <AnimatedGradientBg variant="hero" />
-      <DotGridBackground className="opacity-40" />
 
       <div className="relative z-10 mx-auto max-w-7xl">
         <motion.div variants={stagger} initial="hidden" animate="visible">

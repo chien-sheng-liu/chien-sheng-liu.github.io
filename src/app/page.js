@@ -3,7 +3,6 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import FlightTimeline from "../components/FlightTimeline";
 import AnimatedGradientBg from "../components/AnimatedGradientBg";
-import DotGridBackground from "../components/DotGridBackground";
 import TypewriterText from "../components/TypewriterText";
 import Card3D from "../components/Card3D";
 import CtaSection from "../components/sections/CtaSection";
@@ -42,13 +41,13 @@ const typewriterTexts = ["變成清楚的敘事", "落地為商業價值", "串�
 export default function Home() {
   return (
     <div className="relative min-h-screen overflow-hidden text-[#1d1d1f]">
+      {/* Single unified background for the entire page */}
+      <AnimatedGradientBg variant="hero" />
+
       <main className="relative z-10 pb-12">
 
-        {/* ═══ HERO (ZH-specific: stats + skill tags) ═══ */}
+        {/* ═══ HERO ═══ */}
         <section className="relative min-h-[calc(100vh-5rem)] flex items-center px-4 sm:px-6 lg:px-8 py-20">
-          <AnimatedGradientBg variant="hero" />
-          <DotGridBackground className="opacity-40" />
-
           <div className="relative z-10 mx-auto max-w-7xl w-full">
             <motion.div variants={stagger} initial="hidden" animate="visible">
               <div className="grid gap-10 lg:gap-16 lg:grid-cols-[auto_1fr] items-center">
@@ -75,21 +74,19 @@ export default function Home() {
                     <p className="text-lg sm:text-xl text-slate-500 max-w-lg">策略、資料與產品節奏放進一條故事線</p>
                   </motion.div>
 
-                  <motion.div variants={fadeUp} className="grid grid-cols-2 gap-3 max-w-md mx-auto lg:mx-0">
+                  <motion.div variants={fadeUp} className="grid grid-cols-2 sm:grid-cols-4 gap-3 mx-auto lg:mx-0">
                     {heroStats.map((stat) => (
                       <Card3D key={stat.label} intensity={6}>
-                        <div className="rounded-2xl border border-slate-200/60 bg-white/70 backdrop-blur-sm shadow-sm px-4 py-3 hover:shadow-md hover:border-indigo-200/60 transition-all duration-300">
-                          <div className="flex items-baseline gap-2">
-                            <span className="text-xs">{stat.icon}</span>
-                            <span className="text-xl sm:text-2xl font-bold text-[#1d1d1f]">{stat.value}</span>
-                          </div>
-                          <p className="text-[11px] text-slate-500 mt-0.5">{stat.label}</p>
+                        <div className="rounded-2xl border border-slate-200/60 bg-white/70 backdrop-blur-sm shadow-sm px-4 py-4 hover:shadow-md hover:border-indigo-200/60 transition-all duration-300 text-center lg:text-left">
+                          <span className="text-base mb-1 block">{stat.icon}</span>
+                          <span className="text-2xl sm:text-3xl font-bold text-[#1d1d1f] block">{stat.value}</span>
+                          <p className="text-xs text-slate-500 mt-1">{stat.label}</p>
                         </div>
                       </Card3D>
                     ))}
                   </motion.div>
 
-                  <motion.div variants={fadeUp} className="flex flex-wrap gap-2 max-w-lg mx-auto lg:mx-0">
+                  <motion.div variants={fadeUp} className="flex flex-wrap gap-2 mx-auto lg:mx-0">
                     {skillTags.map((tag, i) => (
                       <motion.span key={tag.name} initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 0.8 + i * 0.05, duration: 0.3 }} className={`rounded-full border px-3 py-1 text-[11px] font-medium ${tag.color} hover:shadow-sm transition-all duration-200`}>
                         {tag.name}
@@ -107,14 +104,9 @@ export default function Home() {
         </section>
 
         {/* ═══ Flight Timeline ═══ */}
-        <section className="relative">
-          <AnimatedGradientBg variant="mid" />
-          <div className="relative z-10">
-            <FlightTimeline />
-          </div>
-        </section>
+        <FlightTimeline />
 
-        {/* ═══ CTA (shared) ═══ */}
+        {/* ═══ CTA ═══ */}
         <CtaSection
           title="想讓 AI 作品說得更好？"
           description="30 分鐘對談，把目標轉成敘事"

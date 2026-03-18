@@ -1,0 +1,247 @@
+"use client";
+
+import { useEffect, useMemo, useState } from "react";
+import { motion } from "framer-motion";
+import {
+  FaGithub,
+  FaArrowRight,
+  FaDatabase,
+  FaCode,
+  FaBrain,
+  FaCloud,
+  FaChartLine,
+} from "react-icons/fa";
+import { getProjectData } from "@/data/projectData";
+import AnimatedGradientBg from "./AnimatedGradientBg";
+
+/* ── i18n ── */
+const i18n = {
+  zh: {
+    tagline: "Projects",
+    title: "我的專案作品",
+    desc: "數據科學、機器學習、全端開發 — 將複雜問題變成可行的解決方案。",
+    viewCode: "查看程式碼",
+    ctaTitle: "想了解更多？",
+    ctaDesc: "每個專案背後都有獨特的挑戰。歡迎到 GitHub 看更多細節。",
+    ctaBtn: "查看 GitHub",
+    updating: "持續更新中",
+  },
+  en: {
+    tagline: "Projects",
+    title: "My Project Work",
+    desc: "Data science, machine learning, and full-stack — turning complex problems into working solutions.",
+    viewCode: "View Code",
+    ctaTitle: "Want to learn more?",
+    ctaDesc: "Each project has unique challenges behind it. Check out GitHub for more details.",
+    ctaBtn: "View GitHub",
+    updating: "Continuously updating",
+  },
+  yue: {
+    tagline: "Projects",
+    title: "我嘅項目作品",
+    desc: "數據科學、機器學習、全端開發 — 將複雜問題變成落地方案。",
+    viewCode: "睇程式碼",
+    ctaTitle: "想知更多？",
+    ctaDesc: "每個項目背後都有獨特嘅挑戰。歡迎去 GitHub 睇更多細節。",
+    ctaBtn: "睇 GitHub",
+    updating: "持續更新緊",
+  },
+};
+
+const iconForCategory = (cat) => {
+  const c = (cat || "").toLowerCase();
+  if (c.includes("llm")) return <FaDatabase size={24} />;
+  if (c.includes("nlp")) return <FaBrain size={24} />;
+  if (c.includes("deep") || c.includes("learning")) return <FaBrain size={24} />;
+  if (c.includes("cloud")) return <FaCloud size={24} />;
+  return <FaChartLine size={24} />;
+};
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 24 },
+  visible: (i = 0) => ({
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.5, delay: i * 0.08, ease: [0.22, 1, 0.36, 1] },
+  }),
+};
+
+const stagger = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.12, delayChildren: 0.1 } },
+};
+
+export default function ProjectsPage({ locale = "zh" }) {
+  const t = i18n[locale] || i18n.zh;
+  const { projects: baseProjects } = getProjectData(locale);
+  const [extra, setExtra] = useState([]);
+
+  useEffect(() => {
+    fetch(`/api/content/projects?locale=${locale}`)
+      .then((r) => r.json())
+      .then((d) => {
+        const items = (d.items || []).map((p) => ({
+          ...p,
+          icon: iconForCategory(p.category),
+          categoryIcon: <FaCode size={14} />,
+        }));
+        setExtra(items);
+      })
+      .catch(() => {});
+  }, [locale]);
+
+  const projects = useMemo(() => [...baseProjects, ...extra], [baseProjects, extra]);
+
+  return (
+    <div className="relative min-h-screen text-[#1d1d1f] overflow-hidden">
+      <AnimatedGradientBg variant="hero" />
+
+      <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-24">
+        <div className="max-w-5xl mx-auto">
+
+          {/* ── Hero ── */}
+          <motion.div className="mb-16" initial="hidden" animate="visible">
+            <motion.p
+              variants={fadeUp}
+              custom={0}
+              className="text-xs uppercase tracking-[0.35em] text-indigo-500/70 font-medium mb-4"
+            >
+              {t.tagline}
+            </motion.p>
+            <motion.h1
+              variants={fadeUp}
+              custom={1}
+              className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-[1.1] tracking-tight mb-5"
+            >
+              <span className="bg-gradient-to-r from-violet-500 via-sky-500 to-cyan-400 bg-clip-text text-transparent">
+                {t.title}
+              </span>
+            </motion.h1>
+            <motion.p
+              variants={fadeUp}
+              custom={2}
+              className="text-lg text-slate-500 leading-relaxed max-w-2xl"
+            >
+              {t.desc}
+            </motion.p>
+          </motion.div>
+
+          {/* ── Project cards ── */}
+          <motion.div
+            className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-20"
+            variants={stagger}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.1 }}
+          >
+            {projects.map((project, idx) => (
+              <motion.div
+                key={idx}
+                variants={fadeUp}
+                custom={idx}
+                className="group relative overflow-hidden rounded-2xl bg-white/70 backdrop-blur-sm border border-slate-200/60 shadow-sm hover:border-slate-300 hover:shadow-md transition-all duration-300"
+              >
+                {/* Accent strip */}
+                <div
+                  className={`absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b ${project.color}`}
+                />
+
+                <div className="pl-5 pr-6 py-6">
+                  {/* Header */}
+                  <div className="flex items-start gap-4 mb-4">
+                    <div
+                      className={`flex-shrink-0 w-11 h-11 rounded-xl bg-gradient-to-br ${project.color} flex items-center justify-center text-white shadow-md`}
+                    >
+                      {project.icon}
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-center gap-2 mb-1">
+                        <span className="text-sky-500">{project.categoryIcon}</span>
+                        <span className="text-xs font-semibold text-sky-500 uppercase tracking-wide">
+                          {project.category}
+                        </span>
+                      </div>
+                      <h3 className="text-lg font-bold text-[#1d1d1f] leading-snug group-hover:text-sky-600 transition-colors">
+                        {project.title}
+                      </h3>
+                    </div>
+                  </div>
+
+                  {/* Description */}
+                  <p className="text-sm text-slate-500 leading-relaxed mb-4">
+                    {project.description}
+                  </p>
+
+                  {/* Tech tags */}
+                  <div className="flex flex-wrap gap-1.5 mb-4">
+                    {project.technologies.map((tech, i) => (
+                      <span
+                        key={i}
+                        className="px-2.5 py-0.5 bg-slate-100 border border-slate-200/80 rounded-full text-[11px] font-medium text-slate-500"
+                      >
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
+
+                  {/* Metrics */}
+                  <div className="flex gap-3 mb-5">
+                    {project.metrics.map((m, i) => (
+                      <div key={i} className="flex-1 text-center py-2.5 bg-slate-50/80 rounded-lg border border-slate-100">
+                        <div className="text-base font-bold text-[#1d1d1f]">{m.value}</div>
+                        <div className="text-[10px] text-slate-400 mt-0.5">{m.label}</div>
+                      </div>
+                    ))}
+                  </div>
+
+                  {/* Action */}
+                  <a
+                    href={project.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 text-sm font-semibold text-sky-600 hover:text-sky-700 transition-colors"
+                  >
+                    <FaGithub className="text-base" />
+                    {t.viewCode}
+                    <FaArrowRight className="text-[10px] group-hover:translate-x-1 transition-transform" />
+                  </a>
+                </div>
+              </motion.div>
+            ))}
+          </motion.div>
+
+          {/* ── CTA ── */}
+          <motion.div
+            className="text-center"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+          >
+            <motion.h3 variants={fadeUp} custom={0} className="text-2xl font-bold text-[#1d1d1f] mb-3">
+              {t.ctaTitle}
+            </motion.h3>
+            <motion.p variants={fadeUp} custom={1} className="text-slate-500 mb-6 max-w-lg mx-auto">
+              {t.ctaDesc}
+            </motion.p>
+            <motion.div variants={fadeUp} custom={2} className="flex flex-col sm:flex-row items-center justify-center gap-4">
+              <a
+                href="https://github.com/chien-sheng-liu"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2.5 px-6 py-3 bg-[#1d1d1f] text-white font-semibold rounded-full hover:bg-slate-800 transition-colors shadow-lg"
+              >
+                <FaGithub />
+                {t.ctaBtn}
+                <FaArrowRight className="text-xs" />
+              </a>
+              <span className="flex items-center gap-2 text-sm text-slate-400">
+                <span className="w-1.5 h-1.5 bg-green-400 rounded-full animate-pulse" />
+                {t.updating}
+              </span>
+            </motion.div>
+          </motion.div>
+        </div>
+      </div>
+    </div>
+  );
+}

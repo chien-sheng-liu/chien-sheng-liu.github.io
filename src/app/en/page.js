@@ -9,9 +9,12 @@ import CtaSection from "@/components/sections/CtaSection";
 export default function HomeEn() {
   return (
     <div className="relative min-h-screen overflow-hidden text-[#1d1d1f]">
+      {/* Single unified background */}
+      <AnimatedGradientBg variant="hero" />
+
       <main className="relative z-10 space-y-20 pb-16">
 
-        {/* ═══ HERO (shared) ═══ */}
+        {/* ═══ HERO ═══ */}
         <HeroSection
           greeting="Hi, I&apos;m Morris"
           titlePrefix="I turn AI"
@@ -48,7 +51,6 @@ export default function HomeEn() {
 
         {/* ═══ EXPERIENCE ═══ */}
         <section className="relative px-4 sm:px-6 lg:px-8">
-          <AnimatedGradientBg variant="mid" />
           <div className="relative z-10 mx-auto max-w-7xl">
             <ScrollReveal>
               <h2 className="text-sm uppercase tracking-[0.35em] text-slate-400 mb-6">Experience</h2>
@@ -111,7 +113,7 @@ export default function HomeEn() {
           </div>
         </section>
 
-        {/* ═══ CTA (shared) ═══ */}
+        {/* ═══ CTA ═══ */}
         <CtaSection
           title="Want to create better work together?"
           description="Drop me a line or grab a time to chat."

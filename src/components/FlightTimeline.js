@@ -49,7 +49,7 @@ const events = [
   },
   {
     year: "2022", title: "Marketing Analyst", org: "HelloFresh SE", flag: "🇩🇪", type: "work",
-    loc: "柏林", locFull: "德國", duration: "2021.10 – 2022.10",
+    loc: "Berlin", locFull: "德國", duration: "2021.10 – 2022.10",
     detail: [
       "為 18 市場部署 conversion/CTR/Revenue 預測，準確度約 85%",
       "打造 CTR/CVR funnel 與 penetration dashboard 支援行銷決策",
@@ -67,7 +67,7 @@ const events = [
     ],
   },
   {
-    year: "2020", title: "Master - Business Informatics", org: "Universität Mannheim", flag: "🇩🇪", type: "education",
+    year: "2020", title: "碩士 - Business Informatics", org: "Universität Mannheim", flag: "🇩🇪", type: "education",
     loc: "Mannheim", locFull: "德國", duration: "2019.09 – 2022.03",
     detail: [
       "Business Informatics (Data Science Track) 連結資訊與商業",
@@ -77,12 +77,21 @@ const events = [
     ],
   },
   {
-    year: "2019", title: "交換生", org: "Universität Bayreuth", flag: "🇩🇪", type: "education",
+    year: "2019", title: "學年交換生", org: "Universität Bayreuth", flag: "🇩🇪", type: "education",
     loc: "Bayreuth", locFull: "德國", duration: "2018.10 – 2019.07",
     detail: [
       "Business Engineering 交換，修習供應鏈/製造/管理課程",
       "以英文與德文完成專題與簡報，提升溝通力",
       "拓展跨文化合作與歐洲產業視野",
+    ],
+  },
+  {
+    year: "2019", title: "High-Tech Recruitment Consultant Intern", org: "Recruit Express", flag: "🇹🇼", type: "work",
+    loc: "台北", locFull: "Taiwan", duration: "2019.06 – 2020.08",
+    detail: [
+      "開發 C#/.NET 後端並整合 WeChat API 的會議安排系統",
+      "設計 workflow 讓差旅報銷效率提升 25%",
+      "訪談 10+ 使用者，將需求轉成系統設計/測試",
     ],
   },
   {
@@ -95,7 +104,7 @@ const events = [
     ],
   },
   {
-    year: "2015", title: "Bachelor - 資訊管理", org: "中原大學", flag: "🇹🇼", type: "education",
+    year: "2015", title: "學士 - 資訊管理", org: "中原大學", flag: "🇹🇼", type: "education",
     loc: "桃園", locFull: "台灣", duration: "2015.09 – 2019.06",
     detail: [
       "資管主修、企管輔系，奠定資訊 × 管理基礎",
@@ -250,8 +259,8 @@ export default function FlightTimeline() {
         className="group/timeline relative overflow-hidden"
         style={{ height: "clamp(380px, 45vh, 480px)" }}
       >
-        {/* ── World map — prominent ── */}
-        <div className="absolute inset-0 pointer-events-none opacity-[0.55]">
+        {/* ── World map — prominent, slightly oversized for immersion ── */}
+        <div className="absolute pointer-events-none opacity-[0.9]" style={{ inset: "-20% -10%", width: "120%", height: "140%" }}>
           <WorldMapBackground />
         </div>
 
@@ -335,7 +344,7 @@ export default function FlightTimeline() {
                           <div className="flex items-center gap-1.5">
                             <FaPlane className={`text-[10px] ${s.accentText}`} />
                             <span className={`text-[10px] font-bold tracking-wider uppercase ${s.accentText}`}>
-                              {ev.type === "work" ? "Career Airlines" : "Edu Airlines"}
+                              {ev.type === "work" ? "Career Airlines" : "Education Airlines"}
                             </span>
                           </div>
                           <span className="text-[10px] font-mono text-slate-300">

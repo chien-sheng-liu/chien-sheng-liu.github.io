@@ -87,12 +87,12 @@ const CONTINENT_MAP = {
 };
 
 const CONTINENT_COLORS = {
-  americas: { fill: "#34d399", opacity: 0.18 },
-  europe:   { fill: "#a78bfa", opacity: 0.16 },
-  africa:   { fill: "#fb923c", opacity: 0.16 },
-  asia:     { fill: "#2dd4bf", opacity: 0.18 },
-  oceania:  { fill: "#f472b6", opacity: 0.15 },
-  unknown:  { fill: "#94a3b8", opacity: 0.08 },
+  americas: { fill: "#34d399", opacity: 0.35 },
+  europe:   { fill: "#a78bfa", opacity: 0.30 },
+  africa:   { fill: "#fb923c", opacity: 0.30 },
+  asia:     { fill: "#2dd4bf", opacity: 0.35 },
+  oceania:  { fill: "#f472b6", opacity: 0.28 },
+  unknown:  { fill: "#94a3b8", opacity: 0.15 },
 };
 
 /* ── Seeded pseudo-random for consistent dot placement ── */
@@ -192,8 +192,8 @@ export default function WorldMapBackground() {
               fill={c.fill}
               fillOpacity={c.opacity}
               stroke="#94a3b8"
-              strokeWidth="0.4"
-              strokeOpacity="0.12"
+              strokeWidth="0.5"
+              strokeOpacity="0.25"
             />
           ))}
         </g>
