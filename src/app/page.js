@@ -49,7 +49,7 @@ export default function Home() {
           <AnimatedGradientBg variant="hero" />
           <DotGridBackground className="opacity-40" />
 
-          <div className="relative z-10 mx-auto max-w-6xl w-full">
+          <div className="relative z-10 mx-auto max-w-7xl w-full">
             <motion.div variants={stagger} initial="hidden" animate="visible">
               <div className="grid gap-10 lg:gap-16 lg:grid-cols-[auto_1fr] items-center">
                 <motion.div variants={fadeUp} className="relative mx-auto lg:mx-0">

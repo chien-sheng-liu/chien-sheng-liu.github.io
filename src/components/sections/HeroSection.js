@@ -40,7 +40,7 @@ export default function HeroSection({
       <AnimatedGradientBg variant="hero" />
       <DotGridBackground className="opacity-40" />
 
-      <div className="relative z-10 mx-auto max-w-6xl">
+      <div className="relative z-10 mx-auto max-w-7xl">
         <motion.div variants={stagger} initial="hidden" animate="visible">
           <div className="grid gap-10 lg:grid-cols-2 items-center">
             {/* Text */}

@@ -24,7 +24,7 @@ export default function HomeYue() {
 
         {/* ═══ 重點 ═══ */}
         <section id="about" className="relative px-4 sm:px-6 lg:px-8">
-          <div className="mx-auto max-w-6xl">
+          <div className="mx-auto max-w-7xl">
             <ScrollReveal>
               <h2 className="text-sm uppercase tracking-[0.35em] text-slate-400 mb-6">重點</h2>
             </ScrollReveal>
@@ -49,7 +49,7 @@ export default function HomeYue() {
         {/* ═══ 經歷 ═══ */}
         <section className="relative px-4 sm:px-6 lg:px-8">
           <AnimatedGradientBg variant="mid" />
-          <div className="relative z-10 mx-auto max-w-6xl">
+          <div className="relative z-10 mx-auto max-w-7xl">
             <ScrollReveal>
               <h2 className="text-sm uppercase tracking-[0.35em] text-slate-400 mb-6">經歷</h2>
             </ScrollReveal>
@@ -76,7 +76,7 @@ export default function HomeYue() {
 
         {/* ═══ 教育 / 語言 ═══ */}
         <section className="px-4 sm:px-6 lg:px-8">
-          <div className="mx-auto max-w-6xl">
+          <div className="mx-auto max-w-7xl">
             <ScrollReveal>
               <h2 className="text-sm uppercase tracking-[0.35em] text-slate-400 mb-6">教育 / 語言</h2>
             </ScrollReveal>

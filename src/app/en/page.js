@@ -24,7 +24,7 @@ export default function HomeEn() {
 
         {/* ═══ HIGHLIGHTS ═══ */}
         <section id="about" className="relative px-4 sm:px-6 lg:px-8">
-          <div className="mx-auto max-w-6xl">
+          <div className="mx-auto max-w-7xl">
             <ScrollReveal>
               <h2 className="text-sm uppercase tracking-[0.35em] text-slate-400 mb-6">Highlights</h2>
             </ScrollReveal>
@@ -49,7 +49,7 @@ export default function HomeEn() {
         {/* ═══ EXPERIENCE ═══ */}
         <section className="relative px-4 sm:px-6 lg:px-8">
           <AnimatedGradientBg variant="mid" />
-          <div className="relative z-10 mx-auto max-w-6xl">
+          <div className="relative z-10 mx-auto max-w-7xl">
             <ScrollReveal>
               <h2 className="text-sm uppercase tracking-[0.35em] text-slate-400 mb-6">Experience</h2>
             </ScrollReveal>
@@ -76,7 +76,7 @@ export default function HomeEn() {
 
         {/* ═══ EDUCATION / LANGUAGES ═══ */}
         <section className="px-4 sm:px-6 lg:px-8">
-          <div className="mx-auto max-w-6xl">
+          <div className="mx-auto max-w-7xl">
             <ScrollReveal>
               <h2 className="text-sm uppercase tracking-[0.35em] text-slate-400 mb-6">Education / Languages</h2>
             </ScrollReveal>

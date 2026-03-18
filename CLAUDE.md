@@ -12,7 +12,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## Architecture
 
 ### Stack
-Next.js 15 (App Router) + Tailwind CSS v4 (`@theme` directive, not tailwind.config.js) + Framer Motion + React Three Fiber/Three.js + tsparticles
+Next.js 15 (App Router, React 19) + Tailwind CSS v4 (`@theme` directive, not tailwind.config.js) + Framer Motion + d3-geo/topojson-client + tsparticles
 
 ### Internationalization (3 locales)
 
@@ -45,9 +45,9 @@ Each locale has: homepage (`page.js`), `/about`, `/articles`, `/articles/[slug]`
 ### Key Components
 
 - `Navbar.js` - Navigation with language switcher dropdown, sets `preferred-lang` cookie
-- `FlightTimeline.js` - Career journey timeline with globe, flight arcs, and detail modals
+- `FlightTimeline.js` - Career journey timeline with world map, flight arcs, and detail modals
 - `FlightArc.js` - SVG animated arcs with traveling light dots between timeline nodes
-- `GlobeBackground.js` - Three.js wireframe globe (React Three Fiber)
+- `WorldMapBackground.js` - 2D world map using d3-geo + Natural Earth TopoJSON (`public/data/world-110m.json`)
 - `ParticlesBackground.js` - tsparticles background effect
 - `MarkdownRenderer.js` - Renders HTML from markdown with Shiki syntax highlighting
 - `Footer.js` - Site footer
@@ -65,3 +65,9 @@ Each locale has: homepage (`page.js`), `/about`, `/articles`, `/articles/[slug]`
 - Client components use `"use client"` directive and Framer Motion for animations
 - Server components for article/content pages (data fetched at build time)
 - All page-level styling uses direct Tailwind classes (not CSS custom properties for colors)
+
+### Dependency Rules
+
+- **React 19**: Many popular React libraries (e.g. `react-simple-maps`) only support React 16-18. Always check `peerDependencies` before `npm install`. If peer conflict occurs, prefer lower-level alternatives (e.g. `d3-geo` + `topojson-client` instead of `react-simple-maps`).
+- **Turbopack cache corruption**: If `npm run dev` shows `TurbopackInternalError` or `Cannot find module .next/postcss.js`, run `npm run clean` to clear the `.next` cache, then retry.
+- **No Three.js**: Three.js / React Three Fiber was removed. Use SVG + d3-geo for map/geo visualizations.

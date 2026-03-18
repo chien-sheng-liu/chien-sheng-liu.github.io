@@ -111,6 +111,25 @@ article blockquote {
   50% { transform: translateY(8px); opacity: 1; }
 }
 
+@keyframes continent-breathe {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+@keyframes dot-twinkle {
+  0%, 100% { opacity: 0; }
+  50% { opacity: 0.35; }
+}
+
+@keyframes city-pulse {
+  0% { r: 4; opacity: 0.3; }
+  100% { r: 16; opacity: 0; }
+}
+
+@keyframes dash-march {
+  to { stroke-dashoffset: -28; }
+}
+
 /* ─── Reduced Motion ─── */
 
 @media (prefers-reduced-motion: reduce) {

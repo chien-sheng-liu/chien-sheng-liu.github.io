@@ -82,7 +82,7 @@ src/
 
 ## 效能檢查項
 
-- [ ] 動態 import 用於大型元件（Three.js、tsparticles）
+- [ ] 動態 import 用於大型元件（tsparticles 等）
 - [ ] 圖片使用 next/image 自動優化
 - [ ] 字體使用 next/font 避免 FOUT
 - [ ] mousemove listener 用 requestAnimationFrame 節流
@@ -96,3 +96,10 @@ src/
 3. 結構性修改（新元件、新 section）→ 抽取共用元件
 4. 純文字修改 → 各語系獨立更新
 5. `npm run build` 驗證所有語系編譯通過
+
+## 套件安裝規則
+
+- **React 19 相容性**：本專案使用 React 19，許多第三方 React 套件（如 `react-simple-maps`）僅支援 React 16-18。安裝前必須檢查 `peerDependencies`，若不相容則改用底層替代方案（如 `d3-geo` + `topojson-client`）。
+- **避免重複下載**：安裝套件前先確認 `node_modules` 是否已有該套件或其子依賴，避免重複安裝。
+- **Turbopack 快取問題**：若 `npm run dev` 出現 `TurbopackInternalError` 或 `Cannot find module .next/postcss.js`，執行 `npm run clean` 清除 `.next` 快取後重試。
+- **已移除的套件**：Three.js / React Three Fiber 已移除，地圖視覺化改用 SVG + d3-geo。不要重新安裝這些套件。

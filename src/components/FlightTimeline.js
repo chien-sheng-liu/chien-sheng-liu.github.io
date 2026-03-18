@@ -2,15 +2,9 @@
 import { useRef, useState, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { FaPlane, FaTimes } from "react-icons/fa";
-import dynamic from "next/dynamic";
 import FlightArc from "./FlightArc";
 import Card3D from "./Card3D";
-
-/* ── Lazy-load Globe (no SSR — Three.js needs browser) ── */
-const GlobeBackground = dynamic(() => import("./GlobeBackground"), {
-  ssr: false,
-  loading: () => null,
-});
+import WorldMapBackground from "./WorldMapBackground";
 
 /* ── DATA ── */
 const events = [
@@ -103,20 +97,24 @@ const events = [
   },
 ];
 
-/* ── Type-based styling (frosted glass + colored left border) ── */
+/* ── Type-based styling ── */
 const typeStyle = {
   work: {
-    border: "border-l-[3px] border-l-cyan-400 border-white/20",
+    strip: "from-cyan-400 to-sky-500",
+    bg: "bg-gradient-to-br from-white/80 to-cyan-50/40",
+    border: "border border-white/40",
     text: "text-cyan-600",
-    glow: "shadow-sm hover:shadow-md",
+    glow: "shadow-sm hover:shadow-lg hover:shadow-cyan-100/40 hover:ring-1 hover:ring-cyan-200/50",
     badge: "bg-cyan-50 text-cyan-600",
     dot: "bg-cyan-400",
     hex: "#06b6d4",
   },
   education: {
-    border: "border-l-[3px] border-l-purple-400 border-white/20",
+    strip: "from-purple-400 to-indigo-500",
+    bg: "bg-gradient-to-br from-white/80 to-purple-50/40",
+    border: "border border-white/40",
     text: "text-purple-600",
-    glow: "shadow-sm hover:shadow-md",
+    glow: "shadow-sm hover:shadow-lg hover:shadow-purple-100/40 hover:ring-1 hover:ring-purple-200/50",
     badge: "bg-purple-50 text-purple-600",
     dot: "bg-purple-400",
     hex: "#a855f7",
@@ -150,38 +148,60 @@ export default function FlightTimeline() {
 
   return (
     <section ref={sectionRef} className="relative px-4 sm:px-6 lg:px-8 py-10 overflow-hidden">
-      <div className="mx-auto max-w-6xl">
+      {/* Radial spotlight for depth */}
+      <div className="absolute inset-0 pointer-events-none" style={{ background: "radial-gradient(ellipse at 50% 40%, rgba(14,165,233,0.06) 0%, rgba(99,102,241,0.03) 40%, transparent 70%)" }} />
+
+      <div className="mx-auto max-w-7xl">
 
         {/* Header */}
         <div className="text-center mb-10">
           <motion.p initial={{ opacity: 0, y: 8 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-[10px] uppercase tracking-[0.5em] text-slate-400 mb-3">
+            <FaPlane className="inline-block mr-2 -mt-0.5" />
             Flight Log
           </motion.p>
-          <motion.h2 initial={{ opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }} className="text-3xl sm:text-4xl font-bold text-[#1d1d1f] mb-2">
+          <motion.h2 initial={{ opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }} className="text-3xl sm:text-4xl font-bold mb-3 bg-gradient-to-r from-cyan-500 via-sky-500 to-indigo-500 bg-clip-text text-transparent">
             人生航線
           </motion.h2>
+          <motion.div initial={{ opacity: 0, scaleX: 0 }} whileInView={{ opacity: 1, scaleX: 1 }} viewport={{ once: true }} transition={{ delay: 0.12, duration: 0.5 }} className="mx-auto h-[2px] w-24 bg-gradient-to-r from-transparent via-cyan-400 to-transparent mb-4" />
           <motion.p initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ delay: 0.15 }} className="text-sm text-slate-500">
-            台灣 → 中國 → 德國 → 香港
+            台灣 <span className="text-cyan-400">→</span> 中國 <span className="text-cyan-400">→</span> 德國 <span className="text-cyan-400">→</span> 香港
           </motion.p>
         </div>
 
         {/* ═══ DESKTOP ═══ */}
         <div className="hidden md:block relative" style={{ aspectRatio: `${VB_W} / ${VB_H}` }}>
-          <GlobeBackground />
+          <WorldMapBackground />
           <FlightArc nodes={nodes} vbW={VB_W} vbH={VB_H} />
 
-          {/* Node dots */}
+          {/* Node dots — circles for work, diamonds for education */}
           <svg className="absolute inset-0 w-full h-full z-[8]" viewBox={`0 0 ${VB_W} ${VB_H}`} preserveAspectRatio="xMidYMid meet" aria-hidden="true">
             {nodes.map((n, i) => {
               const s = typeStyle[events[i].type];
+              const isEdu = events[i].type === "education";
               return (
                 <g key={i}>
-                  <circle cx={n.x} cy={n.y} r="14" fill={s.hex} opacity="0.08" />
-                  <circle cx={n.x} cy={n.y} r="5"  fill={s.hex} opacity="0.9" />
-                  <circle cx={n.x} cy={n.y} r="5"  fill={s.hex} opacity="0.3">
-                    <animate attributeName="r" values="5;14;5" dur="3s" repeatCount="indefinite" />
-                    <animate attributeName="opacity" values="0.3;0;0.3" dur="3s" repeatCount="indefinite" />
-                  </circle>
+                  {isEdu ? (
+                    <>
+                      <rect x={n.x - 10} y={n.y - 10} width="20" height="20" rx="3" fill={s.hex} opacity="0.08" transform={`rotate(45 ${n.x} ${n.y})`} />
+                      <rect x={n.x - 4} y={n.y - 4} width="8" height="8" rx="1" fill={s.hex} opacity="0.9" transform={`rotate(45 ${n.x} ${n.y})`} />
+                      <rect x={n.x - 4} y={n.y - 4} width="8" height="8" rx="1" fill={s.hex} opacity="0.3" transform={`rotate(45 ${n.x} ${n.y})`}>
+                        <animate attributeName="width" values="8;20;8" dur="3s" repeatCount="indefinite" />
+                        <animate attributeName="height" values="8;20;8" dur="3s" repeatCount="indefinite" />
+                        <animate attributeName="x" values={`${n.x - 4};${n.x - 10};${n.x - 4}`} dur="3s" repeatCount="indefinite" />
+                        <animate attributeName="y" values={`${n.y - 4};${n.y - 10};${n.y - 4}`} dur="3s" repeatCount="indefinite" />
+                        <animate attributeName="opacity" values="0.3;0;0.3" dur="3s" repeatCount="indefinite" />
+                      </rect>
+                    </>
+                  ) : (
+                    <>
+                      <circle cx={n.x} cy={n.y} r="14" fill={s.hex} opacity="0.08" />
+                      <circle cx={n.x} cy={n.y} r="5"  fill={s.hex} opacity="0.9" />
+                      <circle cx={n.x} cy={n.y} r="5"  fill={s.hex} opacity="0.3">
+                        <animate attributeName="r" values="5;14;5" dur="3s" repeatCount="indefinite" />
+                        <animate attributeName="opacity" values="0.3;0;0.3" dur="3s" repeatCount="indefinite" />
+                      </circle>
+                    </>
+                  )}
                 </g>
               );
             })}
@@ -220,7 +240,7 @@ export default function FlightTimeline() {
         {/* ═══ MOBILE ═══ */}
         <div className="md:hidden relative">
           <div className="absolute inset-0 opacity-30 pointer-events-none">
-            <GlobeBackground />
+            <WorldMapBackground />
           </div>
 
           <div className="space-y-3 relative z-10">
@@ -253,7 +273,7 @@ export default function FlightTimeline() {
   );
 }
 
-/* ── Desktop card: frosted glass with colored left border ── */
+/* ── Desktop card: frosted glass with gradient top strip ── */
 function FlightCard({ ev, s, align, onClick }) {
   const alignRight = align === "right";
   const textAlignClass = alignRight ? "text-right" : "text-left";
@@ -261,16 +281,19 @@ function FlightCard({ ev, s, align, onClick }) {
   const flagPosClass = alignRight ? "right-4" : "left-4";
 
   return (
-    <div className="relative w-[280px]">
-      <span className="absolute -top-5 right-0 rounded-full border border-slate-200/60 bg-white/80 px-2 py-0.5 text-[10px] font-medium tracking-wide text-slate-500 shadow-sm">
+    <div className="relative w-[280px] group">
+      <span className="absolute -top-5 right-0 rounded-full border border-slate-200/60 bg-white/80 px-2 py-0.5 text-[10px] font-medium tracking-wide text-slate-500 shadow-sm z-10">
         {ev.year}
       </span>
       <button
         type="button"
         onClick={onClick}
-        className={`relative w-full h-[96px] rounded-2xl ${s.border} bg-white/70 backdrop-blur-[12px] px-4 pt-5 pb-5 ${s.glow} transition-all duration-200 hover:bg-white/80 cursor-pointer ${textAlignClass}`}
+        className={`relative w-full h-[96px] rounded-2xl overflow-hidden ${s.border} ${s.bg} backdrop-blur-[12px] px-4 pt-6 pb-4 ${s.glow} transition-all duration-300 cursor-pointer ${textAlignClass}`}
       >
-        <span className={`absolute top-2 ${flagPosClass} text-lg leading-none`}>
+        {/* Gradient top strip */}
+        <div className={`absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r ${s.strip}`} />
+
+        <span className={`absolute top-2.5 ${flagPosClass} text-lg leading-none`}>
           {ev.flag}
         </span>
         <div className={`flex ${badgeRowClass} mb-2`}>
@@ -280,29 +303,37 @@ function FlightCard({ ev, s, align, onClick }) {
         </div>
 
         <div>
-          <h3 className="text-lg font-semibold text-[#1d1d1f] leading-tight truncate">{ev.title}</h3>
+          <h3 className="text-base font-semibold text-[#1d1d1f] leading-tight truncate">{ev.title}</h3>
           <p className={`mt-1 text-sm font-medium ${s.text} leading-tight truncate`}>{ev.org}</p>
         </div>
+
+        {/* Click hint */}
+        <span className="absolute bottom-2 right-3 text-[10px] text-slate-300 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+          details →
+        </span>
       </button>
     </div>
   );
 }
 
 
-/* ── Mobile card: frosted glass ── */
+/* ── Mobile card: frosted glass with gradient top strip ── */
 function MobileFlightCard({ ev, s, isEven, onClick }) {
   return (
     <div className="relative w-[85%]">
-      <span className="absolute -top-4 right-0 rounded-full border border-slate-200/60 bg-white/80 px-2 py-0.5 text-[10px] font-medium tracking-wide text-slate-500 shadow-sm">
+      <span className="absolute -top-4 right-0 rounded-full border border-slate-200/60 bg-white/80 px-2 py-0.5 text-[10px] font-medium tracking-wide text-slate-500 shadow-sm z-10">
         {ev.year}
       </span>
       <button
         type="button"
         onClick={onClick}
-        className={`relative w-full h-[86px] rounded-2xl ${s.border} bg-white/70 backdrop-blur-[12px] px-4 pt-5 pb-4 ${s.glow} text-left cursor-pointer`}
+        className={`relative w-full h-[86px] rounded-2xl overflow-hidden ${s.border} ${s.bg} backdrop-blur-[12px] px-4 pt-6 pb-4 ${s.glow} text-left cursor-pointer transition-all duration-300`}
       >
+        {/* Gradient top strip */}
+        <div className={`absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r ${s.strip}`} />
+
         <div className={`absolute top-4 ${isEven ? "-right-2" : "-left-2"} w-3.5 h-3.5 rounded-full ${s.dot} ring-2 ring-white`} />
-        <span className="absolute top-2 left-4 text-lg leading-none">{ev.flag}</span>
+        <span className="absolute top-2.5 left-4 text-lg leading-none">{ev.flag}</span>
 
         <div className="mb-2">
           <div className={`inline-block rounded-full px-2 py-0.5 text-[8px] font-medium uppercase tracking-wider ${s.badge}`}>
@@ -311,7 +342,7 @@ function MobileFlightCard({ ev, s, isEven, onClick }) {
         </div>
 
         <div>
-          <h3 className="text-lg font-semibold text-[#1d1d1f] leading-tight truncate">{ev.title}</h3>
+          <h3 className="text-base font-semibold text-[#1d1d1f] leading-tight truncate">{ev.title}</h3>
           <p className={`mt-1 text-sm font-medium ${s.text} leading-tight truncate`}>{ev.org}</p>
         </div>
       </button>
@@ -319,7 +350,10 @@ function MobileFlightCard({ ev, s, isEven, onClick }) {
   );
 }
 
-/* ── Detail Modal: frosted glass ── */
+/* ── Detail Modal: frosted glass with gradient strip + staggered list ── */
+const listStagger = { hidden: {}, visible: { transition: { staggerChildren: 0.06 } } };
+const listItem = { hidden: { opacity: 0, x: -8 }, visible: { opacity: 1, x: 0, transition: { duration: 0.25 } } };
+
 function DetailModal({ ev, s, onClose }) {
   return (
     <motion.div
@@ -337,40 +371,45 @@ function DetailModal({ ev, s, onClose }) {
         animate={{ opacity: 1, scale: 1, y: 0 }}
         exit={{ opacity: 0, scale: 0.9, y: 20 }}
         transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
-        className={`relative w-full max-w-md rounded-2xl ${s.border} bg-white/80 backdrop-blur-xl shadow-2xl p-6 text-[#1d1d1f]`}
+        className={`relative w-full max-w-md rounded-2xl overflow-hidden ${s.border} ${s.bg} backdrop-blur-xl shadow-2xl text-[#1d1d1f]`}
         onClick={(e) => e.stopPropagation()}
       >
-        <button
-          type="button"
-          onClick={onClose}
-          className="absolute top-4 right-4 text-slate-400 hover:text-slate-700 transition-colors cursor-pointer"
-        >
-          <FaTimes className="text-sm" />
-        </button>
+        {/* Gradient top strip */}
+        <div className={`h-[4px] bg-gradient-to-r ${s.strip}`} />
 
-        <div className={`inline-block rounded-full px-3 py-1 text-[10px] font-medium uppercase tracking-wider mb-4 ${s.badge}`}>
-          {ev.type === "work" ? "Work" : "Education"}
-        </div>
+        <div className="p-6">
+          <button
+            type="button"
+            onClick={onClose}
+            className="absolute top-5 right-4 text-slate-400 hover:text-slate-700 transition-colors cursor-pointer"
+          >
+            <FaTimes className="text-sm" />
+          </button>
 
-        <div className="flex items-start gap-3 mb-5">
-          <span className="text-2xl leading-none shrink-0 mt-0.5">{ev.flag}</span>
-          <div>
-            <h3 className="text-xl font-bold text-[#1d1d1f] leading-snug">{ev.title}</h3>
-            <p className={`text-sm ${s.text}`}>{ev.org}</p>
-            <p className="text-xs text-slate-400 font-mono mt-1">{ev.year}</p>
+          <div className={`inline-block rounded-full px-3 py-1 text-[10px] font-medium uppercase tracking-wider mb-4 ${s.badge}`}>
+            {ev.type === "work" ? "Work" : "Education"}
           </div>
+
+          <div className="flex items-start gap-3 mb-5">
+            <span className="text-2xl leading-none shrink-0 mt-0.5">{ev.flag}</span>
+            <div>
+              <h3 className="text-xl font-bold text-[#1d1d1f] leading-snug">{ev.title}</h3>
+              <p className={`text-sm ${s.text}`}>{ev.org}</p>
+              <p className="text-xs text-slate-400 font-mono mt-1">{ev.year}</p>
+            </div>
+          </div>
+
+          <div className="h-px mb-4 bg-slate-200/60" />
+
+          <motion.ul className="space-y-2.5" variants={listStagger} initial="hidden" animate="visible">
+            {ev.detail.map((item, i) => (
+              <motion.li key={i} variants={listItem} className="flex items-start gap-2.5 text-sm text-slate-600">
+                <span className={`mt-1.5 w-1.5 h-1.5 rounded-full shrink-0 ${ev.type === "work" ? "bg-cyan-400" : "bg-purple-400"}`} />
+                {item}
+              </motion.li>
+            ))}
+          </motion.ul>
         </div>
-
-        <div className="h-px mb-4 bg-slate-200/60" />
-
-        <ul className="space-y-2.5">
-          {ev.detail.map((item, i) => (
-            <li key={i} className="flex items-start gap-2.5 text-sm text-slate-600">
-              <span className={`mt-1.5 w-1.5 h-1.5 rounded-full shrink-0 ${ev.type === "work" ? "bg-cyan-400" : "bg-purple-400"}`} />
-              {item}
-            </li>
-          ))}
-        </ul>
       </motion.div>
     </motion.div>
   );

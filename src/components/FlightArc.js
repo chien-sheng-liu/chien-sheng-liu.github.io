@@ -9,17 +9,48 @@ import { useEffect, useRef } from "react";
 export default function FlightArc({ nodes, vbW, vbH }) {
   const dotsRef = useRef([]);
 
-  /* Build smooth quadratic arcs between consecutive nodes */
+  /*
+    Hand-tuned cubic Bezier arcs — each one unique, like real flight
+    routes that bend differently depending on wind, geography, etc.
+    Control points are specified per-segment for maximum variety.
+  */
+  const arcConfigs = [
+    // 0: 2026 HK → 2024 TW — gentle swoop upward, slight S
+    { s1: 0.3, s2: 0.7, lift1: 90, lift2: 50, hShift1: 60, hShift2: -40 },
+    // 1: 2024 TW → 2023 ML — steep rise then flatten
+    { s1: 0.2, s2: 0.8, lift1: 110, lift2: 35, hShift1: -50, hShift2: 70 },
+    // 2: 2023 ML → 2023 講師 — low wide arc
+    { s1: 0.35, s2: 0.65, lift1: 55, lift2: 60, hShift1: 80, hShift2: -30 },
+    // 3: 2023 講師 → 2022 DE — dramatic high arc (long flight!)
+    { s1: 0.25, s2: 0.75, lift1: 130, lift2: 80, hShift1: -70, hShift2: 50 },
+    // 4: 2022 DE → 2021 DE — tight short curve
+    { s1: 0.3, s2: 0.7, lift1: 45, lift2: 40, hShift1: 50, hShift2: -60 },
+    // 5: 2021 DE → 2020 MSc — asymmetric S-bend
+    { s1: 0.2, s2: 0.85, lift1: 95, lift2: 25, hShift1: -90, hShift2: 40 },
+    // 6: 2020 MSc → 2019 交換 — gentle dip then rise
+    { s1: 0.4, s2: 0.6, lift1: 35, lift2: 70, hShift1: 60, hShift2: -80 },
+    // 7: 2019 交換 → 2017 CN — wide dramatic swoop
+    { s1: 0.2, s2: 0.75, lift1: 120, lift2: 60, hShift1: -55, hShift2: 85 },
+    // 8: 2017 CN → 2015 TW — final arc, medium height
+    { s1: 0.35, s2: 0.7, lift1: 70, lift2: 55, hShift1: 45, hShift2: -50 },
+  ];
+
   const arcs = [];
   for (let i = 0; i < nodes.length - 1; i++) {
     const a = nodes[i];
     const b = nodes[i + 1];
-    /* Control point: midpoint offset upward for arc effect */
-    const cx = (a.x + b.x) / 2;
-    const cy = (a.y + b.y) / 2 - 40;
+    const dx = b.x - a.x;
+    const dy = b.y - a.y;
+    const cfg = arcConfigs[i] || arcConfigs[0];
+
+    const c1x = a.x + dx * cfg.s1 + cfg.hShift1;
+    const c1y = a.y + dy * cfg.s1 - cfg.lift1;
+    const c2x = a.x + dx * cfg.s2 + cfg.hShift2;
+    const c2y = a.y + dy * cfg.s2 - cfg.lift2;
+
     arcs.push({
       id: i,
-      d: `M ${a.x} ${a.y} Q ${cx} ${cy} ${b.x} ${b.y}`,
+      d: `M ${a.x} ${a.y} C ${c1x} ${c1y}, ${c2x} ${c2y}, ${b.x} ${b.y}`,
     });
   }
 
@@ -58,12 +89,17 @@ export default function FlightArc({ nodes, vbW, vbH }) {
     >
       <defs>
         <linearGradient id="arcGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stopColor="#0ea5e9" stopOpacity="0.8" />
-          <stop offset="100%" stopColor="#6366f1" stopOpacity="0.8" />
+          <stop offset="0%" stopColor="#0ea5e9" stopOpacity="0.9" />
+          <stop offset="100%" stopColor="#6366f1" stopOpacity="0.9" />
         </linearGradient>
         <linearGradient id="arcGradGlow" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stopColor="#0ea5e9" stopOpacity="0.1" />
-          <stop offset="100%" stopColor="#6366f1" stopOpacity="0.1" />
+          <stop offset="0%" stopColor="#0ea5e9" stopOpacity="0.12" />
+          <stop offset="100%" stopColor="#6366f1" stopOpacity="0.12" />
+        </linearGradient>
+        {/* White glow behind arcs for separation from map */}
+        <linearGradient id="arcWhiteGlow" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stopColor="#ffffff" stopOpacity="0.15" />
+          <stop offset="100%" stopColor="#ffffff" stopOpacity="0.15" />
         </linearGradient>
         <filter id="dotGlow">
           <feGaussianBlur in="SourceGraphic" stdDeviation="4" />
@@ -73,11 +109,19 @@ export default function FlightArc({ nodes, vbW, vbH }) {
       {/* Arc paths */}
       {arcs.map((arc) => (
         <g key={arc.id}>
-          {/* Glow layer */}
+          {/* White glow for separation */}
+          <path
+            d={arc.d}
+            stroke="url(#arcWhiteGlow)"
+            strokeWidth="6"
+            fill="none"
+            strokeLinecap="round"
+          />
+          {/* Color glow layer */}
           <path
             d={arc.d}
             stroke="url(#arcGradGlow)"
-            strokeWidth="8"
+            strokeWidth="12"
             fill="none"
             strokeLinecap="round"
           />
@@ -85,10 +129,11 @@ export default function FlightArc({ nodes, vbW, vbH }) {
           <path
             d={arc.d}
             stroke="url(#arcGrad)"
-            strokeWidth="1.5"
+            strokeWidth="2.5"
             fill="none"
             strokeLinecap="round"
-            strokeDasharray="6 8"
+            strokeDasharray="8 6"
+            className="animate-[dash-march_1.5s_linear_infinite]"
           />
         </g>
       ))}
@@ -108,7 +153,7 @@ export default function FlightArc({ nodes, vbW, vbH }) {
           />
           {/* Glow circle */}
           <circle
-            r="8"
+            r="10"
             fill="#0ea5e9"
             opacity="0.25"
             filter="url(#dotGlow)"
@@ -119,7 +164,7 @@ export default function FlightArc({ nodes, vbW, vbH }) {
           />
           {/* Bright dot */}
           <circle
-            r="2.5"
+            r="3"
             fill="#0ea5e9"
             opacity="0.9"
             ref={(el) => {
