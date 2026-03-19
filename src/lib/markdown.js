@@ -1,34 +1,51 @@
-// Simple markdown to HTML conversion
-// This is a minimal implementation - consider using a proper markdown parser for production
+import { marked } from 'marked';
+
+function slugify(text) {
+  return text
+    .toLowerCase()
+    .replace(/[^\w\u4e00-\u9fff\u3400-\u4dbf\s-]/g, '')
+    .replace(/\s+/g, '-')
+    .replace(/-+/g, '-')
+    .trim();
+}
 
 export function markdownToHtml(markdown) {
-  if (!markdown) return '';
-  
-  let html = markdown
-    // Headers
-    .replace(/^### (.*$)/gm, '<h3>$1</h3>')
-    .replace(/^## (.*$)/gm, '<h2>$1</h2>')
-    .replace(/^# (.*$)/gm, '<h1>$1</h1>')
-    
-    // Bold and italic
-    .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
-    .replace(/\*(.*?)\*/g, '<em>$1</em>')
-    
-    // Links
-    .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>')
-    
-    // Code blocks
-    .replace(/```([^`]+)```/g, '<pre><code>$1</code></pre>')
-    .replace(/`([^`]+)`/g, '<code>$1</code>')
-    
-    // Line breaks
-    .replace(/\n\n/g, '</p><p>')
-    .replace(/\n/g, '<br>');
-  
-  // Wrap in paragraphs if not already wrapped
-  if (!html.includes('<p>')) {
-    html = `<p>${html}</p>`;
-  }
-  
-  return html;
+  if (!markdown) return { html: '', toc: [] };
+
+  const toc = [];
+
+  const renderer = new marked.Renderer();
+
+  renderer.heading = function ({ tokens, depth }) {
+    const text = this.parser.parseInline(tokens);
+    // Strip HTML tags from text for TOC display
+    const plainText = text.replace(/<[^>]*>/g, '');
+    const id = slugify(plainText);
+
+    if (depth >= 2 && depth <= 3) {
+      toc.push({ id, text: plainText, level: depth });
+    }
+
+    return `<h${depth} id="${id}">${text}</h${depth}>`;
+  };
+
+  // Add language class to code blocks for Shiki highlighting
+  renderer.code = function ({ text, lang }) {
+    const langClass = lang ? ` class="language-${lang}"` : '';
+    const escaped = text
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;');
+    return `<pre><code${langClass}>${escaped}</code></pre>`;
+  };
+
+  marked.setOptions({
+    renderer,
+    gfm: true,
+    breaks: false,
+  });
+
+  const html = marked.parse(markdown);
+
+  return { html, toc };
 }

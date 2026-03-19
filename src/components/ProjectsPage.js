@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import {
   FaGithub,
   FaArrowRight,
@@ -13,6 +13,7 @@ import {
 } from "react-icons/fa";
 import { getProjectData } from "@/data/projectData";
 import AnimatedGradientBg from "./AnimatedGradientBg";
+import ProjectDetailModal from "./ProjectDetailModal";
 
 /* ── i18n ── */
 const i18n = {
@@ -20,7 +21,9 @@ const i18n = {
     tagline: "Projects",
     title: "我的專案作品",
     desc: "數據科學、機器學習、全端開發 — 將複雜問題變成可行的解決方案。",
+    all: "全部",
     viewCode: "查看程式碼",
+    viewDetail: "了解更多",
     ctaTitle: "想了解更多？",
     ctaDesc: "每個專案背後都有獨特的挑戰。歡迎到 GitHub 看更多細節。",
     ctaBtn: "查看 GitHub",
@@ -30,7 +33,9 @@ const i18n = {
     tagline: "Projects",
     title: "My Project Work",
     desc: "Data science, machine learning, and full-stack — turning complex problems into working solutions.",
+    all: "All",
     viewCode: "View Code",
+    viewDetail: "Learn More",
     ctaTitle: "Want to learn more?",
     ctaDesc: "Each project has unique challenges behind it. Check out GitHub for more details.",
     ctaBtn: "View GitHub",
@@ -40,7 +45,9 @@ const i18n = {
     tagline: "Projects",
     title: "我嘅項目作品",
     desc: "數據科學、機器學習、全端開發 — 將複雜問題變成落地方案。",
+    all: "全部",
     viewCode: "睇程式碼",
+    viewDetail: "了解更多",
     ctaTitle: "想知更多？",
     ctaDesc: "每個項目背後都有獨特嘅挑戰。歡迎去 GitHub 睇更多細節。",
     ctaBtn: "睇 GitHub",
@@ -91,6 +98,18 @@ export default function ProjectsPage({ locale = "zh" }) {
   }, [locale]);
 
   const projects = useMemo(() => [...baseProjects, ...extra], [baseProjects, extra]);
+  const [selectedProject, setSelectedProject] = useState(null);
+  const [activeFilter, setActiveFilter] = useState(null);
+
+  const categories = useMemo(
+    () => [...new Set(projects.map((p) => p.category))],
+    [projects],
+  );
+
+  const filteredProjects = useMemo(
+    () => (activeFilter ? projects.filter((p) => p.category === activeFilter) : projects),
+    [projects, activeFilter],
+  );
 
   return (
     <div className="relative min-h-screen text-[#1d1d1f] overflow-hidden">
@@ -126,6 +145,41 @@ export default function ProjectsPage({ locale = "zh" }) {
             </motion.p>
           </motion.div>
 
+          {/* ── Filter bar ── */}
+          <motion.div
+            className="flex flex-wrap justify-center gap-2 mb-8"
+            variants={fadeUp}
+            initial="hidden"
+            animate="visible"
+            custom={3}
+          >
+            <button
+              type="button"
+              onClick={() => setActiveFilter(null)}
+              className={`px-4 py-1.5 rounded-full text-sm font-medium border transition-all duration-200 cursor-pointer ${
+                activeFilter === null
+                  ? "bg-[#1d1d1f] text-white border-[#1d1d1f] shadow-sm"
+                  : "bg-white/70 text-slate-500 border-slate-200/60 hover:border-slate-300 hover:text-slate-700"
+              }`}
+            >
+              {t.all}
+            </button>
+            {categories.map((cat) => (
+              <button
+                key={cat}
+                type="button"
+                onClick={() => setActiveFilter(activeFilter === cat ? null : cat)}
+                className={`px-4 py-1.5 rounded-full text-sm font-medium border transition-all duration-200 cursor-pointer ${
+                  activeFilter === cat
+                    ? "bg-[#1d1d1f] text-white border-[#1d1d1f] shadow-sm"
+                    : "bg-white/70 text-slate-500 border-slate-200/60 hover:border-slate-300 hover:text-slate-700"
+                }`}
+              >
+                {cat}
+              </button>
+            ))}
+          </motion.div>
+
           {/* ── Project cards ── */}
           <motion.div
             className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-20"
@@ -134,12 +188,17 @@ export default function ProjectsPage({ locale = "zh" }) {
             whileInView="visible"
             viewport={{ once: true, amount: 0.1 }}
           >
-            {projects.map((project, idx) => (
+            <AnimatePresence mode="popLayout">
+            {filteredProjects.map((project, idx) => (
               <motion.div
-                key={idx}
-                variants={fadeUp}
-                custom={idx}
-                className="group relative overflow-hidden rounded-2xl bg-white/70 backdrop-blur-sm border border-slate-200/60 shadow-sm hover:border-slate-300 hover:shadow-md transition-all duration-300"
+                key={project.title}
+                layout
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.95 }}
+                transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+                className="group relative overflow-hidden rounded-2xl bg-white/70 backdrop-blur-sm border border-slate-200/60 shadow-sm hover:border-slate-300 hover:shadow-md transition-all duration-300 cursor-pointer"
+                onClick={() => setSelectedProject(project)}
               >
                 {/* Accent strip */}
                 <div
@@ -195,19 +254,14 @@ export default function ProjectsPage({ locale = "zh" }) {
                   </div>
 
                   {/* Action */}
-                  <a
-                    href={project.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 text-sm font-semibold text-sky-600 hover:text-sky-700 transition-colors"
-                  >
-                    <FaGithub className="text-base" />
-                    {t.viewCode}
+                  <span className="inline-flex items-center gap-2 text-sm font-semibold text-sky-600 group-hover:text-sky-700 transition-colors">
+                    {t.viewDetail}
                     <FaArrowRight className="text-[10px] group-hover:translate-x-1 transition-transform" />
-                  </a>
+                  </span>
                 </div>
               </motion.div>
             ))}
+            </AnimatePresence>
           </motion.div>
 
           {/* ── CTA ── */}
@@ -242,6 +296,17 @@ export default function ProjectsPage({ locale = "zh" }) {
           </motion.div>
         </div>
       </div>
+
+      {/* ── Project Detail Modal ── */}
+      <AnimatePresence>
+        {selectedProject && (
+          <ProjectDetailModal
+            project={selectedProject}
+            locale={locale}
+            onClose={() => setSelectedProject(null)}
+          />
+        )}
+      </AnimatePresence>
     </div>
   );
 }

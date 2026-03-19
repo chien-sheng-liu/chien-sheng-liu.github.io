@@ -5,7 +5,8 @@
       "Bash(npm run:*)",
       "Bash(npm install:*)",
       "Bash(curl -sL \"https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json\" -o /Users/morris/Desktop/Me/Self/personal-website/public/data/world-110m.json)",
-      "Bash(node:*)"
+      "Bash(node:*)",
+      "Bash(pkill -f \"npm install marked\")"
     ]
   }
 }

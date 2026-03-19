@@ -1,5 +1,13 @@
 export const articles = [
   {
+    slug: 'funnel-analysis-hellofresh',
+    title: 'Funnel Analysis in Practice: Breaking Down Conversions with HelloFresh',
+    summary: 'From defining funnels and calculating metrics to finding bottlenecks and optimization strategies — a complete funnel analysis walkthrough using HelloFresh.',
+    date: '2026-03-19',
+    readingTime: '15 min',
+    tags: ['Product Analytics', 'Funnel Analysis', 'HelloFresh', 'Growth'],
+  },
+  {
     slug: 'rag-primer',
     title: 'A Practical Guide to RAG: Principles, Best Practices, and Pitfalls',
     summary: 'From retrieval to generation—core design choices, data prep, vector indexing, and evaluation.',

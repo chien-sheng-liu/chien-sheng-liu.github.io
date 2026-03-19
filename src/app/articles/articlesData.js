@@ -1,5 +1,13 @@
 export const articles = [
   {
+    slug: 'funnel-analysis-hellofresh',
+    title: '漏斗分析實戰：以 HelloFresh 為例拆解用戶轉換',
+    summary: '從定義漏斗、計算指標到找出瓶頸與優化策略，用 HelloFresh 完整示範漏斗分析框架。',
+    date: '2026-03-19',
+    readingTime: '15 分鐘',
+    tags: ['Product Analytics', 'Funnel Analysis', 'HelloFresh', 'Growth'],
+  },
+  {
     slug: 'rag-primer',
     title: '深入理解 RAG 系統：原理、最佳實踐與常見陷阱',
     summary: '從檢索到生成，帶你掌握 RAG 的核心設計要點、資料準備、向量索引與評估方法。',

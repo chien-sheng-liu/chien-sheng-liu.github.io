@@ -1,4 +1,4 @@
-import { FaChartLine, FaBrain, FaMedkit, FaShoppingCart, FaPython, FaDatabase, FaCloud, FaCode, FaStar } from "react-icons/fa";
+import { FaChartLine, FaChartBar, FaDice, FaBrain, FaMedkit, FaShoppingCart, FaRobot, FaPython, FaDatabase, FaCloud, FaCode, FaStar } from "react-icons/fa";
 
 export const projects = [
   {
@@ -18,18 +18,18 @@ export const projects = [
     bgGradient: "from-blue-500/10 to-cyan-500/10",
   },
   {
-    title: "金融市場情緒分析儀",
-    description: "開發一個 NLP 模型，自動爬取財經新聞與社群媒體評論，透過 BERT 進行情緒分析與實體識別，將市場情緒量化為指標，輔助投資決策。後端使用 Flask 建立 API 服務。",
+    title: "VICI — LLM Gateway + 多代理財務分析系統",
+    description: "結合 LLM Gateway 與 Playwright 瀏覽器自動化的財務分析平台。多 Agent 協作（新聞 / 財務 / 交易 / 數據），搭配 Safety Guard 安全層與完整 Artifact 追溯。",
     icon: <FaBrain size={28} />,
     categoryIcon: <FaCode size={16} />,
-    category: "NLP",
-    technologies: ["BERT", "Flask", "NLP", "Python"],
+    category: "LLM",
+    technologies: ["FastAPI", "Playwright", "React", "OpenAI", "Claude", "Docker", "Python"],
     metrics: [
-      { label: "情緒準確率", value: "89%" },
-      { label: "處理速度", value: "1000/秒" },
-      { label: "API 響應", value: "< 200ms" }
+      { label: "Agent 數", value: "4" },
+      { label: "安全層級", value: "5 層" },
+      { label: "LLM 提供商", value: "3+" },
     ],
-    link: "#",
+    link: "https://github.com/chien-sheng-liu/VICI-LLM-Engineer",
     color: "from-purple-500 to-pink-500",
     bgGradient: "from-purple-500/10 to-pink-500/10",
   },
@@ -64,6 +64,54 @@ export const projects = [
     link: "#",
     color: "from-orange-500 to-red-500",
     bgGradient: "from-orange-500/10 to-red-500/10",
+  },
+  {
+    title: "疫情干擾下的時間序列預測",
+    description: "比較 SARIMA、Holt-Winters、Prophet 三種模型在 COVID-19 干擾下的預測表現，設計排除疫情 / 包含疫情 / 後疫情三組實驗，量化外部衝擊對時間序列預測的影響。",
+    icon: <FaChartBar size={28} />,
+    categoryIcon: <FaBrain size={16} />,
+    category: "深度學習",
+    technologies: ["Python", "SARIMA", "Prophet", "Holt-Winters", "pandas", "statsmodels"],
+    metrics: [
+      { label: "預測模型", value: "3" },
+      { label: "實驗組數", value: "3" },
+      { label: "研究機構", value: "Uni Mannheim" }
+    ],
+    link: "#",
+    color: "from-teal-500 to-cyan-500",
+    bgGradient: "from-teal-500/10 to-cyan-500/10",
+  },
+  {
+    title: "OpenNet — 老虎機遊戲引擎與機率優化系統",
+    description: "3×3 老虎機遊戲引擎，結合 Monte Carlo 模擬與啟發式搜索算法自動優化轉軸配置，在目標 RTP 95% 與勝率 ≥ 55% 的約束下找出最佳符號分布。全棧實現含 FastAPI 後端與 React 前端。",
+    icon: <FaDice size={28} />,
+    categoryIcon: <FaCode size={16} />,
+    category: "演算法",
+    technologies: ["Python", "FastAPI", "React", "Monte Carlo", "NumPy", "Vite"],
+    metrics: [
+      { label: "目標 RTP", value: "95%" },
+      { label: "模擬次數", value: "100K" },
+      { label: "獲勝模式", value: "5 種" }
+    ],
+    link: "#",
+    color: "from-amber-500 to-rose-500",
+    bgGradient: "from-amber-500/10 to-rose-500/10",
+  },
+  {
+    title: "AutoLLM — No-Code RAG 聊天機器人平台",
+    description: "生產級 RAG 平台，支援文檔上傳、向量檢索、多 LLM 切換（OpenAI / Gemini / Claude），搭配 Redis + PostgreSQL 雙層存儲與 Docker 微服務部署。",
+    icon: <FaRobot size={28} />,
+    categoryIcon: <FaCloud size={16} />,
+    category: "LLM",
+    technologies: ["FastAPI", "Next.js", "PostgreSQL", "pgvector", "Redis", "Docker", "OpenAI", "Gemini"],
+    metrics: [
+      { label: "LLM 提供商", value: "3+" },
+      { label: "API 端點", value: "15+" },
+      { label: "部署方式", value: "Docker" },
+    ],
+    link: "https://github.com/chien-sheng-liu/AutoLLM",
+    color: "from-violet-500 to-indigo-500",
+    bgGradient: "from-violet-500/10 to-indigo-500/10",
   },
 ];
 
