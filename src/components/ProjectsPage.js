@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   FaGithub,
@@ -80,24 +80,7 @@ const stagger = {
 
 export default function ProjectsPage({ locale = "zh" }) {
   const t = i18n[locale] || i18n.zh;
-  const { projects: baseProjects } = getProjectData(locale);
-  const [extra, setExtra] = useState([]);
-
-  useEffect(() => {
-    fetch(`/api/content/projects?locale=${locale}`)
-      .then((r) => r.json())
-      .then((d) => {
-        const items = (d.items || []).map((p) => ({
-          ...p,
-          icon: iconForCategory(p.category),
-          categoryIcon: <FaCode size={14} />,
-        }));
-        setExtra(items);
-      })
-      .catch(() => {});
-  }, [locale]);
-
-  const projects = useMemo(() => [...baseProjects, ...extra], [baseProjects, extra]);
+  const { projects } = getProjectData(locale);
   const [selectedProject, setSelectedProject] = useState(null);
   const [activeFilter, setActiveFilter] = useState(null);
 
