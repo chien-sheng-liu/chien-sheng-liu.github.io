@@ -1,6 +1,11 @@
-import { getArticle } from '@/lib/content';
+import { getArticle, listArticles } from '@/lib/content';
 import { markdownToHtml } from '@/lib/markdown';
 import ArticleDetailPage from '@/components/ArticleDetailPage';
+
+export async function generateStaticParams() {
+  const articles = await listArticles('en');
+  return articles.map((a) => ({ slug: a.slug }));
+}
 
 export default async function ArticlePageEn({ params }) {
   const { slug } = await params;

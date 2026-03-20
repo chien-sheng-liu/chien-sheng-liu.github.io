@@ -4,6 +4,7 @@ import { ThemeProvider } from "./providers";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import CursorGlow from "@/components/CursorGlow";
+import LangDetect from "@/components/LangDetect";
 
 export const metadata = {
   title: {
@@ -21,6 +22,7 @@ export default function RootLayout({ children }) {
     <html lang="zh-TW" suppressHydrationWarning>
       <body className="bg-[#f5f5f7] text-[#1d1d1f] antialiased">
         <ThemeProvider>
+          <LangDetect />
           <CursorGlow />
           <Navbar />
           <main className="relative z-0 pt-20">{children}</main>
