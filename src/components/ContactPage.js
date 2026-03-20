@@ -11,7 +11,7 @@ import {
 import AnimatedGradientBg from "./AnimatedGradientBg";
 
 const TO_EMAIL = "liu_chiensheng@outlook.com";
-const CALENDAR_URL = "https://calendar.app.google/jPexFUzauM39fYfV9";
+const CALENDAR_URL = "https://calendar.app.google/MANJXP2ZZiaWF5T26";
 const LINKEDIN_URL = "https://www.linkedin.com/in/chienshengliu/";
 
 const i18n = {
@@ -50,7 +50,7 @@ const i18n = {
         color: "#16a34a",
       },
     ],
-    responseNote: "通常 24–48 小時內回覆",
+    responseNote: "通常 24 小時內回覆",
   },
   en: {
     tagline: "Let's Talk",
@@ -83,11 +83,11 @@ const i18n = {
         label: "Book a call",
         subtitle: "30 min · Google Calendar",
         value: "Pick a time that works for you",
-        href: CALENDAR_URL,
+        href: "CALENDAR_URL",
         color: "#16a34a",
       },
     ],
-    responseNote: "Usually reply within 24–48 hours",
+    responseNote: "Usually reply within 24 hours",
   },
 };
 
