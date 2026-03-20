@@ -1,123 +1,116 @@
 "use client";
-import { highlights, experiences, education, languages, pageText } from "@/app/en/about/aboutData";
+import Image from "next/image";
+import { motion } from "framer-motion";
+import FlightTimeline from "@/components/FlightTimeline";
 import AnimatedGradientBg from "@/components/AnimatedGradientBg";
-import ScrollReveal from "@/components/ScrollReveal";
+import TypewriterText from "@/components/TypewriterText";
 import Card3D from "@/components/Card3D";
-import HeroSection from "@/components/sections/HeroSection";
 import CtaSection from "@/components/sections/CtaSection";
+import { FaChevronDown } from "react-icons/fa";
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 18 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } },
+};
+const stagger = { hidden: {}, visible: { transition: { staggerChildren: 0.1 } } };
+
+const heroStats = [
+  { value: "5+ yrs", label: "Data & AI Experience", icon: "📊" },
+  { value: "3 Countries", label: "Cross-market Experience", icon: "🌏" },
+  { value: "NT$80M", label: "AI-driven Revenue", icon: "💰" },
+  { value: "25+ Projects", label: "End-to-end Delivery", icon: "🚀" },
+];
+
+const skillTags = [
+  { name: "Python", color: "bg-emerald-50 text-emerald-600 border-emerald-200" },
+  { name: "Machine Learning", color: "bg-cyan-50 text-cyan-600 border-cyan-200" },
+  { name: "NLP & LLM", color: "bg-indigo-50 text-indigo-600 border-indigo-200" },
+  { name: "SQL", color: "bg-emerald-50 text-emerald-600 border-emerald-200" },
+  { name: "GCP", color: "bg-sky-50 text-sky-600 border-sky-200" },
+  { name: "BigQuery", color: "bg-sky-50 text-sky-600 border-sky-200" },
+  { name: "RAG / LoRA", color: "bg-fuchsia-50 text-fuchsia-600 border-fuchsia-200" },
+  { name: "Tableau", color: "bg-amber-50 text-amber-600 border-amber-200" },
+  { name: "Deep Learning", color: "bg-indigo-50 text-indigo-600 border-indigo-200" },
+  { name: "Docker", color: "bg-cyan-50 text-cyan-600 border-cyan-200" },
+  { name: "dbt / LookML", color: "bg-lime-50 text-lime-600 border-lime-200" },
+  { name: "Pandas", color: "bg-emerald-50 text-emerald-600 border-emerald-200" },
+];
+
+const typewriterTexts = ["into clear narratives", "into business value", "into compelling stories"];
 
 export default function HomeEn() {
   return (
     <div className="relative min-h-screen overflow-hidden text-[#1d1d1f]">
-      {/* Single unified background */}
+      {/* Single unified background for the entire page */}
       <AnimatedGradientBg variant="hero" />
 
-      <main className="relative z-10 space-y-20 pb-16">
+      <main className="relative z-10 pb-12">
 
         {/* ═══ HERO ═══ */}
-        <HeroSection
-          greeting="Hi, I&apos;m Morris"
-          titlePrefix="I turn AI"
-          typewriterTexts={["into clear narratives", "into business value", "into compelling stories"]}
-          subtitle={pageText?.subtitle}
-          tags={["Frontend Engineer", "Process Designer", "AI / Data"]}
-          ctaLabel="Say hello"
-          ctaHref="/en/contact"
-        />
-
-        {/* ═══ HIGHLIGHTS ═══ */}
-        <section id="about" className="relative px-4 sm:px-6 lg:px-8">
-          <div className="mx-auto max-w-7xl">
-            <ScrollReveal>
-              <h2 className="text-sm uppercase tracking-[0.35em] text-slate-400 mb-6">Highlights</h2>
-            </ScrollReveal>
-            <div className="grid gap-5 md:grid-cols-3">
-              {highlights.slice(0,3).map((h, idx) => (
-                <ScrollReveal key={idx} delay={idx * 100}>
-                  <Card3D intensity={5}>
-                    <div className="rounded-2xl border border-slate-200/60 bg-white/70 backdrop-blur-sm p-6 shadow-sm hover:shadow-md transition-shadow duration-300">
-                      <div className="flex items-center gap-3">
-                        <div className="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-sky-50 text-sky-500">{h.icon}</div>
-                        <h3 className="text-base font-semibold text-[#1d1d1f]">{h.title}</h3>
+        <section className="relative min-h-[calc(100vh-5rem)] flex items-center px-4 sm:px-6 lg:px-8 py-20">
+          <div className="relative z-10 mx-auto max-w-7xl w-full">
+            <motion.div variants={stagger} initial="hidden" animate="visible">
+              <div className="grid gap-10 lg:gap-16 lg:grid-cols-[auto_1fr] items-center">
+                <motion.div variants={fadeUp} className="relative mx-auto lg:mx-0">
+                  <Card3D intensity={6}>
+                    <div className="relative w-48 h-48 sm:w-56 sm:h-56 lg:w-64 lg:h-64 xl:w-72 xl:h-72" style={{ animation: "hero-float 6s ease-in-out infinite" }}>
+                      <div className="relative h-full w-full overflow-hidden rounded-full ring-2 ring-white/60 shadow-2xl shadow-indigo-200/40">
+                        <Image src="/profile.png" alt="Morris Liu" fill sizes="288px" className="object-cover" priority />
                       </div>
-                      <p className="mt-2 text-sm text-slate-500">{h.description}</p>
                     </div>
                   </Card3D>
-                </ScrollReveal>
-              ))}
-            </div>
-          </div>
-        </section>
+                </motion.div>
 
-        {/* ═══ EXPERIENCE ═══ */}
-        <section className="relative px-4 sm:px-6 lg:px-8">
-          <div className="relative z-10 mx-auto max-w-7xl">
-            <ScrollReveal>
-              <h2 className="text-sm uppercase tracking-[0.35em] text-slate-400 mb-6">Experience</h2>
-            </ScrollReveal>
-            <div className="space-y-4">
-              {experiences.slice(0,5).map((exp, idx) => (
-                <ScrollReveal key={idx} delay={idx * 80}>
-                  <Card3D intensity={4}>
-                    <div className="rounded-2xl border border-slate-200/60 bg-white/70 backdrop-blur-sm p-6 shadow-sm hover:shadow-md transition-shadow duration-300">
-                      <div className="flex flex-wrap items-baseline justify-between gap-2">
-                        <h3 className="text-base font-semibold text-[#1d1d1f]">{exp.title}</h3>
-                        <span className="text-xs text-slate-400">{exp.date}</span>
-                      </div>
-                      <div className="text-sm text-slate-500">{exp.company}</div>
-                      <ul className="mt-2 space-y-1">
-                        {(exp.bullets||[]).slice(0,3).map((b,i)=>(<li key={i} className="text-sm text-slate-500">• {b}</li>))}
-                      </ul>
-                    </div>
-                  </Card3D>
-                </ScrollReveal>
-              ))}
-            </div>
-          </div>
-        </section>
+                <div className="text-center lg:text-left space-y-6">
+                  <motion.div variants={fadeUp}>
+                    <p className="text-xs uppercase tracking-[0.35em] text-indigo-500/70 font-medium mb-3">Morris Liu / AI + Strategy</p>
+                    <h1 className="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-bold leading-[0.92] tracking-tight text-[#1d1d1f] mb-5">
+                      I turn AI work
+                      <br />
+                      <span className="bg-gradient-to-r from-violet-500 via-sky-500 to-cyan-400 bg-clip-text text-transparent">
+                        <TypewriterText texts={typewriterTexts} speed={80} pause={2500} />
+                      </span>
+                    </h1>
+                    <p className="text-lg sm:text-xl text-slate-500 max-w-lg">Strategy, data, and product rhythm — woven into one story.</p>
+                  </motion.div>
 
-        {/* ═══ EDUCATION / LANGUAGES ═══ */}
-        <section className="px-4 sm:px-6 lg:px-8">
-          <div className="mx-auto max-w-7xl">
-            <ScrollReveal>
-              <h2 className="text-sm uppercase tracking-[0.35em] text-slate-400 mb-6">Education / Languages</h2>
-            </ScrollReveal>
-            <div className="grid gap-6 md:grid-cols-2">
-              <div className="space-y-4">
-                {education.slice(0,3).map((ed, idx)=>(
-                  <ScrollReveal key={idx} delay={idx * 100}>
-                    <Card3D intensity={4}>
-                      <div className="rounded-2xl border border-slate-200/60 bg-white/70 backdrop-blur-sm p-6 shadow-sm">
-                        <div className="flex items-center justify-between gap-2">
-                          <h3 className="text-base font-semibold text-[#1d1d1f]">{ed.title}</h3>
-                          <span className="text-xs text-slate-400">{ed.date}</span>
+                  <motion.div variants={fadeUp} className="grid grid-cols-2 sm:grid-cols-4 gap-3 mx-auto lg:mx-0">
+                    {heroStats.map((stat) => (
+                      <Card3D key={stat.label} intensity={6}>
+                        <div className="rounded-2xl border border-slate-200/60 bg-white/70 backdrop-blur-sm shadow-sm px-4 py-4 hover:shadow-md hover:border-indigo-200/60 transition-all duration-300 text-center lg:text-left">
+                          <span className="text-base mb-1 block">{stat.icon}</span>
+                          <span className="text-2xl sm:text-3xl font-bold text-[#1d1d1f] block">{stat.value}</span>
+                          <p className="text-xs text-slate-500 mt-1">{stat.label}</p>
                         </div>
-                        <p className="text-sm text-slate-500">{ed.company}</p>
-                        {ed.description && <p className="text-xs text-slate-400 mt-1">{ed.description}</p>}
-                      </div>
-                    </Card3D>
-                  </ScrollReveal>
-                ))}
+                      </Card3D>
+                    ))}
+                  </motion.div>
+
+                  <motion.div variants={fadeUp} className="flex flex-wrap gap-2 mx-auto lg:mx-0">
+                    {skillTags.map((tag, i) => (
+                      <motion.span key={tag.name} initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 0.8 + i * 0.05, duration: 0.3 }} className={`rounded-full border px-3 py-1 text-[11px] font-medium ${tag.color} hover:shadow-sm transition-all duration-200`}>
+                        {tag.name}
+                      </motion.span>
+                    ))}
+                  </motion.div>
+                </div>
               </div>
-              <div className="space-y-3">
-                {languages.map((l,idx)=>(
-                  <ScrollReveal key={idx} delay={idx * 80}>
-                    <div className="flex items-center justify-between rounded-2xl border border-slate-200/60 bg-white/70 backdrop-blur-sm px-5 py-4 shadow-sm">
-                      <span className="text-sm text-[#1d1d1f]">{l.title}</span>
-                      <span className="text-xs text-sky-500 font-medium">{l.level}</span>
-                    </div>
-                  </ScrollReveal>
-                ))}
-              </div>
-            </div>
+            </motion.div>
           </div>
+
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.5 }} className="absolute bottom-6 left-1/2 -translate-x-1/2 text-slate-400" style={{ animation: "scroll-bounce 2s ease-in-out infinite" }}>
+            <FaChevronDown className="text-xs" />
+          </motion.div>
         </section>
+
+        {/* ═══ Flight Timeline ═══ */}
+        <FlightTimeline />
 
         {/* ═══ CTA ═══ */}
         <CtaSection
-          title="Want to create better work together?"
-          description="Drop me a line or grab a time to chat."
-          buttonLabel="Say hello"
+          title="Want to tell your AI story better?"
+          description="A 30-min chat to turn your goals into narrative."
+          buttonLabel="Book a call"
           buttonHref="/en/contact"
         />
       </main>

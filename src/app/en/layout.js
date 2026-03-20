@@ -2,10 +2,10 @@ import "../globals.css";
 
 export const metadata = {
   title: {
-    template: '%s | Personal Website',
-    default: 'Personal Website',
+    template: '%s | Morris Liu · AI & Strategy',
+    default: 'Morris Liu · AI & Strategy',
   },
-  description: "A professional personal website to showcase skills, projects, and experience.",
+  description: "Morris Liu — Data scientist and AI strategist turning data into clear narratives and business value.",
   icons: {
     icon: "/favicon.svg",
   },

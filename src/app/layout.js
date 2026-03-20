@@ -8,10 +8,10 @@ import LangDetect from "@/components/LangDetect";
 
 export const metadata = {
   title: {
-    template: '%s | 個人網站',
-    default: '個人網站',
+    template: '%s | Morris Liu · AI × 策略',
+    default: 'Morris Liu · AI × 策略',
   },
-  description: "一個專業的個人網站，用於展示技能、專案和經驗。",
+  description: "Morris Liu — 資料科學家與 AI 策略師，將數據轉化為清晰敘事與商業價值。",
   icons: {
     icon: "/favicon.svg",
   },
