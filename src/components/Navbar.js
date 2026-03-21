@@ -64,11 +64,9 @@ export default function Navbar() {
       <div
         className="transition-all duration-500"
         style={{
-          background: '#0a0a0a',
-          borderBottom: scrolled
-            ? '1px solid rgba(255,255,255,0.08)'
-            : '1px solid rgba(255,255,255,0.04)',
           backdropFilter: scrolled ? 'blur(20px)' : 'none',
+          WebkitBackdropFilter: scrolled ? 'blur(20px)' : 'none',
+          background: scrolled ? 'rgba(10,10,10,0.75)' : 'transparent',
         }}
       >
         <div className="mx-auto max-w-5xl px-5 sm:px-8 h-14 flex items-center justify-between">
