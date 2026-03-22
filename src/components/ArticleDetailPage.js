@@ -29,7 +29,7 @@ export default function ArticleDetailPage({ meta, html, toc, locale = "zh" }) {
 
       <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-24">
         {/* ── Header ── */}
-        <div className="max-w-4xl mx-auto mb-10">
+        <div className="max-w-5xl mx-auto mb-10">
           <motion.div initial="hidden" animate="visible">
             {/* Breadcrumb */}
             <motion.div variants={fadeUp} custom={0} className="mb-6">
@@ -97,13 +97,15 @@ export default function ArticleDetailPage({ meta, html, toc, locale = "zh" }) {
           </motion.div>
         </div>
 
-        {/* ── Body + TOC ── */}
-        <div className="max-w-4xl mx-auto xl:max-w-none xl:flex xl:justify-center xl:gap-12">
+        {/* ── Body ── */}
+        <div className="max-w-5xl mx-auto">
+          {/* TOC above article */}
+          <ArticleToc toc={toc} locale={locale} />
+
           <motion.div
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
-            className="w-full max-w-4xl min-w-0"
           >
             <article className="leading-relaxed">
               <MarkdownRenderer html={html} />
@@ -122,9 +124,6 @@ export default function ArticleDetailPage({ meta, html, toc, locale = "zh" }) {
               </Link>
             </div>
           </motion.div>
-
-          {/* TOC sidebar */}
-          <ArticleToc toc={toc} locale={locale} />
         </div>
       </div>
     </div>

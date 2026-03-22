@@ -15,7 +15,7 @@ const stats = [
   { to: 5,   prefix: "",  suffix: "+", label: "年數據與 AI 經驗" },
   { to: 4,   prefix: "",  suffix: "",  label: "個國家與地區跨市場" },
   { to: 3, prefix: "$", suffix: "M", label: "USD AI 驅動營收" },
-  { to: 25,  prefix: "",  suffix: "",  label: "端到端專案交付" },
+  { to: 25,  prefix: "",  suffix: "+",  label: "端到端專案交付" },
 ];
 
 const roles = [

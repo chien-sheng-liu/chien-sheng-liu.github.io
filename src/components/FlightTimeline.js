@@ -8,7 +8,7 @@ import WorldMapBackground from "./WorldMapBackground";
 const events = [
   {
     year: "2026", title: "Lead - Business Intelligence", org: "Lalamove", flag: "🇭🇰", type: "work",
-    loc: "九龍塘", locFull: "香港", duration: "2025.12 – Present",
+    loc: "九龍塘", locFull: "香港", duration: "2026.04 – Present",
     detail: [
       "跨市場建置 KPI、供需監控與漏斗儀表板，讓決策即時化",
       "與 DE/DA 共建 dbt・LookML 治理與資料規格，加速交付",
@@ -18,7 +18,7 @@ const events = [
   },
   {
     year: "2024", title: "Deputy Manager - Data & AI", org: "Datarget 創代科技", flag: "🇹🇼", type: "work",
-    loc: "台北", locFull: "台灣", duration: "2024.01 – 2025.11",
+    loc: "台北", locFull: "台灣", duration: "2024.08 – 2026.04",
     detail: [
       "Built & led 8 人 AI/Data 團隊，包辦需求、KPI 設計到上線",
       "交付 15+ analytics/AI 專案，為各產業創造 NT$8,000 萬",
@@ -29,7 +29,7 @@ const events = [
   },
   {
     year: "2023", title: "Machine Learning Engineer", org: "OneAD", flag: "🇹🇼", type: "work",
-    loc: "台北", locFull: "台灣", duration: "2023.02 – 2023.12",
+    loc: "台北", locFull: "台灣", duration: "2023.07 – 2024.06",
     detail: [
       "設計/部署多格式 ML・DL targeting 模型，CTR +20%、停留 +30%",
       "重構 cross-device 系統，推論 +40%、GCP 成本 -30%",
@@ -39,7 +39,7 @@ const events = [
   },
   {
     year: "2023", title: "資料科學講師", org: "DeepCoding", flag: "🇹🇼", type: "work",
-    loc: "台北", locFull: "台灣", duration: "2022.06 – 2023.12",
+    loc: "台北", locFull: "台灣", duration: "2023.04 – Present",
     detail: [
       "Delivered custom data/AI workshops，累積 100+ 學員",
       "與大學/企業合辦 LLM、資料分析課程，聚焦實作",
@@ -49,7 +49,7 @@ const events = [
   },
   {
     year: "2022", title: "Marketing Analyst", org: "HelloFresh SE", flag: "🇩🇪", type: "work",
-    loc: "Berlin", locFull: "德國", duration: "2021.10 – 2022.10",
+    loc: "Berlin", locFull: "德國", duration: "2022.03 – 2023.02",
     detail: [
       "為 18 市場部署 conversion/CTR/Revenue 預測，準確度約 85%",
       "打造 CTR/CVR funnel 與 penetration dashboard 支援行銷決策",
@@ -59,7 +59,7 @@ const events = [
   },
   {
     year: "2021", title: "Research Assistant", org: "ZEW 經濟研究中心", flag: "🇩🇪", type: "work",
-    loc: "Mannheim", locFull: "德國", duration: "2020.10 – 2021.09",
+    loc: "Mannheim", locFull: "德國", duration: "2021.08 – 2022.02",
     detail: [
       "建立 OCR + text-mining pipeline 處理中文社會信用資料",
       "設計自動化爬蟲，日更經濟/財政/政策資訊",
@@ -68,7 +68,7 @@ const events = [
   },
   {
     year: "2020", title: "碩士 - Business Informatics", org: "Universität Mannheim", flag: "🇩🇪", type: "education",
-    loc: "Mannheim", locFull: "德國", duration: "2019.09 – 2022.03",
+    loc: "Mannheim", locFull: "德國", duration: "2020.09 – 2023.01",
     detail: [
       "Business Informatics (Data Science Track) 連結資訊與商業",
       "Thesis：Handling Covid-disrupted forecasting in MarTech",
@@ -78,7 +78,7 @@ const events = [
   },
   {
     year: "2019", title: "學年交換生", org: "Universität Bayreuth", flag: "🇩🇪", type: "education",
-    loc: "Bayreuth", locFull: "德國", duration: "2018.10 – 2019.07",
+    loc: "Bayreuth", locFull: "德國", duration: "2019.10 – 2020.03",
     detail: [
       "Business Engineering 交換，修習供應鏈/製造/管理課程",
       "以英文與德文完成專題與簡報，提升溝通力",
@@ -105,7 +105,7 @@ const events = [
   },
   {
     year: "2015", title: "學士 - 資訊管理", org: "中原大學", flag: "🇹🇼", type: "education",
-    loc: "桃園", locFull: "台灣", duration: "2015.09 – 2019.06",
+    loc: "桃園", locFull: "台灣", duration: "2015.09 – 2020.01",
     detail: [
       "資管主修、企管輔系，奠定資訊 × 管理基礎",
       "系學會會長，策畫跨院活動與專案",
