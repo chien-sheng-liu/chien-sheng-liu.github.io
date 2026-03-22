@@ -12,7 +12,7 @@ const GRAIN =
 const stats = [
   { to: 5,   prefix: "",  suffix: "+", label: "Years in Data & AI" },
   { to: 4,   prefix: "",  suffix: "",  label: "Countries cross-market" },
-  { to: 300, prefix: "$", suffix: "M", label: "USD AI-driven Revenue" },
+  { to: 3, prefix: "$", suffix: "M", label: "USD AI-driven Revenue" },
   { to: 25,  prefix: "",  suffix: "",  label: "End-to-end Projects" },
 ];
 
