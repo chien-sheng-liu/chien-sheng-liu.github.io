@@ -158,6 +158,8 @@ export const languages = [
   { icon: <FaGlobeAsia size={28} />, title: "Chinese (Traditional)", description: "Native", level: "Native", color: "from-red-500 to-orange-500" },
   { icon: <FaGlobeAmericas size={28} />, title: "English", description: "Fluent (CEFR C1)", level: "Professional", color: "from-blue-500 to-purple-500" },
   { icon: <FaGlobeEurope size={28} />, title: "Deutsch", description: "Upper‑intermediate (CEFR B2)", level: "Conversational", color: "from-yellow-500 to-red-500" },
+  { icon: <FaGlobeAsia size={28} />, title: "Cantonese", description: "Intermediate", level: "Intermediate", color: "from-cyan-500 to-blue-500" },
+  { icon: <FaGlobeAsia size={28} />, title: "Taiwanese", description: "Native", level: "Native", color: "from-emerald-500 to-teal-500" },
 ];
 
 export const skills = [
@@ -217,7 +219,7 @@ export const stats = [
 export const pageText = {
   title: "About",
   subtitle:
-    "AI/Data Leader and Product‑minded Builder. Consultant in Data & AI - Advisory Service at WSP (Asia) Limited from August 2026. I turn data and AI into measurable, reusable products and processes, focusing on revenue, efficiency and UX outcomes.",
+    "AI/Data Leader and Product‑minded Builder working across 3 written languages and 5 spoken languages. Consultant in Data & AI - Advisory Service at WSP (Asia) Limited from August 2026. I turn data and AI into measurable, reusable products and processes, focusing on revenue, efficiency and UX outcomes.",
   sections: {
     experience: "Experience",
     education: "Education & Languages",

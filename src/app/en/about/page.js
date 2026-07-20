@@ -12,9 +12,12 @@ const fadeUp = {
 const stagger = { hidden: {}, visible: { transition: { staggerChildren: 0.1 } } };
 
 const languages = [
+  { name: "3 Written · 5 Spoken", level: "" },
   { name: "Chinese", level: "Native" },
   { name: "English", level: "C2" },
   { name: "Deutsch", level: "B2" },
+  { name: "Cantonese", level: "Intermediate" },
+  { name: "Taiwanese", level: "Native" },
 ];
 
 const skillCategories = [
@@ -87,7 +90,7 @@ export default function AboutEn() {
                 </motion.div>
 
                 <motion.p variants={fadeUp} className="text-sm sm:text-base text-white/50 max-w-xl leading-relaxed">
-                  Trilingual (Chinese, English, German) Data & Insights Leader joining WSP (Asia) Limited in August 2026 as Consultant in Data & AI - Advisory Service, Hong Kong & Mainland China. Experienced across Taiwan, Germany, and Hong Kong, delivering AI, BI, and strategic analytics projects that connect data strategy to measurable business outcomes.
+                  Data & Insights Leader working across 3 written languages and 5 spoken languages (Chinese, English, German; Mandarin, English, German, Cantonese, Taiwanese), joining WSP (Asia) Limited in August 2026 as Consultant in Data & AI - Advisory Service, Hong Kong & Mainland China. Experienced across Taiwan, Germany, and Hong Kong, delivering AI, BI, and strategic analytics projects that connect data strategy to measurable business outcomes.
                 </motion.p>
 
                 <motion.div variants={fadeUp} className="flex flex-wrap gap-2 justify-center sm:justify-start">
@@ -97,7 +100,7 @@ export default function AboutEn() {
                       className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/[0.05] border border-white/[0.08] text-xs font-medium"
                     >
                       <span className="text-white font-semibold">{lang.name}</span>
-                      <span className="text-white/40">{lang.level}</span>
+                      {lang.level && <span className="text-white/40">{lang.level}</span>}
                     </span>
                   ))}
                 </motion.div>

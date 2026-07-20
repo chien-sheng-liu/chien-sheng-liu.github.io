@@ -19,7 +19,7 @@ const i18n = {
     heroTitle: "有想法？聊聊吧",
     heroDesc: "無論是 AI 專案、數據策略，或只是想交流想法，都歡迎找我。",
     location: "香港",
-    languages: "中文 · English · Deutsch",
+    languages: "三文五語 · 中文 · English · Deutsch · 粵語 · 台語",
     channels: [
       {
         key: "email",
@@ -56,7 +56,7 @@ const i18n = {
     heroTitle: "Got an idea? Let's chat",
     heroDesc: "Whether it's an AI project, data strategy, or just exchanging ideas — I'd love to hear from you.",
     location: "Hong Kong",
-    languages: "Chinese · English · Deutsch",
+    languages: "3 written · 5 spoken · Chinese · English · Deutsch · Cantonese · Taiwanese",
     channels: [
       {
         key: "email",
