@@ -91,7 +91,7 @@ export default function About() {
                 </motion.div>
 
                 <motion.p variants={fadeUp} className="text-sm sm:text-base text-white/50 max-w-xl leading-relaxed">
-                  三文五語（中、英、德；華語、英語、德語、粵語、台語）資料與洞察領導者，2026 年 8 月起加入 WSP (Asia) Limited，擔任 Consultant in Data & AI - Advisory Service，負責香港及中國大陸相關業務。曾於台灣、德國、香港三地交付 AI、BI 與策略分析專案，連結資料策略與可量化業務成果。
+                  三文五語資料與洞察領導者，2026 年 8 月起加入 WSP (Asia) Limited，擔任 Consultant in Data & AI - Advisory Service，負責香港及中國大陸相關業務。曾於台灣、德國、香港三地交付 AI、BI 與策略分析專案，連結資料策略與可量化業務成果。
                 </motion.p>
 
                 <motion.div variants={fadeUp} className="flex flex-wrap gap-2 justify-center sm:justify-start">
