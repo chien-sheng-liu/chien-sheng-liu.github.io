@@ -8,10 +8,10 @@ import LangDetect from "@/components/LangDetect";
 
 export const metadata = {
   title: {
-    template: '%s | Morris Liu · AI × 策略',
-    default: 'Morris Liu · AI × 策略',
+    template: '%s | Morris Liu · AI × Advisory',
+    default: 'Morris Liu · AI × Advisory',
   },
-  description: "Morris Liu — 資料科學家與 AI 策略師，將數據轉化為清晰敘事與商業價值。",
+  description: "Morris Liu — Consultant in Data & AI - Advisory Service at WSP (Asia) Limited from August 2026，連結 AI、資料與策略決策。",
   icons: {
     icon: "/favicon.svg",
   },

@@ -7,13 +7,20 @@ import WorldMapBackground from "./WorldMapBackground";
 /* ── DATA (newest → oldest, 倒敘) ── */
 const events = [
   {
-    year: "2026", title: "Lead - Business Intelligence", org: "Lalamove", flag: "🇭🇰", type: "work",
-    loc: "九龍塘", locFull: "香港", duration: "2026.04 – Present",
+    year: "2026", title: "Consultant in Data & AI - Advisory Service", org: "WSP (Asia) Limited", flag: "🇭🇰", type: "work",
+    loc: "九龍灣", locFull: "香港", duration: "2026.08",
     detail: [
-      "跨市場建置 KPI、供需監控與漏斗儀表板，讓決策即時化",
-      "與 DE/DA 共建 dbt・LookML 治理與資料規格，加速交付",
-      "規劃數據產品 Roadmap，導入自助分析與 AI 自動化",
-      "連結營運/商務與資料團隊，確保儀表板貢獻可量化",
+      "負責香港及中國大陸相關業務，連結策略、資料與決策",
+      "延續 AI/BI 與跨市場分析經驗，協助把洞察轉成可落地成果",
+    ],
+  },
+  {
+    year: "2026", title: "Lead - Business Intelligence", org: "Lalamove", flag: "🇭🇰", type: "work",
+    loc: "九龍塘", locFull: "香港", duration: "2026.04 – 2026.07",
+    detail: [
+      "運用 GenAI LLMs 與進階工具打造企業級自動化報表流程，消除手動報表瓶頸，提升 30% 即時商業洞察交付效率",
+      "以進階 SQL 萃取並分析 10M+ 大規模資料，針對雙邊市場 User 與 Driver 旅程進行 funnel deep-dive，定位轉換摩擦點與流失根因",
+      "主導 15 個 APAC 與 LATAM 高成長市場的 conversion 與 operational analytics，提供資料驅動建議，對齊區域跨部門與國際 stakeholders",
     ],
   },
   {

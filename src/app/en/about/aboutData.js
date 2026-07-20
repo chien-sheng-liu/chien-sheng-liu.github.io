@@ -29,7 +29,17 @@ export const highlights = [
 
 export const experiences = [
   {
-    date: "2026/4–Present",
+    date: "2026/8–Upcoming",
+    title: "Consultant in Data & AI - Advisory Service",
+    company: "WSP (Asia) Limited",
+    bullets: [
+      "Joining the Data & AI - Advisory Service team in August 2026",
+      "Supporting Hong Kong and Mainland China business across strategy, data and decision workflows",
+      "Bringing AI/BI and cross-market analytics experience into advisory delivery",
+    ],
+  },
+  {
+    date: "2026/4–2026/7",
     title: "Lead, Business Intelligence",
     company: "Lalamove (Hong Kong)",
     bullets: [
@@ -207,7 +217,7 @@ export const stats = [
 export const pageText = {
   title: "About",
   subtitle:
-    "AI/Data Leader and Product‑minded Builder. BI Lead at Lalamove (Hong Kong). I turn data and AI into measurable, reusable products and processes, focusing on revenue, efficiency and UX outcomes.",
+    "AI/Data Leader and Product‑minded Builder. Consultant in Data & AI - Advisory Service at WSP (Asia) Limited from August 2026. I turn data and AI into measurable, reusable products and processes, focusing on revenue, efficiency and UX outcomes.",
   sections: {
     experience: "Experience",
     education: "Education & Languages",

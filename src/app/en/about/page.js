@@ -83,11 +83,11 @@ export default function AboutEn() {
                 <motion.div variants={fadeUp}>
                   <p className="text-xs uppercase tracking-[0.35em] text-indigo-400/70 font-medium mb-1">Experience</p>
                   <h1 className="text-3xl sm:text-4xl font-bold text-white">Morris Liu</h1>
-                  <p className="text-base text-white/40 mt-1">Lead, Business Intelligence @ Lalamove · Hong Kong</p>
+                  <p className="text-base text-white/40 mt-1">Consultant in Data & AI - Advisory Service @ WSP (Asia) Limited · Hong Kong</p>
                 </motion.div>
 
                 <motion.p variants={fadeUp} className="text-sm sm:text-base text-white/50 max-w-xl leading-relaxed">
-                  Trilingual (Chinese, English, German) Data & Insights Leader specializing in transforming complex analytics into actionable business strategy. Built and led an 8-member AI & Data team across Taiwan, Germany, and Hong Kong, delivering 15+ analytics projects worth NT$80M. Expert in sales forecasting, BI dashboards, and LLM-driven automation.
+                  Trilingual (Chinese, English, German) Data & Insights Leader joining WSP (Asia) Limited in August 2026 as Consultant in Data & AI - Advisory Service, Hong Kong & Mainland China. Experienced across Taiwan, Germany, and Hong Kong, delivering AI, BI, and strategic analytics projects that connect data strategy to measurable business outcomes.
                 </motion.p>
 
                 <motion.div variants={fadeUp} className="flex flex-wrap gap-2 justify-center sm:justify-start">

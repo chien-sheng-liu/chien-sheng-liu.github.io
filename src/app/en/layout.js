@@ -2,10 +2,10 @@ import "../globals.css";
 
 export const metadata = {
   title: {
-    template: '%s | Morris Liu · AI & Strategy',
-    default: 'Morris Liu · AI & Strategy',
+    template: '%s | Morris Liu · AI & Advisory',
+    default: 'Morris Liu · AI & Advisory',
   },
-  description: "Morris Liu — Data scientist and AI strategist turning data into clear narratives and business value.",
+  description: "Morris Liu — Consultant in Data & AI - Advisory Service at WSP (Asia) Limited from August 2026.",
   icons: {
     icon: "/favicon.svg",
   },
