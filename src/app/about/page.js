@@ -12,7 +12,6 @@ const fadeUp = {
 const stagger = { hidden: {}, visible: { transition: { staggerChildren: 0.1 } } };
 
 const languages = [
-  { name: "三文五語", level: "" },
   { name: "中文", level: "母語" },
   { name: "English", level: "C2" },
   { name: "Deutsch", level: "B2" },
