@@ -83,14 +83,18 @@ export default function About() {
               </motion.div>
 
               {/* Text */}
-              <div className="text-center sm:text-left space-y-3 flex-1">
+              <div className="w-full text-center sm:text-left space-y-3 flex-1 min-w-0 max-w-full">
                 <motion.div variants={fadeUp}>
                   <p className="text-xs uppercase tracking-[0.35em] text-indigo-400/70 font-medium mb-1">個人經歷</p>
                   <h1 className="text-3xl sm:text-4xl font-bold text-white">Morris Liu</h1>
-                  <p className="text-base text-white/40 mt-1">Consultant in Data & AI - Advisory Service @ WSP (Asia) Limited · 香港</p>
+                  <p className="text-sm text-white/40 mt-1 sm:hidden max-w-full break-words">
+                    Data & AI Consultant @ WSP
+                    <span className="block mt-0.5">香港</span>
+                  </p>
+                  <p className="hidden sm:block text-base text-white/40 mt-1">Consultant in Data & AI - Advisory Service @ WSP (Asia) Limited · 香港</p>
                 </motion.div>
 
-                <motion.p variants={fadeUp} className="text-sm sm:text-base text-white/50 max-w-xl leading-relaxed">
+                <motion.p variants={fadeUp} className="wrap-anywhere text-sm sm:text-base text-white/50 max-w-[21rem] sm:max-w-xl mx-auto sm:mx-0 leading-relaxed">
                   三文五語資料與洞察領導者，2026 年 8 月起加入 WSP (Asia) Limited，擔任 Consultant in Data & AI - Advisory Service，負責香港及中國大陸相關業務。曾於台灣、德國、香港三地交付 AI、BI 與策略分析專案，連結資料策略與可量化業務成果。
                 </motion.p>
 

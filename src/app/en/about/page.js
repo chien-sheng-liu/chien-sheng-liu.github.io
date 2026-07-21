@@ -81,15 +81,19 @@ export default function AboutEn() {
                 </div>
               </motion.div>
 
-              <div className="text-center sm:text-left space-y-3 flex-1">
+              <div className="w-full text-center sm:text-left space-y-3 flex-1 min-w-0 max-w-full">
                 <motion.div variants={fadeUp}>
                   <p className="text-xs uppercase tracking-[0.35em] text-indigo-400/70 font-medium mb-1">Experience</p>
                   <h1 className="text-3xl sm:text-4xl font-bold text-white">Morris Liu</h1>
-                  <p className="text-base text-white/40 mt-1">Consultant in Data & AI - Advisory Service @ WSP (Asia) Limited · Hong Kong</p>
+                  <p className="text-sm text-white/40 mt-1 sm:hidden max-w-full break-words">
+                    Data & AI Consultant @ WSP
+                    <span className="block mt-0.5">Hong Kong</span>
+                  </p>
+                  <p className="hidden sm:block text-base text-white/40 mt-1">Consultant in Data & AI - Advisory Service @ WSP (Asia) Limited · Hong Kong</p>
                 </motion.div>
 
-                <motion.p variants={fadeUp} className="text-sm sm:text-base text-white/50 max-w-xl leading-relaxed">
-                  Data & Insights Leader working across 3 written languages and 5 spoken languages (Chinese, English, German; Mandarin, English, German, Cantonese, Taiwanese), joining WSP (Asia) Limited in August 2026 as Consultant in Data & AI - Advisory Service, Hong Kong & Mainland China. Experienced across Taiwan, Germany, and Hong Kong, delivering AI, BI, and strategic analytics projects that connect data strategy to measurable business outcomes.
+                <motion.p variants={fadeUp} className="wrap-anywhere text-sm sm:text-base text-white/50 max-w-[21rem] sm:max-w-xl mx-auto sm:mx-0 leading-relaxed">
+                  Data & Insights Leader working across 3 written languages and 5 spoken languages. Joining WSP (Asia) Limited in August 2026 as Consultant in Data & AI - Advisory Service, Hong Kong & Mainland China. Experienced across Taiwan, Germany, and Hong Kong, connecting AI, BI, and strategy to measurable business outcomes.
                 </motion.p>
 
                 <motion.div variants={fadeUp} className="flex flex-wrap gap-2 justify-center sm:justify-start">

@@ -19,11 +19,11 @@ const stats = [
 ];
 
 const roles = [
-  "AI Strategy", "Data Science", "NLP & LLM", "Product Thinking",
-  "Business Intelligence", "ML Engineering", "RAG / LoRA", "Cloud & BigQuery",
+  "Data & AI Advisory", "Business Intelligence", "LLM Products", "Decision Systems",
+  "Analytics Strategy", "Cross-market Delivery", "RAG / LoRA", "Cloud & BigQuery",
 ];
 
-const typewriterTexts = ["變成清楚的敘事", "落地為商業價值", "串聯成完整故事"];
+const typewriterTexts = ["變成商業決策", "落地為顧問交付", "串成可用系統"];
 
 /* ─── Animated counter ─── */
 function Counter({ to, prefix = "", suffix = "" }) {
@@ -147,7 +147,7 @@ export default function Home() {
               transition={{ delay: 0.12, duration: 0.65 }}
               className="text-[11px] tracking-[0.45em] uppercase text-white/30 font-medium"
             >
-              Morris Liu · AI + Strategy
+              Morris Liu · Data & AI Advisory
             </motion.p>
           </div>
 
@@ -157,7 +157,7 @@ export default function Home() {
               delay={0.22}
               className="text-[clamp(3rem,9.5vw,8.5rem)] font-bold tracking-tight text-white"
             >
-              我把 AI 作品
+              我把 Data & AI
             </MaskLine>
             <MaskLine
               delay={0.40}
@@ -176,7 +176,7 @@ export default function Home() {
             transition={{ delay: 0.68, duration: 0.6 }}
             className="text-base sm:text-lg text-white/38 max-w-[22rem] mb-10"
           >
-            策略、資料與產品節奏放進一條故事線
+            連結分析、顧問交付與商業執行，讓洞察真正進入決策。
           </motion.p>
 
           {/* CTAs */}
@@ -255,9 +255,9 @@ export default function Home() {
             transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
           >
             <h2 className="text-[clamp(2.5rem,6vw,5.5rem)] font-bold text-white leading-[0.92] tracking-tight mb-6">
-              想讓 AI 作品<br />說得更好？
+              想把 Data & AI<br />落到業務現場？
             </h2>
-            <p className="text-white/32 text-lg mb-10">30 分鐘對談，把目標轉成敘事</p>
+            <p className="text-white/32 text-lg mb-10">30 分鐘對談，把問題轉成可交付的分析路徑</p>
             <Link
               href="/contact"
               className="group inline-flex items-center gap-2 px-8 py-4 bg-white text-[#0a0a0a] font-semibold rounded-full hover:bg-white/90 transition-colors text-sm"

@@ -9,6 +9,7 @@ const events = [
   {
     year: "2026", title: "Consultant in Data & AI - Advisory Service", org: "WSP (Asia) Limited", flag: "🇭🇰", type: "work",
     shortTitle: "Data & AI Consultant",
+    summary: "Advisory · Data & AI",
     loc: "九龍灣", locFull: "香港", duration: "2026.08",
     detail: [
       "負責香港及中國大陸相關業務，連結策略、資料與決策",
@@ -17,6 +18,7 @@ const events = [
   },
   {
     year: "2026", title: "Lead - Business Intelligence", org: "Lalamove", flag: "🇭🇰", type: "work",
+    summary: "15 markets · 10M+ records",
     loc: "九龍塘", locFull: "香港", duration: "2026.04 – 2026.07",
     detail: [
       "運用 GenAI LLMs 與進階工具打造企業級自動化報表流程，消除手動報表瓶頸，提升 30% 即時商業洞察交付效率",
@@ -26,6 +28,7 @@ const events = [
   },
   {
     year: "2024", title: "Deputy Manager - Data & AI", org: "Datarget 創代科技", flag: "🇹🇼", type: "work",
+    summary: "15+ projects · NT$80M",
     loc: "台北", locFull: "台灣", duration: "2024.08 – 2026.04",
     detail: [
       "Built & led 8 人 AI/Data 團隊，包辦需求、KPI 設計到上線",
@@ -37,6 +40,7 @@ const events = [
   },
   {
     year: "2023", title: "Machine Learning Engineer", org: "OneAD", flag: "🇹🇼", type: "work",
+    summary: "CTR +20% · cost -30%",
     loc: "台北", locFull: "台灣", duration: "2023.07 – 2024.06",
     detail: [
       "設計/部署多格式 ML・DL targeting 模型，CTR +20%、停留 +30%",
@@ -47,6 +51,7 @@ const events = [
   },
   {
     year: "2023", title: "資料科學講師", org: "DeepCoding", flag: "🇹🇼", type: "work",
+    summary: "100+ learners",
     loc: "台北", locFull: "台灣", duration: "2023.04 – Present",
     detail: [
       "Delivered custom data/AI workshops，累積 100+ 學員",
@@ -57,6 +62,7 @@ const events = [
   },
   {
     year: "2022", title: "Marketing Analyst", org: "HelloFresh SE", flag: "🇩🇪", type: "work",
+    summary: "18 markets · forecasting",
     loc: "Berlin", locFull: "德國", duration: "2022.03 – 2023.02",
     detail: [
       "為 18 市場部署 conversion/CTR/Revenue 預測，準確度約 85%",
@@ -484,6 +490,11 @@ export default function FlightTimeline() {
                             <div className="text-[8px] text-slate-400 uppercase tracking-wider">Role</div>
                             <div className="text-[13px] sm:text-sm font-bold text-[#1d1d1f] leading-snug">{cardTitle}</div>
                             <div className="text-xs text-slate-500 leading-snug">{ev.org}</div>
+                            {ev.summary && (
+                              <div className={`mt-1 text-[10px] font-semibold ${s.accentText} leading-tight`}>
+                                {ev.summary}
+                              </div>
+                            )}
                           </div>
                         </div>
 
