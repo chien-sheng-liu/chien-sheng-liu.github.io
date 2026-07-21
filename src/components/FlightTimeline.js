@@ -156,6 +156,8 @@ const MOBILE_CARD_MAX_W = 340;
 const MOBILE_CARD_H = 190;
 const MOBILE_GAP = 20;
 const MOBILE_PAD = 16;
+const MOBILE_AUTO_SCROLL_DELAY = 2000;
+const MOBILE_DRAG_PAUSE = 5000;
 const AUTO_SCROLL_SPEED = 55;
 const HOVER_MAX_SPEED = 220;
 const EDGE_ZONE = 0.18;
@@ -194,6 +196,7 @@ export default function FlightTimeline() {
   const isDragging = useRef(false);
   const isHovering = useRef(false);
   const hoverVelocity = useRef(0);
+  const pauseAutoUntil = useRef(0);
 
   const openModal = useCallback((ev) => setSelected(ev), []);
   const closeModal = useCallback(() => setSelected(null), []);
@@ -239,9 +242,42 @@ export default function FlightTimeline() {
 
   /* Combined auto-scroll + hover-edge-scroll RAF */
   useEffect(() => {
-    if (timelineMetrics.isMobile) return;
     if (dragConstraint >= 0) return;
+
+    if (timelineMetrics.isMobile) {
+      let timeoutId;
+      let stopped = false;
+      pauseAutoUntil.current = performance.now() + MOBILE_AUTO_SCROLL_DELAY;
+
+      function schedule() {
+        if (stopped) return;
+        const delay = Math.max(600, pauseAutoUntil.current - performance.now());
+        timeoutId = window.setTimeout(() => {
+          if (stopped || isDragging.current) {
+            schedule();
+            return;
+          }
+
+          const step = timelineMetrics.cardW + timelineMetrics.gap;
+          const current = dragX.get();
+          let next = Math.round(current / step) * step - step;
+          if (next < dragConstraint) next = 0;
+
+          animate(dragX, next, { type: "spring", stiffness: 140, damping: 24 });
+          pauseAutoUntil.current = performance.now() + MOBILE_AUTO_SCROLL_DELAY + 900;
+          schedule();
+        }, delay);
+      }
+
+      schedule();
+      return () => {
+        stopped = true;
+        window.clearTimeout(timeoutId);
+      };
+    }
+
     let lastTime = performance.now();
+    pauseAutoUntil.current = 0;
     let autoDir = -1; // -1 = scroll right (dragX decreases), 1 = scroll left
     let rafId;
     function tick(now) {
@@ -268,7 +304,7 @@ export default function FlightTimeline() {
     }
     rafId = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(rafId);
-  }, [dragConstraint, dragX, timelineMetrics.isMobile]);
+  }, [dragConstraint, dragX, timelineMetrics.cardW, timelineMetrics.gap, timelineMetrics.isMobile]);
 
   const handleMouseMove = useCallback((e) => {
     if (!containerRef.current) return;
@@ -346,7 +382,10 @@ export default function FlightTimeline() {
             dragElastic={0.1}
             dragDirectionLock
             onDragStart={() => { isDragging.current = true; }}
-            onDragEnd={() => { requestAnimationFrame(() => { isDragging.current = false; }); }}
+            onDragEnd={() => {
+              pauseAutoUntil.current = performance.now() + MOBILE_DRAG_PAUSE;
+              requestAnimationFrame(() => { isDragging.current = false; });
+            }}
             className="flex h-full cursor-grab active:cursor-grabbing select-none"
             style={{ x: dragX, paddingLeft: timelineMetrics.pad, paddingRight: timelineMetrics.pad, alignItems: "center" }}
           >
