@@ -6,7 +6,9 @@ import {
   FaCalendarAlt,
   FaMapMarkerAlt,
   FaGlobe,
-  FaArrowRight,
+  FaBriefcase,
+  FaMicrophone,
+  FaHandshake,
 } from "react-icons/fa";
 
 const TO_EMAIL = "liu_chiensheng@outlook.com";
@@ -16,79 +18,105 @@ const LINKEDIN_URL = "https://www.linkedin.com/in/chienshengliu/";
 const i18n = {
   zh: {
     tagline: "Let's Talk",
-    heroTitle: "有想法？聊聊吧",
-    heroDesc: "無論是 AI 專案、數據策略，或只是想交流想法，都歡迎找我。",
+    heroTitle: "找 Morris 聊聊",
+    heroDesc: "職涯機會、演講教學、Data & AI 合作，都可以用最直接的方式開始對焦。",
     location: "香港",
     languages: "三文五語 · 中文 · English · Deutsch · 粵語 · 台語",
-    channels: [
+    responseNote: "通常 24 小時內回覆",
+    channels: { email: "Email", linkedin: "LinkedIn", calendar: "Calendar" },
+    intents: [
       {
-        key: "email",
-        icon: <FaEnvelope />,
-        label: "Email",
-        subtitle: "最快的方式",
-        value: TO_EMAIL,
-        href: `mailto:${TO_EMAIL}`,
-        color: "#ef4444",
+        key: "career",
+        icon: <FaBriefcase />,
+        title: "Career / Hiring",
+        subtitle: "職涯、招募、顧問角色",
+        desc: "適合討論 Data & AI、BI、Advisory、跨市場分析相關機會。",
+        color: "from-sky-500 to-cyan-500",
+        links: [
+          { label: "Email", href: `mailto:${TO_EMAIL}`, icon: <FaEnvelope /> },
+          { label: "LinkedIn", href: LINKEDIN_URL, icon: <FaLinkedin />, external: true },
+        ],
       },
       {
-        key: "linkedin",
-        icon: <FaLinkedin />,
-        label: "LinkedIn",
-        subtitle: "專業網路",
-        value: "Chien-Sheng (Morris) Liu",
-        href: LINKEDIN_URL,
-        color: "#0077b5",
+        key: "speaking",
+        icon: <FaMicrophone />,
+        title: "Speaking / Teaching",
+        subtitle: "演講、課程、工作坊",
+        desc: "適合邀請 LLM、RAG、資料分析、AI 顧問職涯與海外經驗分享。",
+        color: "from-violet-500 to-indigo-500",
+        links: [
+          { label: "預約時間", href: CALENDAR_URL, icon: <FaCalendarAlt />, external: true },
+          { label: "Email", href: `mailto:${TO_EMAIL}`, icon: <FaEnvelope /> },
+        ],
       },
       {
-        key: "calendar",
-        icon: <FaCalendarAlt />,
-        label: "預約會談",
-        subtitle: "30 分鐘 · Google Calendar",
-        value: "選一個適合你的時段",
-        href: CALENDAR_URL,
-        color: "#16a34a",
+        key: "collaboration",
+        icon: <FaHandshake />,
+        title: "Data & AI Collaboration",
+        subtitle: "分析路徑、資料產品、GenAI",
+        desc: "適合把模糊業務問題拆成可交付的資料、模型或 AI 產品方向。",
+        color: "from-emerald-500 to-teal-500",
+        links: [
+          { label: "30 分鐘對談", href: CALENDAR_URL, icon: <FaCalendarAlt />, external: true },
+          { label: "Email", href: `mailto:${TO_EMAIL}`, icon: <FaEnvelope /> },
+        ],
       },
     ],
-    responseNote: "通常 24 小時內回覆",
   },
   en: {
     tagline: "Let's Talk",
-    heroTitle: "Got an idea? Let's chat",
-    heroDesc: "Whether it's an AI project, data strategy, or just exchanging ideas — I'd love to hear from you.",
+    heroTitle: "Talk to Morris",
+    heroDesc: "Career opportunities, speaking invitations, and Data & AI collaboration can all start with a clear first conversation.",
     location: "Hong Kong",
     languages: "3 written · 5 spoken · Chinese · English · Deutsch · Cantonese · Taiwanese",
-    channels: [
+    responseNote: "Usually reply within 24 hours",
+    channels: { email: "Email", linkedin: "LinkedIn", calendar: "Calendar" },
+    intents: [
       {
-        key: "email",
-        icon: <FaEnvelope />,
-        label: "Email",
-        subtitle: "Fastest way to reach me",
-        value: TO_EMAIL,
-        href: `mailto:${TO_EMAIL}`,
-        color: "#ef4444",
+        key: "career",
+        icon: <FaBriefcase />,
+        title: "Career / Hiring",
+        subtitle: "Roles, hiring, advisory track",
+        desc: "Best for Data & AI, BI, advisory, and cross-market analytics opportunities.",
+        color: "from-sky-500 to-cyan-500",
+        links: [
+          { label: "Email", href: `mailto:${TO_EMAIL}`, icon: <FaEnvelope /> },
+          { label: "LinkedIn", href: LINKEDIN_URL, icon: <FaLinkedin />, external: true },
+        ],
       },
       {
-        key: "linkedin",
-        icon: <FaLinkedin />,
-        label: "LinkedIn",
-        subtitle: "Professional network",
-        value: "Chien-Sheng (Morris) Liu",
-        href: LINKEDIN_URL,
-        color: "#0077b5",
+        key: "speaking",
+        icon: <FaMicrophone />,
+        title: "Speaking / Teaching",
+        subtitle: "Talks, lectures, workshops",
+        desc: "Best for LLM, RAG, analytics, AI consulting career, and international experience sessions.",
+        color: "from-violet-500 to-indigo-500",
+        links: [
+          { label: "Book time", href: CALENDAR_URL, icon: <FaCalendarAlt />, external: true },
+          { label: "Email", href: `mailto:${TO_EMAIL}`, icon: <FaEnvelope /> },
+        ],
       },
       {
-        key: "calendar",
-        icon: <FaCalendarAlt />,
-        label: "Book a call",
-        subtitle: "30 min · Google Calendar",
-        value: "Pick a time that works for you",
-        href: CALENDAR_URL,
-        color: "#16a34a",
+        key: "collaboration",
+        icon: <FaHandshake />,
+        title: "Data & AI Collaboration",
+        subtitle: "Analytics paths, data products, GenAI",
+        desc: "Best for turning ambiguous business problems into deliverable data, model, or AI product directions.",
+        color: "from-emerald-500 to-teal-500",
+        links: [
+          { label: "30-min chat", href: CALENDAR_URL, icon: <FaCalendarAlt />, external: true },
+          { label: "Email", href: `mailto:${TO_EMAIL}`, icon: <FaEnvelope /> },
+        ],
       },
     ],
-    responseNote: "Usually reply within 24 hours",
   },
 };
+
+const directChannels = [
+  { key: "email", icon: <FaEnvelope />, href: `mailto:${TO_EMAIL}`, value: TO_EMAIL },
+  { key: "linkedin", icon: <FaLinkedin />, href: LINKEDIN_URL, value: "Chien-Sheng (Morris) Liu", external: true },
+  { key: "calendar", icon: <FaCalendarAlt />, href: CALENDAR_URL, value: "30 min", external: true },
+];
 
 const fadeUp = {
   hidden: { opacity: 0, y: 24 },
@@ -104,12 +132,10 @@ export default function ContactPage({ locale = "zh" }) {
 
   return (
     <div className="relative min-h-screen bg-[#0a0a0a] text-white overflow-hidden">
-
       <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-24">
-        <div className="max-w-2xl mx-auto">
-
-          {/* ── Hero ── */}
-          <motion.div className="mb-16" initial="hidden" animate="visible">
+        <div className="max-w-4xl mx-auto">
+          {/* Hero */}
+          <motion.div className="mb-14" initial="hidden" animate="visible">
             <motion.p
               variants={fadeUp}
               custom={0}
@@ -120,7 +146,7 @@ export default function ContactPage({ locale = "zh" }) {
             <motion.h1
               variants={fadeUp}
               custom={1}
-              className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-[1.1] tracking-tight mb-5"
+              className="break-words text-4xl sm:text-5xl lg:text-6xl font-bold leading-[1.1] tracking-tight mb-5"
             >
               <span className="bg-gradient-to-r from-violet-400 via-sky-400 to-cyan-300 bg-clip-text text-transparent">
                 {t.heroTitle}
@@ -129,12 +155,11 @@ export default function ContactPage({ locale = "zh" }) {
             <motion.p
               variants={fadeUp}
               custom={2}
-              className="text-lg text-white/50 leading-relaxed mb-6"
+              className="wrap-anywhere text-lg text-white/50 leading-relaxed mb-6 max-w-2xl"
             >
               {t.heroDesc}
             </motion.p>
 
-            {/* Quick meta */}
             <motion.div
               variants={fadeUp}
               custom={3}
@@ -152,47 +177,79 @@ export default function ContactPage({ locale = "zh" }) {
             </motion.div>
           </motion.div>
 
-          {/* ── Contact channels ── */}
-          <div className="space-y-4 mb-12">
-            {t.channels.map((ch, i) => (
-              <motion.a
-                key={ch.key}
-                href={ch.href}
-                target={ch.key === "email" ? undefined : "_blank"}
-                rel={ch.key === "email" ? undefined : "noopener noreferrer"}
+          {/* Contact intents */}
+          <div className="grid gap-4 md:grid-cols-3 mb-12">
+            {t.intents.map((intent, i) => (
+              <motion.div
+                key={intent.key}
                 initial="hidden"
                 whileInView="visible"
-                viewport={{ once: true, amount: 0.5 }}
+                viewport={{ once: true, amount: 0.35 }}
                 custom={i}
                 variants={fadeUp}
-                className="group flex items-center gap-5 p-5 rounded-2xl bg-white/[0.05] backdrop-blur-sm border border-white/[0.08] hover:border-white/20 hover:shadow-lg hover:shadow-black/20 transition-all duration-300"
+                className="group flex min-w-0 flex-col rounded-2xl border border-white/[0.08] bg-white/[0.05] p-5 backdrop-blur-sm transition-all duration-300 hover:border-white/20 hover:shadow-lg hover:shadow-black/20"
               >
-                {/* Icon */}
-                <div
-                  className="flex-shrink-0 w-12 h-12 rounded-xl flex items-center justify-center text-white text-lg shadow-lg"
-                  style={{ backgroundColor: ch.color }}
-                >
-                  {ch.icon}
+                <div className={`mb-5 flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br ${intent.color} text-lg text-white shadow-lg`}>
+                  {intent.icon}
                 </div>
 
-                {/* Text */}
-                <div className="flex-1 min-w-0">
-                  <div className="flex items-baseline gap-2">
-                    <h3 className="text-base font-bold text-white group-hover:text-sky-400 transition-colors">
-                      {ch.label}
-                    </h3>
-                    <span className="text-xs text-white/40">{ch.subtitle}</span>
-                  </div>
-                  <p className="text-sm text-white/50 truncate mt-0.5">{ch.value}</p>
+                <div className="min-w-0 flex-1">
+                  <p className="mb-1 text-[11px] font-semibold uppercase tracking-[0.22em] text-sky-300/70">
+                    {intent.subtitle}
+                  </p>
+                  <h3 className="wrap-anywhere text-lg font-bold leading-tight text-white">
+                    {intent.title}
+                  </h3>
+                  <p className="wrap-anywhere mt-3 text-sm leading-relaxed text-white/48">
+                    {intent.desc}
+                  </p>
                 </div>
 
-                {/* Arrow */}
-                <FaArrowRight className="flex-shrink-0 text-xs text-white/20 group-hover:text-sky-400 group-hover:translate-x-1 transition-all duration-300" />
-              </motion.a>
+                <div className="mt-5 flex flex-wrap gap-2">
+                  {intent.links.map((link) => (
+                    <a
+                      key={`${intent.key}-${link.label}`}
+                      href={link.href}
+                      target={link.external ? "_blank" : undefined}
+                      rel={link.external ? "noopener noreferrer" : undefined}
+                      className="inline-flex items-center gap-1.5 rounded-full border border-white/[0.08] bg-white/[0.04] px-3 py-1.5 text-xs font-semibold text-white/55 transition-colors hover:border-white/20 hover:text-white"
+                    >
+                      <span className="text-[10px] text-sky-300/80">{link.icon}</span>
+                      {link.label}
+                    </a>
+                  ))}
+                </div>
+              </motion.div>
             ))}
           </div>
 
-          {/* ── Response note ── */}
+          {/* Direct channels */}
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fadeUp}
+            className="mb-12 grid gap-3 sm:grid-cols-3"
+          >
+            {directChannels.map((ch) => (
+              <a
+                key={ch.key}
+                href={ch.href}
+                target={ch.external ? "_blank" : undefined}
+                rel={ch.external ? "noopener noreferrer" : undefined}
+                className="group min-w-0 rounded-xl border border-white/[0.08] bg-white/[0.035] px-4 py-3 transition-colors hover:border-white/20"
+              >
+                <div className="mb-1 flex items-center gap-2 text-xs font-semibold text-white/40">
+                  <span className="text-sky-300/70">{ch.icon}</span>
+                  {t.channels[ch.key]}
+                </div>
+                <p className="truncate text-sm font-medium text-white/65 group-hover:text-white">
+                  {ch.value}
+                </p>
+              </a>
+            ))}
+          </motion.div>
+
           <motion.div
             initial="hidden"
             whileInView="visible"

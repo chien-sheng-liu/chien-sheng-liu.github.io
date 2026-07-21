@@ -23,6 +23,7 @@ const i18n = {
     problem: "問題",
     approach: "方法",
     impact: "成果",
+    featured: "Featured Case",
     viewCode: "查看程式碼",
     viewDetail: "了解更多",
     ctaTitle: "有類似的 Data & AI 問題？",
@@ -38,6 +39,7 @@ const i18n = {
     problem: "Problem",
     approach: "Approach",
     impact: "Impact",
+    featured: "Featured Case",
     viewCode: "View Code",
     viewDetail: "Learn More",
     ctaTitle: "Working through a similar Data & AI problem?",
@@ -71,10 +73,17 @@ export default function ProjectsPage({ locale = "zh" }) {
     () => [...new Set(projects.map((p) => p.category))],
     [projects],
   );
+  const featuredProject = useMemo(
+    () => projects.find((p) => p.title.includes("AutoLLM")) || projects[0],
+    [projects],
+  );
 
   const filteredProjects = useMemo(
-    () => (activeFilter ? projects.filter((p) => p.category === activeFilter) : projects),
-    [projects, activeFilter],
+    () => {
+      const base = activeFilter ? projects.filter((p) => p.category === activeFilter) : projects;
+      return base.filter((p) => p.title !== featuredProject?.title);
+    },
+    [projects, activeFilter, featuredProject?.title],
   );
 
   return (
@@ -109,6 +118,86 @@ export default function ProjectsPage({ locale = "zh" }) {
               {t.desc}
             </motion.p>
           </motion.div>
+
+          {featuredProject && (
+            <motion.div
+              initial={{ opacity: 0, y: 24 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.26, duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+              className="group relative mb-10 min-w-0 overflow-hidden rounded-2xl border border-white/[0.1] bg-white/[0.06] p-5 shadow-lg shadow-black/20 backdrop-blur-sm transition-all duration-300 hover:border-white/20 sm:p-7"
+              onClick={() => setSelectedProject(featuredProject)}
+              role="button"
+              tabIndex={0}
+              onKeyDown={(e) => {
+                if (e.key === "Enter" || e.key === " ") setSelectedProject(featuredProject);
+              }}
+            >
+              <div className={`absolute left-0 top-0 h-full w-1.5 bg-gradient-to-b ${featuredProject.color}`} />
+              <div className="grid gap-6 lg:grid-cols-[0.8fr_1.2fr] lg:items-start">
+                <div className="min-w-0 pl-2">
+                  <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-sky-400/20 bg-sky-400/[0.08] px-3 py-1 text-[10px] font-bold uppercase tracking-[0.22em] text-sky-300">
+                    {t.featured}
+                  </div>
+                  <div className="mb-4 flex items-start gap-3">
+                    <div className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br ${featuredProject.color} text-white shadow-md`}>
+                      {featuredProject.icon}
+                    </div>
+                    <div className="min-w-0">
+                      <div className="mb-1 flex items-center gap-2">
+                        <span className="text-sky-400">{featuredProject.categoryIcon}</span>
+                        <span className="text-xs font-semibold uppercase tracking-wide text-sky-400">
+                          {featuredProject.category}
+                        </span>
+                      </div>
+                      <h2 className="wrap-anywhere text-2xl font-bold leading-tight text-white sm:text-3xl">
+                        {featuredProject.title}
+                      </h2>
+                    </div>
+                  </div>
+                  <p className="wrap-anywhere text-sm leading-relaxed text-white/55">
+                    {featuredProject.description}
+                  </p>
+                </div>
+
+                <div className="min-w-0">
+                  {featuredProject.caseNotes && (
+                    <div className="grid gap-2 sm:grid-cols-3 lg:grid-cols-1">
+                      {[
+                        [t.problem, featuredProject.caseNotes.problem],
+                        [t.approach, featuredProject.caseNotes.approach],
+                        [t.impact, featuredProject.caseNotes.impact],
+                      ].map(([label, text]) => (
+                        <div key={label} className="rounded-lg border border-white/[0.08] bg-black/20 p-3">
+                          <p className="mb-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-white/30">
+                            {label}
+                          </p>
+                          <p className="wrap-anywhere text-xs leading-relaxed text-white/58">
+                            {text}
+                          </p>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+
+                  <div className="mt-5 flex min-w-0 flex-wrap gap-1.5">
+                    {featuredProject.technologies.slice(0, 8).map((tech, i) => (
+                      <span
+                        key={i}
+                        className="rounded-full border border-white/[0.08] bg-white/[0.05] px-2.5 py-0.5 text-[11px] font-medium text-white/50"
+                      >
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
+
+                  <span className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-sky-400 transition-colors group-hover:text-sky-300">
+                    {t.viewDetail}
+                    <FaArrowRight className="text-[10px] transition-transform group-hover:translate-x-1" />
+                  </span>
+                </div>
+              </div>
+            </motion.div>
+          )}
 
           {/* ── Filter bar ── */}
           <motion.div

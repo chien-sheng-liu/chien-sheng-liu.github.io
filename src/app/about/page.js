@@ -61,10 +61,10 @@ const volunteers = [
 ];
 
 const profileSummary = [
-  { label: "Current", value: "WSP Data & AI Advisory", accent: "text-sky-300" },
-  { label: "Founded", value: "Mentarix Data Studio", accent: "text-cyan-300" },
+  { label: "Current Role", value: "WSP Data & AI Advisory", accent: "text-sky-300" },
+  { label: "Founder Track", value: "Mentarix Data Studio", accent: "text-cyan-300" },
   { label: "Markets", value: "台灣 · 德國 · 香港 · 中國大陸", accent: "text-emerald-300" },
-  { label: "Focus", value: "BI · GenAI · Decision Systems", accent: "text-violet-300" },
+  { label: "Languages", value: "三文五語", accent: "text-violet-300" },
 ];
 
 export default function About() {
@@ -102,7 +102,7 @@ export default function About() {
                 </motion.div>
 
                 <motion.p variants={fadeUp} className="wrap-anywhere text-sm sm:text-base text-white/50 max-w-[21rem] sm:max-w-xl mx-auto sm:mx-0 leading-relaxed">
-                  三文五語資料與洞察領導者，2026 年 8 月起加入 WSP (Asia) Limited，擔任 Consultant in Data & AI - Advisory Service，負責香港及中國大陸相關業務；同時創辦 Mentarix Data Studio，作為我把資料工程、BI 與 GenAI 經驗系統化的平台。
+                  WSP Data & AI 顧問、Mentarix 創辦人，跨台灣、德國、香港與中國大陸交付 BI、GenAI 與資料產品。
                 </motion.p>
 
                 <motion.div variants={fadeUp} className="flex flex-wrap gap-2 justify-center sm:justify-start">

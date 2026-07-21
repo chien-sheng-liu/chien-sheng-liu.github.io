@@ -61,10 +61,10 @@ const volunteers = [
 ];
 
 const profileSummary = [
-  { label: "Current", value: "WSP Data & AI Advisory", accent: "text-sky-300" },
-  { label: "Founded", value: "Mentarix Data Studio", accent: "text-cyan-300" },
+  { label: "Current Role", value: "WSP Data & AI Advisory", accent: "text-sky-300" },
+  { label: "Founder Track", value: "Mentarix Data Studio", accent: "text-cyan-300" },
   { label: "Markets", value: "Taiwan · Germany · Hong Kong · Mainland China", accent: "text-emerald-300" },
-  { label: "Focus", value: "BI · GenAI · Decision Systems", accent: "text-violet-300" },
+  { label: "Languages", value: "3 written · 5 spoken", accent: "text-violet-300" },
 ];
 
 export default function AboutEn() {
@@ -100,7 +100,7 @@ export default function AboutEn() {
                 </motion.div>
 
                 <motion.p variants={fadeUp} className="wrap-anywhere text-sm sm:text-base text-white/50 max-w-[21rem] sm:max-w-xl mx-auto sm:mx-0 leading-relaxed">
-                  Data & Insights Leader working across 3 written languages and 5 spoken languages. Joining WSP (Asia) Limited in August 2026 as Consultant in Data & AI - Advisory Service, Hong Kong & Mainland China; also founder of Mentarix Data Studio, a platform for systemizing my data engineering, BI, and GenAI delivery experience.
+                  WSP Data & AI consultant and Mentarix founder, delivering BI, GenAI, and data products across Taiwan, Germany, Hong Kong, and Mainland China.
                 </motion.p>
 
                 <motion.div variants={fadeUp} className="flex flex-wrap gap-2 justify-center sm:justify-start">

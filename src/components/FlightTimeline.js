@@ -9,6 +9,7 @@ const events = [
   {
     year: "2026", title: "Consultant in Data & AI - Advisory Service", org: "WSP (Asia) Limited", flag: "🇭🇰", type: "work",
     shortTitle: "Data & AI Consultant",
+    badge: "Current",
     loc: "九龍灣", locFull: "香港", duration: "2026.08",
     detail: [
       "負責香港及中國大陸相關業務，連結策略、資料與決策",
@@ -471,9 +472,16 @@ export default function FlightTimeline() {
                               {ev.type === "work" ? "Career Airlines" : "Education Airlines"}
                             </span>
                           </div>
-                          <span className="text-[10px] font-mono text-slate-300">
-                            ML-{String(events.length - idx).padStart(3, "0")}
-                          </span>
+                          <div className="flex items-center gap-1.5">
+                            {ev.badge && (
+                              <span className="rounded-full bg-sky-100 px-2 py-0.5 text-[8px] font-black uppercase tracking-wider text-sky-600">
+                                {ev.badge}
+                              </span>
+                            )}
+                            <span className="text-[10px] font-mono text-slate-300">
+                              ML-{String(events.length - idx).padStart(3, "0")}
+                            </span>
+                          </div>
                         </div>
 
                         {/* FROM → TO */}

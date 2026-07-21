@@ -23,6 +23,13 @@ const roles = [
 
 const typewriterTexts = ["into decisions", "into advisory delivery", "into usable systems"];
 
+const proofChips = [
+  "WSP Data & AI",
+  "Founder of Mentarix",
+  "15+ AI/BI Projects",
+  "Taiwan · Germany · Hong Kong",
+];
+
 function Counter({ to, prefix = "", suffix = "" }) {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true });
@@ -175,6 +182,22 @@ export default function HomeEn() {
             <Link href="/en/contact" className="text-sm text-white/38 hover:text-white/75 transition-colors">
               Contact →
             </Link>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 14 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.96, duration: 0.6 }}
+            className="mt-7 flex max-w-2xl flex-wrap gap-2"
+          >
+            {proofChips.map((chip) => (
+              <span
+                key={chip}
+                className="rounded-full border border-white/[0.08] bg-white/[0.035] px-3 py-1.5 text-xs font-medium text-white/42 backdrop-blur-sm"
+              >
+                {chip}
+              </span>
+            ))}
           </motion.div>
         </div>
 
