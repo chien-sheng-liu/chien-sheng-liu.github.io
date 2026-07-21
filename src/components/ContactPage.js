@@ -23,6 +23,12 @@ const i18n = {
     location: "香港",
     languages: "三文五語 · 中文 · English · Deutsch · 粵語 · 台語",
     fitNote: "適合：職涯機會、演講教學、Data & AI 合作。不適合：大量制式推銷或無關外包信件。",
+    formatTitle: "快速合作格式",
+    formats: [
+      { title: "Role", desc: "請附角色、地點、團隊背景，以及希望我解決的 Data & AI 問題。" },
+      { title: "Speaking", desc: "請附主題、audience、日期、形式，以及期待帶走的重點。" },
+      { title: "Collaboration", desc: "請附業務背景、資料或 AI 問題、期待成果與時間線。" },
+    ],
     responseNote: "通常 24 小時內回覆",
     channels: { email: "Email", linkedin: "LinkedIn", calendar: "Calendar" },
     intents: [
@@ -71,6 +77,12 @@ const i18n = {
     location: "Hong Kong",
     languages: "3 written · 5 spoken · Chinese · English · Deutsch · Cantonese · Taiwanese",
     fitNote: "Best for: hiring, speaking, collaboration. Not for cold vendor outreach.",
+    formatTitle: "Quick Collaboration Format",
+    formats: [
+      { title: "Role", desc: "Share the role, location, team context, and the Data & AI problem you want solved." },
+      { title: "Speaking", desc: "Share the topic, audience, date, format, and what people should take away." },
+      { title: "Collaboration", desc: "Share the business context, data or AI problem, target outcome, and timeline." },
+    ],
     responseNote: "Usually reply within 24 hours",
     channels: { email: "Email", linkedin: "LinkedIn", calendar: "Calendar" },
     intents: [
@@ -232,6 +244,31 @@ export default function ContactPage({ locale = "zh" }) {
               </motion.div>
             ))}
           </div>
+
+          {/* Quick format */}
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.3 }}
+            variants={fadeUp}
+            className="mb-12"
+          >
+            <h2 className="mb-4 text-lg font-bold text-white">
+              {t.formatTitle}
+            </h2>
+            <div className="grid gap-3 md:grid-cols-3">
+              {t.formats.map((format) => (
+                <div key={format.title} className="min-w-0 rounded-xl border border-white/[0.08] bg-white/[0.035] p-4">
+                  <p className="mb-2 text-[11px] font-semibold uppercase tracking-[0.24em] text-sky-300/70">
+                    {format.title}
+                  </p>
+                  <p className="wrap-anywhere text-sm leading-relaxed text-white/52">
+                    {format.desc}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </motion.div>
 
           {/* Direct channels */}
           <motion.div

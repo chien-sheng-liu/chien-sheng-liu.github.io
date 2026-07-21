@@ -180,7 +180,7 @@ export default function About() {
             </div>
 
             <p className="mt-5 max-w-3xl text-sm sm:text-base leading-relaxed text-white/55">
-              Mentarix 是我將跨市場分析、資料工程與 AI 顧問交付經驗產品化的創辦者實驗場。它補強的是 Morris Liu 這個個人品牌的可信度，而不是取代這個網站的主角。
+              Mentarix 是我將跨市場分析、資料工程與 AI 顧問交付經驗產品化的創辦者實驗場。Founder proof in building data products, consulting offers, and AI delivery systems. 它補強的是 Morris Liu 這個個人品牌的可信度，而不是取代這個網站的主角。
             </p>
 
             <div className="mt-5 flex flex-wrap gap-2">
@@ -193,6 +193,24 @@ export default function About() {
                 </span>
               ))}
             </div>
+          </motion.div>
+        </section>
+
+        {/* ═══ 人生航線主線 ═══ */}
+        <section className="px-4 sm:px-6 lg:px-8 pb-8">
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="max-w-4xl mx-auto rounded-2xl border border-white/[0.08] bg-white/[0.035] p-5"
+          >
+            <p className="mb-2 text-[11px] font-semibold uppercase tracking-[0.32em] text-sky-300/70">
+              Flight Log Narrative
+            </p>
+            <p className="wrap-anywhere text-base sm:text-lg font-semibold leading-relaxed text-white/72">
+              從台灣工程與資料分析、德國商業資訊與市場分析，到香港 Data & AI advisory。
+            </p>
           </motion.div>
         </section>
 

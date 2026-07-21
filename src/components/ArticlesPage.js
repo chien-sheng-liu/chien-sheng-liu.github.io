@@ -14,6 +14,8 @@ const i18n = {
     readMore: "閱讀全文",
     categories: ["AI", "Data Career", "Consulting", "Germany / HK Experience"],
     proof: ["AI systems", "Data career", "Consulting delivery", "Germany / HK"],
+    featured: "Start here",
+    featuredLabel: "Featured Note",
   },
   en: {
     tagline: "Thinking / Notes",
@@ -23,6 +25,8 @@ const i18n = {
     readMore: "Read more",
     categories: ["AI", "Data Career", "Consulting", "Germany / HK Experience"],
     proof: ["AI systems", "Data career", "Consulting delivery", "Germany / HK"],
+    featured: "Start here",
+    featuredLabel: "Featured Note",
   },
 };
 
@@ -39,10 +43,17 @@ export default function ArticlesPage({ posts, locale = "zh" }) {
   const t = i18n[locale] || i18n.zh;
   const [activeFilter, setActiveFilter] = useState(null);
   const linkPrefix = locale === "zh" ? "/articles" : `/${locale}/articles`;
+  const featuredPost = useMemo(
+    () => posts.find((p) => p.slug === "rag-primer") || posts[0],
+    [posts],
+  );
 
   const filteredPosts = useMemo(
-    () => (activeFilter ? posts.filter((p) => p.category === activeFilter) : posts),
-    [posts, activeFilter],
+    () => {
+      const base = activeFilter ? posts.filter((p) => p.category === activeFilter) : posts;
+      return base.filter((p) => p.slug !== featuredPost?.slug);
+    },
+    [posts, activeFilter, featuredPost?.slug],
   );
 
   return (
@@ -89,9 +100,50 @@ export default function ArticlesPage({ posts, locale = "zh" }) {
             </motion.div>
           </motion.div>
 
+          {featuredPost && (
+            <motion.article
+              initial={{ opacity: 0, y: 18 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.32, duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+              className="group relative mb-8 min-w-0 overflow-hidden rounded-2xl border border-sky-400/15 bg-white/[0.055] p-5 shadow-lg shadow-black/20 transition-all duration-300 hover:border-sky-300/30 sm:p-7"
+            >
+              <div className="absolute left-0 top-0 h-full w-1.5 bg-gradient-to-b from-violet-400 via-sky-400 to-cyan-300" />
+              <div className="grid gap-5 pl-2 lg:grid-cols-[0.85fr_1.15fr] lg:items-end">
+                <div className="min-w-0">
+                  <p className="mb-3 text-[10px] font-bold uppercase tracking-[0.24em] text-sky-300/75">
+                    {t.featuredLabel}
+                  </p>
+                  <h2 className="wrap-anywhere text-2xl font-bold leading-tight text-white sm:text-3xl">
+                    {featuredPost.title}
+                  </h2>
+                  <p className="mt-3 wrap-anywhere text-sm leading-relaxed text-white/55">
+                    {featuredPost.summary}
+                  </p>
+                </div>
+                <div className="min-w-0">
+                  <div className="mb-5 flex flex-wrap items-center gap-2 text-xs text-white/40">
+                    <span className="rounded-full border border-sky-400/20 bg-sky-400/[0.08] px-3 py-1 font-semibold text-sky-300">
+                      {featuredPost.category}
+                    </span>
+                    <span>{featuredPost.date}</span>
+                    <span className="text-white/20">·</span>
+                    <span>{featuredPost.readingTime}</span>
+                  </div>
+                  <Link
+                    href={`${linkPrefix}/${featuredPost.slug}`}
+                    className="inline-flex items-center gap-2 rounded-full bg-white px-5 py-2.5 text-sm font-semibold text-[#0a0a0a] transition-colors hover:bg-white/90"
+                  >
+                    {t.featured}
+                    <FaArrowRight className="text-[10px] transition-transform group-hover:translate-x-0.5" />
+                  </Link>
+                </div>
+              </div>
+            </motion.article>
+          )}
+
           {/* Filter bar */}
           <motion.div
-            className="flex flex-wrap justify-start gap-2 mb-10"
+            className="flex max-w-full flex-nowrap justify-start gap-2 mb-10 overflow-x-auto pb-1 sm:flex-wrap sm:overflow-visible"
             variants={fadeUp}
             initial="hidden"
             animate="visible"
@@ -100,7 +152,7 @@ export default function ArticlesPage({ posts, locale = "zh" }) {
             <button
               type="button"
               onClick={() => setActiveFilter(null)}
-              className={`px-4 py-1.5 rounded-full text-sm font-medium border transition-all duration-200 cursor-pointer ${
+              className={`shrink-0 px-4 py-1.5 rounded-full text-sm font-medium border transition-all duration-200 cursor-pointer ${
                 activeFilter === null
                   ? "bg-white text-[#0a0a0a] border-white shadow-sm"
                   : "bg-white/[0.05] text-white/50 border-white/[0.08] hover:border-white/20 hover:text-white/80"
@@ -113,7 +165,7 @@ export default function ArticlesPage({ posts, locale = "zh" }) {
                 key={cat}
                 type="button"
                 onClick={() => setActiveFilter(activeFilter === cat ? null : cat)}
-                className={`px-3.5 py-1.5 rounded-full text-xs sm:text-sm font-medium border transition-all duration-200 cursor-pointer ${
+                className={`shrink-0 px-3.5 py-1.5 rounded-full text-xs sm:text-sm font-medium border transition-all duration-200 cursor-pointer ${
                   activeFilter === cat
                     ? "bg-white text-[#0a0a0a] border-white shadow-sm"
                     : "bg-white/[0.05] text-white/50 border-white/[0.08] hover:border-white/20 hover:text-white/80"

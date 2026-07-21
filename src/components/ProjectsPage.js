@@ -18,11 +18,12 @@ const i18n = {
   zh: {
     tagline: "Case Work",
     title: "Data & AI 案例集",
-    desc: "用顧問案例方式呈現問題、方法與成果：從 LLM、BI、預測模型到可部署的資料產品。",
+    desc: "用顧問案例方式呈現 Business Problem、What I Built、Business Impact 與 Stack。",
     all: "全部",
-    problem: "問題",
-    approach: "方法",
-    impact: "成果",
+    problem: "Business Problem",
+    built: "What I Built",
+    impact: "Business Impact",
+    stack: "Stack",
     featured: "Featured Case",
     viewCode: "查看程式碼",
     viewDetail: "了解更多",
@@ -34,11 +35,12 @@ const i18n = {
   en: {
     tagline: "Case Work",
     title: "Data & AI Case Work",
-    desc: "Case-style work across LLMs, BI, forecasting, and deployable data products: problem, method, and outcome.",
+    desc: "Case-style work across LLMs, BI, forecasting, and deployable data products: Business Problem, What I Built, Business Impact, and Stack.",
     all: "All",
-    problem: "Problem",
-    approach: "Approach",
-    impact: "Impact",
+    problem: "Business Problem",
+    built: "What I Built",
+    impact: "Business Impact",
+    stack: "Stack",
     featured: "Featured Case",
     viewCode: "View Code",
     viewDetail: "Learn More",
@@ -85,6 +87,13 @@ export default function ProjectsPage({ locale = "zh" }) {
     },
     [projects, activeFilter, featuredProject?.title],
   );
+
+  const caseSections = (project) => [
+    { label: t.problem, text: project.caseNotes?.problem },
+    { label: t.built, text: project.caseNotes?.approach },
+    { label: t.impact, text: project.caseNotes?.impact },
+    { label: t.stack, stack: project.technologies },
+  ];
 
   return (
     <div className="relative min-h-screen bg-[#0a0a0a] text-white overflow-hidden">
@@ -161,34 +170,32 @@ export default function ProjectsPage({ locale = "zh" }) {
 
                 <div className="min-w-0">
                   {featuredProject.caseNotes && (
-                    <div className="grid gap-2 sm:grid-cols-3 lg:grid-cols-1">
-                      {[
-                        [t.problem, featuredProject.caseNotes.problem],
-                        [t.approach, featuredProject.caseNotes.approach],
-                        [t.impact, featuredProject.caseNotes.impact],
-                      ].map(([label, text]) => (
-                        <div key={label} className="rounded-lg border border-white/[0.08] bg-black/20 p-3">
+                    <div className="grid gap-2 sm:grid-cols-2">
+                      {caseSections(featuredProject).map((section) => (
+                        <div key={section.label} className="rounded-lg border border-white/[0.08] bg-black/20 p-3">
                           <p className="mb-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-white/30">
-                            {label}
+                            {section.label}
                           </p>
-                          <p className="wrap-anywhere text-xs leading-relaxed text-white/58">
-                            {text}
-                          </p>
+                          {section.stack ? (
+                            <div className="flex flex-wrap gap-1.5">
+                              {section.stack.slice(0, 8).map((tech) => (
+                                <span
+                                  key={tech}
+                                  className="rounded-full border border-white/[0.08] bg-white/[0.05] px-2 py-0.5 text-[10px] font-medium text-white/50"
+                                >
+                                  {tech}
+                                </span>
+                              ))}
+                            </div>
+                          ) : (
+                            <p className="wrap-anywhere text-xs leading-relaxed text-white/58">
+                              {section.text}
+                            </p>
+                          )}
                         </div>
                       ))}
                     </div>
                   )}
-
-                  <div className="mt-5 flex min-w-0 flex-wrap gap-1.5">
-                    {featuredProject.technologies.slice(0, 8).map((tech, i) => (
-                      <span
-                        key={i}
-                        className="rounded-full border border-white/[0.08] bg-white/[0.05] px-2.5 py-0.5 text-[11px] font-medium text-white/50"
-                      >
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
 
                   <span className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-sky-400 transition-colors group-hover:text-sky-300">
                     {t.viewDetail}
@@ -287,34 +294,31 @@ export default function ProjectsPage({ locale = "zh" }) {
 
                   {project.caseNotes && (
                     <div className="grid gap-2 mb-4">
-                      {[
-                        [t.problem, project.caseNotes.problem],
-                        [t.approach, project.caseNotes.approach],
-                        [t.impact, project.caseNotes.impact],
-                      ].map(([label, text]) => (
-                        <div key={label} className="rounded-lg border border-white/[0.08] bg-black/20 p-3">
+                      {caseSections(project).map((section) => (
+                        <div key={section.label} className="rounded-lg border border-white/[0.08] bg-black/20 p-3">
                           <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-white/30 mb-1">
-                            {label}
+                            {section.label}
                           </p>
-                          <p className="wrap-anywhere text-xs leading-relaxed text-white/55">
-                            {text}
-                          </p>
+                          {section.stack ? (
+                            <div className="flex min-w-0 flex-wrap gap-1.5">
+                              {section.stack.slice(0, 8).map((tech) => (
+                                <span
+                                  key={tech}
+                                  className="rounded-full border border-white/[0.08] bg-white/[0.05] px-2 py-0.5 text-[10px] font-medium text-white/50"
+                                >
+                                  {tech}
+                                </span>
+                              ))}
+                            </div>
+                          ) : (
+                            <p className="wrap-anywhere text-xs leading-relaxed text-white/55">
+                              {section.text}
+                            </p>
+                          )}
                         </div>
                       ))}
                     </div>
                   )}
-
-                  {/* Tech tags */}
-                  <div className="flex min-w-0 flex-wrap gap-1.5 mb-4">
-                    {project.technologies.map((tech, i) => (
-                      <span
-                        key={i}
-                        className="px-2.5 py-0.5 bg-white/[0.05] border border-white/[0.08] rounded-full text-[11px] font-medium text-white/50"
-                      >
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
 
                   {/* Metrics */}
                   <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 mb-5">

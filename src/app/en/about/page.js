@@ -178,7 +178,7 @@ export default function AboutEn() {
             </div>
 
             <p className="mt-5 max-w-3xl text-sm sm:text-base leading-relaxed text-white/55">
-              Mentarix is the founder proof point where I productize cross-market analytics, data engineering, and AI advisory delivery. It strengthens the Morris Liu personal brand without replacing the person as the center of this site.
+              Mentarix is the founder proof point where I productize cross-market analytics, data engineering, and AI advisory delivery. Founder proof in building data products, consulting offers, and AI delivery systems. It strengthens the Morris Liu personal brand without replacing the person as the center of this site.
             </p>
 
             <div className="mt-5 flex flex-wrap gap-2">
@@ -191,6 +191,24 @@ export default function AboutEn() {
                 </span>
               ))}
             </div>
+          </motion.div>
+        </section>
+
+        {/* ═══ Flight Timeline Narrative ═══ */}
+        <section className="px-4 sm:px-6 lg:px-8 pb-8">
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="max-w-4xl mx-auto rounded-2xl border border-white/[0.08] bg-white/[0.035] p-5"
+          >
+            <p className="mb-2 text-[11px] font-semibold uppercase tracking-[0.32em] text-sky-300/70">
+              Flight Log Narrative
+            </p>
+            <p className="wrap-anywhere text-base sm:text-lg font-semibold leading-relaxed text-white/72">
+              From engineering and analytics in Taiwan, business informatics and market analysis in Germany, to Data & AI advisory in Hong Kong.
+            </p>
           </motion.div>
         </section>
 

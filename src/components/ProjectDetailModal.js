@@ -13,8 +13,8 @@ const listItem = {
 };
 
 const i18n = {
-  zh: { highlights: "專案亮點", tech: "技術棧", viewCode: "查看程式碼", metrics: "關鍵指標", problem: "問題", approach: "方法", impact: "成果" },
-  en: { highlights: "Highlights", tech: "Tech Stack", viewCode: "View Code", metrics: "Key Metrics", problem: "Problem", approach: "Approach", impact: "Impact" },
+  zh: { highlights: "專案亮點", tech: "Stack", viewCode: "查看程式碼", metrics: "關鍵指標", problem: "Business Problem", built: "What I Built", impact: "Business Impact" },
+  en: { highlights: "Highlights", tech: "Stack", viewCode: "View Code", metrics: "Key Metrics", problem: "Business Problem", built: "What I Built", impact: "Business Impact" },
 };
 
 export default function ProjectDetailModal({ project, locale = "zh", onClose }) {
@@ -105,7 +105,7 @@ export default function ProjectDetailModal({ project, locale = "zh", onClose }) 
               <div className="grid gap-2 mb-4">
                 {[
                   [t.problem, project.caseNotes.problem],
-                  [t.approach, project.caseNotes.approach],
+                  [t.built, project.caseNotes.approach],
                   [t.impact, project.caseNotes.impact],
                 ].map(([label, text]) => (
                   <div key={label} className="rounded-lg border border-white/[0.08] bg-white/[0.035] p-3">

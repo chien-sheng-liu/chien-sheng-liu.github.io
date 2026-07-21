@@ -161,9 +161,9 @@ export default function HomeEn() {
             initial={{ opacity: 0, y: 18 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.68, duration: 0.6 }}
-            className="text-base sm:text-lg text-white/38 max-w-[22rem] mb-10"
+            className="text-base sm:text-lg text-white/40 max-w-[30rem] mb-10 leading-relaxed"
           >
-            WSP Data & AI consultant and Mentarix founder, connecting cross-market analytics, AI products, and business execution.
+            Data & AI Consultant helping teams turn strategy, data, and AI into operating decisions.
           </motion.p>
 
           <motion.div
@@ -255,7 +255,7 @@ export default function HomeEn() {
               Mentarix Data Studio is where I productize my data engineering, BI, and GenAI delivery experience, and a founder proof point that strategy can become working systems.
             </p>
             <p className="text-sm sm:text-base text-white/40 leading-relaxed mb-6">
-              The main story remains Morris Liu: WSP Data & AI consultant, cross-market BI/AI builder, and founder of Mentarix.
+              Founder proof in building data products, consulting offers, and AI delivery systems. The main story remains Morris Liu: WSP Data & AI consultant, cross-market BI/AI builder, and founder of Mentarix.
             </p>
             <div className="flex flex-wrap items-center gap-3">
               {["Founder", "Data Engineering", "BI", "GenAI"].map((item) => (

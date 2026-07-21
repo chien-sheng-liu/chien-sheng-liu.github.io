@@ -181,9 +181,9 @@ export default function Home() {
             initial={{ opacity: 0, y: 18 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.68, duration: 0.6 }}
-            className="text-base sm:text-lg text-white/38 max-w-[22rem] mb-10"
+            className="text-base sm:text-lg text-white/40 max-w-[28rem] mb-10 leading-relaxed"
           >
-            WSP Data & AI 顧問、Mentarix 創辦人，連結跨市場分析、AI 產品與商業執行。
+            Data & AI 顧問，協助團隊把策略、資料與 AI 轉成可運作的決策系統。
           </motion.p>
 
           {/* CTAs */}
@@ -277,7 +277,7 @@ export default function Home() {
               Mentarix Data Studio 是我把資料工程、BI 與 GenAI 交付經驗產品化的地方，也是一個證明我能把策略落到系統的創辦者紀錄。
             </p>
             <p className="text-sm sm:text-base text-white/40 leading-relaxed mb-6">
-              這裡的主角仍然是 Morris Liu：WSP 的 Data & AI 顧問、跨市場 BI/AI 交付者，以及 Mentarix 的創辦人。
+              Founder proof in building data products, consulting offers, and AI delivery systems. 這裡的主角仍然是 Morris Liu：WSP 的 Data & AI 顧問、跨市場 BI/AI 交付者，以及 Mentarix 的創辦人。
             </p>
             <div className="flex flex-wrap items-center gap-3">
               {["Founder", "Data Engineering", "BI", "GenAI"].map((item) => (
