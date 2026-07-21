@@ -102,7 +102,7 @@ export default function About() {
                 </motion.div>
 
                 <motion.p variants={fadeUp} className="wrap-anywhere text-sm sm:text-base text-white/50 max-w-[21rem] sm:max-w-xl mx-auto sm:mx-0 leading-relaxed">
-                  三文五語資料與洞察領導者，2026 年 8 月起加入 WSP (Asia) Limited，擔任 Consultant in Data & AI - Advisory Service，負責香港及中國大陸相關業務；同時創辦 Mentarix Data Studio，把資料工程、BI 與 GenAI 做成可落地的決策系統。
+                  三文五語資料與洞察領導者，2026 年 8 月起加入 WSP (Asia) Limited，擔任 Consultant in Data & AI - Advisory Service，負責香港及中國大陸相關業務；同時創辦 Mentarix Data Studio，作為我把資料工程、BI 與 GenAI 經驗系統化的平台。
                 </motion.p>
 
                 <motion.div variants={fadeUp} className="flex flex-wrap gap-2 justify-center sm:justify-start">
@@ -143,7 +143,7 @@ export default function About() {
           </motion.div>
         </section>
 
-        {/* ═══ 創辦公司 ═══ */}
+        {/* ═══ 創辦者證明 ═══ */}
         <section className="px-4 sm:px-6 lg:px-8 pb-16">
           <motion.div
             initial={{ opacity: 0, y: 16 }}
@@ -155,28 +155,28 @@ export default function About() {
             <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
               <div className="min-w-0">
                 <p className="mb-2 text-[11px] font-semibold uppercase tracking-[0.32em] text-cyan-300/70">
-                  Founded Company
+                  Founder Proof
                 </p>
                 <h2 className="text-2xl sm:text-3xl font-bold text-white">
                   Mentarix Data Studio
                 </h2>
                 <p className="mt-1 text-sm text-white/40">
-                  創辦人 & AI 策略師 · 台灣
+                  創辦人 & AI 策略師 · 個人品牌延伸
                 </p>
               </div>
               <a
                 href="https://www.mentarix-data.com/zh-TW"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group inline-flex w-fit items-center gap-2 rounded-full bg-white px-5 py-2.5 text-sm font-semibold text-[#0a0a0a] transition-colors hover:bg-white/90"
+                className="group inline-flex w-fit items-center gap-2 rounded-full border border-white/[0.12] px-5 py-2.5 text-sm font-semibold text-white/70 transition-colors hover:border-white/25 hover:text-white"
               >
-                前往公司網站
+                查看創辦公司
                 <FaArrowRight className="text-xs transition-transform group-hover:translate-x-0.5" />
               </a>
             </div>
 
             <p className="mt-5 max-w-3xl text-sm sm:text-base leading-relaxed text-white/55">
-              Mentarix 是我創辦的資料工程與 AI 顧問公司，協助企業把資料基礎設施、商業分析與 AI 應用整合成可上線的決策系統。
+              Mentarix 是我將跨市場分析、資料工程與 AI 顧問交付經驗產品化的創辦者實驗場。它補強的是 Morris Liu 這個個人品牌的可信度，而不是取代這個網站的主角。
             </p>
 
             <div className="mt-5 flex flex-wrap gap-2">
@@ -298,7 +298,7 @@ export default function About() {
         {/* ═══ CTA ═══ */}
         <CtaSection
           title="想把 Data & AI 落到業務現場？"
-          description="個人合作、顧問案或公司服務，都可以從這裡開始對焦"
+          description="30 分鐘對談，把問題轉成可交付的分析路徑"
           buttonLabel="聯絡 Morris"
           buttonHref="/contact"
         />

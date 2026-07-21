@@ -193,15 +193,6 @@ export default function Home() {
               個人經歷
               <FaArrowRight className="text-xs transition-transform group-hover:translate-x-0.5" />
             </Link>
-            <a
-              href="https://www.mentarix-data.com/zh-TW"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group flex items-center gap-2 px-6 py-3 border border-white/[0.12] bg-white/[0.04] text-white/72 text-sm font-semibold rounded-full hover:border-white/25 hover:text-white transition-colors"
-            >
-              Mentarix 服務
-              <FaArrowRight className="text-xs transition-transform group-hover:translate-x-0.5" />
-            </a>
             <Link href="/contact" className="text-sm text-white/38 hover:text-white/75 transition-colors">
               聯絡我 →
             </Link>
@@ -240,33 +231,33 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ══════════════════════════════════ COMPANY ══════════════════════════════════ */}
-      <section className="border-t border-white/[0.07] py-20 px-6 sm:px-8 lg:px-16 xl:px-20">
+      {/* ══════════════════════════════════ FOUNDER NOTE ══════════════════════════════════ */}
+      <section className="border-t border-white/[0.07] py-16 px-6 sm:px-8 lg:px-16 xl:px-20">
         <motion.div
           initial={{ opacity: 0, y: 28 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.75, ease: "easeOut" }}
-          className="max-w-7xl mx-auto grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-end"
+          className="max-w-7xl mx-auto grid gap-8 lg:grid-cols-[0.75fr_1.25fr] lg:items-center"
         >
           <div>
             <p className="text-[11px] tracking-[0.4em] uppercase text-cyan-300/60 font-medium mb-5">
-              Founded Company
+              Founder Proof
             </p>
-            <h2 className="text-[clamp(2.3rem,5vw,5rem)] font-bold text-white leading-[0.95] tracking-tight">
-              Mentarix<br />Data Studio
+            <h2 className="text-[clamp(1.9rem,4vw,3.7rem)] font-bold text-white leading-[1.02] tracking-tight">
+              Founder of<br />Mentarix
             </h2>
           </div>
 
           <div className="max-w-2xl">
-            <p className="text-lg sm:text-xl text-white/72 leading-relaxed mb-5">
-              我創辦 Mentarix Data Studio，擔任創辦人 & AI 策略師，協助企業把資料、分析與 AI 做成決策系統。
+            <p className="text-base sm:text-lg text-white/68 leading-relaxed mb-5">
+              Mentarix Data Studio 是我把資料工程、BI 與 GenAI 交付經驗產品化的地方，也是一個證明我能把策略落到系統的創辦者紀錄。
             </p>
-            <p className="text-sm sm:text-base text-white/40 leading-relaxed mb-7">
-              團隊聚焦資料工程、BI 儀表板、預測模型與 GenAI 應用，從策略對焦到實作移交，讓洞察真正進入營運。
+            <p className="text-sm sm:text-base text-white/40 leading-relaxed mb-6">
+              這裡的主角仍然是 Morris Liu：WSP 的 Data & AI 顧問、跨市場 BI/AI 交付者，以及 Mentarix 的創辦人。
             </p>
             <div className="flex flex-wrap items-center gap-3">
-              {["台灣", "Data Engineering", "AI Consulting", "BI & Analytics"].map((item) => (
+              {["Founder", "Data Engineering", "BI", "GenAI"].map((item) => (
                 <span key={item} className="rounded-full border border-white/[0.08] bg-white/[0.04] px-3 py-1 text-xs font-medium text-white/55">
                   {item}
                 </span>
@@ -275,9 +266,9 @@ export default function Home() {
                 href="https://www.mentarix-data.com/zh-TW"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group inline-flex items-center gap-2 rounded-full bg-white px-5 py-2.5 text-sm font-semibold text-[#0a0a0a] transition-colors hover:bg-white/90"
+                className="group inline-flex items-center gap-2 text-sm font-semibold text-cyan-300/75 transition-colors hover:text-cyan-200"
               >
-                前往 Mentarix
+                查看創辦公司
                 <FaArrowRight className="text-xs transition-transform group-hover:translate-x-0.5" />
               </a>
             </div>
@@ -311,25 +302,14 @@ export default function Home() {
             <h2 className="text-[clamp(2.5rem,6vw,5.5rem)] font-bold text-white leading-[0.92] tracking-tight mb-6">
               想把 Data & AI<br />落到業務現場？
             </h2>
-            <p className="text-white/32 text-lg mb-10">個人合作、顧問案或公司服務，都可以從這裡開始對焦。</p>
-            <div className="flex flex-wrap items-center gap-4">
-              <Link
-                href="/contact"
-                className="group inline-flex items-center gap-2 px-8 py-4 bg-white text-[#0a0a0a] font-semibold rounded-full hover:bg-white/90 transition-colors text-sm"
-              >
-                聯絡 Morris
-                <FaArrowRight className="text-xs transition-transform group-hover:translate-x-0.5" />
-              </Link>
-              <a
-                href="https://www.mentarix-data.com/zh-TW"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group inline-flex items-center gap-2 px-8 py-4 border border-white/[0.12] text-white/72 font-semibold rounded-full hover:border-white/25 hover:text-white transition-colors text-sm"
-              >
-                查看 Mentarix
-                <FaArrowRight className="text-xs transition-transform group-hover:translate-x-0.5" />
-              </a>
-            </div>
+            <p className="text-white/32 text-lg mb-10">30 分鐘對談，把問題轉成可交付的分析路徑。</p>
+            <Link
+              href="/contact"
+              className="group inline-flex items-center gap-2 px-8 py-4 bg-white text-[#0a0a0a] font-semibold rounded-full hover:bg-white/90 transition-colors text-sm"
+            >
+              聯絡 Morris
+              <FaArrowRight className="text-xs transition-transform group-hover:translate-x-0.5" />
+            </Link>
           </motion.div>
         </div>
       </section>

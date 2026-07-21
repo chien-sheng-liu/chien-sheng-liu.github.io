@@ -172,15 +172,6 @@ export default function HomeEn() {
               My Journey
               <FaArrowRight className="text-xs transition-transform group-hover:translate-x-0.5" />
             </Link>
-            <a
-              href="https://www.mentarix-data.com/zh-TW"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group flex items-center gap-2 px-6 py-3 border border-white/[0.12] bg-white/[0.04] text-white/72 text-sm font-semibold rounded-full hover:border-white/25 hover:text-white transition-colors"
-            >
-              Mentarix Services
-              <FaArrowRight className="text-xs transition-transform group-hover:translate-x-0.5" />
-            </a>
             <Link href="/en/contact" className="text-sm text-white/38 hover:text-white/75 transition-colors">
               Contact →
             </Link>
@@ -218,33 +209,33 @@ export default function HomeEn() {
         </div>
       </section>
 
-      {/* ══════ COMPANY ══════ */}
-      <section className="border-t border-white/[0.07] py-20 px-6 sm:px-8 lg:px-16 xl:px-20">
+      {/* ══════ FOUNDER NOTE ══════ */}
+      <section className="border-t border-white/[0.07] py-16 px-6 sm:px-8 lg:px-16 xl:px-20">
         <motion.div
           initial={{ opacity: 0, y: 28 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.75, ease: "easeOut" }}
-          className="max-w-7xl mx-auto grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-end"
+          className="max-w-7xl mx-auto grid gap-8 lg:grid-cols-[0.75fr_1.25fr] lg:items-center"
         >
           <div>
             <p className="text-[11px] tracking-[0.4em] uppercase text-cyan-300/60 font-medium mb-5">
-              Founded Company
+              Founder Proof
             </p>
-            <h2 className="text-[clamp(2.3rem,5vw,5rem)] font-bold text-white leading-[0.95] tracking-tight">
-              Mentarix<br />Data Studio
+            <h2 className="text-[clamp(1.9rem,4vw,3.7rem)] font-bold text-white leading-[1.02] tracking-tight">
+              Founder of<br />Mentarix
             </h2>
           </div>
 
           <div className="max-w-2xl">
-            <p className="text-lg sm:text-xl text-white/72 leading-relaxed mb-5">
-              I founded Mentarix Data Studio as Founder & AI Strategist to help organizations turn data, analytics, and AI into decision systems.
+            <p className="text-base sm:text-lg text-white/68 leading-relaxed mb-5">
+              Mentarix Data Studio is where I productize my data engineering, BI, and GenAI delivery experience, and a founder proof point that strategy can become working systems.
             </p>
-            <p className="text-sm sm:text-base text-white/40 leading-relaxed mb-7">
-              The studio focuses on data engineering, BI dashboards, predictive models, and GenAI applications, carrying work from strategic alignment to production handover.
+            <p className="text-sm sm:text-base text-white/40 leading-relaxed mb-6">
+              The main story remains Morris Liu: WSP Data & AI consultant, cross-market BI/AI builder, and founder of Mentarix.
             </p>
             <div className="flex flex-wrap items-center gap-3">
-              {["Taiwan", "Data Engineering", "AI Consulting", "BI & Analytics"].map((item) => (
+              {["Founder", "Data Engineering", "BI", "GenAI"].map((item) => (
                 <span key={item} className="rounded-full border border-white/[0.08] bg-white/[0.04] px-3 py-1 text-xs font-medium text-white/55">
                   {item}
                 </span>
@@ -253,9 +244,9 @@ export default function HomeEn() {
                 href="https://www.mentarix-data.com/zh-TW"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group inline-flex items-center gap-2 rounded-full bg-white px-5 py-2.5 text-sm font-semibold text-[#0a0a0a] transition-colors hover:bg-white/90"
+                className="group inline-flex items-center gap-2 text-sm font-semibold text-cyan-300/75 transition-colors hover:text-cyan-200"
               >
-                Visit Mentarix
+                View founded company
                 <FaArrowRight className="text-xs transition-transform group-hover:translate-x-0.5" />
               </a>
             </div>
@@ -289,25 +280,14 @@ export default function HomeEn() {
             <h2 className="text-[clamp(2.5rem,6vw,5.5rem)] font-bold text-white leading-[0.92] tracking-tight mb-6">
               Want to turn Data & AI<br />into business action?
             </h2>
-            <p className="text-white/32 text-lg mb-10">Start with personal collaboration, advisory work, or Mentarix company services.</p>
-            <div className="flex flex-wrap items-center gap-4">
-              <Link
-                href="/en/contact"
-                className="group inline-flex items-center gap-2 px-8 py-4 bg-white text-[#0a0a0a] font-semibold rounded-full hover:bg-white/90 transition-colors text-sm"
-              >
-                Contact Morris
-                <FaArrowRight className="text-xs transition-transform group-hover:translate-x-0.5" />
-              </Link>
-              <a
-                href="https://www.mentarix-data.com/zh-TW"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group inline-flex items-center gap-2 px-8 py-4 border border-white/[0.12] text-white/72 font-semibold rounded-full hover:border-white/25 hover:text-white transition-colors text-sm"
-              >
-                Visit Mentarix
-                <FaArrowRight className="text-xs transition-transform group-hover:translate-x-0.5" />
-              </a>
-            </div>
+            <p className="text-white/32 text-lg mb-10">A 30-min chat to turn business problems into deliverable analytics paths.</p>
+            <Link
+              href="/en/contact"
+              className="group inline-flex items-center gap-2 px-8 py-4 bg-white text-[#0a0a0a] font-semibold rounded-full hover:bg-white/90 transition-colors text-sm"
+            >
+              Contact Morris
+              <FaArrowRight className="text-xs transition-transform group-hover:translate-x-0.5" />
+            </Link>
           </motion.div>
         </div>
       </section>

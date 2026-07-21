@@ -100,7 +100,7 @@ export default function AboutEn() {
                 </motion.div>
 
                 <motion.p variants={fadeUp} className="wrap-anywhere text-sm sm:text-base text-white/50 max-w-[21rem] sm:max-w-xl mx-auto sm:mx-0 leading-relaxed">
-                  Data & Insights Leader working across 3 written languages and 5 spoken languages. Joining WSP (Asia) Limited in August 2026 as Consultant in Data & AI - Advisory Service, Hong Kong & Mainland China; also founder of Mentarix Data Studio, turning data engineering, BI, and GenAI into production-ready decision systems.
+                  Data & Insights Leader working across 3 written languages and 5 spoken languages. Joining WSP (Asia) Limited in August 2026 as Consultant in Data & AI - Advisory Service, Hong Kong & Mainland China; also founder of Mentarix Data Studio, a platform for systemizing my data engineering, BI, and GenAI delivery experience.
                 </motion.p>
 
                 <motion.div variants={fadeUp} className="flex flex-wrap gap-2 justify-center sm:justify-start">
@@ -141,7 +141,7 @@ export default function AboutEn() {
           </motion.div>
         </section>
 
-        {/* ═══ Founded Company ═══ */}
+        {/* ═══ Founder Proof ═══ */}
         <section className="px-4 sm:px-6 lg:px-8 pb-16">
           <motion.div
             initial={{ opacity: 0, y: 16 }}
@@ -153,28 +153,28 @@ export default function AboutEn() {
             <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
               <div className="min-w-0">
                 <p className="mb-2 text-[11px] font-semibold uppercase tracking-[0.32em] text-cyan-300/70">
-                  Founded Company
+                  Founder Proof
                 </p>
                 <h2 className="text-2xl sm:text-3xl font-bold text-white">
                   Mentarix Data Studio
                 </h2>
                 <p className="mt-1 text-sm text-white/40">
-                  Founder & AI Strategist · Taiwan
+                  Founder & AI Strategist · Personal brand extension
                 </p>
               </div>
               <a
                 href="https://www.mentarix-data.com/zh-TW"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group inline-flex w-fit items-center gap-2 rounded-full bg-white px-5 py-2.5 text-sm font-semibold text-[#0a0a0a] transition-colors hover:bg-white/90"
+                className="group inline-flex w-fit items-center gap-2 rounded-full border border-white/[0.12] px-5 py-2.5 text-sm font-semibold text-white/70 transition-colors hover:border-white/25 hover:text-white"
               >
-                Visit company site
+                View founded company
                 <FaArrowRight className="text-xs transition-transform group-hover:translate-x-0.5" />
               </a>
             </div>
 
             <p className="mt-5 max-w-3xl text-sm sm:text-base leading-relaxed text-white/55">
-              Mentarix is the data engineering and AI consulting company I founded to help organizations turn data infrastructure, analytics, and AI applications into production-ready decision systems.
+              Mentarix is the founder proof point where I productize cross-market analytics, data engineering, and AI advisory delivery. It strengthens the Morris Liu personal brand without replacing the person as the center of this site.
             </p>
 
             <div className="mt-5 flex flex-wrap gap-2">
@@ -289,7 +289,7 @@ export default function AboutEn() {
         {/* ═══ CTA ═══ */}
         <CtaSection
           title="Want to turn Data & AI into business action?"
-          description="Start with personal collaboration, advisory work, or Mentarix company services."
+          description="A 30-min chat to turn business problems into deliverable analytics paths."
           buttonLabel="Contact Morris"
           buttonHref="/en/contact"
         />
