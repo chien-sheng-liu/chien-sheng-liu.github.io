@@ -19,30 +19,34 @@ const languages = [
   { name: "台語", level: "母語" },
 ];
 
-const skillCategories = [
+const capabilityMatrix = [
   {
-    title: "程式與 BI",
-    tag: "bg-emerald-900/30 text-emerald-300 border-emerald-700/30",
-    label: "text-emerald-400",
-    skills: ["Python", "SQL", "Tableau", "Power BI", "Metabase", "Google Analytics 4", "CRM"],
+    title: "Advisory",
+    desc: "把模糊需求拆成可交付的分析問題、決策路徑與專案節奏。",
+    label: "text-sky-300",
+    metric: "Strategy to delivery",
+    skills: ["Stakeholder alignment", "KPI framing", "Discovery", "Pre-sales", "Agile delivery"],
   },
   {
-    title: "資料科學 / AI",
-    tag: "bg-violet-900/30 text-violet-300 border-violet-700/30",
-    label: "text-violet-400",
-    skills: ["Machine Learning", "Deep Learning", "NLP & LLM", "RAG / LoRA", "Computer Vision"],
+    title: "Analytics",
+    desc: "從資料模型、BI 儀表板到成長分析，讓團隊能看見問題並追蹤結果。",
+    label: "text-emerald-300",
+    metric: "Signals to action",
+    skills: ["SQL", "Python", "Tableau", "Power BI", "GA4", "Funnel analysis"],
   },
   {
-    title: "雲端與工程",
-    tag: "bg-sky-900/30 text-sky-300 border-sky-700/30",
-    label: "text-sky-400",
-    skills: ["GCP", "Azure", "BigQuery", "dbt", "LookML", "Docker", "Snowflake", "Databricks", "Airflow"],
+    title: "Engineering",
+    desc: "設計可維運的資料管道、倉儲與雲端部署，支撐長期分析與 AI 應用。",
+    label: "text-cyan-300",
+    metric: "Pipelines that last",
+    skills: ["GCP", "Azure", "BigQuery", "dbt", "Docker", "Snowflake", "Airflow"],
   },
   {
-    title: "軟實力",
-    tag: "bg-amber-900/30 text-amber-300 border-amber-700/30",
-    label: "text-amber-400",
-    skills: ["Leadership", "Agile / Scrum", "Pre-sales", "Stakeholder Management"],
+    title: "AI Product",
+    desc: "把 LLM、RAG 與模型能力包成可被業務採用、評估與持續改善的產品。",
+    label: "text-violet-300",
+    metric: "Models to products",
+    skills: ["LLM", "RAG", "LoRA", "Model evaluation", "NLP", "GenAI workflow"],
   },
 ];
 
@@ -195,7 +199,7 @@ export default function About() {
         {/* ═══ 人生航線 ═══ */}
         <FlightTimeline />
 
-        {/* ═══ 技術能力 ═══ */}
+        {/* ═══ 能力矩陣 ═══ */}
         <section className="px-4 sm:px-6 lg:px-8 py-16">
           <div className="max-w-4xl mx-auto">
             <motion.h2
@@ -205,25 +209,34 @@ export default function About() {
               transition={{ duration: 0.5 }}
               className="text-2xl font-bold text-white mb-8"
             >
-              技術能力
+              能力矩陣
             </motion.h2>
-            <div className="space-y-7">
-              {skillCategories.map((cat, ci) => (
+            <div className="grid gap-4 md:grid-cols-2">
+              {capabilityMatrix.map((cat, ci) => (
                 <motion.div
                   key={cat.title}
                   initial={{ opacity: 0, y: 16 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: ci * 0.07, duration: 0.45 }}
+                  className="rounded-2xl border border-white/[0.08] bg-white/[0.035] p-5 transition-colors hover:border-white/20"
                 >
-                  <p className={`text-[11px] font-semibold uppercase tracking-widest mb-3 ${cat.label}`}>
-                    {cat.title}
+                  <div className="mb-4 flex items-start justify-between gap-4">
+                    <div>
+                      <p className={`text-[11px] font-semibold uppercase tracking-widest ${cat.label}`}>
+                        {cat.title}
+                      </p>
+                      <p className="mt-2 text-lg font-bold text-white">{cat.metric}</p>
+                    </div>
+                  </div>
+                  <p className="wrap-anywhere mb-5 text-sm leading-relaxed text-white/50">
+                    {cat.desc}
                   </p>
                   <div className="flex flex-wrap gap-2">
                     {cat.skills.map((skill) => (
                       <span
                         key={skill}
-                        className={`px-3 py-1 rounded-full border text-xs font-medium ${cat.tag}`}
+                        className="rounded-full border border-white/[0.08] bg-white/[0.045] px-3 py-1 text-xs font-medium text-white/55"
                       >
                         {skill}
                       </span>

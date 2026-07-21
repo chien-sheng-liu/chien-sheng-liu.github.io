@@ -2,7 +2,7 @@
 title: "Customer Segmentation in Practice: Building Precision User Strategies with Grab"
 date: 2025-03-15
 tags: [Customer Segmentation, K-Means, RFM, Python, Growth]
-category: Data Science
+category: Consulting
 ---
 
 Customer segmentation is one of the highest-ROI applications of data science in business. It replaces the "treat all users the same" approach with targeted strategies for distinct groups. This article uses Grab — Southeast Asia's leading super app — as a case study, walking through the strategic framework from business objectives to go-to-market execution.

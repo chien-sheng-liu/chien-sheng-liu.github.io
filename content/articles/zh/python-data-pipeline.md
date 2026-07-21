@@ -2,7 +2,7 @@
 title: 用 Python 打造可靠的資料管道：架構與實作清單
 date: 2025-01-18
 tags: [Python, ETL, Data Engineering]
-category: 資料工程
+category: Data Career
 ---
 
 每個資料工程師都寫過「能跑」的 ETL 腳本。但從「能跑」到「可維運」之間，差的不是幾行程式碼，而是一整套工程實踐：模組化架構、排程、重試、驗證、監控、告警、測試、部署。本文提供一份完整的架構設計與實作清單，幫你把 ETL 腳本升級成資料產品。

@@ -3,24 +3,26 @@
 import { useMemo, useState } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
-import { FaBookOpen, FaArrowRight } from "react-icons/fa";
+import { FaBookOpen, FaArrowRight, FaLightbulb } from "react-icons/fa";
 
 const i18n = {
   zh: {
-    tagline: "Articles",
-    title: "文章",
-    desc: "記錄我對 AI、資料工程與產品落地的思考與實作。",
+    tagline: "Thinking / Notes",
+    title: "思考筆記",
+    desc: "把 AI 系統、資料職涯、顧問交付與跨市場經驗，整理成可被快速掃描的實務筆記。",
     all: "全部",
     readMore: "閱讀全文",
-    categories: ["資料分析", "資料科學", "AI", "資料工程"],
+    categories: ["AI", "Data Career", "Consulting", "Germany / HK Experience"],
+    proof: ["AI systems", "Data career", "Consulting delivery", "Germany / HK"],
   },
   en: {
-    tagline: "Articles",
-    title: "Articles",
-    desc: "Writing on AI, data engineering, and taking products to production.",
+    tagline: "Thinking / Notes",
+    title: "Thinking / Notes",
+    desc: "Practical notes on AI systems, data careers, consulting delivery, and cross-market work across Germany and Hong Kong.",
     all: "All",
     readMore: "Read more",
-    categories: ["Data Analysis", "Data Science", "AI", "Data Engineering"],
+    categories: ["AI", "Data Career", "Consulting", "Germany / HK Experience"],
+    proof: ["AI systems", "Data career", "Consulting delivery", "Germany / HK"],
   },
 };
 
@@ -50,7 +52,7 @@ export default function ArticlesPage({ posts, locale = "zh" }) {
         <div className="max-w-5xl mx-auto">
 
           {/* Hero */}
-          <motion.div className="mb-14" initial="hidden" animate="visible">
+          <motion.div className="mb-12" initial="hidden" animate="visible">
             <motion.p
               variants={fadeUp}
               custom={0}
@@ -70,15 +72,30 @@ export default function ArticlesPage({ posts, locale = "zh" }) {
             <motion.p variants={fadeUp} custom={2} className="text-lg text-white/50 max-w-2xl leading-relaxed">
               {t.desc}
             </motion.p>
+            <motion.div
+              variants={fadeUp}
+              custom={3}
+              className="mt-7 grid grid-cols-2 gap-2 sm:flex sm:flex-wrap"
+            >
+              {t.proof.map((item) => (
+                <span
+                  key={item}
+                  className="inline-flex min-w-0 items-center gap-2 rounded-full border border-white/[0.08] bg-white/[0.04] px-3 py-2 text-xs font-semibold text-white/55"
+                >
+                  <FaLightbulb className="shrink-0 text-[11px] text-sky-300/75" />
+                  <span className="truncate">{item}</span>
+                </span>
+              ))}
+            </motion.div>
           </motion.div>
 
           {/* Filter bar */}
           <motion.div
-            className="flex flex-wrap justify-center gap-2 mb-10"
+            className="flex flex-wrap justify-start gap-2 mb-10"
             variants={fadeUp}
             initial="hidden"
             animate="visible"
-            custom={2}
+            custom={4}
           >
             <button
               type="button"
@@ -96,7 +113,7 @@ export default function ArticlesPage({ posts, locale = "zh" }) {
                 key={cat}
                 type="button"
                 onClick={() => setActiveFilter(activeFilter === cat ? null : cat)}
-                className={`px-4 py-1.5 rounded-full text-sm font-medium border transition-all duration-200 cursor-pointer ${
+                className={`px-3.5 py-1.5 rounded-full text-xs sm:text-sm font-medium border transition-all duration-200 cursor-pointer ${
                   activeFilter === cat
                     ? "bg-white text-[#0a0a0a] border-white shadow-sm"
                     : "bg-white/[0.05] text-white/50 border-white/[0.08] hover:border-white/20 hover:text-white/80"
@@ -123,13 +140,13 @@ export default function ArticlesPage({ posts, locale = "zh" }) {
                   <div className="absolute inset-0 bg-gradient-to-br from-sky-400/[0.06] to-indigo-400/[0.06] opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                   <div className="relative">
                     <div className="flex items-center justify-between mb-4">
-                      <div className="inline-flex items-center space-x-2 text-sky-400">
-                        <FaBookOpen />
+                      <div className="inline-flex min-w-0 items-center gap-2 text-sky-400">
+                        <FaBookOpen className="shrink-0" />
                         {post.category && (
-                          <span className="text-xs uppercase tracking-wide font-medium">{post.category}</span>
+                          <span className="truncate text-xs uppercase tracking-wide font-medium">{post.category}</span>
                         )}
                       </div>
-                      <div className="text-xs text-white/40">{post.date} · {post.readingTime}</div>
+                      <div className="shrink-0 text-xs text-white/40">{post.date} · {post.readingTime}</div>
                     </div>
                     <h2 className="text-xl font-bold text-white mb-2 group-hover:text-sky-400 transition-colors duration-300">
                       {post.title}

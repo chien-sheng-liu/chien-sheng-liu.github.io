@@ -22,6 +22,7 @@ const i18n = {
     heroDesc: "職涯機會、演講教學、Data & AI 合作，都可以用最直接的方式開始對焦。",
     location: "香港",
     languages: "三文五語 · 中文 · English · Deutsch · 粵語 · 台語",
+    fitNote: "適合：職涯機會、演講教學、Data & AI 合作。不適合：大量制式推銷或無關外包信件。",
     responseNote: "通常 24 小時內回覆",
     channels: { email: "Email", linkedin: "LinkedIn", calendar: "Calendar" },
     intents: [
@@ -69,6 +70,7 @@ const i18n = {
     heroDesc: "Career opportunities, speaking invitations, and Data & AI collaboration can all start with a clear first conversation.",
     location: "Hong Kong",
     languages: "3 written · 5 spoken · Chinese · English · Deutsch · Cantonese · Taiwanese",
+    fitNote: "Best for: hiring, speaking, collaboration. Not for cold vendor outreach.",
     responseNote: "Usually reply within 24 hours",
     channels: { email: "Email", linkedin: "LinkedIn", calendar: "Calendar" },
     intents: [
@@ -175,6 +177,14 @@ export default function ContactPage({ locale = "zh" }) {
                 {t.languages}
               </span>
             </motion.div>
+
+            <motion.p
+              variants={fadeUp}
+              custom={4}
+              className="wrap-anywhere mt-5 max-w-2xl rounded-xl border border-white/[0.08] bg-white/[0.04] px-4 py-3 text-sm font-medium leading-relaxed text-white/55"
+            >
+              {t.fitNote}
+            </motion.p>
           </motion.div>
 
           {/* Contact intents */}
