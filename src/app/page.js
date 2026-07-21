@@ -231,6 +231,51 @@ export default function Home() {
         </div>
       </section>
 
+      {/* ══════════════════════════════════ COMPANY ══════════════════════════════════ */}
+      <section className="border-t border-white/[0.07] py-20 px-6 sm:px-8 lg:px-16 xl:px-20">
+        <motion.div
+          initial={{ opacity: 0, y: 28 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.75, ease: "easeOut" }}
+          className="max-w-7xl mx-auto grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-end"
+        >
+          <div>
+            <p className="text-[11px] tracking-[0.4em] uppercase text-cyan-300/60 font-medium mb-5">
+              Founded Company
+            </p>
+            <h2 className="text-[clamp(2.3rem,5vw,5rem)] font-bold text-white leading-[0.95] tracking-tight">
+              Mentarix<br />Data Studio
+            </h2>
+          </div>
+
+          <div className="max-w-2xl">
+            <p className="text-lg sm:text-xl text-white/72 leading-relaxed mb-5">
+              我創辦 Mentarix Data Studio，擔任創辦人 & AI 策略師，協助企業把資料、分析與 AI 做成決策系統。
+            </p>
+            <p className="text-sm sm:text-base text-white/40 leading-relaxed mb-7">
+              團隊聚焦資料工程、BI 儀表板、預測模型與 GenAI 應用，從策略對焦到實作移交，讓洞察真正進入營運。
+            </p>
+            <div className="flex flex-wrap items-center gap-3">
+              {["台灣", "Data Engineering", "AI Consulting", "BI & Analytics"].map((item) => (
+                <span key={item} className="rounded-full border border-white/[0.08] bg-white/[0.04] px-3 py-1 text-xs font-medium text-white/55">
+                  {item}
+                </span>
+              ))}
+              <a
+                href="https://www.mentarix-data.com/zh-TW"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group inline-flex items-center gap-2 rounded-full bg-white px-5 py-2.5 text-sm font-semibold text-[#0a0a0a] transition-colors hover:bg-white/90"
+              >
+                前往 Mentarix
+                <FaArrowRight className="text-xs transition-transform group-hover:translate-x-0.5" />
+              </a>
+            </div>
+          </div>
+        </motion.div>
+      </section>
+
       {/* ══════════════════════════════════ MARQUEE ══════════════════════════════════ */}
       <section className="border-y border-white/[0.07] py-5 overflow-hidden">
         <div

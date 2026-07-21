@@ -3,7 +3,7 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import FlightTimeline from "../../components/FlightTimeline";
 import CtaSection from "../../components/sections/CtaSection";
-import { FaMicrophone, FaUsers } from "react-icons/fa";
+import { FaArrowRight, FaMicrophone, FaUsers } from "react-icons/fa";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 20 },
@@ -108,6 +108,55 @@ export default function About() {
               </div>
             </motion.div>
           </div>
+        </section>
+
+        {/* ═══ 創辦公司 ═══ */}
+        <section className="px-4 sm:px-6 lg:px-8 pb-16">
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="max-w-4xl mx-auto rounded-2xl border border-white/[0.08] bg-white/[0.035] p-5 sm:p-7"
+          >
+            <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
+              <div className="min-w-0">
+                <p className="mb-2 text-[11px] font-semibold uppercase tracking-[0.32em] text-cyan-300/70">
+                  Founded Company
+                </p>
+                <h2 className="text-2xl sm:text-3xl font-bold text-white">
+                  Mentarix Data Studio
+                </h2>
+                <p className="mt-1 text-sm text-white/40">
+                  創辦人 & AI 策略師 · 台灣
+                </p>
+              </div>
+              <a
+                href="https://www.mentarix-data.com/zh-TW"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group inline-flex w-fit items-center gap-2 rounded-full bg-white px-5 py-2.5 text-sm font-semibold text-[#0a0a0a] transition-colors hover:bg-white/90"
+              >
+                前往公司網站
+                <FaArrowRight className="text-xs transition-transform group-hover:translate-x-0.5" />
+              </a>
+            </div>
+
+            <p className="mt-5 max-w-3xl text-sm sm:text-base leading-relaxed text-white/55">
+              Mentarix 是我創辦的資料工程與 AI 顧問公司，協助企業把資料基礎設施、商業分析與 AI 應用整合成可上線的決策系統。
+            </p>
+
+            <div className="mt-5 flex flex-wrap gap-2">
+              {["資料工程", "BI 儀表板", "預測模型", "GenAI 應用", "端到端交付"].map((item) => (
+                <span
+                  key={item}
+                  className="rounded-full border border-cyan-400/15 bg-cyan-400/[0.06] px-3 py-1 text-xs font-medium text-cyan-200/75"
+                >
+                  {item}
+                </span>
+              ))}
+            </div>
+          </motion.div>
         </section>
 
         {/* ═══ 人生航線 ═══ */}

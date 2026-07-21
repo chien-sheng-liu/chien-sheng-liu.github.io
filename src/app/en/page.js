@@ -209,6 +209,51 @@ export default function HomeEn() {
         </div>
       </section>
 
+      {/* ══════ COMPANY ══════ */}
+      <section className="border-t border-white/[0.07] py-20 px-6 sm:px-8 lg:px-16 xl:px-20">
+        <motion.div
+          initial={{ opacity: 0, y: 28 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.75, ease: "easeOut" }}
+          className="max-w-7xl mx-auto grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-end"
+        >
+          <div>
+            <p className="text-[11px] tracking-[0.4em] uppercase text-cyan-300/60 font-medium mb-5">
+              Founded Company
+            </p>
+            <h2 className="text-[clamp(2.3rem,5vw,5rem)] font-bold text-white leading-[0.95] tracking-tight">
+              Mentarix<br />Data Studio
+            </h2>
+          </div>
+
+          <div className="max-w-2xl">
+            <p className="text-lg sm:text-xl text-white/72 leading-relaxed mb-5">
+              I founded Mentarix Data Studio as Founder & AI Strategist to help organizations turn data, analytics, and AI into decision systems.
+            </p>
+            <p className="text-sm sm:text-base text-white/40 leading-relaxed mb-7">
+              The studio focuses on data engineering, BI dashboards, predictive models, and GenAI applications, carrying work from strategic alignment to production handover.
+            </p>
+            <div className="flex flex-wrap items-center gap-3">
+              {["Taiwan", "Data Engineering", "AI Consulting", "BI & Analytics"].map((item) => (
+                <span key={item} className="rounded-full border border-white/[0.08] bg-white/[0.04] px-3 py-1 text-xs font-medium text-white/55">
+                  {item}
+                </span>
+              ))}
+              <a
+                href="https://www.mentarix-data.com/zh-TW"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group inline-flex items-center gap-2 rounded-full bg-white px-5 py-2.5 text-sm font-semibold text-[#0a0a0a] transition-colors hover:bg-white/90"
+              >
+                Visit Mentarix
+                <FaArrowRight className="text-xs transition-transform group-hover:translate-x-0.5" />
+              </a>
+            </div>
+          </div>
+        </motion.div>
+      </section>
+
       {/* ══════ MARQUEE ══════ */}
       <section className="border-y border-white/[0.07] py-5 overflow-hidden">
         <div
