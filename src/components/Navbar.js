@@ -7,8 +7,8 @@ import { motion, AnimatePresence } from 'framer-motion';
 
 const navLinksZh = [
   { name: '首頁', href: '/' },
-  { name: 'About', href: '/about' },
-  { name: 'Case Work', href: '/projects' },
+  { name: '關於我', href: '/about' },
+  { name: '案例作品', href: '/projects' },
   { name: '文章', href: '/articles' },
   { name: '聯絡我', href: '/contact' },
 ];
