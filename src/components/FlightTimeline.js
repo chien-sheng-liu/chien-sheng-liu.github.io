@@ -8,6 +8,7 @@ import WorldMapBackground from "./WorldMapBackground";
 const events = [
   {
     year: "2026", title: "Consultant in Data & AI - Advisory Service", org: "WSP (Asia) Limited", flag: "🇭🇰", type: "work",
+    shortTitle: "Data & AI Consultant",
     loc: "九龍灣", locFull: "香港", duration: "2026.08",
     detail: [
       "負責香港及中國大陸相關業務，連結策略、資料與決策",
@@ -151,6 +152,10 @@ const CARD_W = 520;
 const CARD_H = 220;
 const GAP = 40;
 const PAD = 48;
+const MOBILE_CARD_MAX_W = 340;
+const MOBILE_CARD_H = 190;
+const MOBILE_GAP = 20;
+const MOBILE_PAD = 16;
 const AUTO_SCROLL_SPEED = 55;
 const HOVER_MAX_SPEED = 220;
 const EDGE_ZONE = 0.18;
@@ -179,6 +184,13 @@ export default function FlightTimeline() {
   const innerRef = useRef(null);
   const dragX = useMotionValue(0);
   const [dragConstraint, setDragConstraint] = useState(0);
+  const [timelineMetrics, setTimelineMetrics] = useState({
+    cardW: CARD_W,
+    cardH: CARD_H,
+    gap: GAP,
+    pad: PAD,
+    isMobile: false,
+  });
   const isDragging = useRef(false);
   const isHovering = useRef(false);
   const hoverVelocity = useRef(0);
@@ -188,27 +200,46 @@ export default function FlightTimeline() {
 
   /* Scroll by one card */
   const scrollBy = useCallback((dir) => {
-    const step = CARD_W + GAP;
+    const step = timelineMetrics.cardW + timelineMetrics.gap;
     const current = dragX.get();
     const target = Math.round(current / step) * step + dir * step;
     const clamped = Math.max(dragConstraint, Math.min(0, target));
     animate(dragX, clamped, { type: "spring", stiffness: 300, damping: 30 });
-  }, [dragX, dragConstraint]);
+  }, [dragX, dragConstraint, timelineMetrics.cardW, timelineMetrics.gap]);
 
   useEffect(() => {
     function calc() {
-      if (!containerRef.current || !innerRef.current) return;
+      if (!containerRef.current) return;
       const containerW = containerRef.current.offsetWidth;
-      const innerW = innerRef.current.scrollWidth;
-      setDragConstraint(Math.min(0, -(innerW - containerW)));
+      const isMobile = containerW < 640;
+      const cardW = isMobile ? Math.max(280, Math.min(containerW - 32, MOBILE_CARD_MAX_W)) : CARD_W;
+      const cardH = isMobile ? MOBILE_CARD_H : CARD_H;
+      const gap = isMobile ? MOBILE_GAP : GAP;
+      const pad = isMobile ? MOBILE_PAD : PAD;
+      const innerW = events.length * cardW + (events.length - 1) * gap + pad * 2;
+      const nextConstraint = Math.min(0, -(innerW - containerW));
+
+      setTimelineMetrics((current) => {
+        if (
+          current.cardW === cardW &&
+          current.cardH === cardH &&
+          current.gap === gap &&
+          current.pad === pad &&
+          current.isMobile === isMobile
+        ) return current;
+        return { cardW, cardH, gap, pad, isMobile };
+      });
+      setDragConstraint(nextConstraint);
+      dragX.set(Math.max(nextConstraint, Math.min(0, dragX.get())));
     }
     calc();
     window.addEventListener("resize", calc);
     return () => window.removeEventListener("resize", calc);
-  }, []);
+  }, [dragX]);
 
   /* Combined auto-scroll + hover-edge-scroll RAF */
   useEffect(() => {
+    if (timelineMetrics.isMobile) return;
     if (dragConstraint >= 0) return;
     let lastTime = performance.now();
     let autoDir = -1; // -1 = scroll right (dragX decreases), 1 = scroll left
@@ -237,7 +268,7 @@ export default function FlightTimeline() {
     }
     rafId = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(rafId);
-  }, [dragConstraint, dragX]);
+  }, [dragConstraint, dragX, timelineMetrics.isMobile]);
 
   const handleMouseMove = useCallback((e) => {
     if (!containerRef.current) return;
@@ -317,7 +348,7 @@ export default function FlightTimeline() {
             onDragStart={() => { isDragging.current = true; }}
             onDragEnd={() => { requestAnimationFrame(() => { isDragging.current = false; }); }}
             className="flex h-full cursor-grab active:cursor-grabbing select-none"
-            style={{ x: dragX, paddingLeft: PAD, paddingRight: PAD, alignItems: "center" }}
+            style={{ x: dragX, paddingLeft: timelineMetrics.pad, paddingRight: timelineMetrics.pad, alignItems: "center" }}
           >
             {/* ── Dashed flight path ── */}
             <div className="absolute left-0 right-0 top-1/2 -translate-y-1/2 pointer-events-none">
@@ -343,6 +374,7 @@ export default function FlightTimeline() {
               const s = typeStyle[ev.type];
               const isAbove = idx % 2 === 0;
               const prevEvent = idx < events.length - 1 ? events[idx + 1] : null;
+              const cardTitle = timelineMetrics.isMobile ? (ev.shortTitle || ev.title) : ev.title;
 
               return (
                 <motion.div
@@ -353,8 +385,8 @@ export default function FlightTimeline() {
                   transition={{ duration: 0.5, delay: idx * 0.04, ease: [0.22, 1, 0.36, 1] }}
                   className="flex-shrink-0 flex flex-col items-center relative"
                   style={{
-                    width: `${CARD_W}px`,
-                    marginRight: idx < events.length - 1 ? `${GAP}px` : 0,
+                    width: `${timelineMetrics.cardW}px`,
+                    marginRight: idx < events.length - 1 ? `${timelineMetrics.gap}px` : 0,
                   }}
                 >
                   <div className={`flex flex-col items-center ${isAbove ? "flex-col" : "flex-col-reverse"}`} style={{ minHeight: "100%" }}>
@@ -366,13 +398,13 @@ export default function FlightTimeline() {
                       type="button"
                       onClick={() => { if (!isDragging.current) openModal(ev); }}
                       className={`group relative overflow-hidden ${s.cardBg} backdrop-blur-md shadow-lg ${s.glow} transition-all duration-300 cursor-pointer text-left flex`}
-                      style={{ borderRadius: "12px", border: "1px solid rgba(255,255,255,0.15)", width: `${CARD_W}px`, height: `${CARD_H}px` }}
+                      style={{ borderRadius: "12px", border: "1px solid rgba(255,255,255,0.15)", width: `${timelineMetrics.cardW}px`, height: `${timelineMetrics.cardH}px` }}
                     >
                       {/* ── Left: accent strip ── */}
                       <div className={`w-[6px] shrink-0 bg-gradient-to-b ${s.strip}`} />
 
                       {/* ── Main section (left ~70%) ── */}
-                      <div className="flex-1 flex flex-col justify-between p-4 min-w-0">
+                      <div className="flex-1 flex flex-col justify-between p-3 sm:p-4 min-w-0">
                         {/* Airline header */}
                         <div className="flex items-center justify-between mb-2">
                           <div className="flex items-center gap-1.5">
@@ -387,9 +419,9 @@ export default function FlightTimeline() {
                         </div>
 
                         {/* FROM → TO */}
-                        <div className="flex items-center gap-2 mb-3">
+                        <div className="flex items-center gap-2 mb-2 sm:mb-3">
                           <div className="text-center min-w-[42px]">
-                            <div className="text-xl font-black text-[#1d1d1f] leading-none">{prevEvent ? prevEvent.loc : "---"}</div>
+                            <div className="text-lg sm:text-xl font-black text-[#1d1d1f] leading-none">{prevEvent ? prevEvent.loc : "---"}</div>
                             <div className="text-[8px] text-slate-400 mt-0.5">{prevEvent ? prevEvent.locFull : ""}</div>
                           </div>
                           <div className="flex-1 flex items-center gap-1 px-1">
@@ -398,20 +430,20 @@ export default function FlightTimeline() {
                             <div className="flex-1 border-t border-dashed border-slate-300" />
                           </div>
                           <div className="text-center min-w-[42px]">
-                            <div className="text-xl font-black text-[#1d1d1f] leading-none">{ev.loc}</div>
+                            <div className="text-lg sm:text-xl font-black text-[#1d1d1f] leading-none">{ev.loc}</div>
                             <div className="text-[8px] text-slate-400 mt-0.5">{ev.locFull}</div>
                           </div>
                         </div>
 
                         {/* Info row */}
-                        <div className="flex gap-4">
+                        <div className="flex gap-3 sm:gap-4">
                           <div>
                             <div className="text-[8px] text-slate-400 uppercase tracking-wider">Date</div>
                             <div className={`text-base font-bold ${s.accentText}`}>{ev.year}</div>
                           </div>
                           <div className="flex-1 min-w-0">
                             <div className="text-[8px] text-slate-400 uppercase tracking-wider">Role</div>
-                            <div className="text-sm font-bold text-[#1d1d1f] leading-snug">{ev.title}</div>
+                            <div className="text-[13px] sm:text-sm font-bold text-[#1d1d1f] leading-snug">{cardTitle}</div>
                             <div className="text-xs text-slate-500 leading-snug">{ev.org}</div>
                           </div>
                         </div>
@@ -419,19 +451,21 @@ export default function FlightTimeline() {
                         {/* Duration + barcode */}
                         <div className="flex items-end justify-between mt-auto pt-2">
                           <div className="text-[11px] font-medium text-slate-500 truncate mr-3">{ev.duration}</div>
-                          <BarcodeSVG width={80} height={14} />
+                          <div className="hidden min-[380px]:block">
+                            <BarcodeSVG width={64} height={14} />
+                          </div>
                         </div>
                       </div>
 
                       {/* ── Vertical perforation ── */}
-                      <div className="relative w-0 shrink-0">
+                      <div className="hidden sm:block relative w-0 shrink-0">
                         <div className="absolute inset-y-0 left-0 border-l border-dashed border-slate-200" />
                         <div className="absolute -top-2 left-1/2 -translate-x-1/2 w-4 h-4 rounded-full bg-[#0a0a0a]" />
                         <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-4 h-4 rounded-full bg-[#0a0a0a]" />
                       </div>
 
                       {/* ── Right stub (~30%) ── */}
-                      <div className="w-[130px] shrink-0 flex flex-col items-center justify-center p-4 text-center">
+                      <div className="hidden sm:flex w-[130px] shrink-0 flex-col items-center justify-center p-4 text-center">
                         <span className="text-3xl mb-1">{ev.flag}</span>
                         <div className="text-2xl font-black text-[#1d1d1f] leading-none mb-0.5">{ev.loc}</div>
                         <div className="text-[9px] text-slate-400 mb-2">{ev.locFull}</div>
@@ -458,21 +492,21 @@ export default function FlightTimeline() {
           </motion.div>
 
           {/* Edge fades — match dark background */}
-          <div className="absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-[#0a0a0a] to-transparent pointer-events-none z-10" />
-          <div className="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-[#0a0a0a] to-transparent pointer-events-none z-10" />
+          <div className="hidden sm:block absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-[#0a0a0a] to-transparent pointer-events-none z-10" />
+          <div className="hidden sm:block absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-[#0a0a0a] to-transparent pointer-events-none z-10" />
 
           {/* Arrow buttons */}
           <button
             type="button"
             onClick={() => scrollBy(1)}
-            className="absolute left-4 top-1/2 -translate-y-1/2 z-20 w-8 h-8 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center text-white/50 opacity-0 hover:opacity-100 hover:bg-white/20 hover:text-white hover:shadow-md group-hover/timeline:opacity-60 transition-all duration-300 cursor-pointer"
+            className="hidden sm:flex absolute left-4 top-1/2 -translate-y-1/2 z-20 w-8 h-8 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 items-center justify-center text-white/50 opacity-0 hover:opacity-100 hover:bg-white/20 hover:text-white hover:shadow-md group-hover/timeline:opacity-60 transition-all duration-300 cursor-pointer"
           >
             <FaChevronLeft className="text-[10px]" />
           </button>
           <button
             type="button"
             onClick={() => scrollBy(-1)}
-            className="absolute right-4 top-1/2 -translate-y-1/2 z-20 w-8 h-8 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center text-white/50 opacity-0 hover:opacity-100 hover:bg-white/20 hover:text-white hover:shadow-md group-hover/timeline:opacity-60 transition-all duration-300 cursor-pointer"
+            className="hidden sm:flex absolute right-4 top-1/2 -translate-y-1/2 z-20 w-8 h-8 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 items-center justify-center text-white/50 opacity-0 hover:opacity-100 hover:bg-white/20 hover:text-white hover:shadow-md group-hover/timeline:opacity-60 transition-all duration-300 cursor-pointer"
           >
             <FaChevronRight className="text-[10px]" />
           </button>
