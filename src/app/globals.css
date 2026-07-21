@@ -48,6 +48,9 @@ html {
   .hide-scrollbar::-webkit-scrollbar {
     display: none;
   }
+  .wrap-anywhere {
+    overflow-wrap: anywhere;
+  }
 }
 
 /* ─── Article Prose Typography ─── */

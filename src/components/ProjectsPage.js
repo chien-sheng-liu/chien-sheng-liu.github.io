@@ -16,27 +16,33 @@ import ProjectDetailModal from "./ProjectDetailModal";
 /* ── i18n ── */
 const i18n = {
   zh: {
-    tagline: "Projects",
-    title: "我的專案作品",
-    desc: "數據科學、機器學習、全端開發 — 將複雜問題變成可行的解決方案。",
+    tagline: "Case Work",
+    title: "Data & AI 案例集",
+    desc: "用顧問案例方式呈現問題、方法與成果：從 LLM、BI、預測模型到可部署的資料產品。",
     all: "全部",
+    problem: "問題",
+    approach: "方法",
+    impact: "成果",
     viewCode: "查看程式碼",
     viewDetail: "了解更多",
-    ctaTitle: "想了解更多？",
-    ctaDesc: "每個專案背後都有獨特的挑戰。歡迎到 GitHub 看更多細節。",
-    ctaBtn: "查看 GitHub",
+    ctaTitle: "有類似的 Data & AI 問題？",
+    ctaDesc: "我可以協助把模糊需求拆成可驗收的分析、模型或資料產品路徑。",
+    ctaBtn: "查看 GitHub 案例",
     updating: "持續更新中",
   },
   en: {
-    tagline: "Projects",
-    title: "My Project Work",
-    desc: "Data science, machine learning, and full-stack — turning complex problems into working solutions.",
+    tagline: "Case Work",
+    title: "Data & AI Case Work",
+    desc: "Case-style work across LLMs, BI, forecasting, and deployable data products: problem, method, and outcome.",
     all: "All",
+    problem: "Problem",
+    approach: "Approach",
+    impact: "Impact",
     viewCode: "View Code",
     viewDetail: "Learn More",
-    ctaTitle: "Want to learn more?",
-    ctaDesc: "Each project has unique challenges behind it. Check out GitHub for more details.",
-    ctaBtn: "View GitHub",
+    ctaTitle: "Working through a similar Data & AI problem?",
+    ctaDesc: "I can help turn ambiguous requirements into deliverable analytics, model, or data-product paths.",
+    ctaBtn: "View GitHub cases",
     updating: "Continuously updating",
   },
 };
@@ -75,7 +81,7 @@ export default function ProjectsPage({ locale = "zh" }) {
     <div className="relative min-h-screen bg-[#0a0a0a] text-white overflow-hidden">
 
       <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-24">
-        <div className="max-w-5xl mx-auto">
+        <div className="max-w-5xl mx-auto min-w-0">
 
           {/* ── Hero ── */}
           <motion.div className="mb-16" initial="hidden" animate="visible">
@@ -89,7 +95,7 @@ export default function ProjectsPage({ locale = "zh" }) {
             <motion.h1
               variants={fadeUp}
               custom={1}
-              className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-[1.1] tracking-tight mb-5"
+              className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-[1.1] tracking-tight mb-5 break-words"
             >
               <span className="bg-gradient-to-r from-violet-400 via-sky-400 to-cyan-300 bg-clip-text text-transparent">
                 {t.title}
@@ -98,7 +104,7 @@ export default function ProjectsPage({ locale = "zh" }) {
             <motion.p
               variants={fadeUp}
               custom={2}
-              className="text-lg text-white/50 leading-relaxed max-w-2xl"
+              className="wrap-anywhere text-lg text-white/50 leading-relaxed max-w-2xl"
             >
               {t.desc}
             </motion.p>
@@ -106,7 +112,7 @@ export default function ProjectsPage({ locale = "zh" }) {
 
           {/* ── Filter bar ── */}
           <motion.div
-            className="flex flex-wrap justify-center gap-2 mb-8"
+            className="flex max-w-full flex-nowrap justify-start gap-2 mb-8 overflow-x-auto pb-1 sm:flex-wrap sm:justify-center sm:overflow-visible"
             variants={fadeUp}
             initial="hidden"
             animate="visible"
@@ -115,7 +121,7 @@ export default function ProjectsPage({ locale = "zh" }) {
             <button
               type="button"
               onClick={() => setActiveFilter(null)}
-              className={`px-4 py-1.5 rounded-full text-sm font-medium border transition-all duration-200 cursor-pointer ${
+              className={`max-w-full shrink-0 px-4 py-1.5 rounded-full text-sm font-medium border transition-all duration-200 cursor-pointer ${
                 activeFilter === null
                   ? "bg-white text-[#0a0a0a] border-white shadow-sm"
                   : "bg-white/[0.05] text-white/50 border-white/[0.08] hover:border-white/20 hover:text-white/80"
@@ -128,7 +134,7 @@ export default function ProjectsPage({ locale = "zh" }) {
                 key={cat}
                 type="button"
                 onClick={() => setActiveFilter(activeFilter === cat ? null : cat)}
-                className={`px-4 py-1.5 rounded-full text-sm font-medium border transition-all duration-200 cursor-pointer ${
+                className={`max-w-full shrink-0 px-4 py-1.5 rounded-full text-sm font-medium border transition-all duration-200 cursor-pointer ${
                   activeFilter === cat
                     ? "bg-white text-[#0a0a0a] border-white shadow-sm"
                     : "bg-white/[0.05] text-white/50 border-white/[0.08] hover:border-white/20 hover:text-white/80"
@@ -141,7 +147,7 @@ export default function ProjectsPage({ locale = "zh" }) {
 
           {/* ── Project cards ── */}
           <motion.div
-            className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-20"
+            className="grid w-full min-w-0 grid-cols-1 lg:grid-cols-2 gap-6 mb-20 overflow-hidden"
             variants={stagger}
             initial="hidden"
             whileInView="visible"
@@ -156,7 +162,7 @@ export default function ProjectsPage({ locale = "zh" }) {
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.95 }}
                 transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-                className="group relative overflow-hidden rounded-2xl bg-white/[0.05] backdrop-blur-sm border border-white/[0.08] hover:border-white/20 hover:shadow-lg hover:shadow-black/20 transition-all duration-300 cursor-pointer"
+                className="group relative min-w-0 max-w-full overflow-hidden rounded-2xl bg-white/[0.05] backdrop-blur-sm border border-white/[0.08] hover:border-white/20 hover:shadow-lg hover:shadow-black/20 transition-all duration-300 cursor-pointer"
                 onClick={() => setSelectedProject(project)}
               >
                 {/* Accent strip */}
@@ -164,11 +170,11 @@ export default function ProjectsPage({ locale = "zh" }) {
                   className={`absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b ${project.color}`}
                 />
 
-                <div className="pl-5 pr-6 py-6">
+                <div className="min-w-0 pl-5 pr-4 sm:pr-6 py-5 sm:py-6">
                   {/* Header */}
-                  <div className="flex items-start gap-4 mb-4">
+                  <div className="flex items-start gap-3 sm:gap-4 mb-4">
                     <div
-                      className={`flex-shrink-0 w-11 h-11 rounded-xl bg-gradient-to-br ${project.color} flex items-center justify-center text-white shadow-md`}
+                      className={`flex-shrink-0 w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-gradient-to-br ${project.color} flex items-center justify-center text-white shadow-md`}
                     >
                       {project.icon}
                     </div>
@@ -179,19 +185,38 @@ export default function ProjectsPage({ locale = "zh" }) {
                           {project.category}
                         </span>
                       </div>
-                      <h3 className="text-lg font-bold text-white leading-snug group-hover:text-sky-400 transition-colors">
+                      <h3 className="wrap-anywhere text-[15px] sm:text-lg font-bold text-white leading-snug group-hover:text-sky-400 transition-colors">
                         {project.title}
                       </h3>
                     </div>
                   </div>
 
                   {/* Description */}
-                  <p className="text-sm text-white/50 leading-relaxed mb-4">
+                  <p className="wrap-anywhere text-sm text-white/50 leading-relaxed mb-4">
                     {project.description}
                   </p>
 
+                  {project.caseNotes && (
+                    <div className="grid gap-2 mb-4">
+                      {[
+                        [t.problem, project.caseNotes.problem],
+                        [t.approach, project.caseNotes.approach],
+                        [t.impact, project.caseNotes.impact],
+                      ].map(([label, text]) => (
+                        <div key={label} className="rounded-lg border border-white/[0.08] bg-black/20 p-3">
+                          <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-white/30 mb-1">
+                            {label}
+                          </p>
+                          <p className="wrap-anywhere text-xs leading-relaxed text-white/55">
+                            {text}
+                          </p>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+
                   {/* Tech tags */}
-                  <div className="flex flex-wrap gap-1.5 mb-4">
+                  <div className="flex min-w-0 flex-wrap gap-1.5 mb-4">
                     {project.technologies.map((tech, i) => (
                       <span
                         key={i}
@@ -203,11 +228,11 @@ export default function ProjectsPage({ locale = "zh" }) {
                   </div>
 
                   {/* Metrics */}
-                  <div className="flex gap-3 mb-5">
+                  <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 mb-5">
                     {project.metrics.map((m, i) => (
-                      <div key={i} className="flex-1 text-center py-2.5 bg-white/[0.05] rounded-lg border border-white/[0.08]">
+                      <div key={i} className="min-w-0 text-center py-2.5 bg-white/[0.05] rounded-lg border border-white/[0.08]">
                         <div className="text-base font-bold text-white">{m.value}</div>
-                        <div className="text-[10px] text-white/40 mt-0.5">{m.label}</div>
+                        <div className="truncate text-[10px] text-white/40 mt-0.5">{m.label}</div>
                       </div>
                     ))}
                   </div>

@@ -48,6 +48,18 @@ const projectBase = [
       zh: "結合 LLM Gateway 與 Playwright 瀏覽器自動化的財務分析平台。多 Agent 協作（新聞 / 財務 / 交易 / 數據），搭配 Safety Guard 安全層與完整 Artifact 追溯。",
       en: "Financial analysis platform combining an LLM Gateway with Playwright browser automation. Multi-agent collaboration (news / finance / trader / data) with Safety Guard and full artifact traceability.",
     },
+    caseNotes: {
+      zh: {
+        problem: "投資研究流程分散，資料來源、推理過程與報告產出難以追溯。",
+        approach: "用多代理工作流串接新聞、財務、交易與資料擷取，並加入 LLM Gateway 與安全層。",
+        impact: "把分析、審計日誌與可重放 artifacts 整合成可驗證的研究流程。",
+      },
+      en: {
+        problem: "Investment research workflows were fragmented, with weak traceability across sources, reasoning, and reports.",
+        approach: "Connected news, finance, trader, and data agents through an LLM Gateway with safety controls.",
+        impact: "Packaged analysis, audit logs, and replayable artifacts into a verifiable research workflow.",
+      },
+    },
     detailDescription: {
       zh: "VICI 是一套生產級的 LLM Gateway + 多代理財務分析系統。Gateway 層採用 Provider 抽象設計（策略模式），支援 OpenAI / Claude / Mock 一鍵切換，內建 Safety Guard 五層安全架構（輸入驗證→Prompt 掃描→Provider 白名單→輸出脫敏→審計日誌）。四個專業 Agent（News / Finance / Trader / YFinance）各司其職，透過 Playwright 無頭瀏覽器自動抓取股票行情與新聞，再由 LLM 生成帶情緒分析的投資報告與簡報。每次運行產出完整 Artifact（report.md / slides.pdf / run.json / trace.zip / SHA256 校驗），支援 Deterministic Dry-run 離線測試。",
       en: "VICI is a production-grade LLM Gateway + multi-agent financial analysis system. The Gateway layer uses a Provider abstraction (strategy pattern) supporting one-click switching between OpenAI / Claude / Mock, with a built-in 5-layer Safety Guard (input validation → prompt scan → provider allowlist → output redaction → audit log). Four specialized agents (News / Finance / Trader / YFinance) collaborate via Playwright headless browser to scrape stock data and news, then LLM generates investment reports with sentiment analysis. Each run produces full artifacts (report.md / slides.pdf / run.json / trace.zip / SHA256 checksums), with deterministic dry-run for offline testing.",
@@ -118,6 +130,18 @@ const projectBase = [
       zh: "蒐集我國氣象、船舶靜態資料、船舶即時AIS資料，並建立 Clickhouse 即時流式資料庫，並以深度學習模型進行不間斷預測船舶擱淺以及異常行為，以防止我國周遭發生船難",
       en: "Integrated national weather, vessel static data, and real‑time AIS streams into ClickHouse and deep learning to predict grounding and anomalous behaviors and help prevent maritime incidents.",
     },
+    caseNotes: {
+      zh: {
+        problem: "船舶風險資料即時、異質且高風險，傳統監控難以及早預警。",
+        approach: "整合氣象、AIS 與船舶靜態資料，建立 ClickHouse 串流資料庫與深度學習預測流程。",
+        impact: "支援 7x24 異常與擱淺風險預測，協助提前 30 分鐘發出警報。",
+      },
+      en: {
+        problem: "Maritime risk data is real-time, heterogeneous, and high-stakes, making early warning difficult.",
+        approach: "Integrated weather, AIS, and vessel static data into ClickHouse streaming and deep learning pipelines.",
+        impact: "Supported 24/7 anomaly and grounding prediction with alerts up to 30 minutes ahead.",
+      },
+    },
     detailDescription: {
       zh: "本專案整合 15+ 種資料來源，包含氣象局即時氣象資料、船舶靜態資料庫、以及全台灣周遭海域的 AIS（船舶自動識別系統）即時串流資料。所有資料匯入 ClickHouse 即時流式資料庫，經過特徵工程後餵入深度學習模型，對船舶擱淺風險與異常航行行為進行 7×24 小時不間斷預測，協助海巡單位提前預警並防止船難發生。",
       en: "This project integrates 15+ data sources including real-time weather data, vessel static databases, and AIS (Automatic Identification System) streaming data from surrounding waters. All data flows into ClickHouse for real-time processing, goes through feature engineering, and feeds into deep learning models for 24/7 continuous prediction of vessel grounding risks and anomalous navigation behaviors, helping coast guard units issue early warnings and prevent maritime incidents.",
@@ -150,6 +174,18 @@ const projectBase = [
     description: {
       zh: "比較 SARIMA、Holt-Winters、Prophet 三種模型在 COVID-19 干擾下的預測表現，設計排除疫情 / 包含疫情 / 後疫情三組實驗，量化外部衝擊對時間序列預測的影響。",
       en: "Compared SARIMA, Holt-Winters, and Prophet under COVID-19 disruptions. Designed three experimental groups (excluding / including / post-COVID data) to quantify the impact of external shocks on time-series forecasting.",
+    },
+    caseNotes: {
+      zh: {
+        problem: "疫情等外部衝擊讓歷史資料失真，需求預測模型難以直接沿用。",
+        approach: "以三組實驗比較 SARIMA、Holt-Winters 與 Prophet 在不同衝擊情境下的表現。",
+        impact: "建立可解釋的模型選擇依據，支援零售、供應鏈與市場規劃預測。",
+      },
+      en: {
+        problem: "External shocks distorted historical demand signals, making existing forecasting assumptions unreliable.",
+        approach: "Compared SARIMA, Holt-Winters, and Prophet across excluding, including, and post-shock experiments.",
+        impact: "Produced interpretable model-selection guidance for retail, supply chain, and market planning.",
+      },
     },
     detailDescription: {
       zh: "本專案探討 COVID-19 疫情如何影響時間序列預測模型的準確度。透過嚴謹的實驗設計，將數據分為「排除疫情」「包含疫情」「後疫情」三組，分別以 SARIMA（含自動參數優化）、Holt-Winters（三重指數平滑）、Prophet（自動處理假日與異常值）進行建模與預測，最終比較各模型在不同情境下的 MAE、RMSE、MAPE 等指標表現，並提出面對外部干擾時的最佳預測策略。",
@@ -192,6 +228,18 @@ const projectBase = [
       zh: "3×3 老虎機遊戲引擎，結合 Monte Carlo 模擬與啟發式搜索算法自動優化轉軸配置，在目標 RTP 95% 與勝率 ≥ 55% 的約束下找出最佳符號分布。全棧實現含 FastAPI 後端與 React 前端。",
       en: "3×3 slot game engine combining Monte Carlo simulation with heuristic search to auto-optimize reel configurations under RTP 95% and win rate ≥ 55% constraints. Full-stack implementation with FastAPI backend and React frontend.",
     },
+    caseNotes: {
+      zh: {
+        problem: "遊戲機率設計需要同時滿足 RTP、勝率與體驗限制，手動調參成本高。",
+        approach: "用 Monte Carlo 模擬與啟發式搜索自動評估大量轉軸配置。",
+        impact: "把數天人工試算壓縮成分鐘級優化，並保留可重現的驗證結果。",
+      },
+      en: {
+        problem: "Game probability design had to balance RTP, win rate, and player experience under costly manual tuning.",
+        approach: "Used Monte Carlo simulation and heuristic search to evaluate large reel-configuration spaces.",
+        impact: "Reduced multi-day manual tuning into minute-level optimization with reproducible validation.",
+      },
+    },
     detailDescription: {
       zh: "是一套老虎機遊戲引擎與機率優化系統。核心挑戰在於如何設計轉軸配置使遊戲同時滿足 RTP（返還率）與勝率雙目標。系統以啟發式搜索算法迭代 800 步，每步透過 Monte Carlo 模擬 50,000 局來評估配置的適應度，最終以 100,000 局精確驗證最佳候選。5 種符號（不同賠率）搭配 5 種獲勝模式（水平、垂直、對角、V 型、自定義），透過符號分布變異與適應性搜索策略，在巨大的搜索空間中高效收斂至目標配置。全棧實現支援 CLI 與 API 雙模式，React 前端可即時體驗遊戲與查看統計數據。",
       en: "This is a slot game engine and probability optimization system. The core challenge is designing reel configurations that simultaneously meet RTP (Return to Player) and win rate targets. The system uses heuristic search iterating 800 steps, evaluating each configuration via 50,000-spin Monte Carlo simulation, with final 100,000-spin verification. Five symbols (varying multipliers) combined with five winning patterns (horizontal, vertical, diagonal, V-shape, custom), using symbol distribution mutation and adaptive search to efficiently converge in a massive search space. Full-stack implementation supports both CLI and API modes, with a React frontend for real-time gameplay and statistics.",
@@ -233,6 +281,18 @@ const projectBase = [
       zh: "生產級 RAG 平台，支援文檔上傳、向量檢索、多 LLM 切換（OpenAI / Gemini / Claude），搭配 Redis + PostgreSQL 雙層存儲與 Docker 微服務部署。",
       en: "Production-grade RAG platform with document upload, vector retrieval, multi-LLM switching (OpenAI / Gemini / Claude), dual-layer Redis + PostgreSQL storage, and Docker microservice deployment.",
     },
+    caseNotes: {
+      zh: {
+        problem: "企業知識問答常卡在文件上傳、權限、模型切換與稽核紀錄，難以產品化。",
+        approach: "建立 no-code RAG 流程，串接 pgvector、Redis、PostgreSQL 與多 LLM provider。",
+        impact: "讓文件問答從數週建置縮短到數小時，並支援引用、串流與審計。",
+      },
+      en: {
+        problem: "Enterprise Q&A often stalls on upload, permissions, model switching, and auditability before it can become a product.",
+        approach: "Built a no-code RAG workflow across pgvector, Redis, PostgreSQL, and multiple LLM providers.",
+        impact: "Reduced document Q&A setup from weeks to hours with citations, streaming, and audit support.",
+      },
+    },
     detailDescription: {
       zh: "AutoLLM 是一套 No-Code 的 RAG 聊天機器人平台。使用者上傳文件後，系統自動完成解析、分塊、Embedding 生成與向量儲存（pgvector），再透過餘弦相似度檢索相關文檔塊，構建上下文送入 LLM 生成帶引用的答案。架構採用 FastAPI + Next.js 全棧，Redis 做短期對話緩存（3 天 TTL）、PostgreSQL 做永久審計，Provider 抽象層可一鍵切換 OpenAI / Gemini / Claude。全服務以 Docker Compose 編排，支援流式回答（SSE）、JWT 認證、速率限制與自動版本管理。",
       en: "AutoLLM is a No-Code RAG chatbot platform. Users upload documents, and the system automatically parses, chunks, generates embeddings, and stores vectors (pgvector). Cosine similarity retrieval finds relevant chunks to build context for LLM-generated answers with citations. Built with FastAPI + Next.js full-stack, Redis for short-term conversation cache (3-day TTL), PostgreSQL for permanent audit storage, and a provider abstraction layer for one-click switching between OpenAI / Gemini / Claude. All services orchestrated via Docker Compose, supporting streaming responses (SSE), JWT auth, rate limiting, and automatic versioning.",
@@ -273,6 +333,7 @@ export function getProjectData(locale = "zh") {
     title: p.title[locale] || p.title.zh,
     description: p.description[locale] || p.description.zh,
     detailDescription: p.detailDescription?.[locale] || p.detailDescription?.zh || null,
+    caseNotes: p.caseNotes?.[locale] || p.caseNotes?.zh || null,
     highlights: p.highlights?.[locale] || p.highlights?.zh || null,
     icon: p.icon,
     categoryIcon: p.categoryIcon,

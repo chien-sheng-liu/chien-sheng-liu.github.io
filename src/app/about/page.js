@@ -60,6 +60,13 @@ const volunteers = [
   { date: "2025/05/22", title: "Taiwan Women in Data Science (TWiDS)", org: "Stanford Data Science in Taiwan" },
 ];
 
+const profileSummary = [
+  { label: "Current", value: "WSP Data & AI Advisory", accent: "text-sky-300" },
+  { label: "Founded", value: "Mentarix Data Studio", accent: "text-cyan-300" },
+  { label: "Markets", value: "台灣 · 德國 · 香港 · 中國大陸", accent: "text-emerald-300" },
+  { label: "Focus", value: "BI · GenAI · Decision Systems", accent: "text-violet-300" },
+];
+
 export default function About() {
   return (
     <div className="relative min-h-screen bg-[#0a0a0a] text-white">
@@ -83,15 +90,19 @@ export default function About() {
               </motion.div>
 
               {/* Text */}
-              <div className="text-center sm:text-left space-y-3 flex-1">
+              <div className="w-full text-center sm:text-left space-y-3 flex-1 min-w-0 max-w-full">
                 <motion.div variants={fadeUp}>
                   <p className="text-xs uppercase tracking-[0.35em] text-indigo-400/70 font-medium mb-1">個人經歷</p>
                   <h1 className="text-3xl sm:text-4xl font-bold text-white">Morris Liu</h1>
-                  <p className="text-base text-white/40 mt-1">Consultant in Data & AI - Advisory Service @ WSP (Asia) Limited · 香港</p>
+                  <p className="text-sm text-white/40 mt-1 sm:hidden max-w-full break-words">
+                    Data & AI Consultant @ WSP
+                    <span className="block mt-0.5">香港</span>
+                  </p>
+                  <p className="hidden sm:block text-base text-white/40 mt-1">Consultant in Data & AI - Advisory Service @ WSP (Asia) Limited · 香港</p>
                 </motion.div>
 
-                <motion.p variants={fadeUp} className="text-sm sm:text-base text-white/50 max-w-xl leading-relaxed">
-                  三文五語資料與洞察領導者，2026 年 8 月起加入 WSP (Asia) Limited，擔任 Consultant in Data & AI - Advisory Service，負責香港及中國大陸相關業務。曾於台灣、德國、香港三地交付 AI、BI 與策略分析專案，連結資料策略與可量化業務成果。
+                <motion.p variants={fadeUp} className="wrap-anywhere text-sm sm:text-base text-white/50 max-w-[21rem] sm:max-w-xl mx-auto sm:mx-0 leading-relaxed">
+                  三文五語資料與洞察領導者，2026 年 8 月起加入 WSP (Asia) Limited，擔任 Consultant in Data & AI - Advisory Service，負責香港及中國大陸相關業務；同時創辦 Mentarix Data Studio，把資料工程、BI 與 GenAI 做成可落地的決策系統。
                 </motion.p>
 
                 <motion.div variants={fadeUp} className="flex flex-wrap gap-2 justify-center sm:justify-start">
@@ -108,6 +119,28 @@ export default function About() {
               </div>
             </motion.div>
           </div>
+        </section>
+
+        {/* ═══ 身份總覽 ═══ */}
+        <section className="px-4 sm:px-6 lg:px-8 pb-10">
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="max-w-4xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3"
+          >
+            {profileSummary.map((item) => (
+              <div key={item.label} className="rounded-xl border border-white/[0.08] bg-white/[0.035] px-4 py-4">
+                <p className="text-[10px] uppercase tracking-[0.22em] text-white/30 mb-2">
+                  {item.label}
+                </p>
+                <p className={`wrap-anywhere text-sm font-semibold leading-snug ${item.accent}`}>
+                  {item.value}
+                </p>
+              </div>
+            ))}
+          </motion.div>
         </section>
 
         {/* ═══ 創辦公司 ═══ */}
@@ -264,9 +297,9 @@ export default function About() {
 
         {/* ═══ CTA ═══ */}
         <CtaSection
-          title="想讓 AI 作品說得更好？"
-          description="30 分鐘對談，把目標轉成敘事"
-          buttonLabel="安排對談"
+          title="想把 Data & AI 落到業務現場？"
+          description="個人合作、顧問案或公司服務，都可以從這裡開始對焦"
+          buttonLabel="聯絡 Morris"
           buttonHref="/contact"
         />
 

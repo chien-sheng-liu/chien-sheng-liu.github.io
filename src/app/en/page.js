@@ -17,11 +17,11 @@ const stats = [
 ];
 
 const roles = [
-  "AI Strategy", "Data Science", "NLP & LLM", "Product Thinking",
-  "Business Intelligence", "ML Engineering", "RAG / LoRA", "Cloud & BigQuery",
+  "Data & AI Advisory", "Mentarix Founder", "Business Intelligence", "LLM Products",
+  "Decision Systems", "Cross-market Delivery", "RAG / LoRA", "Cloud & BigQuery",
 ];
 
-const typewriterTexts = ["into clear narratives", "into business value", "into compelling stories"];
+const typewriterTexts = ["into decisions", "into advisory delivery", "into usable systems"];
 
 function Counter({ to, prefix = "", suffix = "" }) {
   const ref = useRef(null);
@@ -135,13 +135,13 @@ export default function HomeEn() {
               transition={{ delay: 0.12, duration: 0.65 }}
               className="text-[11px] tracking-[0.45em] uppercase text-white/30 font-medium"
             >
-              Morris Liu · AI + Strategy
+              Morris Liu · Data & AI Consultant · Founder
             </motion.p>
           </div>
 
           <div className="mb-8">
             <MaskLine delay={0.22} className="text-[clamp(3rem,9.5vw,8.5rem)] font-bold tracking-tight text-white">
-              I turn AI work
+              I turn Data & AI
             </MaskLine>
             <MaskLine delay={0.40} className="text-[clamp(3rem,9.5vw,8.5rem)] font-bold tracking-tight">
               <span className="bg-gradient-to-r from-violet-400 via-sky-400 to-cyan-300 bg-clip-text text-transparent">
@@ -156,7 +156,7 @@ export default function HomeEn() {
             transition={{ delay: 0.68, duration: 0.6 }}
             className="text-base sm:text-lg text-white/38 max-w-[22rem] mb-10"
           >
-            Strategy, data, and product rhythm — woven into one story.
+            WSP Data & AI consultant and Mentarix founder, connecting cross-market analytics, AI products, and business execution.
           </motion.p>
 
           <motion.div
@@ -172,6 +172,15 @@ export default function HomeEn() {
               My Journey
               <FaArrowRight className="text-xs transition-transform group-hover:translate-x-0.5" />
             </Link>
+            <a
+              href="https://www.mentarix-data.com/zh-TW"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group flex items-center gap-2 px-6 py-3 border border-white/[0.12] bg-white/[0.04] text-white/72 text-sm font-semibold rounded-full hover:border-white/25 hover:text-white transition-colors"
+            >
+              Mentarix Services
+              <FaArrowRight className="text-xs transition-transform group-hover:translate-x-0.5" />
+            </a>
             <Link href="/en/contact" className="text-sm text-white/38 hover:text-white/75 transition-colors">
               Contact →
             </Link>
@@ -278,16 +287,27 @@ export default function HomeEn() {
             transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
           >
             <h2 className="text-[clamp(2.5rem,6vw,5.5rem)] font-bold text-white leading-[0.92] tracking-tight mb-6">
-              Want to tell your<br />AI story better?
+              Want to turn Data & AI<br />into business action?
             </h2>
-            <p className="text-white/32 text-lg mb-10">A 30-min chat to turn your goals into narrative.</p>
-            <Link
-              href="/en/contact"
-              className="group inline-flex items-center gap-2 px-8 py-4 bg-white text-[#0a0a0a] font-semibold rounded-full hover:bg-white/90 transition-colors text-sm"
-            >
-              Book a call
-              <FaArrowRight className="text-xs transition-transform group-hover:translate-x-0.5" />
-            </Link>
+            <p className="text-white/32 text-lg mb-10">Start with personal collaboration, advisory work, or Mentarix company services.</p>
+            <div className="flex flex-wrap items-center gap-4">
+              <Link
+                href="/en/contact"
+                className="group inline-flex items-center gap-2 px-8 py-4 bg-white text-[#0a0a0a] font-semibold rounded-full hover:bg-white/90 transition-colors text-sm"
+              >
+                Contact Morris
+                <FaArrowRight className="text-xs transition-transform group-hover:translate-x-0.5" />
+              </Link>
+              <a
+                href="https://www.mentarix-data.com/zh-TW"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group inline-flex items-center gap-2 px-8 py-4 border border-white/[0.12] text-white/72 font-semibold rounded-full hover:border-white/25 hover:text-white transition-colors text-sm"
+              >
+                Visit Mentarix
+                <FaArrowRight className="text-xs transition-transform group-hover:translate-x-0.5" />
+              </a>
+            </div>
           </motion.div>
         </div>
       </section>

@@ -60,6 +60,13 @@ const volunteers = [
   { date: "2025/05/22", title: "Taiwan Women in Data Science (TWiDS)", org: "Stanford Data Science in Taiwan" },
 ];
 
+const profileSummary = [
+  { label: "Current", value: "WSP Data & AI Advisory", accent: "text-sky-300" },
+  { label: "Founded", value: "Mentarix Data Studio", accent: "text-cyan-300" },
+  { label: "Markets", value: "Taiwan · Germany · Hong Kong · Mainland China", accent: "text-emerald-300" },
+  { label: "Focus", value: "BI · GenAI · Decision Systems", accent: "text-violet-300" },
+];
+
 export default function AboutEn() {
   return (
     <div className="relative min-h-screen bg-[#0a0a0a] text-white">
@@ -81,15 +88,19 @@ export default function AboutEn() {
                 </div>
               </motion.div>
 
-              <div className="text-center sm:text-left space-y-3 flex-1">
+              <div className="w-full text-center sm:text-left space-y-3 flex-1 min-w-0 max-w-full">
                 <motion.div variants={fadeUp}>
                   <p className="text-xs uppercase tracking-[0.35em] text-indigo-400/70 font-medium mb-1">Experience</p>
                   <h1 className="text-3xl sm:text-4xl font-bold text-white">Morris Liu</h1>
-                  <p className="text-base text-white/40 mt-1">Consultant in Data & AI - Advisory Service @ WSP (Asia) Limited · Hong Kong</p>
+                  <p className="text-sm text-white/40 mt-1 sm:hidden max-w-full break-words">
+                    Data & AI Consultant @ WSP
+                    <span className="block mt-0.5">Hong Kong</span>
+                  </p>
+                  <p className="hidden sm:block text-base text-white/40 mt-1">Consultant in Data & AI - Advisory Service @ WSP (Asia) Limited · Hong Kong</p>
                 </motion.div>
 
-                <motion.p variants={fadeUp} className="text-sm sm:text-base text-white/50 max-w-xl leading-relaxed">
-                  Data & Insights Leader working across 3 written languages and 5 spoken languages (Chinese, English, German; Mandarin, English, German, Cantonese, Taiwanese), joining WSP (Asia) Limited in August 2026 as Consultant in Data & AI - Advisory Service, Hong Kong & Mainland China. Experienced across Taiwan, Germany, and Hong Kong, delivering AI, BI, and strategic analytics projects that connect data strategy to measurable business outcomes.
+                <motion.p variants={fadeUp} className="wrap-anywhere text-sm sm:text-base text-white/50 max-w-[21rem] sm:max-w-xl mx-auto sm:mx-0 leading-relaxed">
+                  Data & Insights Leader working across 3 written languages and 5 spoken languages. Joining WSP (Asia) Limited in August 2026 as Consultant in Data & AI - Advisory Service, Hong Kong & Mainland China; also founder of Mentarix Data Studio, turning data engineering, BI, and GenAI into production-ready decision systems.
                 </motion.p>
 
                 <motion.div variants={fadeUp} className="flex flex-wrap gap-2 justify-center sm:justify-start">
@@ -106,6 +117,28 @@ export default function AboutEn() {
               </div>
             </motion.div>
           </div>
+        </section>
+
+        {/* ═══ Profile Summary ═══ */}
+        <section className="px-4 sm:px-6 lg:px-8 pb-10">
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="max-w-4xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3"
+          >
+            {profileSummary.map((item) => (
+              <div key={item.label} className="rounded-xl border border-white/[0.08] bg-white/[0.035] px-4 py-4">
+                <p className="text-[10px] uppercase tracking-[0.22em] text-white/30 mb-2">
+                  {item.label}
+                </p>
+                <p className={`wrap-anywhere text-sm font-semibold leading-snug ${item.accent}`}>
+                  {item.value}
+                </p>
+              </div>
+            ))}
+          </motion.div>
         </section>
 
         {/* ═══ Founded Company ═══ */}
@@ -255,9 +288,9 @@ export default function AboutEn() {
 
         {/* ═══ CTA ═══ */}
         <CtaSection
-          title="Want to tell your AI story better?"
-          description="A 30-min chat to turn your goals into narrative."
-          buttonLabel="Book a call"
+          title="Want to turn Data & AI into business action?"
+          description="Start with personal collaboration, advisory work, or Mentarix company services."
+          buttonLabel="Contact Morris"
           buttonHref="/en/contact"
         />
 

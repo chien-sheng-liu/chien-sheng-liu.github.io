@@ -182,10 +182,12 @@ function BarcodeSVG({ width = 100, height = 20 }) {
 /* ── COMPONENT ── */
 export default function FlightTimeline() {
   const [selected, setSelected] = useState(null);
+  const sectionRef = useRef(null);
   const containerRef = useRef(null);
   const innerRef = useRef(null);
   const dragX = useMotionValue(0);
   const [dragConstraint, setDragConstraint] = useState(0);
+  const [isTimelineInView, setIsTimelineInView] = useState(false);
   const [timelineMetrics, setTimelineMetrics] = useState({
     cardW: CARD_W,
     cardH: CARD_H,
@@ -200,6 +202,23 @@ export default function FlightTimeline() {
 
   const openModal = useCallback((ev) => setSelected(ev), []);
   const closeModal = useCallback(() => setSelected(null), []);
+
+  useEffect(() => {
+    if (!sectionRef.current) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsTimelineInView(entry.isIntersecting);
+        if (!entry.isIntersecting) {
+          isHovering.current = false;
+          hoverVelocity.current = 0;
+        }
+      },
+      { rootMargin: "-20% 0px -20% 0px", threshold: 0.01 },
+    );
+
+    observer.observe(sectionRef.current);
+    return () => observer.disconnect();
+  }, []);
 
   /* Scroll by one card */
   const scrollBy = useCallback((dir) => {
@@ -242,7 +261,7 @@ export default function FlightTimeline() {
 
   /* Combined auto-scroll + hover-edge-scroll RAF */
   useEffect(() => {
-    if (dragConstraint >= 0) return;
+    if (!isTimelineInView || dragConstraint >= 0) return;
 
     if (timelineMetrics.isMobile) {
       let timeoutId;
@@ -304,7 +323,7 @@ export default function FlightTimeline() {
     }
     rafId = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(rafId);
-  }, [dragConstraint, dragX, timelineMetrics.cardW, timelineMetrics.gap, timelineMetrics.isMobile]);
+  }, [dragConstraint, dragX, isTimelineInView, timelineMetrics.cardW, timelineMetrics.gap, timelineMetrics.isMobile]);
 
   const handleMouseMove = useCallback((e) => {
     if (!containerRef.current) return;
@@ -328,7 +347,7 @@ export default function FlightTimeline() {
   const progressWidth = useTransform(dragX, [0, dragConstraint || -1], ["0%", "100%"]);
 
   return (
-    <section className="relative py-8 overflow-hidden">
+    <section ref={sectionRef} className="relative py-8 overflow-hidden">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
 
         {/* ── Header ── */}

@@ -13,8 +13,8 @@ const listItem = {
 };
 
 const i18n = {
-  zh: { highlights: "專案亮點", tech: "技術棧", viewCode: "查看程式碼", metrics: "關鍵指標" },
-  en: { highlights: "Highlights", tech: "Tech Stack", viewCode: "View Code", metrics: "Key Metrics" },
+  zh: { highlights: "專案亮點", tech: "技術棧", viewCode: "查看程式碼", metrics: "關鍵指標", problem: "問題", approach: "方法", impact: "成果" },
+  en: { highlights: "Highlights", tech: "Tech Stack", viewCode: "View Code", metrics: "Key Metrics", problem: "Problem", approach: "Approach", impact: "Impact" },
 };
 
 export default function ProjectDetailModal({ project, locale = "zh", onClose }) {
@@ -82,13 +82,13 @@ export default function ProjectDetailModal({ project, locale = "zh", onClose }) 
           </div>
 
           {/* Metrics row */}
-          <div className="flex border-b border-white/[0.08]">
+          <div className="grid grid-cols-3 border-b border-white/[0.08]">
             {project.metrics.map((m, i) => (
               <div
                 key={i}
-                className={`flex-1 px-4 py-2.5 text-center ${i < project.metrics.length - 1 ? "border-r border-white/[0.08]" : ""}`}
+                className={`min-w-0 px-2 sm:px-4 py-2.5 text-center ${i < project.metrics.length - 1 ? "border-r border-white/[0.08]" : ""}`}
               >
-                <div className="text-[8px] uppercase tracking-wider text-white/30">{m.label}</div>
+                <div className="truncate text-[8px] uppercase tracking-wider text-white/30">{m.label}</div>
                 <div className="text-sm font-bold text-white">{m.value}</div>
               </div>
             ))}
@@ -97,9 +97,28 @@ export default function ProjectDetailModal({ project, locale = "zh", onClose }) 
           {/* Scrollable body */}
           <div className="flex-1 px-6 py-5 overflow-y-auto" style={{ maxHeight: "400px" }}>
             {/* Description */}
-            <p className="text-sm text-white/50 leading-relaxed mb-4">
+            <p className="wrap-anywhere text-sm text-white/50 leading-relaxed mb-4">
               {hasDetail ? project.detailDescription : project.description}
             </p>
+
+            {project.caseNotes && (
+              <div className="grid gap-2 mb-4">
+                {[
+                  [t.problem, project.caseNotes.problem],
+                  [t.approach, project.caseNotes.approach],
+                  [t.impact, project.caseNotes.impact],
+                ].map(([label, text]) => (
+                  <div key={label} className="rounded-lg border border-white/[0.08] bg-white/[0.035] p-3">
+                    <div className="text-[8px] uppercase tracking-wider text-white/30 mb-1">
+                      {label}
+                    </div>
+                    <p className="wrap-anywhere text-[13px] leading-relaxed text-white/55">
+                      {text}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            )}
 
             {/* Highlights */}
             {project.highlights && project.highlights.length > 0 && (
@@ -113,7 +132,7 @@ export default function ProjectDetailModal({ project, locale = "zh", onClose }) 
                 <div className="text-[8px] uppercase tracking-wider text-white/30 mb-2">{t.highlights}</div>
                 <motion.ul className="space-y-2 mb-4" variants={listStagger} initial="hidden" animate="visible">
                   {project.highlights.map((item, i) => (
-                    <motion.li key={i} variants={listItem} className="flex items-start gap-2 text-[13px] text-white/50 leading-relaxed">
+                    <motion.li key={i} variants={listItem} className="wrap-anywhere flex items-start gap-2 text-[13px] text-white/50 leading-relaxed">
                       <FaCheckCircle className={`mt-0.5 text-xs shrink-0 bg-gradient-to-r ${project.color} text-white rounded-full`} />
                       {item}
                     </motion.li>

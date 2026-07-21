@@ -19,11 +19,11 @@ const stats = [
 ];
 
 const roles = [
-  "AI Strategy", "Data Science", "NLP & LLM", "Product Thinking",
-  "Business Intelligence", "ML Engineering", "RAG / LoRA", "Cloud & BigQuery",
+  "Data & AI Advisory", "Mentarix Founder", "Business Intelligence", "LLM Products",
+  "Decision Systems", "Cross-market Delivery", "RAG / LoRA", "Cloud & BigQuery",
 ];
 
-const typewriterTexts = ["變成清楚的敘事", "落地為商業價值", "串聯成完整故事"];
+const typewriterTexts = ["變成商業決策", "落地為顧問交付", "串成可用系統"];
 
 /* ─── Animated counter ─── */
 function Counter({ to, prefix = "", suffix = "" }) {
@@ -147,7 +147,7 @@ export default function Home() {
               transition={{ delay: 0.12, duration: 0.65 }}
               className="text-[11px] tracking-[0.45em] uppercase text-white/30 font-medium"
             >
-              Morris Liu · AI + Strategy
+              Morris Liu · Data & AI Consultant · Founder
             </motion.p>
           </div>
 
@@ -157,7 +157,7 @@ export default function Home() {
               delay={0.22}
               className="text-[clamp(3rem,9.5vw,8.5rem)] font-bold tracking-tight text-white"
             >
-              我把 AI 作品
+              我把 Data & AI
             </MaskLine>
             <MaskLine
               delay={0.40}
@@ -176,7 +176,7 @@ export default function Home() {
             transition={{ delay: 0.68, duration: 0.6 }}
             className="text-base sm:text-lg text-white/38 max-w-[22rem] mb-10"
           >
-            策略、資料與產品節奏放進一條故事線
+            WSP Data & AI 顧問、Mentarix 創辦人，連結跨市場分析、AI 產品與商業執行。
           </motion.p>
 
           {/* CTAs */}
@@ -193,6 +193,15 @@ export default function Home() {
               個人經歷
               <FaArrowRight className="text-xs transition-transform group-hover:translate-x-0.5" />
             </Link>
+            <a
+              href="https://www.mentarix-data.com/zh-TW"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group flex items-center gap-2 px-6 py-3 border border-white/[0.12] bg-white/[0.04] text-white/72 text-sm font-semibold rounded-full hover:border-white/25 hover:text-white transition-colors"
+            >
+              Mentarix 服務
+              <FaArrowRight className="text-xs transition-transform group-hover:translate-x-0.5" />
+            </a>
             <Link href="/contact" className="text-sm text-white/38 hover:text-white/75 transition-colors">
               聯絡我 →
             </Link>
@@ -300,16 +309,27 @@ export default function Home() {
             transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
           >
             <h2 className="text-[clamp(2.5rem,6vw,5.5rem)] font-bold text-white leading-[0.92] tracking-tight mb-6">
-              想讓 AI 作品<br />說得更好？
+              想把 Data & AI<br />落到業務現場？
             </h2>
-            <p className="text-white/32 text-lg mb-10">30 分鐘對談，把目標轉成敘事</p>
-            <Link
-              href="/contact"
-              className="group inline-flex items-center gap-2 px-8 py-4 bg-white text-[#0a0a0a] font-semibold rounded-full hover:bg-white/90 transition-colors text-sm"
-            >
-              安排對談
-              <FaArrowRight className="text-xs transition-transform group-hover:translate-x-0.5" />
-            </Link>
+            <p className="text-white/32 text-lg mb-10">個人合作、顧問案或公司服務，都可以從這裡開始對焦。</p>
+            <div className="flex flex-wrap items-center gap-4">
+              <Link
+                href="/contact"
+                className="group inline-flex items-center gap-2 px-8 py-4 bg-white text-[#0a0a0a] font-semibold rounded-full hover:bg-white/90 transition-colors text-sm"
+              >
+                聯絡 Morris
+                <FaArrowRight className="text-xs transition-transform group-hover:translate-x-0.5" />
+              </Link>
+              <a
+                href="https://www.mentarix-data.com/zh-TW"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group inline-flex items-center gap-2 px-8 py-4 border border-white/[0.12] text-white/72 font-semibold rounded-full hover:border-white/25 hover:text-white transition-colors text-sm"
+              >
+                查看 Mentarix
+                <FaArrowRight className="text-xs transition-transform group-hover:translate-x-0.5" />
+              </a>
+            </div>
           </motion.div>
         </div>
       </section>
