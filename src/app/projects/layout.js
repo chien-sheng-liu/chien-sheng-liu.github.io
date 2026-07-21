@@ -1,6 +1,6 @@
 export const metadata = {
   title: "Data & AI 案例作品",
-  description: "Morris Liu 的 Data & AI case work：以 Business Problem、What I Built、Business Impact 與 Stack 呈現 LLM、BI、預測模型與資料產品案例。",
+  description: "Morris Liu 的 Data & AI 案例作品，聚焦 LLM、BI、預測模型與可部署資料產品如何解決實際業務問題。",
   alternates: {
     canonical: "/projects",
   },

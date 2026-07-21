@@ -243,7 +243,7 @@ export default function HomeEn() {
         >
           <div>
             <p className="text-[11px] tracking-[0.4em] uppercase text-cyan-300/60 font-medium mb-5">
-              Founder Proof
+              Venture Building
             </p>
             <h2 className="text-[clamp(1.9rem,4vw,3.7rem)] font-bold text-white leading-[1.02] tracking-tight">
               Founder of<br />Mentarix
@@ -252,10 +252,10 @@ export default function HomeEn() {
 
           <div className="max-w-2xl">
             <p className="text-base sm:text-lg text-white/68 leading-relaxed mb-5">
-              Mentarix Data Studio is where I productize my data engineering, BI, and GenAI delivery experience, and a founder proof point that strategy can become working systems.
+              Mentarix Data Studio is where I productize my data engineering, BI, and GenAI delivery experience into working systems.
             </p>
             <p className="text-sm sm:text-base text-white/40 leading-relaxed mb-6">
-              Founder proof in building data products, consulting offers, and AI delivery systems. The main story remains Morris Liu: WSP Data & AI consultant, cross-market BI/AI builder, and founder of Mentarix.
+              From problem framing and consulting offer design to AI delivery systems, it is where I turn ambiguous needs into data products that can be used, delivered, and improved.
             </p>
             <div className="flex flex-wrap items-center gap-3">
               {["Founder", "Data Engineering", "BI", "GenAI"].map((item) => (

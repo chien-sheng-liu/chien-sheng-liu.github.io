@@ -18,7 +18,7 @@ const i18n = {
   zh: {
     tagline: "Case Work",
     title: "Data & AI 案例集",
-    desc: "用顧問案例方式呈現 Business Problem、What I Built、Business Impact 與 Stack。",
+    desc: "每個案例都直接說清楚：遇到什麼業務問題、我做了什麼、帶來什麼影響，以及背後使用的技術。",
     all: "全部",
     problem: "Business Problem",
     built: "What I Built",
@@ -35,7 +35,7 @@ const i18n = {
   en: {
     tagline: "Case Work",
     title: "Data & AI Case Work",
-    desc: "Case-style work across LLMs, BI, forecasting, and deployable data products: Business Problem, What I Built, Business Impact, and Stack.",
+    desc: "Each case shows the business problem, what I built, the impact, and the stack behind the work.",
     all: "All",
     problem: "Business Problem",
     built: "What I Built",

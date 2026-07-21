@@ -265,7 +265,7 @@ export default function Home() {
         >
           <div>
             <p className="text-[11px] tracking-[0.4em] uppercase text-cyan-300/60 font-medium mb-5">
-              Founder Proof
+              Venture Building
             </p>
             <h2 className="text-[clamp(1.9rem,4vw,3.7rem)] font-bold text-white leading-[1.02] tracking-tight">
               Founder of<br />Mentarix
@@ -274,10 +274,10 @@ export default function Home() {
 
           <div className="max-w-2xl">
             <p className="text-base sm:text-lg text-white/68 leading-relaxed mb-5">
-              Mentarix Data Studio 是我把資料工程、BI 與 GenAI 交付經驗產品化的地方，也是一個證明我能把策略落到系統的創辦者紀錄。
+              Mentarix Data Studio 是我把資料工程、BI 與 GenAI 交付經驗產品化的實作基地。
             </p>
             <p className="text-sm sm:text-base text-white/40 leading-relaxed mb-6">
-              Founder proof in building data products, consulting offers, and AI delivery systems. 這裡的主角仍然是 Morris Liu：WSP 的 Data & AI 顧問、跨市場 BI/AI 交付者，以及 Mentarix 的創辦人。
+              從問題定義、顧問服務設計到 AI 交付系統，我在這裡把模糊需求做成可被使用、可被交付、可持續改善的資料產品。
             </p>
             <div className="flex flex-wrap items-center gap-3">
               {["Founder", "Data Engineering", "BI", "GenAI"].map((item) => (

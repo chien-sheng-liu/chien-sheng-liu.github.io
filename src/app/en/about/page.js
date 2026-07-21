@@ -145,7 +145,7 @@ export default function AboutEn() {
           </motion.div>
         </section>
 
-        {/* ═══ Founder Proof ═══ */}
+        {/* ═══ Venture Building ═══ */}
         <section className="px-4 sm:px-6 lg:px-8 pb-16">
           <motion.div
             initial={{ opacity: 0, y: 16 }}
@@ -157,7 +157,7 @@ export default function AboutEn() {
             <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
               <div className="min-w-0">
                 <p className="mb-2 text-[11px] font-semibold uppercase tracking-[0.32em] text-cyan-300/70">
-                  Founder Proof
+                  Venture Building
                 </p>
                 <h2 className="text-2xl sm:text-3xl font-bold text-white">
                   Mentarix Data Studio
@@ -178,7 +178,7 @@ export default function AboutEn() {
             </div>
 
             <p className="mt-5 max-w-3xl text-sm sm:text-base leading-relaxed text-white/55">
-              Mentarix is the founder proof point where I productize cross-market analytics, data engineering, and AI advisory delivery. Founder proof in building data products, consulting offers, and AI delivery systems. It strengthens the Morris Liu personal brand without replacing the person as the center of this site.
+              Mentarix is where I productize cross-market analytics, data engineering, and AI advisory delivery across problem framing, consulting offer design, data product buildout, and AI delivery systems.
             </p>
 
             <div className="mt-5 flex flex-wrap gap-2">

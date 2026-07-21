@@ -159,7 +159,7 @@ export default function About() {
             <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
               <div className="min-w-0">
                 <p className="mb-2 text-[11px] font-semibold uppercase tracking-[0.32em] text-cyan-300/70">
-                  Founder Proof
+                  Venture Building
                 </p>
                 <h2 className="text-2xl sm:text-3xl font-bold text-white">
                   Mentarix Data Studio
@@ -180,7 +180,7 @@ export default function About() {
             </div>
 
             <p className="mt-5 max-w-3xl text-sm sm:text-base leading-relaxed text-white/55">
-              Mentarix 是我將跨市場分析、資料工程與 AI 顧問交付經驗產品化的創辦者實驗場。Founder proof in building data products, consulting offers, and AI delivery systems. 它補強的是 Morris Liu 這個個人品牌的可信度，而不是取代這個網站的主角。
+              Mentarix 是我將跨市場分析、資料工程與 AI 顧問交付經驗產品化的實作基地，涵蓋問題定義、顧問服務設計、資料產品建置與 AI 交付系統。
             </p>
 
             <div className="mt-5 flex flex-wrap gap-2">
