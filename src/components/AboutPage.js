@@ -6,6 +6,8 @@ import Link from "next/link";
 import { homeProfileData } from "@/data/homeProfileData";
 import HeroTypewriter from "./HeroTypewriter";
 
+const MENTARIX_URL = "https://www.mentarix-data.com/zh-TW";
+
 function TrainIcon() {
   return (
     <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
@@ -46,6 +48,10 @@ const copy = {
       "回到亞洲後，我帶過資料與人工智慧團隊、做過模型與平台，也走進客戶的會議室。現在最在意的，是讓策略、資料與人的日常工作真正接得起來。",
       "我也是 Mentarix 的創辦人，把它當作獨立的 Data & AI 實驗場，持續整理跨市場方法、打造原型，並把複雜能力轉成更容易理解與使用的產品。",
     ],
+    founderKicker: "FOUNDED BY MORRIS",
+    founderTitle: "Mentarix Data Studio",
+    founderBody: "把跨市場資料策略、AI 原型與可落地產品整合起來的獨立工作室。",
+    founderLink: "進入 Mentarix",
     numbers: [
       ["04", "生活與工作過的市場"],
       ["25+", "端到端資料與人工智慧專案"],
@@ -119,6 +125,10 @@ const copy = {
       "Back in Asia, I have led data and AI teams, built models and platforms, and sat with clients in the meeting room. What matters most to me now is making strategy, data, and everyday work genuinely connect.",
       "I am also the founder of Mentarix, an independent Data & AI studio where I document cross-market methods, build prototypes, and make complex capabilities easier to understand and use.",
     ],
+    founderKicker: "FOUNDED BY MORRIS",
+    founderTitle: "Mentarix Data Studio",
+    founderBody: "An independent studio connecting cross-market data strategy, AI prototypes, and products built for real use.",
+    founderLink: "Visit Mentarix",
     numbers: [
       ["04", "markets lived and worked in"],
       ["25+", "end-to-end data and AI projects"],
@@ -257,6 +267,20 @@ export default function AboutPage({ locale = "zh" }) {
             {t.storyBody.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
           </div>
         </div>
+        <a
+          className="jre-about-founder-entry jre-reveal"
+          href={MENTARIX_URL}
+          target="_blank"
+          rel="noreferrer"
+          aria-label={`${t.founderLink}: ${t.founderTitle}`}
+        >
+          <div>
+            <span>{t.founderKicker}</span>
+            <h3>{t.founderTitle}</h3>
+          </div>
+          <p>{t.founderBody}</p>
+          <strong>{t.founderLink}<i aria-hidden="true">↗</i></strong>
+        </a>
         <div className="jre-about-numbers">
           {t.numbers.map(([value, label]) => (
             <div className="jre-reveal" key={label}>
@@ -432,10 +456,14 @@ export default function AboutPage({ locale = "zh" }) {
             {profile.education.map((item, index) => (
               <article className="jre-reveal" key={item.school}>
                 <span>0{index + 1}</span>
-                <p>{item.date}</p>
-                <h3>{item.degree}</h3>
-                <strong>{item.school}</strong>
-                <small>{item.place}</small>
+                <div className="jre-about-education__meta">
+                  <p>{item.date}</p>
+                  <small>{item.place}</small>
+                </div>
+                <div className="jre-about-education__detail">
+                  <h3>{item.degree}</h3>
+                  <strong>{item.school}</strong>
+                </div>
               </article>
             ))}
           </div>
