@@ -216,6 +216,17 @@ article hr {
   margin: 2rem 0;
 }
 
+/* Diagrams */
+article img {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin: 1.75rem 0;
+  border: 1px solid var(--jre-line);
+  border-radius: 12px;
+  background: var(--jre-white);
+}
+
 /* Strong / emphasis */
 article strong {
   color: var(--jre-ink);

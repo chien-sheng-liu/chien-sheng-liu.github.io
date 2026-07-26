@@ -1,0 +1,19 @@
+<svg viewBox="0 0 820 360" xmlns="http://www.w3.org/2000/svg" font-family="Helvetica, Arial, sans-serif">
+  <text x="410" y="34" text-anchor="middle" font-size="15" font-weight="700" fill="#252525">The platform's two customers</text>
+
+  <rect x="40" y="56" width="345" height="220" rx="18" fill="#dff2dc" stroke="#009b16" stroke-width="1.5"/>
+  <text x="212" y="90" text-anchor="middle" font-size="18" font-weight="700" fill="#007d12">🚗 Drivers</text>
+  <text x="70" y="126" font-size="13" fill="#252525">Cares about: earnings per hour</text>
+  <text x="70" y="158" font-size="13" fill="#252525">Fears: idle time, being ignored</text>
+  <text x="70" y="190" font-size="13" fill="#252525">Churn driver: unstable income</text>
+
+  <rect x="435" y="56" width="345" height="220" rx="18" fill="#dceff6" stroke="#36a2d4" stroke-width="1.5"/>
+  <text x="607" y="90" text-anchor="middle" font-size="18" font-weight="700" fill="#148cbd">🧑 Riders</text>
+  <text x="465" y="126" font-size="13" fill="#252525">Cares about: how fast a ride arrives</text>
+  <text x="465" y="158" font-size="13" fill="#252525">Fears: long waits, getting cancelled on</text>
+  <text x="465" y="190" font-size="13" fill="#252525">Churn driver: unreliable experience</text>
+
+  <rect x="40" y="300" width="740" height="46" rx="12" fill="#f2f6f4"/>
+  <text x="410" y="320" text-anchor="middle" font-size="12.5" fill="#252525">The two sides' needs often conflict — riders want cheap and fast, drivers want fair pay</text>
+  <text x="410" y="338" text-anchor="middle" font-size="12.5" fill="#252525">Riders want cars at peak hours, drivers don't want to go online at a loss</text>
+</svg>

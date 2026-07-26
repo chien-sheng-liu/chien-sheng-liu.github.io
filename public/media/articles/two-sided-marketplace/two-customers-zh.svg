@@ -1,0 +1,19 @@
+<svg viewBox="0 0 820 360" xmlns="http://www.w3.org/2000/svg" font-family="Helvetica, Arial, sans-serif">
+  <text x="410" y="34" text-anchor="middle" font-size="15" font-weight="700" fill="#252525">平台的兩個客戶</text>
+
+  <rect x="40" y="56" width="345" height="220" rx="18" fill="#dff2dc" stroke="#009b16" stroke-width="1.5"/>
+  <text x="212" y="90" text-anchor="middle" font-size="18" font-weight="700" fill="#007d12">🚗 司機端</text>
+  <text x="70" y="126" font-size="13" fill="#252525">關心：每小時能賺多少</text>
+  <text x="70" y="158" font-size="13" fill="#252525">怕：空等、被演算法忽略</text>
+  <text x="70" y="190" font-size="13" fill="#252525">流失原因：收入不穩定</text>
+
+  <rect x="435" y="56" width="345" height="220" rx="18" fill="#dceff6" stroke="#36a2d4" stroke-width="1.5"/>
+  <text x="607" y="90" text-anchor="middle" font-size="18" font-weight="700" fill="#148cbd">🧑 乘客端</text>
+  <text x="465" y="126" font-size="13" fill="#252525">關心：多快能叫到車</text>
+  <text x="465" y="158" font-size="13" fill="#252525">怕：等太久、被取消</text>
+  <text x="465" y="190" font-size="13" fill="#252525">流失原因：體驗不可靠</text>
+
+  <rect x="40" y="300" width="740" height="46" rx="12" fill="#f2f6f4"/>
+  <text x="410" y="320" text-anchor="middle" font-size="12.5" fill="#252525">兩端的需求常常互相矛盾——乘客要便宜快速，司機要合理收入</text>
+  <text x="410" y="338" text-anchor="middle" font-size="12.5" fill="#252525">乘客要尖峰時段有車，司機不想在虧錢時段上線</text>
+</svg>

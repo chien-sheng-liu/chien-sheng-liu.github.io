@@ -1,0 +1,15 @@
+<svg viewBox="0 0 820 320" xmlns="http://www.w3.org/2000/svg" font-family="Helvetica, Arial, sans-serif">
+  <text x="410" y="30" text-anchor="middle" font-size="15" font-weight="700" fill="#252525">Three levels of marketplace liquidity</text>
+
+  <rect x="40" y="52" width="740" height="70" rx="14" fill="#f2f6f4" stroke="#d8dfdc"/>
+  <text x="70" y="80" font-size="14" font-weight="700" fill="#007d12">Level 1 · Aggregate balance</text>
+  <text x="70" y="102" font-size="12.5" fill="#252525">Does total driver count roughly match total rider demand citywide?</text>
+
+  <rect x="40" y="132" width="740" height="70" rx="14" fill="#dceff6" stroke="#36a2d4"/>
+  <text x="70" y="160" font-size="14" font-weight="700" fill="#148cbd">Level 2 · Temporal balance</text>
+  <text x="70" y="182" font-size="12.5" fill="#252525">Is supply sufficient at peak (commute, mealtimes)? Too many drivers off-peak?</text>
+
+  <rect x="40" y="212" width="740" height="80" rx="14" fill="#dff2dc" stroke="#009b16"/>
+  <text x="70" y="240" font-size="14" font-weight="700" fill="#007d12">Level 3 · Spatial balance</text>
+  <text x="70" y="262" font-size="12.5" fill="#252525">Too many drivers downtown, too few in the suburbs? — the level most teams overlook</text>
+</svg>

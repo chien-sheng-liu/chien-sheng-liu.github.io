@@ -1,0 +1,70 @@
+<svg viewBox="0 0 820 480" xmlns="http://www.w3.org/2000/svg" font-family="Helvetica, Arial, sans-serif">
+  <defs>
+    <marker id="af" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#9aa39f" />
+    </marker>
+  </defs>
+
+  <text x="215" y="26" text-anchor="middle" font-size="14" font-weight="700" fill="#148cbd">Rider funnel</text>
+  <text x="605" y="26" text-anchor="middle" font-size="14" font-weight="700" fill="#007d12">Driver funnel</text>
+
+  <!-- Rider column -->
+  <g>
+    <rect x="45" y="42" width="340" height="42" rx="10" fill="#dceff6" stroke="#36a2d4"/>
+    <text x="215" y="68" text-anchor="middle" font-size="13" fill="#252525">Open app</text>
+    <line x1="215" y1="84" x2="215" y2="112" stroke="#9aa39f" stroke-width="1.5" marker-end="url(#af)"/>
+    <text x="230" y="102" font-size="10.5" fill="#8a938f">Drop-off: can't find the service</text>
+
+    <rect x="45" y="116" width="340" height="42" rx="10" fill="#dceff6" stroke="#36a2d4"/>
+    <text x="215" y="142" text-anchor="middle" font-size="13" fill="#252525">Enter destination / request</text>
+    <line x1="215" y1="158" x2="215" y2="186" stroke="#9aa39f" stroke-width="1.5" marker-end="url(#af)"/>
+    <text x="230" y="176" font-size="10.5" fill="#8a938f">Drop-off: waits too long, cancels</text>
+
+    <rect x="45" y="190" width="340" height="42" rx="10" fill="#dceff6" stroke="#36a2d4"/>
+    <text x="215" y="216" text-anchor="middle" font-size="13" fill="#252525">Matched to a driver</text>
+    <line x1="215" y1="232" x2="215" y2="260" stroke="#9aa39f" stroke-width="1.5" marker-end="url(#af)"/>
+    <text x="230" y="250" font-size="10.5" fill="#8a938f">Drop-off: driver cancels / no-show</text>
+
+    <rect x="45" y="264" width="340" height="42" rx="10" fill="#dceff6" stroke="#36a2d4"/>
+    <text x="215" y="290" text-anchor="middle" font-size="13" fill="#252525">Driver arrives</text>
+    <line x1="215" y1="306" x2="215" y2="334" stroke="#9aa39f" stroke-width="1.5" marker-end="url(#af)"/>
+    <text x="230" y="324" font-size="10.5" fill="#8a938f">Drop-off: rider changes mind</text>
+
+    <rect x="45" y="338" width="340" height="42" rx="10" fill="#36a2d4"/>
+    <text x="215" y="364" text-anchor="middle" font-size="13" fill="#ffffff">Trip completed</text>
+    <line x1="215" y1="380" x2="215" y2="408" stroke="#9aa39f" stroke-width="1.5" marker-end="url(#af)"/>
+
+    <rect x="45" y="412" width="340" height="42" rx="10" fill="#dff2dc" stroke="#009b16"/>
+    <text x="215" y="438" text-anchor="middle" font-size="13" fill="#252525">Retention / repeat use</text>
+  </g>
+
+  <!-- Driver column -->
+  <g>
+    <rect x="435" y="42" width="340" height="42" rx="10" fill="#dff2dc" stroke="#009b16"/>
+    <text x="605" y="68" text-anchor="middle" font-size="13" fill="#252525">Go online</text>
+    <line x1="605" y1="84" x2="605" y2="112" stroke="#9aa39f" stroke-width="1.5" marker-end="url(#af)"/>
+    <text x="620" y="102" font-size="10.5" fill="#8a938f">Drop-off: feels like no orders</text>
+
+    <rect x="435" y="116" width="340" height="42" rx="10" fill="#dff2dc" stroke="#009b16"/>
+    <text x="605" y="142" text-anchor="middle" font-size="13" fill="#252525">Receive an order offer</text>
+    <line x1="605" y1="158" x2="605" y2="186" stroke="#9aa39f" stroke-width="1.5" marker-end="url(#af)"/>
+    <text x="620" y="176" font-size="10.5" fill="#8a938f">Drop-off: route isn't worth it</text>
+
+    <rect x="435" y="190" width="340" height="42" rx="10" fill="#dff2dc" stroke="#009b16"/>
+    <text x="605" y="216" text-anchor="middle" font-size="13" fill="#252525">Accept the order</text>
+    <line x1="605" y1="232" x2="605" y2="260" stroke="#9aa39f" stroke-width="1.5" marker-end="url(#af)"/>
+    <text x="620" y="250" font-size="10.5" fill="#8a938f">Drop-off: can't find rider, lost</text>
+
+    <rect x="435" y="264" width="340" height="42" rx="10" fill="#dff2dc" stroke="#009b16"/>
+    <text x="605" y="290" text-anchor="middle" font-size="13" fill="#252525">Arrive at pickup point</text>
+    <line x1="605" y1="306" x2="605" y2="334" stroke="#9aa39f" stroke-width="1.5" marker-end="url(#af)"/>
+    <text x="620" y="324" font-size="10.5" fill="#8a938f">Drop-off: rider is a no-show</text>
+
+    <rect x="435" y="338" width="340" height="42" rx="10" fill="#009b16"/>
+    <text x="605" y="364" text-anchor="middle" font-size="13" fill="#ffffff">Trip completed and paid</text>
+    <line x1="605" y1="380" x2="605" y2="408" stroke="#9aa39f" stroke-width="1.5" marker-end="url(#af)"/>
+
+    <rect x="435" y="412" width="340" height="42" rx="10" fill="#dceff6" stroke="#36a2d4"/>
+    <text x="605" y="438" text-anchor="middle" font-size="13" fill="#252525">Stays online / retained</text>
+  </g>
+</svg>

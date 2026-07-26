@@ -14,18 +14,7 @@ Ride-hailing, delivery, and logistics platforms are all **two-sided marketplaces
 
 A two-sided marketplace is a platform whose value comes from connecting two groups that need each other. The platform itself doesn't produce supply — it matches it.
 
-```
-                    ┌─────────────┐
-        Supply  ───▶│             │───▶  Demand
-        (Drivers)   │  Platform / │     (Riders)
-        ◀────────── │  Matching   │ ◀─────────
-       Earnings/     └─────────────┘   Service/
-       Ratings                         Experience
-
-     More drivers  → shorter wait times  → more riders
-     More riders   → higher driver pay   → more drivers
-        (a positive flywheel — or a vicious cycle in reverse)
-```
+![Two-sided marketplace flywheel: supply and demand matched through the platform, forming a positive loop](/media/articles/two-sided-marketplace/flywheel-en.svg)
 
 ### Two-Sided Marketplace vs. Single-Sided Business
 
@@ -43,25 +32,7 @@ A two-sided marketplace is a platform whose value comes from connecting two grou
 
 Take a typical ride-hailing/delivery platform:
 
-```
-┌───────────────────────────────────────────────────────────┐
-│                  The platform's two customers               │
-│                                                             │
-│   🚗 Drivers                       🧑 Riders                │
-│   ─────────                        ─────────                │
-│   Cares about: earnings per hour   Cares about: how fast    │
-│                                     they can get a ride      │
-│   Fears: idle time, being          Fears: long waits,       │
-│   ignored by the algorithm          getting cancelled on     │
-│   Churn driver: unstable income    Churn driver: unreliable  │
-│                                     experience                │
-│                                                             │
-│   ── The two sides' needs often directly conflict ──         │
-│   Riders want cheap and fast vs. drivers want fair pay      │
-│   Riders want cars during peak vs. drivers don't want to    │
-│   go online during unprofitable hours                       │
-└───────────────────────────────────────────────────────────┘
-```
+![The platform's two customers: drivers care about earnings per hour, riders care about how fast they get a ride — and the two sides' needs often conflict](/media/articles/two-sided-marketplace/two-customers-en.svg)
 
 A team that only watches rider satisfaction may keep cutting prices and adding subsidies until driver earnings get squeezed, supply shrinks, and rider wait times actually get worse. Conversely, a team that only watches driver earnings may price too high, lose riders, see order volume drop — and driver earnings fall too, since there's less demand to serve. **There is no single-sided optimum in a two-sided marketplace, only a dynamic balance.**
 
@@ -97,23 +68,7 @@ The first step in analyzing a two-sided marketplace is refusing to collapse the 
 
 The single most important underlying concept in a two-sided marketplace is **liquidity** — whether supply and demand can be effectively matched at the right time and place.
 
-```
-┌─────────────────────────────────────────────────────────────┐
-│               Three levels of marketplace liquidity          │
-│                                                               │
-│  Level 1: Aggregate balance                                  │
-│  Does total driver count roughly match total rider demand    │
-│  citywide?                                                    │
-│                                                               │
-│  Level 2: Temporal balance                                   │
-│  Is supply sufficient during peaks (commute, mealtimes)?      │
-│  Are there too many drivers during off-peak hours?            │
-│                                                               │
-│  Level 3: Spatial balance                                    │
-│  Too many drivers downtown, too few in the suburbs? — the     │
-│  level most teams overlook                                    │
-└─────────────────────────────────────────────────────────────┘
-```
+![Three levels of marketplace liquidity: aggregate balance, temporal balance, spatial balance](/media/articles/two-sided-marketplace/liquidity-levels-en.svg)
 
 Most teams only look at Level 1 (citywide aggregate supply/demand ratio), but what actually drives rider experience is usually Level 3 — even when a city's total driver count looks adequate, a specific zone at a specific hour can still have no cars available.
 
@@ -135,25 +90,7 @@ This gridded analysis is the data foundation for downstream dynamic pricing and 
 
 A two-sided marketplace actually has **two parallel funnels** — a bottleneck in either one hurts the overall experience.
 
-```
-Rider funnel                         Driver funnel
-──────────                           ──────────
-Open app                             Go online
-   ↓ drop-off: can't find the           ↓ drop-off: feels like
-     service they need                    there are no orders
-Enter destination / request          Receive an order offer
-   ↓ drop-off: waits too long,          ↓ drop-off: route isn't
-     cancels                              worth it, declines
-Matched to a driver                  Accept the order
-   ↓ drop-off: driver cancels           ↓ drop-off: can't find
-     or never shows                       the rider, gets lost
-Driver arrives                       Arrive at pickup point
-   ↓ drop-off: rider changes            ↓ drop-off: rider is a
-     their mind                           no-show
-Trip completed                       Trip completed and paid
-   ↓                                    ↓
-Retention / repeat use                Stays online / retained
-```
+![Rider funnel and driver funnel compared side by side, with drop-off reasons labeled at each stage](/media/articles/two-sided-marketplace/funnels-en.svg)
 
 Lay the two funnels side by side and you'll often find that a "rider drop-off" actually originates on the driver side (e.g. a high decline rate slows down matching), and vice versa. **Analyzing a single funnel alone only ever shows you the symptom, never the root cause.**
 
@@ -172,41 +109,23 @@ Just like a single-sided business, a two-sided marketplace needs segmentation �
 
 ### Example Driver Segments
 
-```
-┌─────────────────────────────────────────────────────────────┐
-│  Persona             │ Traits                │ Strategy       │
-├───────────────────────┼───────────────────────┼────────────────┤
-│ 🚗 Full-time stable   │ Online 8hr+ daily     │ Income          │
-│                       │                       │ stability       │
-│ ⏰ Peak-hour driver   │ Only online during    │ Peak-hour       │
-│                       │ commute/mealtimes     │ incentive boost │
-│ 🎯 Cherry-picker      │ Low acceptance rate,  │ Review dispatch │
-│                       │ only takes long trips │ algorithm       │
-│ 🌱 New driver         │ Online < 30 days      │ Onboarding +    │
-│                       │                       │ earnings floor  │
-│ ⚠️ At-risk of churn   │ Online hours steadily │ Proactive       │
-│                       │ declining             │ outreach        │
-└───────────────────────┴───────────────────────┴────────────────┘
-```
+| Persona | Traits | Strategy |
+|---|---|---|
+| 🚗 Full-time stable | Online 8hr+ daily | Income stability |
+| ⏰ Peak-hour driver | Only online during commute/mealtimes | Peak-hour incentive boost |
+| 🎯 Cherry-picker | Low acceptance rate, only takes long trips | Review dispatch algorithm |
+| 🌱 New driver | Online < 30 days | Onboarding + earnings floor |
+| ⚠️ At risk of churn | Online hours steadily declining | Proactive outreach |
 
 ### Example Rider Segments
 
-```
-┌─────────────────────────────────────────────────────────────┐
-│  Persona             │ Traits                │ Strategy       │
-├───────────────────────┼───────────────────────┼────────────────┤
-│ 🏆 Frequent commuter  │ Fixed time, fixed     │ Subscription /  │
-│                       │ route                 │ pass plans      │
-│ 🎉 Flexible off-peak  │ High tolerance for    │ Off-peak        │
-│                       │ wait time             │ diversion offers│
-│ 💸 Price-sensitive    │ Heavily promo-driven  │ Targeted coupons│
-│                       │                       │ to avoid overuse│
-│ 😤 High cancel risk   │ Historically high     │ Pre-order       │
-│                       │ cancellation rate     │ confirmation    │
-│ 🌟 High-value         │ High AOV, quality-    │ Priority match, │
-│    long-distance      │ sensitive             │ quality guarantee│
-└───────────────────────┴───────────────────────┴────────────────┘
-```
+| Persona | Traits | Strategy |
+|---|---|---|
+| 🏆 Frequent commuter | Fixed time, fixed route | Subscription / pass plans |
+| 🎉 Flexible off-peak | High tolerance for wait time | Off-peak diversion offers |
+| 💸 Price-sensitive | Heavily promo-driven | Targeted coupons to avoid overuse |
+| 😤 High cancel risk | Historically high cancellation rate | Pre-order confirmation |
+| 🌟 High-value long-distance | High AOV, quality-sensitive | Priority match, quality guarantee |
 
 Once segmented, driver-side and rider-side strategies must be **cross-referenced**: for example, routing "flexible off-peak riders" toward off-peak hours is exactly what's needed to absorb the capacity of "idle off-peak drivers." That intersection is the real value of two-sided marketplace analysis — not optimizing each side separately, but finding where the two sides can reinforce each other.
 
@@ -214,21 +133,7 @@ Once segmented, driver-side and rider-side strategies must be **cross-referenced
 
 Dynamic (surge) pricing is often misunderstood as a pure revenue lever, but its real function is **real-time supply-demand adjustment**.
 
-```
-┌─────────────────────────────────────────────────────────────┐
-│              The two-sided effect of dynamic pricing          │
-│                                                               │
-│  Price rises → Rider side: some demand is deferred or        │
-│               cancelled (demand decreases)                    │
-│             → Driver side: attracts more drivers online       │
-│               (supply increases)                               │
-│                                                               │
-│  Right goal: rebalance supply and demand at the new price,   │
-│  shortening rider wait time                                   │
-│  Wrong goal: treating a price hike as simply a way to boost   │
-│  revenue                                                        │
-└─────────────────────────────────────────────────────────────┘
-```
+![The two-sided effect of dynamic pricing: a price increase defers rider demand on one side while attracting more drivers online on the other](/media/articles/two-sided-marketplace/pricing-effect-en.svg)
 
 ### Guardrail Metrics to Watch When Designing Dynamic Pricing Experiments
 
@@ -245,21 +150,7 @@ Driver-side incentive design (bonuses, quest-based rewards) follows the same log
 
 A two-sided marketplace's operating dashboard should have at least three layers:
 
-```
-┌─────────────────────────────────────────────────────────────┐
-│  Layer 1: North Star                                          │
-│  Match success rate, average wait time, average driver        │
-│  earnings per hour                                             │
-│                                                               │
-│  Layer 2: Health                                              │
-│  Driver utilization, acceptance rate, rider cancellation      │
-│  rate, supply-gap heatmap                                      │
-│                                                               │
-│  Layer 3: Early warning                                       │
-│  Weekly driver churn growth rate, speed of supply-gap          │
-│  deterioration in specific areas/hours                         │
-└─────────────────────────────────────────────────────────────┘
-```
+![Three-layer structure of the two-sided monitoring dashboard: North Star, health, early warning](/media/articles/two-sided-marketplace/dashboard-layers-en.svg)
 
 Layer 3's early-warning metrics are the ones most often neglected — but they're usually the key to preventing supply collapse. Driver churn typically leads visible symptoms by one to two weeks; by the time rider wait times noticeably worsen, the best window to intervene has usually already passed.
 
@@ -303,29 +194,6 @@ When a new city first launches, both drivers and riders are scarce, and the supp
 
 ## Conclusion: The Core of Two-Sided Marketplace Analysis Is Watching Two Reports at Once
 
-```
-┌─────────────────────────────────────────────────────────────┐
-│                                                               │
-│   Build the framework   Dual-sided metrics side by side →    │
-│                          reject a single North Star            │
-│      ↓                                                        │
-│   Understand liquidity  Aggregate / temporal / spatial        │
-│                          balance, all three levels              │
-│      ↓                                                        │
-│   Break down funnels    Two parallel funnels cross-referenced,│
-│                          find cross-side cause and effect       │
-│      ↓                                                        │
-│   Segment both sides    Driver and rider personas cross-       │
-│                          referenced to find complementary       │
-│                          strategies                              │
-│      ↓                                                        │
-│   Dynamic adjustment    Pricing and incentives aimed at        │
-│                          rebalancing supply and demand           │
-│      ↓                                                        │
-│   Continuous monitoring North Star / health / early-warning    │
-│                          dashboard layers                        │
-│                                                               │
-└─────────────────────────────────────────────────────────────┘
-```
+![The complete two-sided marketplace analysis workflow: build the framework, understand liquidity, break down funnels, segment both sides, dynamically adjust, continuously monitor](/media/articles/two-sided-marketplace/conclusion-flow-en.svg)
 
 The most common mistake in two-sided marketplace analytics is reducing it to two independent single-sided problems solved separately. The real value lies in understanding the causal chain and feedback loop between the two sides — driver earnings affect supply, supply affects wait time, wait time affects rider retention, rider retention affects order volume, and order volume feeds back into driver earnings. **It's a loop, not two lines**, and any analytical framework that fails to close that loop is only treating symptoms, not actually understanding the marketplace.

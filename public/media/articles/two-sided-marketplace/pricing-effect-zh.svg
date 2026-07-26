@@ -1,0 +1,27 @@
+<svg viewBox="0 0 820 300" xmlns="http://www.w3.org/2000/svg" font-family="Helvetica, Arial, sans-serif">
+  <defs>
+    <marker id="ap" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#6e7471" />
+    </marker>
+  </defs>
+
+  <rect x="310" y="16" width="200" height="46" rx="12" fill="#252525"/>
+  <text x="410" y="45" text-anchor="middle" font-size="14" font-weight="700" fill="#ffffff">動態定價：價格上升</text>
+
+  <line x1="380" y1="62" x2="240" y2="100" stroke="#6e7471" stroke-width="1.5" marker-end="url(#ap)"/>
+  <line x1="440" y1="62" x2="580" y2="100" stroke="#6e7471" stroke-width="1.5" marker-end="url(#ap)"/>
+
+  <rect x="70" y="104" width="340" height="70" rx="14" fill="#dceff6" stroke="#36a2d4"/>
+  <text x="240" y="130" text-anchor="middle" font-size="13" font-weight="700" fill="#148cbd">乘客端</text>
+  <text x="240" y="152" text-anchor="middle" font-size="12" fill="#252525">部分需求延後或取消（需求減少）</text>
+
+  <rect x="410" y="104" width="340" height="70" rx="14" fill="#dff2dc" stroke="#009b16"/>
+  <text x="580" y="130" text-anchor="middle" font-size="13" font-weight="700" fill="#007d12">司機端</text>
+  <text x="580" y="152" text-anchor="middle" font-size="12" fill="#252525">吸引更多司機上線（供給增加）</text>
+
+  <rect x="70" y="200" width="680" height="42" rx="10" fill="#f2f6f4"/>
+  <text x="410" y="226" text-anchor="middle" font-size="12.5" fill="#252525">正確目標：讓供需在新價格下重新平衡，縮短乘客等待時間</text>
+
+  <rect x="70" y="250" width="680" height="42" rx="10" fill="#fdeceb"/>
+  <text x="410" y="276" text-anchor="middle" font-size="12.5" fill="#8a2c22">錯誤目標：單純把漲價當作提高營收的手段</text>
+</svg>

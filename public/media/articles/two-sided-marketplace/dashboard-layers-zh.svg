@@ -1,0 +1,13 @@
+<svg viewBox="0 0 820 300" xmlns="http://www.w3.org/2000/svg" font-family="Helvetica, Arial, sans-serif">
+  <rect x="40" y="20" width="740" height="76" rx="14" fill="#252525"/>
+  <text x="70" y="50" font-size="14" font-weight="700" fill="#ffffff">第一層 · 北極星</text>
+  <text x="70" y="74" font-size="12.5" fill="#d8dfdc">媒合成功率、平均等待時間、司機平均每小時收入</text>
+
+  <rect x="40" y="106" width="740" height="76" rx="14" fill="#36a2d4"/>
+  <text x="70" y="136" font-size="14" font-weight="700" fill="#ffffff">第二層 · 健康度</text>
+  <text x="70" y="160" font-size="12.5" fill="#eaf6fb">司機利用率、接單率、乘客取消率、供需缺口熱力圖</text>
+
+  <rect x="40" y="192" width="740" height="76" rx="14" fill="#009b16"/>
+  <text x="70" y="222" font-size="14" font-weight="700" fill="#ffffff">第三層 · 預警</text>
+  <text x="70" y="246" font-size="12.5" fill="#e3f5e6">司機流失率週增幅、特定區域／時段供需缺口惡化速度</text>
+</svg>
