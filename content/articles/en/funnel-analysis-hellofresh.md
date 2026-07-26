@@ -1,6 +1,7 @@
 ---
 title: "Funnel Analysis in Practice: Breaking Down Conversions with HelloFresh"
 date: 2026-03-19
+summary: "A subscription journey case study for defining funnels, measuring drop-off, finding bottlenecks, and testing improvements."
 tags: [Product Analytics, Funnel Analysis, HelloFresh, Growth]
 category: Germany / HK Experience
 ---

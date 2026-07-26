@@ -1,6 +1,7 @@
 ---
 title: "Customer Segmentation in Practice: Building Precision User Strategies with Grab"
 date: 2025-03-15
+summary: "A practical path from business goals and RFM signals to K-Means segments and actionable growth strategies."
 tags: [Customer Segmentation, K-Means, RFM, Python, Growth]
 category: Consulting
 ---

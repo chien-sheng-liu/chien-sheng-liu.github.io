@@ -1,6 +1,7 @@
 ---
 title: 漏斗分析實戰：以 HelloFresh 為例拆解用戶轉換
 date: 2026-03-19
+summary: 以訂閱制旅程示範如何定義漏斗、量化流失、找出瓶頸並提出可驗證的優化方案。
 tags: [Product Analytics, Funnel Analysis, HelloFresh, Growth]
 category: Germany / HK Experience
 ---

@@ -1,82 +1,93 @@
 "use client";
-import { motion } from "framer-motion";
+
+import Image from "next/image";
 import {
   FaEnvelope,
   FaLinkedin,
   FaCalendarAlt,
-  FaMapMarkerAlt,
-  FaGlobe,
   FaBriefcase,
   FaMicrophone,
   FaHandshake,
 } from "react-icons/fa";
+import HeroTypewriter from "./HeroTypewriter";
 
 const TO_EMAIL = "liu_chiensheng@outlook.com";
 const CALENDAR_URL = "https://calendar.app.google/MANJXP2ZZiaWF5T26";
 const LINKEDIN_URL = "https://www.linkedin.com/in/chienshengliu/";
 
+const heroImages = [
+  "/media/selected-work/foodtech-editorial.webp",
+  "/media/selected-work/martech-editorial.webp",
+  "/media/selected-work/adtech-editorial.webp",
+];
+
 const i18n = {
   zh: {
-    tagline: "Let's Talk",
-    heroTitle: "找 Morris 聊聊",
-    heroDesc: "職涯機會、演講教學、Data & AI 合作，都可以用最直接的方式開始對焦。",
+    label: "聯絡 / 00",
+    role: "職涯／合作",
+    heroTitle: ["很高興", "認識你"],
+    heroLines: ["聊職涯、合作與分享", "把問題直接告訴我", "通常 24 小時內回覆"],
     location: "香港",
-    languages: "三文五語 · 中文 · English · Deutsch · 粵語 · 台語",
-    fitNote: "適合：職涯機會、演講教學、Data & AI 合作。不適合：大量制式推銷或無關外包信件。",
+    languages: "三文五語 · 中文 · 英文 · 德文 · 粵語 · 台語",
+    fitNote: "職涯與團隊交流優先；演講、教學與具體的資料或人工智慧合作邀請也歡迎來信。",
+    intentsEn: "聯絡方式",
+    intentsZh: "合作方向",
     formatTitle: "快速合作格式",
     formats: [
-      { title: "Role", desc: "請附角色、地點、團隊背景，以及希望我解決的 Data & AI 問題。" },
-      { title: "Speaking", desc: "請附主題、audience、日期、形式，以及期待帶走的重點。" },
-      { title: "Collaboration", desc: "請附業務背景、資料或 AI 問題、期待成果與時間線。" },
+      { title: "職涯機會", desc: "請附角色、地點、團隊背景，以及希望我協助解決的資料與人工智慧問題。" },
+      { title: "演講教學", desc: "請附主題、參與對象、日期、形式，以及期待帶走的重點。" },
+      { title: "專案合作", desc: "請附業務背景、資料或人工智慧問題、期待成果與時間線。" },
     ],
     responseNote: "通常 24 小時內回覆",
-    channels: { email: "Email", linkedin: "LinkedIn", calendar: "Calendar" },
+    ctaKicker: "歡迎來信",
+    ctaTitle: "一起聊聊吧。",
+    channels: { email: "寫信", linkedin: "LinkedIn", calendar: "預約時間" },
     intents: [
       {
         key: "career",
         icon: <FaBriefcase />,
-        title: "Career / Hiring",
+        title: "職涯與招募",
         subtitle: "職涯、招募、顧問角色",
-        desc: "適合討論 Data & AI、BI、Advisory、跨市場分析相關機會。",
-        color: "from-sky-500 to-cyan-500",
+        desc: "適合討論資料與人工智慧、BI、顧問服務及跨市場分析相關機會。",
         links: [
-          { label: "Email", href: `mailto:${TO_EMAIL}`, icon: <FaEnvelope /> },
+          { label: "電子郵件", href: `mailto:${TO_EMAIL}`, icon: <FaEnvelope /> },
           { label: "LinkedIn", href: LINKEDIN_URL, icon: <FaLinkedin />, external: true },
         ],
       },
       {
         key: "speaking",
         icon: <FaMicrophone />,
-        title: "Speaking / Teaching",
+        title: "演講與教學",
         subtitle: "演講、課程、工作坊",
-        desc: "適合邀請 LLM、RAG、資料分析、AI 顧問職涯與海外經驗分享。",
-        color: "from-violet-500 to-indigo-500",
+        desc: "適合邀請 LLM、RAG、資料分析、人工智慧顧問職涯與海外經驗分享。",
         links: [
           { label: "預約時間", href: CALENDAR_URL, icon: <FaCalendarAlt />, external: true },
-          { label: "Email", href: `mailto:${TO_EMAIL}`, icon: <FaEnvelope /> },
+          { label: "電子郵件", href: `mailto:${TO_EMAIL}`, icon: <FaEnvelope /> },
         ],
       },
       {
         key: "collaboration",
         icon: <FaHandshake />,
-        title: "Data & AI Collaboration",
-        subtitle: "分析路徑、資料產品、GenAI",
-        desc: "適合把模糊業務問題拆成可交付的資料、模型或 AI 產品方向。",
-        color: "from-emerald-500 to-teal-500",
+        title: "資料與人工智慧合作",
+        subtitle: "分析路徑、資料產品、生成式 AI",
+        desc: "適合把模糊業務問題拆成可交付的資料、模型或人工智慧產品方向。",
         links: [
           { label: "30 分鐘對談", href: CALENDAR_URL, icon: <FaCalendarAlt />, external: true },
-          { label: "Email", href: `mailto:${TO_EMAIL}`, icon: <FaEnvelope /> },
+          { label: "電子郵件", href: `mailto:${TO_EMAIL}`, icon: <FaEnvelope /> },
         ],
       },
     ],
   },
   en: {
-    tagline: "Let's Talk",
-    heroTitle: "Talk to Morris",
-    heroDesc: "Career opportunities, speaking invitations, and Data & AI collaboration can all start with a clear first conversation.",
+    label: "CONTACT / 00",
+    role: "Career / Contact",
+    heroTitle: ["Good to", "meet you"],
+    heroLines: ["Career · work · talks", "Tell me what you need", "Replies within 24 hours"],
     location: "Hong Kong",
     languages: "3 written · 5 spoken · Chinese · English · Deutsch · Cantonese · Taiwanese",
-    fitNote: "Best for: hiring, speaking, collaboration. Not for cold vendor outreach.",
+    fitNote: "Career and team conversations come first; thoughtful speaking, teaching, and Data / AI invitations are welcome too.",
+    intentsEn: "Ways to Reach Me",
+    intentsZh: "How I can help",
     formatTitle: "Quick Collaboration Format",
     formats: [
       { title: "Role", desc: "Share the role, location, team context, and the Data & AI problem you want solved." },
@@ -84,7 +95,9 @@ const i18n = {
       { title: "Collaboration", desc: "Share the business context, data or AI problem, target outcome, and timeline." },
     ],
     responseNote: "Usually reply within 24 hours",
-    channels: { email: "Email", linkedin: "LinkedIn", calendar: "Calendar" },
+    ctaKicker: "SAY HELLO",
+    ctaTitle: "Say hello your way.",
+    channels: { email: "Email", linkedin: "LinkedIn", calendar: "Book time" },
     intents: [
       {
         key: "career",
@@ -92,7 +105,6 @@ const i18n = {
         title: "Career / Hiring",
         subtitle: "Roles, hiring, advisory track",
         desc: "Best for Data & AI, BI, advisory, and cross-market analytics opportunities.",
-        color: "from-sky-500 to-cyan-500",
         links: [
           { label: "Email", href: `mailto:${TO_EMAIL}`, icon: <FaEnvelope /> },
           { label: "LinkedIn", href: LINKEDIN_URL, icon: <FaLinkedin />, external: true },
@@ -104,7 +116,6 @@ const i18n = {
         title: "Speaking / Teaching",
         subtitle: "Talks, lectures, workshops",
         desc: "Best for LLM, RAG, analytics, AI consulting career, and international experience sessions.",
-        color: "from-violet-500 to-indigo-500",
         links: [
           { label: "Book time", href: CALENDAR_URL, icon: <FaCalendarAlt />, external: true },
           { label: "Email", href: `mailto:${TO_EMAIL}`, icon: <FaEnvelope /> },
@@ -116,7 +127,6 @@ const i18n = {
         title: "Data & AI Collaboration",
         subtitle: "Analytics paths, data products, GenAI",
         desc: "Best for turning ambiguous business problems into deliverable data, model, or AI product directions.",
-        color: "from-emerald-500 to-teal-500",
         links: [
           { label: "30-min chat", href: CALENDAR_URL, icon: <FaCalendarAlt />, external: true },
           { label: "Email", href: `mailto:${TO_EMAIL}`, icon: <FaEnvelope /> },
@@ -127,188 +137,131 @@ const i18n = {
 };
 
 const directChannels = [
-  { key: "email", icon: <FaEnvelope />, href: `mailto:${TO_EMAIL}`, value: TO_EMAIL },
-  { key: "linkedin", icon: <FaLinkedin />, href: LINKEDIN_URL, value: "Chien-Sheng (Morris) Liu", external: true },
-  { key: "calendar", icon: <FaCalendarAlt />, href: CALENDAR_URL, value: "30 min", external: true },
+  { key: "email", href: `mailto:${TO_EMAIL}` },
+  { key: "linkedin", href: LINKEDIN_URL, external: true },
+  { key: "calendar", href: CALENDAR_URL, external: true },
 ];
-
-const fadeUp = {
-  hidden: { opacity: 0, y: 24 },
-  visible: (i = 0) => ({
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.5, delay: i * 0.08, ease: [0.22, 1, 0.36, 1] },
-  }),
-};
 
 export default function ContactPage({ locale = "zh" }) {
   const t = i18n[locale] || i18n.zh;
 
   return (
-    <div className="relative min-h-screen bg-[#0a0a0a] text-white overflow-hidden">
-      <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-24">
-        <div className="max-w-4xl mx-auto">
-          {/* Hero */}
-          <motion.div className="mb-14" initial="hidden" animate="visible">
-            <motion.p
-              variants={fadeUp}
-              custom={0}
-              className="text-xs uppercase tracking-[0.35em] text-indigo-400/70 font-medium mb-4"
-            >
-              {t.tagline}
-            </motion.p>
-            <motion.h1
-              variants={fadeUp}
-              custom={1}
-              className="break-words text-4xl sm:text-5xl lg:text-6xl font-bold leading-[1.1] tracking-tight mb-5"
-            >
-              <span className="bg-gradient-to-r from-violet-400 via-sky-400 to-cyan-300 bg-clip-text text-transparent">
-                {t.heroTitle}
-              </span>
-            </motion.h1>
-            <motion.p
-              variants={fadeUp}
-              custom={2}
-              className="wrap-anywhere text-lg text-white/50 leading-relaxed mb-6 max-w-2xl"
-            >
-              {t.heroDesc}
-            </motion.p>
+    <main className="jre-about-page">
+      <section className="jre-about-hero">
+        <div className="jre-about-hero__meta jre-reveal">
+          <span>{t.label}</span>
+          <span>{t.role}</span>
+          <span>{t.location}</span>
+        </div>
 
-            <motion.div
-              variants={fadeUp}
-              custom={3}
-              className="flex flex-wrap gap-3 text-sm text-white/40"
-            >
-              <span className="inline-flex items-center gap-1.5">
-                <FaMapMarkerAlt className="text-xs text-sky-400" />
-                {t.location}
-              </span>
-              <span className="text-white/20">·</span>
-              <span className="inline-flex items-center gap-1.5">
-                <FaGlobe className="text-xs text-sky-400" />
-                {t.languages}
-              </span>
-            </motion.div>
+        <div className="jre-about-hero__title jre-reveal">
+          <h1>
+            <span>{t.heroTitle[0]}</span>
+            <span>{t.heroTitle[1]}</span>
+          </h1>
+          <HeroTypewriter texts={t.heroLines} />
+          <div className="jre-about-hero__visuals" aria-hidden="true">
+            <figure className="jre-about-hero__visual jre-about-hero__visual--main">
+              <Image
+                src={heroImages[0]}
+                alt=""
+                fill
+                priority
+                sizes="(min-width: 900px) 34vw, 82vw"
+              />
+            </figure>
+            <figure className="jre-about-hero__visual jre-about-hero__visual--finance">
+              <Image
+                src={heroImages[1]}
+                alt=""
+                fill
+                sizes="(min-width: 900px) 16vw, 42vw"
+              />
+            </figure>
+            <figure className="jre-about-hero__visual jre-about-hero__visual--maritime">
+              <Image
+                src={heroImages[2]}
+                alt=""
+                fill
+                sizes="(min-width: 900px) 15vw, 38vw"
+              />
+            </figure>
+          </div>
+          <i className="jre-about-hero__shape jre-about-hero__shape--circle" />
+          <i className="jre-about-hero__shape jre-about-hero__shape--pill" />
+        </div>
 
-            <motion.p
-              variants={fadeUp}
-              custom={4}
-              className="wrap-anywhere mt-5 max-w-2xl rounded-xl border border-white/[0.08] bg-white/[0.04] px-4 py-3 text-sm font-medium leading-relaxed text-white/55"
-            >
-              {t.fitNote}
-            </motion.p>
-          </motion.div>
+      </section>
 
-          {/* Contact intents */}
-          <div className="grid gap-4 md:grid-cols-3 mb-12">
-            {t.intents.map((intent, i) => (
-              <motion.div
-                key={intent.key}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true, amount: 0.35 }}
-                custom={i}
-                variants={fadeUp}
-                className="group flex min-w-0 flex-col rounded-2xl border border-white/[0.08] bg-white/[0.05] p-5 backdrop-blur-sm transition-all duration-300 hover:border-white/20 hover:shadow-lg hover:shadow-black/20"
-              >
-                <div className={`mb-5 flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br ${intent.color} text-lg text-white shadow-lg`}>
-                  {intent.icon}
-                </div>
+      <section className="jre-about-craft">
+        <header className={`jre-section-title jre-reveal ${locale === "zh" ? "jre-section-title--zh" : ""}`}>
+          <h2>{t.intentsEn}</h2>
+          <p>{t.intentsZh}</p>
+        </header>
+        <p className="jre-about-journey__lead jre-reveal">{t.fitNote}</p>
 
-                <div className="min-w-0 flex-1">
-                  <p className="mb-1 text-[11px] font-semibold uppercase tracking-[0.22em] text-sky-300/70">
-                    {intent.subtitle}
-                  </p>
-                  <h3 className="wrap-anywhere text-lg font-bold leading-tight text-white">
-                    {intent.title}
-                  </h3>
-                  <p className="wrap-anywhere mt-3 text-sm leading-relaxed text-white/48">
-                    {intent.desc}
-                  </p>
-                </div>
-
-                <div className="mt-5 flex flex-wrap gap-2">
-                  {intent.links.map((link) => (
+        <div className="jre-about-craft__grid">
+          {t.intents.map((intent) => (
+            <article className="jre-reveal jre-craft-card" key={intent.key}>
+              <div>
+                <span>{intent.icon}</span>
+                <small>{intent.subtitle}</small>
+              </div>
+              <h3>{intent.title}</h3>
+              <p>{intent.desc}</p>
+              <ul className="jre-craft-card__links">
+                {intent.links.map((link) => (
+                  <li key={link.label}>
                     <a
-                      key={`${intent.key}-${link.label}`}
                       href={link.href}
                       target={link.external ? "_blank" : undefined}
                       rel={link.external ? "noopener noreferrer" : undefined}
-                      className="inline-flex items-center gap-1.5 rounded-full border border-white/[0.08] bg-white/[0.04] px-3 py-1.5 text-xs font-semibold text-white/55 transition-colors hover:border-white/20 hover:text-white"
                     >
-                      <span className="text-[10px] text-sky-300/80">{link.icon}</span>
+                      {link.icon}
                       {link.label}
                     </a>
-                  ))}
-                </div>
-              </motion.div>
-            ))}
-          </div>
-
-          {/* Quick format */}
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.3 }}
-            variants={fadeUp}
-            className="mb-12"
-          >
-            <h2 className="mb-4 text-lg font-bold text-white">
-              {t.formatTitle}
-            </h2>
-            <div className="grid gap-3 md:grid-cols-3">
-              {t.formats.map((format) => (
-                <div key={format.title} className="min-w-0 rounded-xl border border-white/[0.08] bg-white/[0.035] p-4">
-                  <p className="mb-2 text-[11px] font-semibold uppercase tracking-[0.24em] text-sky-300/70">
-                    {format.title}
-                  </p>
-                  <p className="wrap-anywhere text-sm leading-relaxed text-white/52">
-                    {format.desc}
-                  </p>
-                </div>
-              ))}
-            </div>
-          </motion.div>
-
-          {/* Direct channels */}
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={fadeUp}
-            className="mb-12 grid gap-3 sm:grid-cols-3"
-          >
-            {directChannels.map((ch) => (
-              <a
-                key={ch.key}
-                href={ch.href}
-                target={ch.external ? "_blank" : undefined}
-                rel={ch.external ? "noopener noreferrer" : undefined}
-                className="group min-w-0 rounded-xl border border-white/[0.08] bg-white/[0.035] px-4 py-3 transition-colors hover:border-white/20"
-              >
-                <div className="mb-1 flex items-center gap-2 text-xs font-semibold text-white/40">
-                  <span className="text-sky-300/70">{ch.icon}</span>
-                  {t.channels[ch.key]}
-                </div>
-                <p className="truncate text-sm font-medium text-white/65 group-hover:text-white">
-                  {ch.value}
-                </p>
-              </a>
-            ))}
-          </motion.div>
-
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={fadeUp}
-            className="flex items-center justify-center gap-2 text-sm text-white/40"
-          >
-            <span className="w-1.5 h-1.5 bg-green-400 rounded-full animate-pulse" />
-            {t.responseNote}
-          </motion.div>
+                  </li>
+                ))}
+              </ul>
+            </article>
+          ))}
         </div>
-      </div>
-    </div>
+      </section>
+
+      <section className="jre-benefit">
+        <p className="jre-benefit__eyebrow jre-reveal">{t.formatTitle}</p>
+        <div className="jre-contact-format jre-reveal">
+          {t.formats.map((format) => (
+            <article key={format.title}>
+              <span>{format.title}</span>
+              <h3>{format.title}</h3>
+              <p>{format.desc}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section className="jre-about-cta jre-contact-cta">
+        <p className="jre-reveal">{t.ctaKicker}</p>
+        <h2 className="jre-reveal">{t.ctaTitle}</h2>
+        <div className="jre-about-cta__actions jre-reveal">
+          {directChannels.map((ch) => (
+            <a
+              key={ch.key}
+              className="jre-pill-button"
+              href={ch.href}
+              target={ch.external ? "_blank" : undefined}
+              rel={ch.external ? "noopener noreferrer" : undefined}
+            >
+              {t.channels[ch.key]}<span>↗</span>
+            </a>
+          ))}
+        </div>
+        <div className="jre-about-cta__status jre-reveal">
+          <i />
+          {t.responseNote}
+        </div>
+      </section>
+    </main>
   );
 }

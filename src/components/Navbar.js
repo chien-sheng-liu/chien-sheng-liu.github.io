@@ -1,197 +1,153 @@
-'use client';
+"use client";
 
-import Link from 'next/link';
-import { usePathname, useRouter } from 'next/navigation';
-import { useCallback, useEffect, useMemo, useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import Link from "next/link";
+import { usePathname, useRouter } from "next/navigation";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+import { FaGithub, FaLinkedin } from "react-icons/fa";
 
-const navLinksZh = [
-  { name: '首頁', href: '/' },
-  { name: '關於我', href: '/about' },
-  { name: '案例作品', href: '/projects' },
-  { name: '文章', href: '/articles' },
-  { name: '聯絡我', href: '/contact' },
-];
+const navigation = {
+  zh: [
+    ["首頁", "/"],
+    ["關於我", "/about"],
+    ["作品", "/projects"],
+    ["文章", "/articles"],
+    ["聯絡", "/contact"],
+  ],
+  en: [
+    ["Home", "/"],
+    ["About", "/about"],
+    ["Work", "/projects"],
+    ["Notes", "/articles"],
+    ["Contact", "/contact"],
+  ],
+};
 
-const navLinksEn = [
-  { name: 'Home', href: '/' },
-  { name: 'About', href: '/about' },
-  { name: 'Case Work', href: '/projects' },
-  { name: 'Articles', href: '/articles' },
-  { name: 'Contact', href: '/contact' },
-];
-
-const normalize = (p) => (p === '/' ? '/' : p.replace(/\/$/, ''));
+const normalize = (path) => (path === "/" ? "/" : path?.replace(/\/$/, ""));
 
 export default function Navbar() {
   const pathname = usePathname();
   const router = useRouter();
-  const [isOpen, setIsOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
+  const reduced = useReducedMotion();
+  const [open, setOpen] = useState(false);
+  const menuRef = useRef(null);
+  const locale = useMemo(() => (pathname?.startsWith("/en") ? "en" : "zh"), [pathname]);
+  const prefix = locale === "en" ? "/en" : "";
 
-  const locale = useMemo(() => (pathname?.startsWith('/en') ? 'en' : 'zh'), [pathname]);
-  const hrefPrefix = locale === 'zh' ? '' : '/en';
-  const links = locale === 'en' ? navLinksEn : navLinksZh;
+  useEffect(() => setOpen(false), [pathname]);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 40);
-    window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
-  }, []);
+    if (!open) return undefined;
+    const previous = document.body.style.overflow;
+    const focusable = Array.from(menuRef.current?.querySelectorAll("a, button") || []);
+    document.body.style.overflow = "hidden";
+    focusable[0]?.focus();
 
-  const switchTo = useCallback((lang) => {
-    if (!pathname) return;
-    const base = pathname.replace(/^\/en(?=\/|$)/, '') || '/';
-    const target = lang === 'zh' ? (base === '' ? '/' : base) : `/${lang}${base === '/' ? '' : base}`;
-    try {
-      if (typeof window !== 'undefined') {
-        localStorage.setItem('preferred-lang', lang);
-        document.cookie = `preferred-lang=${lang}; path=/; max-age=31536000; samesite=lax`;
+    const onKey = (event) => {
+      if (event.key === "Escape") setOpen(false);
+      if (event.key !== "Tab" || focusable.length === 0) return;
+      const first = focusable[0];
+      const last = focusable.at(-1);
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
       }
-    } catch {}
-    setIsOpen(false);
+    };
+
+    window.addEventListener("keydown", onKey);
+    return () => {
+      document.body.style.overflow = previous;
+      window.removeEventListener("keydown", onKey);
+    };
+  }, [open]);
+
+  const switchTo = useCallback((language) => {
+    const base = pathname?.replace(/^\/en(?=\/|$)/, "") || "/";
+    const target = language === "en" ? `/en${base === "/" ? "" : base}` : base;
+    localStorage.setItem("preferred-lang", language);
+    document.cookie = `preferred-lang=${language}; path=/; max-age=31536000; samesite=lax`;
     router.push(target);
   }, [pathname, router]);
 
   return (
-    <motion.nav
-      className="fixed top-0 left-0 right-0 z-50"
-      initial={{ opacity: 0, y: -8 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-    >
-      {/* Backdrop — only on scroll */}
-      <div
-        className="absolute inset-0 pointer-events-none transition-all duration-500"
-        style={{
-          background: scrolled ? 'rgba(10,10,10,0.85)' : 'transparent',
-          backdropFilter: scrolled ? 'blur(16px)' : 'none',
-          WebkitBackdropFilter: scrolled ? 'blur(16px)' : 'none',
-        }}
-      />
-
-      <div className="relative flex items-center justify-between px-6 sm:px-10 lg:px-16 h-16">
-
-        {/* Logo */}
-        <Link href={hrefPrefix || '/'} className="flex items-center gap-2.5 group">
-          <div
-            className="w-7 h-7 rounded-lg flex items-center justify-center shrink-0"
-            style={{ background: 'linear-gradient(135deg, #38bdf8, #6366f1)' }}
-          >
-            <span className="text-white text-[10px] font-black select-none">ML</span>
-          </div>
-          <span className="text-sm font-semibold text-white/80 group-hover:text-white transition-colors">
-            Morris Liu
-          </span>
+    <header className="jre-header">
+      <div className="jre-header__bar">
+        <Link href={prefix || "/"} className="jre-brand" aria-label="Morris Liu home">
+          <span className="jre-brand__mark">ML<small>MORRIS</small></span>
+          <span className="jre-brand__name">Morris Liu<br /><small>Personal portfolio</small></span>
         </Link>
 
-        {/* Desktop links */}
-        <div className="hidden md:flex items-center gap-6">
-          {links.map((link, i) => {
-            const linkHref = normalize(`${hrefPrefix}${link.href}`.replace('//', '/'));
-            const isActive = normalize(pathname || '') === linkHref;
+        <nav className="jre-nav" aria-label="Primary navigation">
+          {navigation[locale].map(([label, href]) => {
+            const target = normalize(`${prefix}${href}`.replace("//", "/"));
+            const active = normalize(pathname || "/") === target;
             return (
-              <motion.div
-                key={link.href}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.1 + i * 0.05 }}
-              >
-                <Link
-                  href={linkHref}
-                  className={`relative text-sm font-medium transition-colors duration-200 ${
-                    isActive ? 'text-white' : 'text-white/55 hover:text-white/90'
-                  }`}
-                >
-                  {link.name}
-                  {isActive && (
-                    <motion.span
-                      layoutId="underline"
-                      className="absolute -bottom-0.5 left-0 right-0 h-px bg-sky-400"
-                      style={{ boxShadow: '0 0 6px rgba(56,189,248,0.8)' }}
-                      transition={{ type: 'spring', bounce: 0.2, duration: 0.4 }}
-                    />
-                  )}
-                </Link>
-              </motion.div>
+              <Link href={target} className={active ? "is-active" : ""} key={href}>
+                {label}
+              </Link>
             );
           })}
+        </nav>
 
-          {/* Lang */}
-          <div className="flex items-center gap-1 text-sm font-medium ml-2">
-            <button
-              onClick={() => switchTo('zh')}
-              className={`transition-colors ${locale === 'zh' ? 'text-white' : 'text-white/35 hover:text-white/70'}`}
-            >
-              繁中
-            </button>
-            <span className="text-white/20">·</span>
-            <button
-              onClick={() => switchTo('en')}
-              className={`transition-colors ${locale === 'en' ? 'text-white' : 'text-white/35 hover:text-white/70'}`}
-            >
-              EN
-            </button>
+        <div className="jre-header__actions">
+          <div className="jre-language" aria-label="Language">
+            <button onClick={() => switchTo("zh")} className={locale === "zh" ? "is-active" : ""}>繁中</button>
+            <span>/</span>
+            <button onClick={() => switchTo("en")} className={locale === "en" ? "is-active" : ""}>EN</button>
           </div>
+          <Link href={`${prefix}/contact`} className="jre-header__contact">
+            {locale === "zh" ? "聯絡我" : "CONTACT"} <span aria-hidden="true">↗</span>
+          </Link>
+          <button
+            className="jre-menu-button"
+            onClick={() => setOpen((value) => !value)}
+            aria-expanded={open}
+            aria-controls="jre-mobile-menu"
+          >
+            <span>{open ? "Close" : "Menu"}</span>
+            <i className={open ? "is-open" : ""} />
+          </button>
         </div>
-
-        {/* Mobile hamburger */}
-        <button
-          onClick={() => setIsOpen(v => !v)}
-          className="md:hidden flex flex-col items-center justify-center gap-1.5 w-8 h-8"
-          aria-label="Toggle menu"
-        >
-          <motion.span className="block h-px w-5 bg-white/70 rounded-full"
-            animate={isOpen ? { rotate: 45, y: 5 } : { rotate: 0, y: 0 }} transition={{ duration: 0.2 }} />
-          <motion.span className="block h-px w-5 bg-white/70 rounded-full"
-            animate={isOpen ? { opacity: 0 } : { opacity: 1 }} transition={{ duration: 0.2 }} />
-          <motion.span className="block h-px w-5 bg-white/70 rounded-full"
-            animate={isOpen ? { rotate: -45, y: -5 } : { rotate: 0, y: 0 }} transition={{ duration: 0.2 }} />
-        </button>
       </div>
 
-      {/* Mobile menu */}
       <AnimatePresence>
-        {isOpen && (
+        {open && (
           <motion.div
-            initial={{ opacity: 0, y: -6 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -6 }}
-            transition={{ duration: 0.2 }}
-            className="md:hidden mx-4 rounded-xl border border-white/[0.08] overflow-hidden"
-            style={{ background: 'rgba(12,12,12,0.96)', backdropFilter: 'blur(20px)' }}
+            ref={menuRef}
+            id="jre-mobile-menu"
+            className="jre-mobile-menu"
+            initial={reduced ? false : { clipPath: "inset(0 0 100% 0)" }}
+            animate={{ clipPath: "inset(0 0 0% 0)" }}
+            exit={{ clipPath: "inset(0 0 100% 0)" }}
+            transition={{ duration: reduced ? 0 : 0.6, ease: [0.76, 0, 0.24, 1] }}
           >
-            <div className="p-2 flex flex-col">
-              {links.map((link) => {
-                const linkHref = normalize(`${hrefPrefix}${link.href}`.replace('//', '/'));
-                const isActive = normalize(pathname || '') === linkHref;
+            <nav aria-label="Mobile navigation">
+              {navigation[locale].map(([label, href], index) => {
+                const target = normalize(`${prefix}${href}`.replace("//", "/"));
                 return (
-                  <Link
-                    key={link.href}
-                    href={linkHref}
-                    onClick={() => setIsOpen(false)}
-                    className={`px-4 py-3 rounded-lg text-sm font-medium transition-colors ${
-                      isActive ? 'text-white bg-white/[0.06]' : 'text-white/50 hover:text-white/80'
-                    }`}
-                  >
-                    {link.name}
+                  <Link href={target} key={href}>
+                    <span>0{index + 1}</span><strong>{label}</strong><i>↗</i>
                   </Link>
                 );
               })}
-              <div className="mt-1 pt-2 border-t border-white/[0.06] flex gap-1 px-2 pb-1">
-                <button onClick={() => switchTo('zh')}
-                  className={`flex-1 py-2 rounded-lg text-sm font-medium transition-colors ${locale === 'zh' ? 'text-white bg-white/[0.07]' : 'text-white/35 hover:text-white/60'}`}>
-                  繁中
-                </button>
-                <button onClick={() => switchTo('en')}
-                  className={`flex-1 py-2 rounded-lg text-sm font-medium transition-colors ${locale === 'en' ? 'text-white bg-white/[0.07]' : 'text-white/35 hover:text-white/60'}`}>
-                  EN
-                </button>
+            </nav>
+            <div className="jre-mobile-menu__foot">
+              <div className="jre-language">
+                <button onClick={() => switchTo("zh")} className={locale === "zh" ? "is-active" : ""}>繁中</button>
+                <span>/</span>
+                <button onClick={() => switchTo("en")} className={locale === "en" ? "is-active" : ""}>EN</button>
+              </div>
+              <div>
+                <a href="https://www.linkedin.com/in/chienshengliu/" target="_blank" rel="noreferrer" aria-label="LinkedIn"><FaLinkedin /></a>
+                <a href="https://github.com/chien-sheng-liu" target="_blank" rel="noreferrer" aria-label="GitHub"><FaGithub /></a>
               </div>
             </div>
           </motion.div>
         )}
       </AnimatePresence>
-    </motion.nav>
+    </header>
   );
 }

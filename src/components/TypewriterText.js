@@ -5,14 +5,29 @@ import { useState, useEffect } from "react";
  * Typewriter effect cycling through an array of strings.
  * Pure JS — no external packages.
  */
-export default function TypewriterText({ texts = [], speed = 60, pause = 2000, className = "" }) {
+export default function TypewriterText({ texts = [], speed = 60, pause = 2000, className = "", disabled = false }) {
   const [displayed, setDisplayed] = useState("");
   const [textIdx, setTextIdx] = useState(0);
   const [charIdx, setCharIdx] = useState(0);
   const [deleting, setDeleting] = useState(false);
+  /* `disabled` comes from useReducedMotion(), which can already resolve on the
+     client's first render — branching JSX on it directly would then disagree
+     with the server's render. Gating on `mounted` (always false pre-hydration,
+     on both server and client) keeps the first paint identical everywhere;
+     the real disabled-dependent render only happens after that effect fires. */
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => setMounted(true), []);
 
   useEffect(() => {
-    if (!texts.length) return;
+    if (disabled) {
+      setDisplayed(texts[0] || "");
+      return;
+    }
+  }, [disabled, texts]);
+
+  useEffect(() => {
+    if (!texts.length || disabled) return;
 
     const current = texts[textIdx] || "";
 
@@ -45,15 +60,17 @@ export default function TypewriterText({ texts = [], speed = 60, pause = 2000, c
     }, delay);
 
     return () => clearTimeout(id);
-  }, [texts, textIdx, charIdx, deleting, speed, pause]);
+  }, [texts, textIdx, charIdx, deleting, speed, pause, disabled]);
 
   return (
     <span className={className}>
       {displayed}
-      <span
-        className="inline-block w-[2px] h-[0.85em] bg-current ml-0.5 align-middle"
-        style={{ animation: "blink-caret 0.8s step-end infinite" }}
-      />
+      {mounted && !disabled && (
+        <span
+          className="inline-block w-[2px] h-[0.85em] bg-current ml-0.5 align-middle"
+          style={{ animation: "blink-caret 0.8s step-end infinite" }}
+        />
+      )}
     </span>
   );
 }

@@ -1,6 +1,7 @@
 ---
 title: "Reliable Data Pipelines in Python: Architecture and Checklist"
 date: 2025-01-18
+summary: "A practical checklist for turning ETL scripts into maintainable data products with validation, monitoring, testing, and deployment."
 tags: [Python, ETL, Data Engineering]
 category: Data Career
 ---

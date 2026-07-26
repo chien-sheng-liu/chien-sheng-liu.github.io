@@ -1,20 +1,22 @@
 
 import "./globals.css";
+import "./jreast.css";
 import { ThemeProvider } from "./providers";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import CursorGlow from "@/components/CursorGlow";
 import LangDetect from "@/components/LangDetect";
+import SmoothScrollProvider from "@/components/SmoothScrollProvider";
+import SiteMotion from "@/components/SiteMotion";
 
 const siteUrl = "https://morris-liu.com";
 
 export const metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    template: "%s | Morris Liu · Data & AI Advisory",
-    default: "Morris Liu · Data & AI Advisory",
+    template: "%s | Morris Liu",
+    default: "Morris Liu · Data & AI Portfolio",
   },
-  description: "Morris Liu — WSP Data & AI Consultant、Mentarix Data Studio 創辦人，連結跨市場 BI、GenAI、資料工程與商業決策。",
+  description: "Morris Liu 的個人履歷與作品集，記錄 Data、AI、跨市場分析與產品實作經驗。",
   alternates: {
     canonical: "/",
     languages: {
@@ -23,8 +25,8 @@ export const metadata = {
     },
   },
   openGraph: {
-    title: "Morris Liu · Data & AI Advisory",
-    description: "WSP Data & AI Consultant、Mentarix Data Studio 創辦人，連結 BI、GenAI、資料工程與商業決策。",
+    title: "Morris Liu · Data & AI Portfolio",
+    description: "Morris Liu 的個人履歷、作品與 Data / AI 實作筆記。",
     url: siteUrl,
     siteName: "Morris Liu",
     locale: "zh_TW",
@@ -33,8 +35,8 @@ export const metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Morris Liu · Data & AI Advisory",
-    description: "WSP Data & AI Consultant、Mentarix Data Studio 創辦人，連結 BI、GenAI、資料工程與商業決策。",
+    title: "Morris Liu · Data & AI Portfolio",
+    description: "Morris Liu 的個人履歷、作品與 Data / AI 實作筆記。",
     images: ["/profile.png"],
   },
   icons: {
@@ -45,13 +47,15 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="zh-TW" suppressHydrationWarning>
-      <body className="bg-[#0a0a0a] text-white antialiased">
+      <body className="bg-white text-[#111] antialiased">
         <ThemeProvider>
           <LangDetect />
-          <CursorGlow />
-          <Navbar />
-          <main className="relative z-0 pt-20">{children}</main>
-          <Footer />
+          <SmoothScrollProvider>
+            <SiteMotion />
+            <Navbar />
+            <main className="site-main">{children}</main>
+            <Footer />
+          </SmoothScrollProvider>
         </ThemeProvider>
       </body>
     </html>

@@ -1,14 +1,12 @@
-import "../globals.css";
-
 const siteUrl = "https://morris-liu.com";
 
 export const metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    template: "%s | Morris Liu · Data & AI Advisory",
-    default: "Morris Liu · Data & AI Advisory",
+    template: "%s | Morris Liu",
+    default: "Morris Liu · Data & AI Portfolio",
   },
-  description: "Morris Liu — WSP Data & AI Consultant and founder of Mentarix Data Studio, connecting cross-market BI, GenAI, data engineering, and business decisions.",
+  description: "The personal résumé and portfolio of Morris Liu, featuring work across data, AI, analytics, and product delivery.",
   alternates: {
     canonical: "/en",
     languages: {
@@ -17,8 +15,8 @@ export const metadata = {
     },
   },
   openGraph: {
-    title: "Morris Liu · Data & AI Advisory",
-    description: "WSP Data & AI Consultant and founder of Mentarix Data Studio, connecting BI, GenAI, data engineering, and business decisions.",
+    title: "Morris Liu · Data & AI Portfolio",
+    description: "The personal résumé, selected work, and Data / AI notes of Morris Liu.",
     url: `${siteUrl}/en`,
     siteName: "Morris Liu",
     locale: "en_US",
@@ -27,8 +25,8 @@ export const metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Morris Liu · Data & AI Advisory",
-    description: "WSP Data & AI Consultant and founder of Mentarix Data Studio, connecting BI, GenAI, data engineering, and business decisions.",
+    title: "Morris Liu · Data & AI Portfolio",
+    description: "The personal résumé, selected work, and Data / AI notes of Morris Liu.",
     images: ["/profile.png"],
   },
   icons: {

@@ -1,72 +1,102 @@
 # CLAUDE.md
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+本文件是此 repository 的唯一開發指引。網站介面以繁體中文為預設，所有修改都必須同步檢查英文版本。
 
-## Development Commands
+## 開發指令
 
-- `npm run dev` - Start development server with Turbopack
-- `npm run build` - Production build (runs `clean` automatically via `prebuild`)
-- `npm run lint` / `npm run lint:fix` - ESLint
-- `npm run clean` - Delete `.next` cache (runs automatically before dev/build)
+- `npm run dev -- -p 3000`：以 Turbopack 啟動開發服務
+- `npm run lint`：執行 ESLint
+- `npm run build`：production build 並輸出靜態網站至 `out/`
+- `npm run clean`：刪除 `.next` 快取
 
-## Architecture
+`predev` 與 `prebuild` 會自動執行 clean。
 
-### Stack
-Next.js 15 (App Router, React 19) + Tailwind CSS v4 (`@theme` directive, not tailwind.config.js) + Framer Motion + d3-geo/topojson-client + tsparticles
+## 固定連接埠規則
 
-### Internationalization (2 locales)
+1. 一律先檢查 port 3000。
+2. 若 3000 已是本 repository 的服務，直接沿用，不重複啟動。
+3. 只有當 3000 被無關程式占用時，才改用 3100。
+4. 不可自動使用其他 port。
+5. 回報實際網址：`http://localhost:3000` 或 `http://localhost:3100`。
 
-| Locale | Route prefix | Default? |
-|--------|-------------|----------|
-| Traditional Chinese (zh) | `/` (no prefix) | Yes |
-| English | `/en/` | No |
+## 架構
 
-- `middleware.js` (root) handles language detection via cookie `preferred-lang` → Accept-Language header → fallback to `zh`
-- Each locale has its own page files: `src/app/page.js` (zh), `src/app/en/page.js`
-- Locale sub-layout: `src/app/en/layout.js`
-- **When modifying a page, the same change must be applied to both locale versions**
+技術棧：Next.js 15 App Router、React 19、Tailwind CSS 4、Framer Motion、GSAP、Lenis、Markdown。
 
-### Page Structure
+網站使用 `output: "export"`，必須保持 static export 相容性，不可加入依賴 request-time server runtime 的功能。
 
-Each locale has: homepage (`page.js`), `/about`, `/articles`, `/articles/[slug]`, `/contact`, `/projects`
+### 雙語路由
 
-- Homepage data: inline in each `page.js`
-- Project data: `src/data/projectData.js` (shared, locale-aware)
-- About data: `src/app/about/aboutData.js`, `src/app/en/about/aboutData.js`
+| 語系 | Prefix | 預設 |
+| --- | --- | --- |
+| 繁體中文 | `/` | 是 |
+| English | `/en` | 否 |
 
-### Content System
+路由頁只負責載入資料與傳入 `locale`。主要畫面由下列共用元件負責：
 
-- Markdown articles in `content/articles/{zh,en}/`
-- `src/lib/content.js` - File-based content reading with frontmatter parsing
-- `src/lib/markdown.js` - Markdown → HTML with TOC generation (uses `marked` library)
-- API routes: `src/app/api/content/articles/` serve content as JSON
+- `EditorialHome.js`
+- `AboutPage.js`
+- `ProjectsPage.js`
+- `ArticlesPage.js`
+- `ContactPage.js`
+- `ArticleDetailPage.js`
 
-### Key Components
+雙語資料集中在元件的 `content`／`i18n` 物件、`src/data/homeProfileData.js` 與 `src/data/projectData.js`。不要建立第三套重複頁面。
 
-- `Navbar.js` - Navigation with language switcher dropdown, sets `preferred-lang` cookie
-- `FlightTimeline.js` - Career journey timeline with world map, flight arcs, and detail modals
-- `FlightArc.js` - SVG animated arcs with traveling light dots between timeline nodes
-- `WorldMapBackground.js` - 2D world map using d3-geo + Natural Earth TopoJSON (`public/data/world-110m.json`)
-- `ParticlesBackground.js` - tsparticles background effect
-- `MarkdownRenderer.js` - Renders HTML from markdown with Shiki syntax highlighting
-- `Footer.js` - Site footer
+### 語言處理
 
-### Styling
+- `Navbar.js` 負責切換路徑並設定 `preferred-lang` cookie。
+- `LangDetect.js` 在靜態部署時依 cookie 或瀏覽器語言導向英文。
+- 中文頁文案應維持自然繁體中文；專有名詞如 Data、AI、LLM 可保留英文。
+- 修改共享 UI 後必須檢查 zh 與 en 路由。
 
-- Tailwind CSS v4 with `@theme` directive in `globals.css` (not `tailwind.config.js`)
-- Light theme: body bg `#f8fafc`, text `#334155`
-- Accent colors: `--color-electric-blue: #0ea5e9`, `--color-violet-glow: #6366f1`
-- Theme forced to light mode via `next-themes` in `src/app/providers.js`
-- Font: Noto Sans TC (loaded via `next/font/google` in root `layout.js`)
+### 文章系統
 
-### Common Patterns
+- Markdown：`content/articles/{zh,en}/`
+- 讀取與 frontmatter：`src/lib/content.js`
+- Markdown 轉 HTML 與 TOC：`src/lib/markdown.js`
+- 中文與英文同主題文章使用相同 slug
 
-- Client components use `"use client"` directive and Framer Motion for animations
-- Server components for article/content pages (data fetched at build time)
-- All page-level styling uses direct Tailwind classes (not CSS custom properties for colors)
+## 樣式與動態
 
-### Dependency Rules
+- `src/app/globals.css`：Tailwind、文章排版與基礎樣式。
+- `src/app/jreast.css`：目前網站的 editorial 視覺系統與 responsive 規則。
+- `SiteMotion.js`：共用 GSAP reveal、時間軸與路由動態。
+- `SmoothScrollProvider.js`：Lenis 與 ScrollTrigger 同步。
+- `TypewriterText.js`／`HeroTypewriter.js`：首頁與內頁 Hero 打字動畫。
 
-- **React 19**: Many popular React libraries (e.g. `react-simple-maps`) only support React 16-18. Always check `peerDependencies` before `npm install`. If peer conflict occurs, prefer lower-level alternatives (e.g. `d3-geo` + `topojson-client` instead of `react-simple-maps`).
-- **Turbopack cache corruption**: If `npm run dev` shows `TurbopackInternalError` or `Cannot find module .next/postcss.js`, run `npm run clean` to clear the `.next` cache, then retry.
-- **No Three.js**: Three.js / React Three Fiber was removed. Use SVG + d3-geo for map/geo visualizations.
+首頁 Hero 有獨立版型；調整內頁 Hero 時不可連帶修改首頁，除非使用者明確要求。
+
+所有動畫都必須尊重 `prefers-reduced-motion`。互動元件需支援鍵盤操作，裝飾圖片使用空 `alt` 並標記為非內容。
+
+## 素材規則
+
+- 公司素材：`public/brands/`
+- Hero／作品素材：`public/media/`
+- 只保留實際被程式引用的素材。
+- 不提交 `.next/`、`out/`、`tem/`、`.env*`、`.DS_Store`、`.npm-cache/` 或個人 CV。
+
+## 依賴規則
+
+- 安裝前檢查 React 19 peer dependency。
+- 不加入 Three.js 或 React Three Fiber。
+- 避免為單一簡單效果新增大型套件。
+- 移除元件後同步檢查並移除不再使用的 dependencies。
+
+## 交付前檢查
+
+```bash
+npm run lint
+npm run build
+```
+
+另外確認：
+
+- `/`、`/about`、`/projects`、`/articles`、`/contact`
+- `/en` 與對應英文內頁
+- 桌面與手機沒有水平溢出
+- 中文標題沒有過度負字距
+- Hero 圖片與卡片素材可正常載入
+- port 3000 優先、3100 僅為備用
+
+GitHub Pages 只保留 `.github/workflows/deploy.yml` 作為部署流程。

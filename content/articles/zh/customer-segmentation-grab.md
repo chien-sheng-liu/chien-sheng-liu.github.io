@@ -1,6 +1,7 @@
 ---
 title: 客戶分群實戰：以 Grab 為例打造精準用戶策略
 date: 2025-03-15
+summary: 從商業目標、RFM 到 K-Means，拆解如何把用戶分群轉化為可執行的成長策略。
 tags: [Customer Segmentation, K-Means, RFM, Python, Growth]
 category: Consulting
 ---

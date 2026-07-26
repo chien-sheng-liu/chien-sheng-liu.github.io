@@ -1,6 +1,7 @@
 ---
 title: 用 Python 打造可靠的資料管道：架構與實作清單
 date: 2025-01-18
+summary: 從模組化、資料驗證到監控與部署，整理把 ETL 腳本升級為可維運資料產品的完整清單。
 tags: [Python, ETL, Data Engineering]
 category: Data Career
 ---

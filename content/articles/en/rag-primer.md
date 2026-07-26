@@ -1,6 +1,7 @@
 ---
 title: "A Practical Guide to RAG: Principles, Best Practices, and Pitfalls"
 date: 2025-02-20
+summary: "The core decisions behind reliable RAG systems, from chunking and retrieval to vector indexing, evaluation, and failure modes."
 tags: [LLM, RAG, Vector DB]
 category: AI
 ---
