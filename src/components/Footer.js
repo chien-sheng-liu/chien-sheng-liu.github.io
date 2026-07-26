@@ -1,30 +1,37 @@
-
 "use client";
-import { FaGithub, FaLinkedin } from "react-icons/fa";
-import { usePathname } from "next/navigation";
 
-const Footer = () => {
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { FaGithub, FaLinkedin } from "react-icons/fa";
+
+export default function Footer() {
   const pathname = usePathname();
-  const isEnglish = pathname?.startsWith('/en');
+  const english = pathname?.startsWith("/en");
+  const prefix = english ? "/en" : "";
+
   return (
-    <footer className="relative z-10 bg-[#0a0a0a] text-white/40 py-6 border-t border-white/[0.07]">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center">
-          <p className="text-sm">
-            &copy; {new Date().getFullYear()} Chien-Sheng Liu. {isEnglish ? 'All rights reserved.' : '版權所有.'}
-          </p>
-          <div className="flex space-x-4">
-            <a href="https://github.com/chien-sheng-liu" target="_blank" rel="noopener noreferrer" className="hover:text-sky-400 transition-colors">
-              <FaGithub size={24} />
-            </a>
-            <a href="https://www.linkedin.com/in/chienshengliu/" target="_blank" rel="noopener noreferrer" className="hover:text-sky-400 transition-colors">
-              <FaLinkedin size={24} />
-            </a>
-          </div>
-        </div>
+    <footer className="jre-footer">
+      <div className="jre-footer__lead">
+        <span>PORTFOLIO / {new Date().getFullYear()}</span>
+        <strong>MORRIS<br />LIU</strong>
+        <p>{english ? "Data, AI, and the people behind every decision." : "關於資料、AI，以及每個決定背後的人。"}</p>
       </div>
+      <nav>
+        <Link href={`${prefix}/about`}>{english ? "About" : "關於我"}</Link>
+        <Link href={`${prefix}/projects`}>{english ? "Selected work" : "作品"}</Link>
+        <Link href={`${prefix}/articles`}>{english ? "Notes" : "文章"}</Link>
+        <Link href={`${prefix}/contact`}>{english ? "Contact" : "聯絡我"}</Link>
+      </nav>
+      <div className="jre-footer__meta">
+        <div>
+          <a href="https://www.linkedin.com/in/chienshengliu/" target="_blank" rel="noreferrer"><FaLinkedin /> LinkedIn</a>
+          <a href="https://github.com/chien-sheng-liu" target="_blank" rel="noreferrer"><FaGithub /> GitHub</a>
+        </div>
+        <button onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>
+          Page top <span aria-hidden="true">↑</span>
+        </button>
+      </div>
+      <p className="jre-footer__copyright">© {new Date().getFullYear()} Chien-Sheng Liu. All rights reserved.</p>
     </footer>
   );
-};
-
-export default Footer;
+}

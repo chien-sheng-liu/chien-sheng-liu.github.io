@@ -17,7 +17,7 @@ export default function ArticleToc({ toc, locale = "zh" }) {
     if (!toc.length) return;
 
     const headings = toc
-      .filter((h) => h.level === 1)
+      .filter((h) => h.level === 2)
       .map((h) => document.getElementById(h.id))
       .filter(Boolean);
 
@@ -48,22 +48,20 @@ export default function ArticleToc({ toc, locale = "zh" }) {
     }
   }, []);
 
-  const filteredToc = toc.filter((h) => h.level === 1);
+  const filteredToc = toc.filter((h) => h.level === 2);
 
   if (!filteredToc.length) return null;
 
   const title = tocStrings[locale] || tocStrings.zh;
 
   return (
-    <div className="mb-8 border border-white/[0.08] rounded-xl overflow-hidden bg-white/[0.03]">
-      {/* Header toggle */}
+    <div className="jre-article-toc">
       <button
+        type="button"
         onClick={() => setOpen((v) => !v)}
-        className="w-full flex items-center justify-between px-5 py-3.5 text-left"
+        className="jre-article-toc__toggle"
       >
-        <span className="text-xs uppercase tracking-widest text-white/30 font-semibold">
-          {title}
-        </span>
+        <span>{title}</span>
         <motion.svg
           animate={{ rotate: open ? 180 : 0 }}
           transition={{ duration: 0.2 }}
@@ -75,13 +73,11 @@ export default function ArticleToc({ toc, locale = "zh" }) {
           strokeWidth="2"
           strokeLinecap="round"
           strokeLinejoin="round"
-          className="text-white/25 shrink-0"
         >
           <polyline points="6 9 12 15 18 9" />
         </motion.svg>
       </button>
 
-      {/* Collapsible content */}
       <AnimatePresence initial={false}>
         {open && (
           <motion.div
@@ -92,47 +88,22 @@ export default function ArticleToc({ toc, locale = "zh" }) {
             transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
             style={{ overflow: "hidden" }}
           >
-            <nav className="relative px-5 pb-4 pt-1">
-              {/* Vertical guide line */}
-              <div className="absolute left-[21px] top-2 bottom-4 w-px bg-white/[0.10]" />
-
-              <div className="space-y-0.5">
-                {filteredToc.map((h) => {
-                  const isActive = activeId === h.id;
-                  const isChild = false;
-                  return (
-                    <a
-                      key={h.id}
-                      href={`#${h.id}`}
-                      onClick={(e) => handleClick(e, h.id)}
-                      className={`relative flex items-start gap-2.5 py-1.5 transition-all duration-200 ${
-                        isChild ? "pl-5" : "pl-0"
-                      }`}
-                    >
-                      {/* Dot indicator */}
-                      <span
-                        className={`relative z-10 shrink-0 rounded-full transition-all duration-200 ${
-                          isActive
-                            ? "w-[9px] h-[9px] bg-sky-400 shadow-[0_0_6px_rgba(56,189,248,0.5)] mt-[5px]"
-                            : isChild
-                              ? "w-[5px] h-[5px] bg-white/20 mt-[7px]"
-                              : "w-[7px] h-[7px] bg-white/20 mt-[6px]"
-                        }`}
-                        style={{ marginLeft: isChild ? "-1px" : "-2px" }}
-                      />
-                      <span
-                        className={`leading-snug transition-colors duration-200 ${
-                          isActive
-                            ? "text-sky-400 font-semibold"
-                            : "text-white/40 hover:text-white/80"
-                        } ${isChild ? "text-[11.5px] text-white/30" : "text-[13px] font-medium"}`}
-                      >
-                        {h.text}
-                      </span>
-                    </a>
-                  );
-                })}
-              </div>
+            <nav className="jre-article-toc__nav">
+              <div className="jre-article-toc__line" />
+              {filteredToc.map((h) => {
+                const isActive = activeId === h.id;
+                return (
+                  <a
+                    key={h.id}
+                    href={`#${h.id}`}
+                    onClick={(e) => handleClick(e, h.id)}
+                    className={`jre-article-toc__link ${isActive ? "is-active" : ""}`}
+                  >
+                    <span className="jre-article-toc__dot" />
+                    <span>{h.text}</span>
+                  </a>
+                );
+              })}
             </nav>
           </motion.div>
         )}

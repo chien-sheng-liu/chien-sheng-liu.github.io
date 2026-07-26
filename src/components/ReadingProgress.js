@@ -16,9 +16,9 @@ export default function ReadingProgress() {
   }, []);
 
   return (
-    <div className="fixed top-0 left-0 right-0 z-50 h-[3px] bg-transparent pointer-events-none">
+    <div className="reading-progress fixed top-0 left-0 right-0 z-50 h-[3px] bg-transparent pointer-events-none">
       <div
-        className="h-full bg-gradient-to-r from-sky-500 to-indigo-500 transition-transform duration-150 ease-out origin-left"
+        className="h-full transition-transform duration-150 ease-out origin-left"
         style={{ transform: `scaleX(${progress})` }}
       />
     </div>

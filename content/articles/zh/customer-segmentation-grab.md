@@ -1,8 +1,9 @@
 ---
 title: 客戶分群實戰：以 Grab 為例打造精準用戶策略
 date: 2025-03-15
+summary: 從商業目標、RFM 到 K-Means，拆解如何把用戶分群轉化為可執行的成長策略。
 tags: [Customer Segmentation, K-Means, RFM, Python, Growth]
-category: 資料科學
+category: Consulting
 ---
 
 客戶分群（Customer Segmentation）是資料科學在商業場景中最直接、最高 ROI 的應用之一。它讓你把「所有用戶一視同仁」的粗放策略，升級為「不同群體、不同對待」的精準打法。本文以東南亞超級應用 Grab 為例，從商業思維出發，完整拆解客戶分群的策略框架。

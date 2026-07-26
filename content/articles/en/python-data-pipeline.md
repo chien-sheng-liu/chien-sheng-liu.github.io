@@ -1,8 +1,9 @@
 ---
 title: "Reliable Data Pipelines in Python: Architecture and Checklist"
 date: 2025-01-18
+summary: "A practical checklist for turning ETL scripts into maintainable data products with validation, monitoring, testing, and deployment."
 tags: [Python, ETL, Data Engineering]
-category: Data Engineering
+category: Data Career
 ---
 
 Every data engineer has written an ETL script that "works." But from "works" to "operable" is not a few extra lines of code — it's a full set of engineering practices: modular architecture, scheduling, retries, validation, monitoring, alerting, testing, and deployment. This article provides a complete architecture design and implementation checklist to help you level up your ETL scripts into data products.

@@ -24,6 +24,8 @@
 .DS_Store
 Thumbs.db
 Icon?
+.claude/
+.npm-cache/
 *.pem
 .eslintcache
 .cache/
@@ -67,3 +69,4 @@ dist/
 
 # project-specific large files
 CV/
+tem/

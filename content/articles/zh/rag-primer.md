@@ -1,6 +1,7 @@
 ---
 title: 深入理解 RAG 系統：原理、最佳實踐與常見陷阱
 date: 2025-02-20
+summary: 從檢索、切塊與向量索引到評估，建立可靠 RAG 系統所需的核心觀念與實務判斷。
 tags: [LLM, RAG, 向量資料庫]
 category: AI
 ---
