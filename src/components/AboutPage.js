@@ -22,16 +22,17 @@ const copy = {
   zh: {
     label: "關於我 / 00",
     title: ["關於", "我"],
-    role: "資料與人工智慧顧問",
+    role: "Data & AI Consultant",
     location: "香港 ↗ 亞洲",
     heroLines: [
-      "WSP 資料與 AI 顧問",
+      "WSP Data & AI Consultant",
+      "Founder of Mentarix",
       "台灣 · 德國 · 香港 · 中國",
       "三種書寫 · 五種口說",
       "教學 · 寫作 · 城市散步",
     ],
     facts: [
-      ["目前", "WSP 資料與人工智慧顧問"],
+      ["目前", "WSP Data & AI Consultant"],
       ["足跡", "台灣 · 德國 · 香港 · 中國大陸"],
       ["語言", "三文五語"],
       ["工作之外", "教學 · 寫作 · 城市散步"],
@@ -43,6 +44,7 @@ const copy = {
     storyBody: [
       "我不是從一開始就知道自己要成為什麼。軟體工程讓我學會把事情做對，資料分析讓我開始問「為什麼」，而在德國生活與研究的幾年，則讓我習慣從不同文化和市場重新理解同一個問題。",
       "回到亞洲後，我帶過資料與人工智慧團隊、做過模型與平台，也走進客戶的會議室。現在最在意的，是讓策略、資料與人的日常工作真正接得起來。",
+      "我也是 Mentarix 的創辦人，把它當作獨立的 Data & AI 實驗場，持續整理跨市場方法、打造原型，並把複雜能力轉成更容易理解與使用的產品。",
     ],
     numbers: [
       ["04", "生活與工作過的市場"],
@@ -97,6 +99,7 @@ const copy = {
     location: "Hong Kong ↗ Asia",
     heroLines: [
       "WSP Data & AI",
+      "Founder of Mentarix",
       "TW · DE · HK · CN",
       "3 written · 5 spoken",
       "Teaching · writing · walks",
@@ -114,6 +117,7 @@ const copy = {
     storyBody: [
       "I did not begin with a fixed answer for what I wanted to become. Software engineering taught me to build things right; analytics taught me to ask why. Living and studying in Germany taught me to see the same question again through another culture and market.",
       "Back in Asia, I have led data and AI teams, built models and platforms, and sat with clients in the meeting room. What matters most to me now is making strategy, data, and everyday work genuinely connect.",
+      "I am also the founder of Mentarix, an independent Data & AI studio where I document cross-market methods, build prototypes, and make complex capabilities easier to understand and use.",
     ],
     numbers: [
       ["04", "markets lived and worked in"],

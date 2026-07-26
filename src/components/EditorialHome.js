@@ -22,7 +22,7 @@ const content = {
     heroTop: "DATA / AI / PEOPLE",
     heroName: ["Morris", "Liu"],
     heroRole: "Data & AI Consultant",
-    heroRoles: ["Data & AI Consultant", "跨市場分析工作者", "AI 產品實作者", "講師與分享者"],
+    heroRoles: ["Data & AI Consultant", "Cross-market Analyst", "AI Product Builder", "Instructor & Speaker"],
     heroLocation: "Hong Kong · Taiwan · Germany",
     status: "目前在香港，持續把複雜的資料與 AI 問題，做成真正有人使用的決策工具。",
     scroll: "Scroll",

@@ -30,7 +30,10 @@ export const metadata = {
     images: ["/profile.png"],
   },
   icons: {
-    icon: "/favicon.svg",
+    icon: {
+      url: "/favicon.svg?v=2",
+      type: "image/svg+xml",
+    },
   },
 };
 
