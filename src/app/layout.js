@@ -31,13 +31,13 @@ export const metadata = {
     siteName: "Morris Liu",
     locale: "zh_TW",
     type: "website",
-    images: [{ url: "/profile.png", width: 1200, height: 1200, alt: "Morris Liu" }],
+    images: [{ url: "/profile.webp", width: 1600, height: 1200, alt: "Morris Liu" }],
   },
   twitter: {
     card: "summary_large_image",
     title: "Morris Liu · Data & AI Portfolio",
     description: "Morris Liu 的個人履歷、作品與 Data / AI 實作筆記。",
-    images: ["/profile.png"],
+    images: ["/profile.webp"],
   },
   icons: {
     icon: {

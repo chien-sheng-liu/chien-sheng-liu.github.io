@@ -79,7 +79,7 @@ export default function ProjectsPage({ locale = "zh" }) {
           <HeroTypewriter texts={stats.map((stat) => `${stat.value} ${stat.label}`)} />
           <div className="jre-about-hero__visuals" aria-hidden="true">
             <figure className="jre-about-hero__visual jre-about-hero__visual--main">
-              <Image src={heroImages[0]} alt="" fill sizes="(min-width: 900px) 34vw, 82vw" />
+              <Image src={heroImages[0]} alt="" fill priority sizes="(min-width: 900px) 34vw, 82vw" />
             </figure>
             <figure className="jre-about-hero__visual jre-about-hero__visual--finance">
               <Image src={heroImages[1]} alt="" fill sizes="(min-width: 900px) 16vw, 42vw" />
@@ -103,7 +103,7 @@ export default function ProjectsPage({ locale = "zh" }) {
 
       <section className="jre-about-craft">
         <header className={`jre-section-title jre-reveal ${locale === "zh" ? "jre-section-title--zh" : ""}`}>
-          <h2>{t.gridEn}</h2>
+          <h2><span>Selected</span>{" "}<span>Cases</span></h2>
           <p>{t.gridZh}</p>
         </header>
 

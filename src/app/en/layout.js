@@ -21,13 +21,13 @@ export const metadata = {
     siteName: "Morris Liu",
     locale: "en_US",
     type: "website",
-    images: [{ url: "/profile.png", width: 1200, height: 1200, alt: "Morris Liu" }],
+    images: [{ url: "/profile.webp", width: 1600, height: 1200, alt: "Morris Liu" }],
   },
   twitter: {
     card: "summary_large_image",
     title: "Morris Liu · Data & AI Portfolio",
     description: "The personal résumé, selected work, and Data / AI notes of Morris Liu.",
-    images: ["/profile.png"],
+    images: ["/profile.webp"],
   },
   icons: {
     icon: {

@@ -865,11 +865,82 @@ body {
   line-height: 1.8;
 }
 
+.jre-experience__intro {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 30px;
+}
+
+.jre-experience__controls {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: 12px;
+}
+
+.jre-experience__controls button {
+  width: 52px;
+  height: 52px;
+  display: grid;
+  place-items: center;
+  border: 0;
+  border-radius: 50%;
+  color: var(--jre-white);
+  background: var(--jre-blue);
+  cursor: pointer;
+  transition: color .25s ease, background .25s ease, transform .25s ease;
+}
+
+.jre-experience__controls button:hover {
+  color: var(--jre-ink);
+  background: var(--jre-green);
+  transform: translateY(-2px);
+}
+
+.jre-experience__controls button:focus-visible {
+  outline: 3px solid rgba(18, 58, 168, .25);
+  outline-offset: 3px;
+}
+
+.jre-experience__controls svg {
+  width: 21px;
+  height: 21px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.jre-experience__controls > span {
+  min-width: 58px;
+  color: var(--jre-muted);
+  font-size: 10px;
+  font-weight: 850;
+  letter-spacing: .08em;
+  text-align: center;
+}
+
 .jre-experience__rail {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-auto-columns: calc((100% - 56px) / 3);
+  grid-auto-flow: column;
   gap: 28px;
   margin-top: 80px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+}
+
+.jre-experience__rail::-webkit-scrollbar {
+  display: none;
+}
+
+.jre-experience-card {
+  min-width: 0;
+  scroll-snap-align: start;
 }
 
 .jre-experience-card__media {
@@ -3758,6 +3829,13 @@ body {
     top: 98px;
   }
 
+  .jre-home-hero {
+    min-height: auto;
+    display: flex;
+    flex-direction: column;
+    padding: 118px 20px 24px;
+  }
+
   .jre-home-hero__orbit {
     top: 39%;
     right: -22%;
@@ -3769,10 +3847,12 @@ body {
   }
 
   .jre-home-hero__title {
-    top: 41%;
-    left: 20px;
-    width: calc(100% - 40px);
-    transform: translateY(-48%);
+    position: relative;
+    top: auto;
+    left: auto;
+    order: 1;
+    width: 100%;
+    transform: none;
     text-align: left;
   }
 
@@ -3790,10 +3870,15 @@ body {
   }
 
   .jre-home-hero__portrait {
-    top: 17%;
-    right: 18px;
-    width: 77vw;
-    height: 50%;
+    position: relative;
+    top: auto;
+    right: auto;
+    order: 2;
+    width: calc(100% - 40px);
+    height: 275px;
+    align-self: flex-start;
+    margin-top: 30px;
+    box-sizing: border-box;
     border-width: 6px;
     border-radius: 64px 9px 64px 9px;
   }
@@ -3806,12 +3891,16 @@ body {
   }
 
   .jre-home-hero__status {
-    left: 20px;
+    position: relative;
+    left: auto;
     right: auto;
-    bottom: 20px;
-    width: calc(100% - 40px);
+    bottom: auto;
+    order: 3;
+    width: 100%;
     min-height: 102px;
+    margin-top: 20px;
     padding: 15px 17px;
+    box-sizing: border-box;
   }
 
   .jre-home-hero__status p {
@@ -3822,40 +3911,32 @@ body {
   }
 
   .jre-home-hero__scroll {
-    right: 20px;
-    bottom: 132px;
-    width: 88px;
-    height: 42px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    border: 1px solid rgba(255, 255, 255, .75);
-    border-radius: 999px;
-    background: rgba(0, 164, 37, .94);
+    position: relative;
+    right: auto;
+    bottom: auto;
+    order: 4;
+    width: 84px;
+    height: 87px;
+    display: grid;
+    place-content: center;
+    align-self: flex-end;
+    gap: 8px;
+    margin-top: 14px;
+    border: 0;
+    border-radius: 6px;
+    background: var(--jre-green);
   }
 
   .jre-home-hero__shape--lime {
-    top: 13.5%;
-    right: 8px;
-    width: 44px;
-    height: 44px;
+    display: none;
   }
 
   .jre-home-hero__shape--paper {
-    top: 20%;
-    left: 10px;
-    right: auto;
-    width: 18px;
-    height: 54px;
+    display: none;
   }
 
   .jre-home-hero__shape--dot {
-    right: 8px;
-    bottom: 31%;
-    width: 16px;
-    height: 16px;
-    border-width: 4px;
+    display: none;
   }
 
   .jre-index {
@@ -3964,22 +4045,29 @@ body {
     margin-top: 35px;
   }
 
+  .jre-experience__intro {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+  }
+
+  .jre-experience__controls {
+    gap: 8px;
+  }
+
+  .jre-experience__controls button {
+    width: 52px;
+    height: 52px;
+  }
+
+  .jre-experience__controls > span {
+    min-width: 50px;
+  }
+
   .jre-experience__rail {
-    grid-template-columns: 86vw 86vw 86vw;
+    grid-auto-columns: 100%;
     gap: 16px;
-    margin-right: -20px;
     margin-top: 55px;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    scrollbar-width: none;
-  }
-
-  .jre-experience-card {
-    scroll-snap-align: start;
-  }
-
-  .jre-experience__rail::-webkit-scrollbar {
-    display: none;
   }
 
   .jre-work {
@@ -4044,7 +4132,20 @@ body {
   }
 
   .jre-work .jre-section-title h2 {
-    font-size: 55px;
+    font-size: clamp(44px, 14vw, 55px);
+  }
+
+  .jre-experience .jre-section-title {
+    display: block;
+  }
+
+  .jre-experience .jre-section-title h2 {
+    font-size: clamp(46px, 14vw, 58px);
+    line-height: .88;
+  }
+
+  .jre-experience .jre-section-title p {
+    margin-top: 12px;
   }
 
   .jre-work .jre-section-title p {
@@ -4108,9 +4209,9 @@ body {
   }
 
   .jre-about-hero__title {
-    min-height: 550px;
+    min-height: 660px;
     align-items: flex-start;
-    padding-top: 42px;
+    padding-top: 32px;
   }
 
   .jre-about-hero__title h1 {
@@ -4134,7 +4235,7 @@ body {
   }
 
   .jre-about-hero__visuals {
-    top: 145px;
+    top: 230px;
     right: 0;
     width: 100%;
     height: 300px;
@@ -4275,6 +4376,27 @@ body {
     max-width: 100%;
     grid-template-columns: minmax(0, 1fr);
     margin-top: 62px;
+  }
+
+  .jre-about-craft > .jre-section-title {
+    display: block;
+  }
+
+  .jre-about-craft > .jre-section-title h2 {
+    width: 100%;
+    max-width: 100%;
+    font-size: clamp(46px, 14vw, 58px);
+    line-height: .9;
+    overflow-wrap: normal;
+    white-space: normal;
+  }
+
+  .jre-about-craft > .jre-section-title h2 span {
+    display: block;
+  }
+
+  .jre-about-craft > .jre-section-title p {
+    margin-top: 14px;
   }
 
   .jre-about-craft .jre-craft-card {

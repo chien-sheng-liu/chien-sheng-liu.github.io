@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { homeProfileData } from "@/data/homeProfileData";
 import CtaSection from "@/components/sections/CtaSection";
@@ -156,6 +156,11 @@ export default function EditorialHome({ locale = "zh" }) {
   const prefix = locale === "en" ? "/en" : "";
   const reduced = useReducedMotion();
   const [introDone, setIntroDone] = useState(false);
+  const experienceRailRef = useRef(null);
+  const experienceScrollTimerRef = useRef(null);
+  const [experienceIndex, setExperienceIndex] = useState(0);
+  const [experiencePaused, setExperiencePaused] = useState(false);
+  const experienceItems = profile.experience;
 
   useEffect(() => {
     document.body.classList.add("jre-home-active");
@@ -163,7 +168,8 @@ export default function EditorialHome({ locale = "zh" }) {
   }, []);
 
   useEffect(() => {
-    if (reduced || sessionStorage.getItem("morris-jre-intro-seen")) {
+    const mobile = window.matchMedia("(max-width: 820px)").matches;
+    if (mobile || reduced || sessionStorage.getItem("morris-jre-intro-seen")) {
       setIntroDone(true);
       return undefined;
     }
@@ -173,6 +179,58 @@ export default function EditorialHome({ locale = "zh" }) {
     }, 1350);
     return () => window.clearTimeout(timer);
   }, [reduced]);
+
+  useEffect(() => () => {
+    if (experienceScrollTimerRef.current) {
+      window.clearTimeout(experienceScrollTimerRef.current);
+    }
+  }, []);
+
+  useEffect(() => {
+    const rail = experienceRailRef.current;
+    const card = rail?.children[experienceIndex];
+    if (!rail || !card) return;
+
+    rail.scrollTo({
+      left: card.offsetLeft - rail.offsetLeft,
+      behavior: reduced ? "auto" : "smooth",
+    });
+  }, [experienceIndex, reduced]);
+
+  useEffect(() => {
+    if (reduced || experiencePaused || experienceItems.length < 2) return undefined;
+
+    const timer = window.setInterval(() => {
+      setExperienceIndex((current) => (current + 1) % experienceItems.length);
+    }, 4200);
+
+    return () => window.clearInterval(timer);
+  }, [experienceItems.length, experiencePaused, reduced]);
+
+  const moveExperience = (direction) => {
+    setExperienceIndex((current) => (
+      (current + direction + experienceItems.length) % experienceItems.length
+    ));
+  };
+
+  const syncExperienceIndex = () => {
+    if (experienceScrollTimerRef.current) {
+      window.clearTimeout(experienceScrollTimerRef.current);
+    }
+
+    experienceScrollTimerRef.current = window.setTimeout(() => {
+      const rail = experienceRailRef.current;
+      if (!rail) return;
+
+      const cards = Array.from(rail.children);
+      const nearest = cards.reduce((best, card, index) => {
+        const distance = Math.abs(card.offsetLeft - rail.offsetLeft - rail.scrollLeft);
+        return distance < best.distance ? { index, distance } : best;
+      }, { index: 0, distance: Number.POSITIVE_INFINITY });
+
+      setExperienceIndex(nearest.index);
+    }, 140);
+  };
 
   return (
     <div className="jre-home">
@@ -216,11 +274,11 @@ export default function EditorialHome({ locale = "zh" }) {
           transition={{ duration: reduced ? 0 : 1.1, delay: 0.28, ease: [0.16, 1, 0.3, 1] }}
         >
           <Image
-            src="/profile.png"
+            src="/profile.webp"
             alt="Morris Liu"
             fill
             priority
-            sizes="(min-width: 900px) 38vw, 76vw"
+            sizes="(min-width: 900px) 540px, 77vw"
           />
           <span>BASED IN HONG KONG</span>
         </motion.div>
@@ -285,7 +343,7 @@ export default function EditorialHome({ locale = "zh" }) {
         </div>
         <div className="jre-profile-strip jre-reveal">
           <div className="jre-profile-strip__photo">
-            <Image src="/profile.png" alt="Morris Liu" fill sizes="(min-width: 900px) 26vw, 86vw" />
+            <Image src="/profile.webp" alt="Morris Liu" fill sizes="(min-width: 900px) 420px, 86vw" />
           </div>
           <div className="jre-profile-strip__copy">
             <p>
@@ -318,9 +376,40 @@ export default function EditorialHome({ locale = "zh" }) {
         <header className="jre-section-title jre-reveal">
           <h2>{t.experienceEn}</h2><p>{t.experienceZh}</p>
         </header>
-        <p className="jre-experience__lead jre-reveal">{t.experienceLead}</p>
-        <div className="jre-experience__rail">
-          {profile.experience.slice(0, 3).map((item, index) => (
+        <div className="jre-experience__intro">
+          <p className="jre-experience__lead jre-reveal">{t.experienceLead}</p>
+          <div className="jre-experience__controls jre-reveal">
+            <button
+              type="button"
+              onClick={() => moveExperience(-1)}
+              aria-label={locale === "zh" ? "上一段工作經歷" : "Previous experience"}
+            >
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M15 5 8 12l7 7" />
+              </svg>
+            </button>
+            <span>{String(experienceIndex + 1).padStart(2, "0")} / {String(experienceItems.length).padStart(2, "0")}</span>
+            <button
+              type="button"
+              onClick={() => moveExperience(1)}
+              aria-label={locale === "zh" ? "下一段工作經歷" : "Next experience"}
+            >
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="m9 5 7 7-7 7" />
+              </svg>
+            </button>
+          </div>
+        </div>
+        <div
+          className="jre-experience__rail"
+          ref={experienceRailRef}
+          onScroll={syncExperienceIndex}
+          onMouseEnter={() => setExperiencePaused(true)}
+          onMouseLeave={() => setExperiencePaused(false)}
+          onFocus={() => setExperiencePaused(true)}
+          onBlur={() => setExperiencePaused(false)}
+        >
+          {experienceItems.map((item, index) => (
             <article className="jre-experience-card jre-reveal" key={`${item.company}-${item.date}`}>
               <div className="jre-experience-card__media">
                 <div className={`jre-experience-card__logo ${item.logoClass || ""}`}>
