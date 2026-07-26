@@ -160,7 +160,7 @@ export default function EditorialHome({ locale = "zh" }) {
   const experienceScrollTimerRef = useRef(null);
   const [experienceIndex, setExperienceIndex] = useState(0);
   const [experiencePaused, setExperiencePaused] = useState(false);
-  const experienceItems = profile.experience;
+  const experienceItems = profile.experience.slice(0, 3);
 
   useEffect(() => {
     document.body.classList.add("jre-home-active");
@@ -206,12 +206,6 @@ export default function EditorialHome({ locale = "zh" }) {
 
     return () => window.clearInterval(timer);
   }, [experienceItems.length, experiencePaused, reduced]);
-
-  const moveExperience = (direction) => {
-    setExperienceIndex((current) => (
-      (current + direction + experienceItems.length) % experienceItems.length
-    ));
-  };
 
   const syncExperienceIndex = () => {
     if (experienceScrollTimerRef.current) {
@@ -376,30 +370,7 @@ export default function EditorialHome({ locale = "zh" }) {
         <header className="jre-section-title jre-reveal">
           <h2>{t.experienceEn}</h2><p>{t.experienceZh}</p>
         </header>
-        <div className="jre-experience__intro">
-          <p className="jre-experience__lead jre-reveal">{t.experienceLead}</p>
-          <div className="jre-experience__controls jre-reveal">
-            <button
-              type="button"
-              onClick={() => moveExperience(-1)}
-              aria-label={locale === "zh" ? "上一段工作經歷" : "Previous experience"}
-            >
-              <svg viewBox="0 0 24 24" aria-hidden="true">
-                <path d="M15 5 8 12l7 7" />
-              </svg>
-            </button>
-            <span>{String(experienceIndex + 1).padStart(2, "0")} / {String(experienceItems.length).padStart(2, "0")}</span>
-            <button
-              type="button"
-              onClick={() => moveExperience(1)}
-              aria-label={locale === "zh" ? "下一段工作經歷" : "Next experience"}
-            >
-              <svg viewBox="0 0 24 24" aria-hidden="true">
-                <path d="m9 5 7 7-7 7" />
-              </svg>
-            </button>
-          </div>
-        </div>
+        <p className="jre-experience__lead jre-reveal">{t.experienceLead}</p>
         <div
           className="jre-experience__rail"
           ref={experienceRailRef}
