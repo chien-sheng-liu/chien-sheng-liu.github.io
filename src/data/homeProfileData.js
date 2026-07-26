@@ -1,8 +1,8 @@
 export const homeProfileData = {
   zh: {
     proof: [
-      "WSP 資料與人工智慧顧問",
-      "Mentarix 創辦人",
+      "WSP Data & AI Consultant",
+      "Mentarix Founder",
       "三文五語",
       "台灣 · 德國 · 香港 · 中國大陸",
     ],
@@ -16,7 +16,7 @@ export const homeProfileData = {
     experience: [
       {
         date: "2026 — 現在",
-        title: "資料與人工智慧顧問 — 顧問服務部",
+        title: "Consultant in Data & AI",
         company: "WSP (Asia) Limited",
         logo: "/brands/wsp.svg",
         logoClass: "is-wsp",
@@ -26,7 +26,7 @@ export const homeProfileData = {
       },
       {
         date: "2026.04 — 2026.07",
-        title: "商業智慧主管",
+        title: "Lead — Business Intelligence",
         company: "Lalamove",
         logo: "/brands/lalamove.png",
         logoClass: "is-lalamove",
@@ -36,7 +36,7 @@ export const homeProfileData = {
       },
       {
         date: "2024.08 — 2026.04",
-        title: "資料與人工智慧副理",
+        title: "Deputy Manager — Data & AI",
         company: "Datarget 創代科技",
         logo: "/brands/datarget.webp",
         logoClass: "is-datarget",
@@ -46,7 +46,7 @@ export const homeProfileData = {
       },
       {
         date: "2023.07 — 2024.06",
-        title: "機器學習工程師",
+        title: "Machine Learning Engineer",
         company: "OneAD",
         logo: "/brands/onead.svg",
         logoClass: "is-onead",
@@ -56,7 +56,7 @@ export const homeProfileData = {
       },
       {
         date: "2023.04 — 現在",
-        title: "資料科學講師",
+        title: "Data Science Instructor",
         company: "DeepCoding",
         logo: "/brands/deepcoding.png",
         logoClass: "is-deepcoding",
@@ -66,7 +66,7 @@ export const homeProfileData = {
       },
       {
         date: "2022.03 — 2023.02",
-        title: "行銷分析師",
+        title: "Marketing Analyst",
         company: "HelloFresh SE",
         logo: "/brands/hellofresh.png",
         logoClass: "is-hellofresh",
@@ -76,7 +76,7 @@ export const homeProfileData = {
       },
       {
         date: "2021.08 — 2022.02",
-        title: "研究助理",
+        title: "Research Assistant",
         company: "ZEW 經濟研究中心",
         logo: "/brands/zew.svg",
         logoClass: "is-zew",
@@ -86,7 +86,7 @@ export const homeProfileData = {
       },
       {
         date: "2019.06 — 2020.08",
-        title: "招募顧問實習生",
+        title: "Recruitment Consultant Intern",
         company: "Recruit Express",
         logo: "/brands/recruit-express.jpg",
         logoClass: "is-recruit",
@@ -96,7 +96,7 @@ export const homeProfileData = {
       },
       {
         date: "2017.07 — 2017.09",
-        title: "軟體工程實習生",
+        title: "Software Engineer Intern",
         company: "Mitac",
         logo: "/brands/mitac.svg",
         logoClass: "is-mitac",
@@ -165,7 +165,7 @@ export const homeProfileData = {
     experience: [
       {
         date: "2026 — Present",
-        title: "Consultant in Data & AI — Advisory Service",
+        title: "Consultant in Data & AI",
         company: "WSP (Asia) Limited",
         logo: "/brands/wsp.svg",
         logoClass: "is-wsp",

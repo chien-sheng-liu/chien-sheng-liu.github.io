@@ -22,16 +22,16 @@ const copy = {
   zh: {
     label: "關於我 / 00",
     title: ["關於", "我"],
-    role: "資料與人工智慧顧問",
+    role: "Data & AI Consultant",
     location: "香港 ↗ 亞洲",
     heroLines: [
-      "WSP 資料與 AI 顧問",
+      "WSP Data & AI Consultant",
       "台灣 · 德國 · 香港 · 中國",
       "三種書寫 · 五種口說",
       "教學 · 寫作 · 城市散步",
     ],
     facts: [
-      ["目前", "WSP 資料與人工智慧顧問"],
+      ["目前", "WSP Data & AI Consultant"],
       ["足跡", "台灣 · 德國 · 香港 · 中國大陸"],
       ["語言", "三文五語"],
       ["工作之外", "教學 · 寫作 · 城市散步"],
