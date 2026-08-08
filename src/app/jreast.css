@@ -608,8 +608,25 @@ body {
 
 /* About / Benefit */
 .jre-benefit {
-  padding: clamp(72px, 7.5vw, 112px) var(--jre-gutter);
+  padding: clamp(58px, 6vw, 88px) var(--jre-gutter);
   background: var(--jre-paper);
+}
+
+.jre-glance-panel {
+  display: grid;
+  grid-template-columns: minmax(220px, .62fr) minmax(0, 1.8fr);
+  gap: 12px;
+}
+
+.jre-glance-panel__intro {
+  min-height: 214px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 22px;
+  border-radius: 34px 10px 10px 10px;
+  color: var(--jre-white);
+  background: var(--jre-green-dark);
 }
 
 .jre-benefit__eyebrow {
@@ -626,6 +643,23 @@ body {
   letter-spacing: .16em;
 }
 
+.jre-glance-panel__intro .jre-benefit__eyebrow {
+  color: var(--jre-white);
+  background: rgba(255, 255, 255, .12);
+}
+
+.jre-glance-panel__intro .jre-benefit__eyebrow::before {
+  background: #b9ff62;
+}
+
+.jre-glance-panel__intro > strong {
+  max-width: 300px;
+  font-size: clamp(18px, 1.65vw, 25px);
+  font-weight: 750;
+  line-height: 1.4;
+  letter-spacing: -.025em;
+}
+
 .jre-benefit__eyebrow::before {
   width: 8px;
   height: 8px;
@@ -636,48 +670,53 @@ body {
 
 .jre-about-quick {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 14px;
-  margin-top: 18px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
 }
 
 .jre-about-quick > div {
   position: relative;
-  min-height: 122px;
+  min-height: 101px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  padding: 19px 20px;
+  justify-content: flex-start;
+  gap: 9px;
+  padding: 16px 18px;
   overflow: hidden;
-  border: 0;
-  border-radius: 34px 10px 10px 10px;
+  border: 1px solid rgba(22, 29, 26, .06);
+  border-radius: 10px;
   background: var(--jre-white);
+  transition: transform .2s ease, box-shadow .2s ease;
 }
 
-.jre-about-quick > div::after {
+.jre-about-quick > div i {
   position: absolute;
-  top: -17px;
-  right: -17px;
-  width: 48px;
-  height: 48px;
-  border: 8px solid rgba(255, 255, 255, .32);
-  border-radius: 50%;
-  content: "";
+  top: 13px;
+  right: 15px;
+  color: rgba(22, 29, 26, .13);
+  font: 750 22px/1 Georgia, serif;
+  font-style: normal;
 }
 
 .jre-about-quick > div:nth-child(2) {
-  border-radius: 10px 34px 10px 10px;
   color: var(--jre-white);
   background: var(--jre-blue);
 }
 
+.jre-about-quick > div:nth-child(2) i {
+  color: rgba(255, 255, 255, .25);
+}
+
+.jre-about-quick > div:nth-child(2) span {
+  color: #b9ff62;
+}
+
 .jre-about-quick > div:nth-child(3) {
-  border-radius: 10px 10px 34px 10px;
   background: #e7f3fa;
 }
 
 .jre-about-quick > div:nth-child(4) {
-  border-radius: 10px 10px 10px 34px;
+  border-radius: 10px 10px 34px 10px;
   background: #dff2dc;
 }
 
@@ -693,17 +732,26 @@ body {
 }
 
 .jre-about-quick strong {
+  max-width: calc(100% - 28px);
   font-size: clamp(15px, 1.25vw, 19px);
   font-weight: 800;
   line-height: 1.35;
   letter-spacing: -.025em;
 }
 
+@media (hover: hover) {
+  .jre-about-quick > div:hover {
+    z-index: 1;
+    transform: translateY(-3px);
+    box-shadow: 0 12px 24px rgba(13, 38, 30, .1);
+  }
+}
+
 .jre-benefit__content {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 20px;
-  margin-top: 34px;
+  margin-top: 22px;
 }
 
 .jre-benefit__content article {
@@ -758,7 +806,7 @@ body {
   grid-template-columns: minmax(210px, .65fr) minmax(310px, 1.2fr) minmax(230px, .7fr);
   align-items: stretch;
   gap: clamp(25px, 4vw, 62px);
-  margin-top: 38px;
+  margin-top: 24px;
   padding: 22px;
   border-radius: 38px 12px 38px 12px;
   background: var(--jre-white);
@@ -3970,9 +4018,28 @@ body {
     letter-spacing: -.01em;
   }
 
-  .jre-benefit,
+  .jre-benefit {
+    padding-block: 54px;
+  }
+
   .jre-experience {
     padding-block: 68px;
+  }
+
+  .jre-glance-panel {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .jre-glance-panel__intro {
+    min-height: 132px;
+    padding: 18px;
+    border-radius: 28px 8px 8px 8px;
+  }
+
+  .jre-glance-panel__intro > strong {
+    max-width: 310px;
+    font-size: 18px;
   }
 
   .jre-benefit__content {
@@ -3983,13 +4050,27 @@ body {
 
   .jre-about-quick {
     grid-template-columns: 1fr 1fr;
-    margin-top: 14px;
+    gap: 8px;
+    margin-top: 0;
   }
 
   .jre-about-quick > div {
-    min-height: 108px;
+    min-height: 94px;
+    gap: 7px;
     padding: 13px;
     border: 0;
+  }
+
+  .jre-about-quick > div i {
+    top: 11px;
+    right: 12px;
+    font-size: 18px;
+  }
+
+  .jre-about-quick strong {
+    max-width: 100%;
+    padding-right: 5px;
+    font-size: 13px;
   }
 
   .jre-about-quick > div:nth-child(odd) {

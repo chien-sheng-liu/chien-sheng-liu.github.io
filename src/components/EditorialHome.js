@@ -37,6 +37,7 @@ const content = {
     aboutEn: "About",
     aboutZh: "關於我",
     atGlance: "MORRIS AT A GLANCE",
+    atGlanceLead: "現在的位置、正在打造的事，以及能交付的證明。",
     aboutQuick: [
       ["CURRENT", "WSP Data & AI Advisory"],
       ["FOUNDER", "Mentarix Data Studio"],
@@ -98,6 +99,7 @@ const content = {
     aboutEn: "About",
     aboutZh: "A little about me",
     atGlance: "MORRIS AT A GLANCE",
+    atGlanceLead: "Where I am now, what I am building, and the proof behind the work.",
     aboutQuick: [
       ["CURRENT", "WSP Data & AI Advisory"],
       ["FOUNDER", "Mentarix Data Studio"],
@@ -320,11 +322,20 @@ export default function EditorialHome({ locale = "zh" }) {
       </section>
 
       <section className="jre-benefit" id="about">
-        <p className="jre-benefit__eyebrow jre-reveal">{t.atGlance}</p>
-        <div className="jre-about-quick jre-reveal">
-          {t.aboutQuick.map(([label, value]) => (
-            <div key={label}><span>{label}</span><strong>{value}</strong></div>
-          ))}
+        <div className="jre-glance-panel jre-reveal">
+          <div className="jre-glance-panel__intro">
+            <p className="jre-benefit__eyebrow">{t.atGlance}</p>
+            <strong>{t.atGlanceLead}</strong>
+          </div>
+          <div className="jre-about-quick">
+            {t.aboutQuick.map(([label, value], index) => (
+              <div key={label}>
+                <i aria-hidden="true">0{index + 1}</i>
+                <span>{label}</span>
+                <strong>{value}</strong>
+              </div>
+            ))}
+          </div>
         </div>
         <div className="jre-benefit__content">
           {t.strengths.map((item, index) => (
