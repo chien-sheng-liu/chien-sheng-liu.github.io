@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { useMemo, useState } from "react";
 import { AnimatePresence } from "framer-motion";
 import { getProjectData } from "@/data/projectData";
@@ -23,8 +24,11 @@ const content = {
     marquee: "LLM · DEEP LEARNING · ALGORITHM · DATA ENGINEERING · ",
     gridEn: "Selected Cases",
     gridZh: "精選案例",
+    featuredEn: "Featured Cases",
+    featuredZh: "優先閱讀",
     all: "全部",
     viewDetail: "了解更多",
+    fullCase: "閱讀完整案例",
     ctaKicker: "OPEN SOURCE",
     ctaTitle: "想看更多程式碼，或聊聊某個案例？",
     ctaButton: "查看 GitHub",
@@ -38,8 +42,11 @@ const content = {
     marquee: "LLM · DEEP LEARNING · ALGORITHM · DATA ENGINEERING · ",
     gridEn: "Selected Cases",
     gridZh: "Case by case",
+    featuredEn: "Featured Cases",
+    featuredZh: "Start here",
     all: "All",
     viewDetail: "Learn more",
+    fullCase: "View full case",
     ctaKicker: "OPEN SOURCE",
     ctaTitle: "Want to see more code, or talk through a case?",
     ctaButton: "View GitHub",
@@ -51,15 +58,21 @@ export default function ProjectsPage({ locale = "zh" }) {
   const { projects, stats } = getProjectData(locale);
   const [selectedProject, setSelectedProject] = useState(null);
   const [activeFilter, setActiveFilter] = useState(null);
+  const prefix = locale === "en" ? "/en" : "";
 
   const categories = useMemo(
-    () => [...new Set(projects.map((p) => p.category))],
+    () => [...new Set(projects.flatMap((p) => p.categories))],
     [projects],
   );
 
   const filteredProjects = useMemo(
-    () => (activeFilter ? projects.filter((p) => p.category === activeFilter) : projects),
+    () => (activeFilter ? projects.filter((p) => p.categories.includes(activeFilter)) : projects),
     [projects, activeFilter],
+  );
+
+  const featuredProjects = useMemo(
+    () => projects.filter((project) => project.featured),
+    [projects],
   );
 
   return (
@@ -101,6 +114,29 @@ export default function ProjectsPage({ locale = "zh" }) {
         </div>
       </div>
 
+      <section className="jre-featured-cases">
+        <header className={`jre-section-title jre-section-title--light jre-reveal ${locale === "zh" ? "jre-section-title--zh" : ""}`}>
+          <h2>{t.featuredEn}</h2>
+          <p>{t.featuredZh}</p>
+        </header>
+        <div className="jre-featured-cases__grid">
+          {featuredProjects.map((project, index) => (
+            <Link className="jre-featured-case jre-reveal" href={`${prefix}/projects/${project.slug}`} key={project.slug}>
+              <figure>
+                <Image src={project.socialImage} alt="" fill sizes="(min-width: 900px) 33vw, 100vw" />
+              </figure>
+              <div>
+                <span>0{index + 1}</span>
+                <small>{project.industry}</small>
+                <h3>{project.title}</h3>
+                <p>{project.description}</p>
+                <i>{t.fullCase} ↗</i>
+              </div>
+            </Link>
+          ))}
+        </div>
+      </section>
+
       <section className="jre-about-craft">
         <header className={`jre-section-title jre-reveal ${locale === "zh" ? "jre-section-title--zh" : ""}`}>
           <h2><span>Selected</span>{" "}<span>Cases</span></h2>
@@ -141,7 +177,10 @@ export default function ProjectsPage({ locale = "zh" }) {
             >
               <div>
                 <span>{String(index + 1).padStart(2, "0")}</span>
-                <small>{project.category}</small>
+                <small>
+                  <b>{project.category}</b>
+                  <em>{project.industry}</em>
+                </small>
               </div>
               <h3>{project.title}</h3>
               <p>{project.description}</p>
@@ -150,6 +189,14 @@ export default function ProjectsPage({ locale = "zh" }) {
                   <li key={tag}>{tag}</li>
                 ))}
               </ul>
+              <Link
+                className="jre-craft-card__case-link"
+                href={`${prefix}/projects/${project.slug}`}
+                onClick={(event) => event.stopPropagation()}
+                onKeyDown={(event) => event.stopPropagation()}
+              >
+                {t.fullCase}<span>↗</span>
+              </Link>
             </article>
           ))}
         </div>

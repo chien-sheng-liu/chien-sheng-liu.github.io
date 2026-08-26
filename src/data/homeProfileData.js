@@ -21,12 +21,12 @@ export const homeProfileData = {
         logo: "/brands/wsp.svg",
         logoClass: "is-wsp",
         place: "香港",
-        summary: "負責香港及中國大陸相關業務，連結策略、資料與決策工作流，將跨市場 AI／BI 經驗轉化成企業級顧問交付。",
+        summary: "負責香港及中國大陸相關業務，連結策略、資料與決策工作流，將跨市場 AI / BI 經驗轉化成企業級顧問交付。",
         bullets: [
           "支援香港與中國大陸相關業務，協助梳理策略、資料與決策工作流。",
-          "把跨市場 AI／BI 經驗轉化為企業級顧問方案與可落地的交付內容。",
+          "把跨市場 AI / BI 經驗轉化為企業級顧問方案與可落地的交付內容。",
         ],
-        tags: ["資料與人工智慧顧問", "策略", "香港", "中國大陸"],
+        tags: ["Data & AI 顧問", "策略", "香港", "中國大陸"],
       },
       {
         date: "2026.04 — 2026.07",
@@ -50,7 +50,7 @@ export const homeProfileData = {
         logo: "/brands/datarget.webp",
         logoClass: "is-datarget",
         place: "台北",
-        summary: "建立並帶領 8 人資料與人工智慧團隊，交付 15 個以上的分析與人工智慧專案，涵蓋預測、分群、Text-to-SQL、BI 與資料管線。",
+        summary: "建立並帶領 8 人 Data & AI 團隊，交付 15 個以上的分析與 AI 專案，涵蓋預測、分群、Text-to-SQL、BI 與資料管線。",
         bullets: [
           "帶領 AI 與資料團隊，定義系統架構並審查模型設計與資料管線，服務半導體、製造、零售、快消與運輸產業。",
           "直接對接客戶，從需求訪談、問題定義、PoC 實驗一路推進至客製化正式環境程式碼。",
@@ -58,7 +58,7 @@ export const homeProfileData = {
           "以 LangChain、RAG、LangSmith、Pydantic 與客製日誌打造聊天機器人、CRM 推薦、內容生成和 BI 應用。",
           "設計 GCP、Azure 與地端混合架構，透過 Docker CI/CD 管理部署，並建立知識分享、敏捷回顧與 Data PM 協作制度。",
         ],
-        tags: ["8 人團隊", "15 個以上專案", "新台幣 8,000 萬", "LLM／BI"],
+        tags: ["8 人團隊", "15 個以上專案", "新台幣 8,000 萬", "LLM / BI"],
       },
       {
         date: "2023.04 — 現在",
@@ -67,7 +67,7 @@ export const homeProfileData = {
         logo: "/brands/deepcoding.png",
         logoClass: "is-deepcoding",
         place: "台灣",
-        summary: "設計資料、人工智慧與視覺化實作課程，累積 100 位以上學員，並透過客製工作坊與一對一指導協助學習與職涯轉換。",
+        summary: "設計 Data、AI 與視覺化實作課程，累積 100 位以上學員，並透過客製工作坊與一對一指導協助學習與職涯轉換。",
         bullets: [
           "規劃並帶領 LLM 應用工作坊，涵蓋健康、行銷與金融情境。",
           "設計客製化資料分析與資料科學訓練，協助學員建立實作能力並轉入資料相關職涯。",
@@ -84,9 +84,9 @@ export const homeProfileData = {
         place: "台北",
         summary: "設計與部署廣告定向投放模型，使 CTR 提升 20%、停留時間提升 30%；重構跨裝置推論並打造 LLM＋RAG 受眾平台。",
         bullets: [
-          "設計並部署多種廣告格式的 ML／DL 定向模型，使 CTR 提升 20%、使用者停留時間提升 30%。",
+          "設計並部署多種廣告格式的 ML / DL 定向模型，使 CTR 提升 20%、使用者停留時間提升 30%。",
           "以圖模型與社群偵測重構跨裝置使用者定向，使預測速度提升 40%，GCP 基礎設施成本降低約 30%。",
-          "與後端及資料工程團隊打造精準廣告受眾平台，整合 Meta、Google Ads API 與 LLM／RAG 受眾擴充。",
+          "與後端及資料工程團隊打造精準廣告受眾平台，整合 Meta、Google Ads API 與 LLM / RAG 受眾擴充。",
           "使用 Spark、Hadoop 處理每日一億筆以上日誌，並以 Airflow、MLflow、GCP 自動化預測與實驗追蹤。",
         ],
         tags: ["CTR 提升 20%", "推論效能提升 40%", "GCP 成本降低 30%", "LLM＋RAG"],
@@ -105,11 +105,11 @@ export const homeProfileData = {
           "建置可擴充資料管線與自動化 ETL，把高流量本地資料轉換為 BigQuery 分析表與檢視表。",
           "運用 CTR、CVR、LTV 與 cohort 指標進行顧客行為和分群分析，整合多渠道廣告資料以改善行銷 ROI。",
         ],
-        tags: ["18 個市場", "預測分析", "BigQuery", "A／B 測試"],
+        tags: ["18 個市場", "預測分析", "BigQuery", "A/B 測試"],
       },
       {
         date: "2021.08 — 2022.02",
-        title: "Data Science 經濟研究員",
+        title: "Data Science Researcher",
         company: "ZEW 萊布尼茲歐洲經濟研究中心",
         logo: "/brands/zew.svg",
         logoClass: "is-zew",
@@ -133,7 +133,7 @@ export const homeProfileData = {
           "執行使用者訪談，將實際需求轉成系統設計、開發與測試項目。",
           "開發整合 WeChat API 的會議安排流程，改善差旅協調與行政效率。",
         ],
-        tags: ["使用者訪談", "C#／.NET", "WeChat API", "工作流程"],
+        tags: ["使用者訪談", "C# / .NET", "WeChat API", "工作流程"],
       },
       {
         date: "2017.07 — 2017.09",
@@ -156,7 +156,7 @@ export const homeProfileData = {
         degree: "M.Sc. in Business Informatics (Data Science Track)",
         school: "Universität Mannheim",
         place: "Mannheim, Deutschland",
-        body: "主修資料科學。論文研究疫情衝擊下的行銷科技預測，並以人工智慧與神經網路處理報童模型需求預測。",
+        body: "主修資料科學。論文研究疫情衝擊下的行銷科技預測，並以 AI 與神經網路處理報童模型需求預測。",
       },
       {
         date: "2019.10 — 2020.03",
@@ -176,7 +176,7 @@ export const homeProfileData = {
     talks: [
       ["2025.07.20", "生成式 AI 與 LLM 應用", "DeepCoding"],
       ["2025.05.24", "用 Streamlit 與 OpenAI 打造學術研究 ChatGPT", "國立陽明交通大學"],
-      ["2025.05.22", "深入認識資料與人工智慧顧問", "Google 開發者社群 @ 國立臺北大學"],
+      ["2025.05.22", "深入認識 Data & AI 顧問", "Google 開發者社群 @ 國立臺北大學"],
       ["2025.05.20", "LLM 基礎與生成式 AI 應用", "國立陽明交通大學"],
       ["2024.12.01", "用 Python 進行 LLM 資料分析", "國立陽明交通大學"],
       ["2024.03.15", "Tableau 與 Python 的跨產業資料分析", "國立陽明交通大學"],

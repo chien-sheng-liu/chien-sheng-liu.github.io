@@ -1,8 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { usePathname } from "next/navigation";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
 
@@ -27,7 +27,6 @@ const normalize = (path) => (path === "/" ? "/" : path?.replace(/\/$/, ""));
 
 export default function Navbar() {
   const pathname = usePathname();
-  const router = useRouter();
   const reduced = useReducedMotion();
   const [open, setOpen] = useState(false);
   const menuRef = useRef(null);
@@ -64,13 +63,15 @@ export default function Navbar() {
     };
   }, [open]);
 
-  const switchTo = useCallback((language) => {
+  const languageTarget = (language) => {
     const base = pathname?.replace(/^\/en(?=\/|$)/, "") || "/";
-    const target = language === "en" ? `/en${base === "/" ? "" : base}` : base;
+    return language === "en" ? `/en${base === "/" ? "" : base}` : base;
+  };
+
+  const rememberLanguage = (language) => {
     localStorage.setItem("preferred-lang", language);
     document.cookie = `preferred-lang=${language}; path=/; max-age=31536000; samesite=lax`;
-    router.push(target);
-  }, [pathname, router]);
+  };
 
   return (
     <header className="jre-header">
@@ -94,9 +95,9 @@ export default function Navbar() {
 
         <div className="jre-header__actions">
           <div className="jre-language" aria-label="Language">
-            <button onClick={() => switchTo("zh")} className={locale === "zh" ? "is-active" : ""}>繁中</button>
+            <Link href={languageTarget("zh")} onClick={() => rememberLanguage("zh")} hrefLang="zh-Hant" className={locale === "zh" ? "is-active" : ""}>繁中</Link>
             <span>/</span>
-            <button onClick={() => switchTo("en")} className={locale === "en" ? "is-active" : ""}>EN</button>
+            <Link href={languageTarget("en")} onClick={() => rememberLanguage("en")} hrefLang="en" className={locale === "en" ? "is-active" : ""}>EN</Link>
           </div>
           <Link href={`${prefix}/contact`} className="jre-header__contact">
             {locale === "zh" ? "聯絡我" : "CONTACT"} <span aria-hidden="true">↗</span>
@@ -136,9 +137,9 @@ export default function Navbar() {
             </nav>
             <div className="jre-mobile-menu__foot">
               <div className="jre-language">
-                <button onClick={() => switchTo("zh")} className={locale === "zh" ? "is-active" : ""}>繁中</button>
+                <Link href={languageTarget("zh")} onClick={() => rememberLanguage("zh")} hrefLang="zh-Hant" className={locale === "zh" ? "is-active" : ""}>繁中</Link>
                 <span>/</span>
-                <button onClick={() => switchTo("en")} className={locale === "en" ? "is-active" : ""}>EN</button>
+                <Link href={languageTarget("en")} onClick={() => rememberLanguage("en")} hrefLang="en" className={locale === "en" ? "is-active" : ""}>EN</Link>
               </div>
               <div>
                 <a href="https://www.linkedin.com/in/chienshengliu/" target="_blank" rel="noreferrer" aria-label="LinkedIn"><FaLinkedin /></a>

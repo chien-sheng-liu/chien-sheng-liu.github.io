@@ -2,12 +2,12 @@ import EditorialHome from "@/components/EditorialHome";
 import JsonLd from "@/components/JsonLd";
 import { personJsonLd, websiteJsonLd } from "@/lib/seo";
 
-export default function HomeEn() {
+export default function Home() {
   return (
     <>
-      <JsonLd data={websiteJsonLd("en")} />
-      <JsonLd data={personJsonLd("en")} />
-      <EditorialHome locale="en" />
+      <JsonLd data={websiteJsonLd("zh")} />
+      <JsonLd data={personJsonLd("zh")} />
+      <EditorialHome locale="zh" />
     </>
   );
 }

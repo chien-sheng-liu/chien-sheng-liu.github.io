@@ -23,23 +23,23 @@ const heroImages = [
 
 const i18n = {
   zh: {
-    label: "聯絡 / 00",
+    label: "CONTACT / 00",
     role: "職涯／合作",
     heroTitle: ["很高興", "認識你"],
     heroLines: ["聊職涯、合作與分享", "把問題直接告訴我", "通常 24 小時內回覆"],
     location: "香港",
     languages: "三文五語 · 中文 · 英文 · 德文 · 粵語 · 台語",
-    fitNote: "職涯與團隊交流優先；演講、教學與具體的資料或人工智慧合作邀請也歡迎來信。",
-    intentsEn: "聯絡方式",
+    fitNote: "職涯與團隊交流優先；演講、教學與具體的 Data & AI 合作邀請也歡迎來信。",
+    intentsEn: "Ways to Reach Me",
     intentsZh: "合作方向",
-    formatTitle: "快速合作格式",
+    formatTitle: "Quick Collaboration Format",
     formats: [
-      { title: "職涯機會", desc: "請附角色、地點、團隊背景，以及希望我協助解決的資料與人工智慧問題。" },
+      { title: "職涯機會", desc: "請附角色、地點、團隊背景，以及希望我協助解決的 Data & AI 問題。" },
       { title: "演講教學", desc: "請附主題、參與對象、日期、形式，以及期待帶走的重點。" },
-      { title: "專案合作", desc: "請附業務背景、資料或人工智慧問題、期待成果與時間線。" },
+      { title: "專案合作", desc: "請附業務背景、Data & AI 問題、期待成果與時間線。" },
     ],
     responseNote: "通常 24 小時內回覆",
-    ctaKicker: "歡迎來信",
+    ctaKicker: "SAY HELLO",
     ctaTitle: "一起聊聊吧。",
     channels: { email: "寫信", linkedin: "LinkedIn", calendar: "預約時間" },
     intents: [
@@ -48,7 +48,7 @@ const i18n = {
         icon: <FaBriefcase />,
         title: "職涯與招募",
         subtitle: "職涯、招募、顧問角色",
-        desc: "適合討論資料與人工智慧、BI、顧問服務及跨市場分析相關機會。",
+        desc: "適合討論 Data & AI、BI、顧問服務及跨市場分析相關機會。",
         links: [
           { label: "電子郵件", href: `mailto:${TO_EMAIL}`, icon: <FaEnvelope /> },
           { label: "LinkedIn", href: LINKEDIN_URL, icon: <FaLinkedin />, external: true },
@@ -59,7 +59,7 @@ const i18n = {
         icon: <FaMicrophone />,
         title: "演講與教學",
         subtitle: "演講、課程、工作坊",
-        desc: "適合邀請 LLM、RAG、資料分析、人工智慧顧問職涯與海外經驗分享。",
+        desc: "適合邀請 LLM、RAG、資料分析、AI 顧問職涯與海外經驗分享。",
         links: [
           { label: "預約時間", href: CALENDAR_URL, icon: <FaCalendarAlt />, external: true },
           { label: "電子郵件", href: `mailto:${TO_EMAIL}`, icon: <FaEnvelope /> },
@@ -68,9 +68,9 @@ const i18n = {
       {
         key: "collaboration",
         icon: <FaHandshake />,
-        title: "資料與人工智慧合作",
+        title: "Data & AI 合作",
         subtitle: "分析路徑、資料產品、生成式 AI",
-        desc: "適合把模糊業務問題拆成可交付的資料、模型或人工智慧產品方向。",
+        desc: "適合把模糊業務問題拆成可交付的資料、模型或 AI 產品方向。",
         links: [
           { label: "30 分鐘對談", href: CALENDAR_URL, icon: <FaCalendarAlt />, external: true },
           { label: "電子郵件", href: `mailto:${TO_EMAIL}`, icon: <FaEnvelope /> },
@@ -85,7 +85,7 @@ const i18n = {
     heroLines: ["Career · work · talks", "Tell me what you need", "Replies within 24 hours"],
     location: "Hong Kong",
     languages: "3 written · 5 spoken · Chinese · English · Deutsch · Cantonese · Taiwanese",
-    fitNote: "Career and team conversations come first; thoughtful speaking, teaching, and Data / AI invitations are welcome too.",
+    fitNote: "Career and team conversations come first; thoughtful speaking, teaching, and Data & AI invitations are welcome too.",
     intentsEn: "Ways to Reach Me",
     intentsZh: "How I can help",
     formatTitle: "Quick Collaboration Format",

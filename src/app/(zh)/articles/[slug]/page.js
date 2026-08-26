@@ -6,20 +6,20 @@ import { notFound } from 'next/navigation';
 import { articleJsonLd, breadcrumbJsonLd, buildPageMetadata } from '@/lib/seo';
 
 export async function generateStaticParams() {
-  const articles = await listArticles('en');
+  const articles = await listArticles('zh');
   return articles.map((a) => ({ slug: a.slug }));
 }
 
 export async function generateMetadata({ params }) {
   const { slug } = await params;
-  const data = await getArticle(slug, 'en');
+  const data = await getArticle(slug, 'zh');
   if (!data) return {};
   const { meta } = data;
   return {
     ...buildPageMetadata({
-      locale: 'en',
+      locale: 'zh',
       path: `/articles/${slug}`,
-      title: `${meta.seoTitle || meta.title} | Morris Liu`,
+      title: `${meta.seoTitle || meta.title}｜Morris Liu`,
       description: meta.seoDescription || meta.summary,
       type: 'article',
       publishedTime: meta.date || undefined,
@@ -31,21 +31,21 @@ export async function generateMetadata({ params }) {
   };
 }
 
-export default async function ArticlePageEn({ params }) {
+export default async function ArticlePage({ params }) {
   const { slug } = await params;
-  const data = await getArticle(slug, 'en');
+  const data = await getArticle(slug, 'zh');
   if (!data) notFound();
   const { meta, content } = data;
   const { html, toc } = markdownToHtml(content);
   return (
     <>
-      <JsonLd data={articleJsonLd(meta, slug, 'en')} />
+      <JsonLd data={articleJsonLd(meta, slug, 'zh')} />
       <JsonLd data={breadcrumbJsonLd([
-        { name: 'Home', path: '/en' },
-        { name: 'Notes', path: '/en/articles' },
-        { name: meta.title, path: `/en/articles/${slug}` },
+        { name: '首頁', path: '/' },
+        { name: '文章', path: '/articles' },
+        { name: meta.title, path: `/articles/${slug}` },
       ])} />
-      <ArticleDetailPage meta={meta} html={html} toc={toc} locale="en" />
+      <ArticleDetailPage meta={meta} html={html} toc={toc} locale="zh" />
     </>
   );
 }

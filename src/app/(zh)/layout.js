@@ -1,3 +1,4 @@
+
 import "../globals.css";
 import "../jreast.css";
 import { ThemeProvider } from "../providers";
@@ -7,11 +8,11 @@ import SmoothScrollProvider from "@/components/SmoothScrollProvider";
 import SiteMotion from "@/components/SiteMotion";
 import { buildSiteMetadata } from "@/lib/seo";
 
-export const metadata = buildSiteMetadata("en");
+export const metadata = buildSiteMetadata("zh");
 
-export default function LocaleLayout({ children }) {
+export default function RootLayout({ children }) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="zh-TW" suppressHydrationWarning>
       <body className="bg-white text-[#111] antialiased">
         <ThemeProvider>
           <SmoothScrollProvider>

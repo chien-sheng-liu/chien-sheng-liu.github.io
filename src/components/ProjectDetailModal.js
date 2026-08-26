@@ -3,31 +3,38 @@
 import { useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
 import { motion } from "framer-motion";
+import Link from "next/link";
 import { FaArrowRight, FaGithub } from "react-icons/fa";
 
 const i18n = {
   zh: {
     close: "關閉",
     overview: "PROJECT OVERVIEW",
+    industryContext: "Industry Context",
+    fullDetails: "展開完整執行細節",
     problem: "Business Problem",
     built: "What I Built",
     impact: "Business Impact",
-    highlights: "專案亮點",
-    stack: "Stack",
+    highlights: "Project Highlights",
+    stack: "Tech Stack",
     metrics: "Key Metrics",
     viewCode: "查看程式碼",
+    fullCase: "閱讀完整案例",
     private: "Private project",
   },
   en: {
     close: "Close",
     overview: "PROJECT OVERVIEW",
+    industryContext: "Industry Context",
+    fullDetails: "Expand full delivery details",
     problem: "Business Problem",
     built: "What I Built",
     impact: "Business Impact",
-    highlights: "Highlights",
-    stack: "Stack",
+    highlights: "Project Highlights",
+    stack: "Tech Stack",
     metrics: "Key Metrics",
     viewCode: "View Code",
+    fullCase: "View Full Case",
     private: "Private project",
   },
 };
@@ -53,6 +60,7 @@ export default function ProjectDetailModal({ project, locale = "zh", onClose }) 
   }, [onClose]);
 
   const sections = [
+    [t.industryContext, project.industryContext],
     [t.problem, project.caseNotes?.problem],
     [t.built, project.caseNotes?.approach],
     [t.impact, project.caseNotes?.impact],
@@ -83,11 +91,14 @@ export default function ProjectDetailModal({ project, locale = "zh", onClose }) 
         transition={{ duration: .45, ease: [0.16, 1, 0.3, 1] }}
         onMouseDown={(event) => event.stopPropagation()}
       >
-        <div className="jre-project-modal__scroll">
+        <div className="jre-project-modal__scroll" data-lenis-prevent>
           <header className="jre-project-modal__header">
             <div className="jre-project-modal__category">
               <span>{project.categoryIcon}</span>
-              <p>{project.category}</p>
+              <div>
+                <p>{project.category}</p>
+                <strong>{project.industry}</strong>
+              </div>
             </div>
             <button ref={closeRef} type="button" onClick={onClose} aria-label={t.close}>
               <span>{t.close}</span><i aria-hidden="true">×</i>
@@ -95,7 +106,7 @@ export default function ProjectDetailModal({ project, locale = "zh", onClose }) 
             <p>{t.overview}</p>
             <h2 id="project-modal-title">{project.title}</h2>
             <p className="jre-project-modal__description">
-              {project.detailDescription || project.description}
+              {project.description}
             </p>
           </header>
 
@@ -107,6 +118,11 @@ export default function ProjectDetailModal({ project, locale = "zh", onClose }) 
               </div>
             ))}
           </section>
+
+          <details className="jre-project-modal__details">
+            <summary>{t.fullDetails}</summary>
+            <p>{project.detailDescription || project.description}</p>
+          </details>
 
           <div className="jre-project-modal__body">
             <div className="jre-project-modal__case">
@@ -144,13 +160,18 @@ export default function ProjectDetailModal({ project, locale = "zh", onClose }) 
         </div>
 
         <footer className="jre-project-modal__footer">
-          {project.link && project.link !== "#" ? (
-            <a href={project.link} target="_blank" rel="noopener noreferrer">
-              <FaGithub />{t.viewCode}<FaArrowRight />
-            </a>
-          ) : (
-            <span>{t.private}</span>
-          )}
+          <div className="jre-project-modal__footer-actions">
+            <Link href={`${locale === "en" ? "/en" : ""}/projects/${project.slug}`}>
+              {t.fullCase}<FaArrowRight />
+            </Link>
+            {project.link && project.link !== "#" ? (
+              <a href={project.link} target="_blank" rel="noopener noreferrer">
+                <FaGithub />{t.viewCode}
+              </a>
+            ) : (
+              <span>{t.private}</span>
+            )}
+          </div>
           <button type="button" onClick={onClose}>{t.close}<span>×</span></button>
         </footer>
       </motion.article>

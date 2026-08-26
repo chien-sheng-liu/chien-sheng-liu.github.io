@@ -64,6 +64,10 @@ export async function listArticles(locale = 'zh') {
           readingTime: frontmatter.readingTime || estimateReadingTime(body, locale),
           tags: Array.isArray(frontmatter.tags) ? frontmatter.tags : [],
           category: frontmatter.category || '',
+          seoTitle: frontmatter.seoTitle || frontmatter.title || slug,
+          seoDescription: frontmatter.seoDescription || frontmatter.summary || excerpt,
+          keywords: Array.isArray(frontmatter.keywords) ? frontmatter.keywords : [],
+          updated: frontmatter.updated || '',
         };
       })
       .filter(Boolean)
@@ -95,8 +99,13 @@ export async function getArticle(slug, locale = 'zh') {
         date: frontmatter.date || '',
         readingTime: frontmatter.readingTime || estimateReadingTime(body, locale),
         tags: Array.isArray(frontmatter.tags) ? frontmatter.tags : [],
+        category: frontmatter.category || '',
         summary: frontmatter.summary || '',
         excerpt: frontmatter.excerpt || '',
+        seoTitle: frontmatter.seoTitle || frontmatter.title || slug,
+        seoDescription: frontmatter.seoDescription || frontmatter.summary || '',
+        keywords: Array.isArray(frontmatter.keywords) ? frontmatter.keywords : [],
+        updated: frontmatter.updated || '',
       },
       content: body,
     };
@@ -105,4 +114,3 @@ export async function getArticle(slug, locale = 'zh') {
     return null;
   }
 }
-

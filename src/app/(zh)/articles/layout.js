@@ -1,10 +1,10 @@
 import { buildPageMetadata } from "@/lib/seo";
 
 export const metadata = buildPageMetadata({
-  locale: "en",
+  locale: "zh",
   path: "/articles",
-  title: "Data, AI & Analytics Notes | Morris Liu",
-  description: "Bilingual practical notes by Morris Liu on analytics, AI systems, LLMs, data careers, consulting, and cross-market experience.",
+  title: "Data、AI 與 Analytics 實務筆記｜Morris Liu",
+  description: "Morris Liu 關於資料分析、AI 系統、LLM、Data Career、Consulting 與跨市場經驗的雙語實務文章。",
   image: "/media/selected-work/martech-editorial.webp",
 });
 

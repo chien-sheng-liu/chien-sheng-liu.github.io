@@ -11,9 +11,9 @@ import TypewriterText from "@/components/TypewriterText";
 const MENTARIX_URL = "https://www.mentarix-data.com/zh-TW";
 
 const projectMedia = [
+  "/media/selected-work/logistics-editorial.webp",
+  "/media/selected-work/o2o-editorial.webp",
   "/media/selected-work/autollm-editorial.webp",
-  "/media/selected-work/financial-agents-editorial.webp",
-  "/media/selected-work/maritime-editorial.webp",
 ];
 
 const content = {
@@ -22,11 +22,12 @@ const content = {
     heroTop: "DATA / AI / PEOPLE",
     heroName: ["Morris", "Liu"],
     heroRole: "Data & AI Consultant",
-    heroRoles: ["Data & AI Consultant", "Cross-market Analyst", "AI Product Builder", "Instructor & Speaker"],
+    heroRoles: ["Data & AI Consultant · BI & Analytics Lead", "Cross-market Analyst", "AI Product Builder", "Instructor & Speaker"],
     heroLocation: "Hong Kong · Taiwan · Germany",
-    status: "目前在香港，持續把複雜的資料與 AI 問題，做成真正有人使用的決策工具。",
+    status: "協助企業把模糊商業問題轉化為可落地的 BI、Analytics、AI Product 與 Data System，累積 15 個市場的跨市場交付。",
     scroll: "Scroll",
     resume: "查看完整經歷",
+    caseCta: "探索案例作品",
     indexTitle: "目次",
     index: [
       ["01", "關於我", "#about"],
@@ -64,9 +65,9 @@ const content = {
     workZh: "代表作品",
     workLead: "不是產品型錄，而是我真正解過的問題。",
     cases: [
-      ["01", "AutoLLM Platform", "把分散的 LLM 能力整理成可管理、可觀測的產品系統。"],
-      ["02", "Financial Multi-Agent", "讓研究流程保留來源、推理脈絡與安全邊界。"],
-      ["03", "Maritime Risk Prediction", "從即時訊號辨識風險，提早把異常帶到決策者面前。"],
+      ["01", "O2O Logistics Cancellation Analysis", "拆解跨市場取消率、雙邊旅程與訂單生命週期，將單一比例轉成可行動的營運問題。", "o2o-logistics-cancellation-drivers"],
+      ["02", "Regional AI Mobility Data Center", "整合多運具資料、治理制度與 AI 應用，建立可持續營運的智慧交通決策基礎。", "regional-ai-smart-mobility-data-center"],
+      ["03", "AutoLLM Platform", "把分散的 LLM、RAG 與資料儲存能力整理成可管理、可部署的產品系統。", "autollm-rag-platform"],
     ],
     workLink: "查看全部作品",
     profileLabel: "PROFILE",
@@ -84,11 +85,12 @@ const content = {
     heroTop: "DATA / AI / PEOPLE",
     heroName: ["Morris", "Liu"],
     heroRole: "Data & AI Consultant",
-    heroRoles: ["Data & AI Consultant", "Cross-market analyst", "AI product builder", "Teacher and speaker"],
+    heroRoles: ["Data & AI Consultant · BI & Analytics Lead", "Cross-market analyst", "AI product builder", "Teacher and speaker"],
     heroLocation: "Hong Kong · Taiwan · Germany",
-    status: "Based in Hong Kong, turning complex data and AI questions into decision tools that people actually use.",
+    status: "I turn ambiguous business problems into practical BI, analytics, AI products, and data systems, with delivery experience across 15 markets.",
     scroll: "Scroll",
     resume: "View full experience",
+    caseCta: "Explore case work",
     indexTitle: "Index",
     index: [
       ["01", "About", "#about"],
@@ -126,9 +128,9 @@ const content = {
     workZh: "Problems I have worked on",
     workLead: "Not a product catalogue—real problems I have helped solve.",
     cases: [
-      ["01", "AutoLLM Platform", "Turning scattered LLM capabilities into a manageable and observable product system."],
-      ["02", "Financial Multi-Agent", "Keeping sources, reasoning, and safety boundaries visible throughout research."],
-      ["03", "Maritime Risk Prediction", "Reading live signals early enough to bring risk to decision-makers."],
+      ["01", "O2O Logistics Cancellation Analysis", "Turning cross-market cancellations, marketplace journeys, and order lifecycles into actionable operating priorities.", "o2o-logistics-cancellation-drivers"],
+      ["02", "Regional AI Mobility Data Center", "Connecting multimodal data, governance, and AI applications into a sustainable smart-mobility decision foundation.", "regional-ai-smart-mobility-data-center"],
+      ["03", "AutoLLM Platform", "Turning scattered LLM, RAG, and storage capabilities into a manageable and deployable product system.", "autollm-rag-platform"],
     ],
     workLink: "View all work",
     profileLabel: "PROFILE",
@@ -303,9 +305,14 @@ export default function EditorialHome({ locale = "zh" }) {
             />
           </p>
           <small>{t.heroLocation}</small>
-          <Link href={`${prefix}/about`} className="jre-hero-resume">
-            {t.resume}<span aria-hidden="true">→</span>
-          </Link>
+          <div className="jre-hero-actions">
+            <Link href={`${prefix}/about`} className="jre-hero-resume">
+              {t.resume}<span aria-hidden="true">→</span>
+            </Link>
+            <Link href={`${prefix}/projects`} className="jre-hero-resume jre-hero-resume--secondary">
+              {t.caseCta}<span aria-hidden="true">→</span>
+            </Link>
+          </div>
         </motion.div>
         <motion.aside
           className="jre-home-hero__status"
@@ -432,8 +439,8 @@ export default function EditorialHome({ locale = "zh" }) {
         </header>
         <p className="jre-work__lead jre-reveal">{t.workLead}</p>
         <div className="jre-work__list">
-          {t.cases.map(([number, title, description], index) => (
-            <Link href={`${prefix}/projects`} className="jre-work-row jre-reveal" key={title}>
+          {t.cases.map(([number, title, description, slug], index) => (
+            <Link href={`${prefix}/projects/${slug}`} className="jre-work-row jre-reveal" key={title}>
               <div className="jre-work-row__image">
                 <Image
                   src={projectMedia[index]}
