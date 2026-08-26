@@ -16,9 +16,20 @@ function parse(raw) {
   const match = raw.match(/^---\n([\s\S]*?)\n---\n?([\s\S]*)$/);
   if (!match) return null;
   const frontmatter = {};
+  let currentKey = null;
   for (const line of match[1].split("\n")) {
+    if (/^\s+/.test(line) && currentKey) {
+      const nestedValue = line.trim();
+      if (nestedValue) {
+        frontmatter[currentKey] = `${frontmatter[currentKey] || ""} ${nestedValue}`.trim();
+      }
+      continue;
+    }
     const colon = line.indexOf(":");
-    if (colon > 0) frontmatter[line.slice(0, colon).trim()] = line.slice(colon + 1).trim();
+    if (colon > 0) {
+      currentKey = line.slice(0, colon).trim();
+      frontmatter[currentKey] = line.slice(colon + 1).trim();
+    }
   }
   return { frontmatter, body: match[2].trim() };
 }
