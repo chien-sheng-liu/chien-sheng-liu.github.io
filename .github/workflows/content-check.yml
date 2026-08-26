@@ -1,0 +1,37 @@
+name: Content checks
+
+on:
+  pull_request:
+    paths:
+      - "content/articles/**"
+      - "src/lib/content.js"
+      - "src/app/**/articles/**"
+      - "scripts/validate-articles.mjs"
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Validate article pairs
+        run: npm run content:validate
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Static build
+        run: NODE_OPTIONS="--max-old-space-size=4096" npm run build

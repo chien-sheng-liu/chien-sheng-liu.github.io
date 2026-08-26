@@ -8,6 +8,9 @@
 - `npm run lint`：執行 ESLint
 - `npm run build`：production build 並輸出靜態網站至 `out/`
 - `npm run clean`：刪除 `.next` 快取
+- `npm run admin:dev`：啟動本機文章 Admin
+- `npm run admin:test`：執行 Admin 單元測試
+- `npm run content:validate`：驗證所有 Git 追蹤中的雙語文章
 
 `predev` 與 `prebuild` 會自動執行 clean。
 
@@ -99,4 +102,13 @@ npm run build
 - Hero 圖片與卡片素材可正常載入
 - port 3000 優先、3100 僅為備用
 
-GitHub Pages 只保留 `.github/workflows/deploy.yml` 作為部署流程。
+GitHub Pages 使用 `.github/workflows/deploy.yml` 部署；文章 PR 使用 `.github/workflows/content-check.yml` 驗證，不得新增重複的 Pages 部署 workflow。
+
+## 文章 Admin
+
+- `admin/` 是獨立的 server-rendered localhost 應用，不可併入主站 static export。
+- 日常使用由 `Morris Writing Studio.app` 在 `127.0.0.1:3210` 背景啟動；3000／3100 保留給公開網站。
+- Admin secrets 只能放在 `admin/.env.local`，不得寫入原始碼、Notion 頁面或 Git。
+- Notion 是編輯中的主資料來源；Git Markdown 是已發布內容的投影。
+- 發布與下架必須成對處理 `zh`／`en`，並經 `.github/workflows/content-check.yml` 驗證。
+- 發布程式必須使用隔離的暫存 clone，不得修改目前 working tree。

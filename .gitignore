@@ -56,6 +56,7 @@ yarn-error.log*
 
 # env files (can opt-in for committing if needed)
 .env*
+!admin/.env.example
 
 # vercel
 .vercel
@@ -66,6 +67,9 @@ next-env.d.ts
 
 # build outputs
 dist/
+/admin/.data/
+/admin/.next/
+/admin/node_modules/
 
 # project-specific large files
 CV/

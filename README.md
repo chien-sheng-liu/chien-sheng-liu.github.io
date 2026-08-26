@@ -36,9 +36,57 @@ npm run lint      # ESLint
 npm run build     # production build + static export
 npm run start     # 啟動 production server（非靜態部署流程）
 npm run clean     # 清除 .next
+npm run admin:dev # 啟動本機文章 Admin（http://127.0.0.1:3210）
+npm run admin:test
+npm run content:validate
 ```
 
 `npm run dev` 與 `npm run build` 都會先清理 `.next`，避免 Turbopack 快取損壞。
+
+## 本機文章 Admin
+
+`admin/` 是獨立的 localhost 應用，Notion 保存草稿與雙語正文，GitHub 只保存已發布的 Markdown。它不會被匯出到 GitHub Pages。
+
+完整初稿流程包含研究、大綱、繁中撰寫、英文同步，以及可關閉的「視覺內容 Agent」。Agent 只在圖片能改善理解時規劃 1–3 張橫式配圖，逐張顯示進度，將 WebP 圖片本體與規劃紀錄保存到 Notion，並在發布時連同中英文 Markdown 一起送往 GitHub。圖片模型可用 `OPENAI_IMAGE_MODEL` 覆寫，預設為 `gpt-image-2`。
+
+日常使用可直接在 Finder 雙擊 repository 根目錄的 `Morris Writing Studio.app`。啟動器會：
+
+- 在背景啟動 Admin 專屬的 `http://127.0.0.1:3210`，不占用網站的 3000／3100。
+- 若 Admin 已啟動，直接開啟瀏覽器而不重複建立程序。
+- 首次使用時自動執行 `npm install`。
+- 將執行紀錄與 PID 放在 `admin/.data/`；啟動失敗時顯示 macOS 對話框。
+
+可把 `Morris Writing Studio.app` 拖到 Dock，但不要把它移出 repository；啟動器需要同層的 `admin/` 與 `scripts/`。
+
+首次使用：
+
+```bash
+cd admin
+npm install
+cp .env.example .env.local
+# 填入 OPENAI_API_KEY、NOTION_API_KEY
+gh auth login
+cd ..
+npm run admin:dev
+```
+
+手動啟動預設供開發使用；日常啟動器固定開啟 `http://127.0.0.1:3210`。在設定畫面直接貼上既有 Notion database 網址；系統會沿用其中的 Articles data source，並在同一個 database 內建立 Article Locales data source。Notion integration 必須對該 database 有讀取、插入與更新 content 的權限。
+
+初始化後可匯入目前 Git 追蹤中的文章：
+
+```bash
+npm run content:import
+```
+
+匯入器以 slug 判斷重複，只讀取 `git ls-files` 回傳的文章，因此不會碰觸本機未追蹤稿件。
+
+發布流程會在系統暫存目錄 clone 最新 repository、輸出中英文 Markdown、執行內容驗證／lint／build、建立 PR、等待 checks、自動合併並追蹤 GitHub Pages。若只想驗證而不 push：
+
+```bash
+PUBLISH_DRY_RUN=true npm run admin:dev
+```
+
+密鑰只放在 `admin/.env.local`，不可提交至 Git。
 
 ## 路由與語系
 

@@ -1,0 +1,8 @@
+#!/bin/zsh
+
+set -u
+
+EXECUTABLE_DIRECTORY="$(cd "$(dirname "$0")" && pwd)"
+PROJECT_ROOT="$(cd "${EXECUTABLE_DIRECTORY}/../../.." && pwd)"
+
+exec "${PROJECT_ROOT}/scripts/launch-article-admin.sh"
